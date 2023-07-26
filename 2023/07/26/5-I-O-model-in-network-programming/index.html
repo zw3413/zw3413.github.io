@@ -16,21 +16,28 @@
   <meta name="author" content="">
   <meta name="keywords" content="">
   
-    <meta name="description" content="PostgreSQL https:&#x2F;&#x2F;medium.com&#x2F;braintree-product-technology&#x2F;postgresql-at-scale-database-schema-changes-without-downtime-20d3749ed680 https:&#x2F;&#x2F;gajus.medium.com&#x2F;lessons-learned-scaling-postgresql-databas">
+    <meta name="description" content="There are 2 main periods in a networking call:  check if the data ready in kernel space copy data from kernel space to user space (the system function: revcfrom)  Linux provides 5 network programming">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PostgreSQL-more">
-<meta property="og:url" content="http://example.com/2023/07/24/PostgreSQL-more/index.html">
+<meta property="og:title" content="5 I&#x2F;O model in network programming">
+<meta property="og:url" content="http://example.com/2023/07/26/5-I-O-model-in-network-programming/index.html">
 <meta property="og:site_name" content="Elvin&#39;s Blog">
-<meta property="og:description" content="PostgreSQL https:&#x2F;&#x2F;medium.com&#x2F;braintree-product-technology&#x2F;postgresql-at-scale-database-schema-changes-without-downtime-20d3749ed680 https:&#x2F;&#x2F;gajus.medium.com&#x2F;lessons-learned-scaling-postgresql-databas">
+<meta property="og:description" content="There are 2 main periods in a networking call:  check if the data ready in kernel space copy data from kernel space to user space (the system function: revcfrom)  Linux provides 5 network programming">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-07-24T12:29:19.000Z">
-<meta property="article:modified_time" content="2023-07-24T12:29:42.861Z">
-<meta property="article:tag" content="postgresql">
+<meta property="og:image" content="http://example.com/2023/07/26/5-I-O-model-in-network-programming/bio.png">
+<meta property="og:image" content="http://example.com/2023/07/26/5-I-O-model-in-network-programming/nio.png">
+<meta property="og:image" content="http://example.com/2023/07/26/5-I-O-model-in-network-programming/iomultiplexing.png">
+<meta property="og:image" content="http://example.com/2023/07/26/5-I-O-model-in-network-programming/sigio.png">
+<meta property="og:image" content="http://example.com/2023/07/26/5-I-O-model-in-network-programming/aio.png">
+<meta property="og:image" content="http://example.com/2023/07/26/5-I-O-model-in-network-programming/compare.png">
+<meta property="article:published_time" content="2023-07-26T12:09:44.000Z">
+<meta property="article:modified_time" content="2023-07-26T14:00:30.153Z">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/07/26/5-I-O-model-in-network-programming/bio.png">
   
   
   
-  <title>PostgreSQL-more - Elvin&#39;s Blog</title>
+  <title>5 I/O model in network programming - Elvin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +191,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="PostgreSQL-more"></span>
+            <span id="subtitle" data-typed-text="5 I/O model in network programming"></span>
           
         </div>
 
@@ -195,8 +202,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-24 20:29" pubdate>
-          July 24, 2023 pm
+        <time datetime="2023-07-26 20:09" pubdate>
+          July 26, 2023 pm
         </time>
       </span>
     
@@ -207,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          546 words
+          570 words
         
       </span>
     
@@ -255,18 +262,48 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">PostgreSQL-more</h1>
+            <h1 id="seo-header">5 I/O model in network programming</h1>
             
             
               <div class="markdown-body">
                 
-                <p>PostgreSQL</p>
-<p><a target="_blank" rel="noopener" href="https://medium.com/braintree-product-technology/postgresql-at-scale-database-schema-changes-without-downtime-20d3749ed680">https://medium.com/braintree-product-technology/postgresql-at-scale-database-schema-changes-without-downtime-20d3749ed680</a></p>
-<p><a target="_blank" rel="noopener" href="https://gajus.medium.com/lessons-learned-scaling-postgresql-database-to-1-2bn-records-month-edc5449b3067">https://gajus.medium.com/lessons-learned-scaling-postgresql-database-to-1-2bn-records-month-edc5449b3067</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.2ndquadrant.com/en/blog/pg-phriday-terrific-throughput-tracking/">https://www.2ndquadrant.com/en/blog/pg-phriday-terrific-throughput-tracking/</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.crunchydata.com/blog/managing-transaction-id-wraparound-in-postgresql">https://blog.crunchydata.com/blog/managing-transaction-id-wraparound-in-postgresql</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.crunchydata.com/blog/a-guide-to-building-an-active-active-postgresql-cluster">https://blog.crunchydata.com/blog/a-guide-to-building-an-active-active-postgresql-cluster</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.2ndquadrant.com/en/blog/banking-on-postgres-webinar/">https://www.2ndquadrant.com/en/blog/banking-on-postgres-webinar/</a></p>
+                <p>There are 2 main periods in a networking call:</p>
+<ol>
+<li>check if the data ready in kernel space</li>
+<li>copy data from kernel space to user space (the system function: revcfrom)</li>
+</ol>
+<p>Linux provides 5 network programming I&#x2F;O models</p>
+<ol>
+<li>Blocking I&#x2F;O</li>
+<li>Non-Blocking I&#x2F;O</li>
+<li>I&#x2F;O multiplexing (select, poll and epoll)</li>
+<li>Signal Driven I&#x2F;O</li>
+<li>Asynchronous I&#x2F;O (aio_* functions)</li>
+</ol>
+<h1 id="1-Blocking-I-x2F-O"><a href="#1-Blocking-I-x2F-O" class="headerlink" title="1. Blocking I&#x2F;O"></a>1. Blocking I&#x2F;O</h1><img src="/2023/07/26/5-I-O-model-in-network-programming/bio.png" srcset="/img/loading.gif" lazyload class="" title="BIO">
+
+
+<h1 id="2-Non-Blocking-I-x2F-O"><a href="#2-Non-Blocking-I-x2F-O" class="headerlink" title="2. Non-Blocking I&#x2F;O"></a>2. Non-Blocking I&#x2F;O</h1><img src="/2023/07/26/5-I-O-model-in-network-programming/nio.png" srcset="/img/loading.gif" lazyload class="" title="NIO">
+
+
+<h1 id="3-I-x2F-O-multiplexing-select-poll-and-epoll"><a href="#3-I-x2F-O-multiplexing-select-poll-and-epoll" class="headerlink" title="3. I&#x2F;O multiplexing (select, poll and epoll)"></a>3. I&#x2F;O multiplexing (select, poll and epoll)</h1><img src="/2023/07/26/5-I-O-model-in-network-programming/iomultiplexing.png" srcset="/img/loading.gif" lazyload class="" title="IO Multiplexing">
+
+
+<h1 id="4-Signal-Driven-I-x2F-O"><a href="#4-Signal-Driven-I-x2F-O" class="headerlink" title="4. Signal Driven I&#x2F;O"></a>4. Signal Driven I&#x2F;O</h1><img src="/2023/07/26/5-I-O-model-in-network-programming/sigio.png" srcset="/img/loading.gif" lazyload class="" title="SIGIO">
+
+
+<h1 id="5-Asynchronous-I-x2F-O-aio-functions"><a href="#5-Asynchronous-I-x2F-O-aio-functions" class="headerlink" title="5. Asynchronous I&#x2F;O (aio_* functions)"></a>5. Asynchronous I&#x2F;O (aio_* functions)</h1><img src="/2023/07/26/5-I-O-model-in-network-programming/aio.png" srcset="/img/loading.gif" lazyload class="" title="AIO">
+
+
+<h1 id="6-Compare-above-5-models"><a href="#6-Compare-above-5-models" class="headerlink" title="6. Compare above 5 models"></a>6. Compare above 5 models</h1><img src="/2023/07/26/5-I-O-model-in-network-programming/compare.png" srcset="/img/loading.gif" lazyload class="" title="COMPARE">
+
+
+<hr>
+<p>documents:</p>
+<a href="/2023/07/26/5-I-O-model-in-network-programming/networkprogrammingmodels.ods" title="networkprogrammingmodels.ods">networkprogrammingmodels.ods</a>
+
+<hr>
+<p>Reference:<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jiujuan/p/16564610.html">https://www.cnblogs.com/jiujuan/p/16564610.html</a></p>
 
                 
               </div>
@@ -285,7 +322,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/database/" class="category-chain-item">database</a>
+  <a href="/categories/OS/" class="category-chain-item">OS</a>
   
   
 
@@ -300,7 +337,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/postgresql/" class="print-no-link">#postgresql</a>
+        <a href="/tags/linux/" class="print-no-link">#linux</a>
       
     </div>
   
@@ -312,15 +349,15 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>PostgreSQL-more</div>
-      <div>http://example.com/2023/07/24/PostgreSQL-more/</div>
+      <div>5 I/O model in network programming</div>
+      <div>http://example.com/2023/07/26/5-I-O-model-in-network-programming/</div>
     </div>
     <div class="license-meta">
       
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 24, 2023</div>
+          <div>July 26, 2023</div>
         </div>
       
       
@@ -352,18 +389,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/26/5-I-O-model-in-network-programming/" title="5 I/O model in network programming">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">5 I/O model in network programming</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/18/GIN-CORS-OPTIONS-issue/" title="GIN CORS OPTIONS issue">
-                        <span class="hidden-mobile">GIN CORS OPTIONS issue</span>
+                      <a href="/2023/07/24/PostgreSQL-more/" title="PostgreSQL-more">
+                        <span class="hidden-mobile">PostgreSQL-more</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
