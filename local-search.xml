@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>Access webservice running in wsl2 with mirrored networkingmode</title>
+    <link href="/2024/01/19/Access-webservice-running-in-wsl2-with-mirrored-networkingmode/"/>
+    <url>/2024/01/19/Access-webservice-running-in-wsl2-with-mirrored-networkingmode/</url>
+    
+    <content type="html"><![CDATA[<p>As I have VPN run on windows11, when I launch the WSL2, always prompt the tip about the autoproxy not working for my VPN.</p><p>Then I did the configuration for WSL which to put the .wslconfig in to my user root with below content:</p><p>[experimental]<br>autoMemoryReclaim&#x3D;gradual  # gradual  | dropcache | disabled<br>networkingMode&#x3D;mirrored<br>dnsTunneling&#x3D;true<br>firewall&#x3D;false<br>autoProxy&#x3D;true</p><p>Above setting let the WSL2 running on mirrored networking mode with share same ip address with the host windows.</p><p>But problem is I can not access the go api which run in the WSL2 Ubuntu via LAN. To resolve this issue, the information in this page is helpful:</p><p><a href="https://github.com/microsoft/WSL/issues/10714">https://github.com/microsoft/WSL/issues/10714</a></p><p>Run below command </p><p>New-NetFirewallHyperVRule -DisplayName “allow port 3001 inbound” -Direction Inbound -LocalPorts 3001 -Action Allow</p><p>on the windows host to permit the port you want to visit from LAN.</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>C# Winform Code Snippet</title>
     <link href="/2023/12/01/C-Winform-Code-Snippet/"/>
     <url>/2023/12/01/C-Winform-Code-Snippet/</url>
