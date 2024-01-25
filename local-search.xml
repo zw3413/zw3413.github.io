@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Powershell script to detect connected IP on a router</title>
+    <link href="/2024/01/25/Powershell-script-to-detect-connected-IP-on-a-router/"/>
+    <url>/2024/01/25/Powershell-script-to-detect-connected-IP-on-a-router/</url>
+    
+    <content type="html"><![CDATA[<p>I want to know the IP of a computer without a display which connected to a router, use below powershell script to detect. I don’t have the admin access of the router.</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">for ($i=1; $i -lt 255; $i++) &#123;<br>    $computer = &#x27;192.168.1.&#x27; + $i<br>    if (Test-Connection -ComputerName $computer -Count 1 -Quiet) &#123;<br>        Write-Host &quot;$computer is online.&quot;<br>    &#125; else &#123;<br>        Write-Host &quot;$computer&quot; <br>    &#125;<br> &#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>tools</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>powershell</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Access webservice running in wsl2 with mirrored networkingmode</title>
     <link href="/2024/01/19/Access-webservice-running-in-wsl2-with-mirrored-networkingmode/"/>
     <url>/2024/01/19/Access-webservice-running-in-wsl2-with-mirrored-networkingmode/</url>
