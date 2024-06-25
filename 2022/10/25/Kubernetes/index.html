@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="KUBERNETES Kubernetes Components  Node Pod Service ingress Volumes Replicaset Secret Configmap Deployment for stateless apps Statefulset for stateful apps  DB are ofter hosted outside of k8s clusterKu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes">
+<meta property="og:url" content="http://example.com/2022/10/25/Kubernetes/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="KUBERNETES Kubernetes Components  Node Pod Service ingress Volumes Replicaset Secret Configmap Deployment for stateless apps Statefulset for stateful apps  DB are ofter hosted outside of k8s clusterKu">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-25T14:58:49.000Z">
+<meta property="article:modified_time" content="2024-06-20T09:43:03.518Z">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Kubernetes - Elvin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Elvin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg1.JPG') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Kubernetes"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-25 22:58" pubdate>
+          October 25, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          37 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Kubernetes</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>KUBERNETES</p>
+<p>Kubernetes Components</p>
+<ul>
+<li>Node</li>
+<li>Pod</li>
+<li>Service</li>
+<li>ingress</li>
+<li>Volumes</li>
+<li>Replicaset</li>
+<li>Secret</li>
+<li>Configmap</li>
+<li>Deployment for stateless apps</li>
+<li>Statefulset for stateful apps</li>
+</ul>
+<h1 id="DB-are-ofter-hosted-outside-of-k8s-cluster"><a href="#DB-are-ofter-hosted-outside-of-k8s-cluster" class="headerlink" title="DB are ofter hosted outside of k8s cluster"></a>DB are ofter hosted outside of k8s cluster</h1><p>Kubernetes Processes<br>Master processes</p>
+<ul>
+<li>Api Server: cluster gateway, act as authentication gate</li>
+<li>Scheduler:  decides on which Node new Pod should be scheduled</li>
+<li>Controller manager: detects cluster state changes</li>
+<li>Etcd:  the cluster brain, Cluster changes get stored in the key value store<br>Node processes</li>
+<li>Container runtime:  like docker</li>
+<li>Kubelet:  interacts with the container and node</li>
+<li>Kube proxy:  forwards the requests<br>Minikube</li>
+<li>Creates Virtual Box on your laptop</li>
+<li>Node runs in that Virtual Box</li>
+<li>1 Node K8s cluster</li>
+<li>For testing purposes</li>
+</ul>
+<p>Kubernetes Operation<br>在mac上安装minikube<br>brew update<br>brew install hyperkit<br>brew install minikube</p>
+<p>运行minikube<br>minikube start —vm-driver&#x3D;hyperkit —cni&#x3D; flannel<br>minikube status </p>
+<p>Setup the docker mirror repository inside minikube<br>minikube ssh<br>sudo mkdir -p &#x2F;etc&#x2F;docker<br>sudo tee &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;-‘EOF’<br>{<br>  “registry-mirrors”: [“xxx”]<br>}<br>EOF<br>sudo systemctl daemon-reload<br>sudo systemctl restart docker</p>
+<p>kubectl的一些操作<br>kubectl version 查看版本<br>Kubectl cluster-info<br>kubectl get nodes 查看当前node<br>Kubectl get service<br>Kubectl get deployment<br>Kubectl get replicaset<br>Kubectl get pod</p>
+<h1 id="Layer-of-abstraction"><a href="#Layer-of-abstraction" class="headerlink" title="Layer of abstraction"></a>Layer of abstraction</h1><ul>
+<li>Deployment manages a replicaset</li>
+<li>Replicaset manages all the replicaset of a pod</li>
+<li>Pod is a abstraction of a container<br>Everything below deployment is handled by kubernates.</li>
+</ul>
+<p>Kubectl create deployment [depl-name] –image&#x3D;[iamge name] 创建pod<br>Kubectl edit deployment [depl name]<br>Kubectl delete deployment [depl name]</p>
+<p>Kubectl apply -f [file name] 用于创建service和deployment<br>Kubectl delete -f [file name]<br>Kubectl get pod -o wide</p>
+<p>Kubectl exec -it [pod name] – bin&#x2F;bash<br>Kubectl logs [pod name]<br>Kubectl describe pod [pod name]<br>Kubectl describe service [service name]</p>
+<p>Kubectl get deployment -o yaml<br>Kubectl get deployment -o yaml &gt; nginx-deployment-result.yaml</p>
+<p>Echo -n ‘username’ | base64</p>
+<p>Kubectl get secret<br>Kubectl get all | grep mongodb<br>Kubectl get pod </p>
+<p>minikube service mongodb-express-service</p>
+<p>Namespace</p>
+<ul>
+<li>Kubernetes-dashboard only with minikube</li>
+<li>Kube-system system processes</li>
+<li>Kube-public publicely accessible data, a congifmap, which contains cluster information #Kubectl cluster-info</li>
+<li>Kube-node-lease  heartbeats of nodes, each node has associated lease object in namespace, determines the availability of a node</li>
+<li>Default  resources you create are located here</li>
+<li>Create a Namespace #kubectl create namespace my-namespace</li>
+</ul>
+<p>User cases when to use Namespace:</p>
+<ol>
+<li>Structure your components</li>
+<li>Avoid conflicts between teams</li>
+<li>Share services between different environments</li>
+<li>Access and Resource Limits on Namespaces Level<br>characteristics of Namespace:</li>
+<li>You can’t access most resources from another Namespace, each NS must define own ConfigMap,Secrets and service</li>
+<li>Components, which can’t be created within a Namespace, like volumes…  # kubectl api-resources —namespaced&#x3D;false# kubectl api-resources —namespaced&#x3D;true</li>
+</ol>
+<p>kubectl create namespace my-namespace<br>Kubectl get ns<br>kubectl get configmap -n my-namespece<br>kubectl apply -f mongo-configmap.yaml –namespace&#x3D;my-namespace<br>kubectl delete configmap -n my-namespace mongodb-configmap</p>
+<p>Change the active namespace with kubernetes ？？<br>Brew install kubectx<br>Kubens my-namespace<br>Kubens</p>
+<p>INGRESS<br>Minikube addons enable ingress<br>Debug:</p>
+<ul>
+<li>Kubectl get pod -A</li>
+<li>Kubectl describe pod &#x2F;ingress-nginx-controller-xxxxxx —namespace&#x3D;kube-system</li>
+<li>Minikube ssh</li>
+<li>Docker pull quay.io&#x2F;kubernetes-ingress-controller&#x2F;nginx-ingress-controller:0.33.0<br>将本地的image放到minikube里面</li>
+<li>docker save pollyduan&#x2F;ingress-nginx-controller:v0.42.0 | (eval $(minikube docker-env) &amp;&amp; docker load)<br>Kubectl get pod -n kube-system</li>
+</ul>
+<p>us.gcr.io&#x2F;k8s-artifacts-prod&#x2F;ingress-nginx&#x2F;controller:v0.40.2<br>us.gcr.io&#x2F;.. 这样的iamge在国内是访问不到的，可以通过docker hub下载到镜像后，在本地使用tag给image改名来让k8s或者docker识别使用：</p>
+<ul>
+<li>docker tag 2da us.gcr.io&#x2F;k8s-artifacts-prod&#x2F;ingress-nginx&#x2F;controller:v0.40.2</li>
+</ul>
+<p>kubectl get ingress -n kubernetes-dashboard –watch</p>
+<p>HELM</p>
+<ol>
+<li>Helm是一个k8s包管理器<br>Brew install helm<br>helm repo add ingress-nginx <a target="_blank" rel="noopener" href="https://kubernetes.github.io/ingress-nginx">https://kubernetes.github.io/ingress-nginx</a><br>Helm repo update<br>helm install -n default ingress ingress-nginx&#x2F;ingress-nginx</li>
+</ol>
+<p>Helm Charts 用来安装常用的一些软件，例如：<br>Database Apps: MongoDB, MySQL, Elasticsearch<br>Monitoring Apps: Promotheus<br>Helm search<br>2. Templating Engine<br>3. Redeployment Same Applications Across Different Environments<br>Helm Chart Structure:<br>Mychart&#x2F;			—Top level mychart folder<br>    Chart.yaml   	— meta innfo about chart, like chart name version..<br>    values.yaml	— values for the template files<br>    charts&#x2F;		— chart depencies<br>    templates&#x2F;	— the actual template files<br>    …</p>
+<p>可以指定其他value.yaml来覆盖chart中的默认value:<br>Helm install chartname —values&#x3D;my-values.yaml<br>可以在命令行中使用–set指定value来覆盖chart中的默认value<br>Helm install  chartname —set version&#x3D;2.0.0</p>
+<p>Helm3 removed the server of Tiller from K8s cluster</p>
+<p>Volumes<br>Persistent volumes are NOT namespaced</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Kubernetes</div>
+      <div>http://example.com/2022/10/25/Kubernetes/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 25, 2022</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/14/IOS-device-as-a-webcam-audio-input-device-for-windows/" title="IOS device as a webcam/audio input device for windows">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">IOS device as a webcam/audio input device for windows</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/25/Homebrew/" title="Homebrew">
+                        <span class="hidden-mobile">Homebrew</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
