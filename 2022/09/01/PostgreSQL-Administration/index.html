@@ -16,15 +16,15 @@
   <meta name="author" content="">
   <meta name="keywords" content="">
   
-    <meta name="description" content="https:&#x2F;&#x2F;medium.com&#x2F;braintree-product-technology&#x2F;postgresql-at-scale-database-schema-changes-without-downtime-20d3749ed680https:&#x2F;&#x2F;gajus.medium.com&#x2F;lessons-learned-scaling-postgresql-database-to-1-2bn-r">
+    <meta name="description" content="commands in psql: 123\dx #show all installed extension\l #list all databases\password &lt;username&gt; # change password for user   https:&#x2F;&#x2F;medium.com&#x2F;braintree-product-technology&#x2F;postgresql-at-scale-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PostgreSQL Administration">
 <meta property="og:url" content="http://example.com/2022/09/01/PostgreSQL-Administration/index.html">
 <meta property="og:site_name" content="Elvin&#39;s Blog">
-<meta property="og:description" content="https:&#x2F;&#x2F;medium.com&#x2F;braintree-product-technology&#x2F;postgresql-at-scale-database-schema-changes-without-downtime-20d3749ed680https:&#x2F;&#x2F;gajus.medium.com&#x2F;lessons-learned-scaling-postgresql-database-to-1-2bn-r">
+<meta property="og:description" content="commands in psql: 123\dx #show all installed extension\l #list all databases\password &lt;username&gt; # change password for user   https:&#x2F;&#x2F;medium.com&#x2F;braintree-product-technology&#x2F;postgresql-at-scale-">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-09-01T02:16:06.000Z">
-<meta property="article:modified_time" content="2024-06-20T09:43:03.521Z">
+<meta property="article:published_time" content="2022-09-01T14:16:06.000Z">
+<meta property="article:modified_time" content="2024-07-24T06:55:17.080Z">
 <meta property="article:tag" content="postgresql">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -207,7 +207,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          620 words
+          733 words
         
       </span>
     
@@ -218,7 +218,7 @@
         
         
         
-          6 mins
+          7 mins
         
       </span>
     
@@ -260,7 +260,11 @@
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://medium.com/braintree-product-technology/postgresql-at-scale-database-schema-changes-without-downtime-20d3749ed680">https://medium.com/braintree-product-technology/postgresql-at-scale-database-schema-changes-without-downtime-20d3749ed680</a><br><a target="_blank" rel="noopener" href="https://gajus.medium.com/lessons-learned-scaling-postgresql-database-to-1-2bn-records-month-edc5449b3067">https://gajus.medium.com/lessons-learned-scaling-postgresql-database-to-1-2bn-records-month-edc5449b3067</a><br><a target="_blank" rel="noopener" href="https://www.2ndquadrant.com/en/blog/pg-phriday-terrific-throughput-tracking/">https://www.2ndquadrant.com/en/blog/pg-phriday-terrific-throughput-tracking/</a><br><a target="_blank" rel="noopener" href="https://blog.crunchydata.com/blog/managing-transaction-id-wraparound-in-postgresql">https://blog.crunchydata.com/blog/managing-transaction-id-wraparound-in-postgresql</a><br><a target="_blank" rel="noopener" href="https://blog.crunchydata.com/blog/a-guide-to-building-an-active-active-postgresql-cluster">https://blog.crunchydata.com/blog/a-guide-to-building-an-active-active-postgresql-cluster</a><br><a target="_blank" rel="noopener" href="https://www.2ndquadrant.com/en/blog/banking-on-postgres-webinar/">https://www.2ndquadrant.com/en/blog/banking-on-postgres-webinar/</a></p>
+                <p>commands in psql:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">\dx #<span class="hljs-keyword">show</span> <span class="hljs-keyword">all</span> installed extension<br>\l #list <span class="hljs-keyword">all</span> databases<br>\password <span class="hljs-operator">&lt;</span>username<span class="hljs-operator">&gt;</span> # change password <span class="hljs-keyword">for</span> <span class="hljs-keyword">user</span><br></code></pre></td></tr></table></figure>
+
+
+<p><a target="_blank" rel="noopener" href="https://medium.com/braintree-product-technology/postgresql-at-scale-database-schema-changes-without-downtime-20d3749ed680">https://medium.com/braintree-product-technology/postgresql-at-scale-database-schema-changes-without-downtime-20d3749ed680</a><br><a target="_blank" rel="noopener" href="https://gajus.medium.com/lessons-learned-scaling-postgresql-database-to-1-2bn-records-month-edc5449b3067">https://gajus.medium.com/lessons-learned-scaling-postgresql-database-to-1-2bn-records-month-edc5449b3067</a><br><a target="_blank" rel="noopener" href="https://www.2ndquadrant.com/en/blog/pg-phriday-terrific-throughput-tracking/">https://www.2ndquadrant.com/en/blog/pg-phriday-terrific-throughput-tracking/</a><br><a target="_blank" rel="noopener" href="https://blog.crunchydata.com/blog/managing-transaction-id-wraparound-in-postgresql">https://blog.crunchydata.com/blog/managing-transaction-id-wraparound-in-postgresql</a><br><a target="_blank" rel="noopener" href="https://blog.crunchydata.com/blog/a-guide-to-building-an-active-active-postgresql-cluster">https://blog.crunchydata.com/blog/a-guide-to-building-an-active-active-postgresql-cluster</a><br><a target="_blank" rel="noopener" href="https://www.2ndquadrant.com/en/blog/banking-on-postgres-webinar/">https://www.2ndquadrant.com/en/blog/banking-on-postgres-webinar/</a></p>
 <p>高可用方案：<br>共享磁盤故障轉移<br>文件系統(塊設備)複製<br>預寫式日誌(WAL)傳送<br>邏輯複製<br>基於觸發器的主-備複製<br>基於語句的複製中間件<br>異步多主控機複製<br>同步多主控機複製<br>其他商業方案</p>
 
                 
@@ -347,9 +351,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/01/Golang-Basic/" title="Golang Basic">
+                      <a href="/2022/10/18/CSS-4-Reasons-of-Z-Index-Not-Working/" title="4 Reasons of Z-Index Not Working">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Golang Basic</span>
+                        <span class="hidden-mobile">4 Reasons of Z-Index Not Working</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -357,8 +361,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/01/PostgreSQL-Extension/" title="PostgreSQL Extension">
-                        <span class="hidden-mobile">PostgreSQL Extension</span>
+                      <a href="/2022/08/31/Tech-Index/" title="Tech Index">
+                        <span class="hidden-mobile">Tech Index</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
