@@ -1,0 +1,659 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SQL進階分組集 GROUP BY  分組集    group by field     group by rollup(field),     group by rollup(field1, field2),     group by cube(field1, field2),     group by grouping sets((), field1, field2) select regio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PostgreSQL SQL Advance">
+<meta property="og:url" content="http://example.com/2022/09/01/PostgreSQL-SQL-Advance/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="SQL進階分組集 GROUP BY  分組集    group by field     group by rollup(field),     group by rollup(field1, field2),     group by cube(field1, field2),     group by grouping sets((), field1, field2) select regio">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-01T14:10:28.000Z">
+<meta property="article:modified_time" content="2024-06-20T09:43:03.524Z">
+<meta property="article:tag" content="postgresql">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>PostgreSQL SQL Advance - Elvin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Elvin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg1.JPG') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="PostgreSQL SQL Advance"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-01 10:10" pubdate>
+          September 1, 2022 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          42 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">PostgreSQL SQL Advance</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="SQL進階"><a href="#SQL進階" class="headerlink" title="SQL進階"></a>SQL進階</h2><p>分組集 GROUP BY</p>
+<ol>
+<li>分組集    group by field<br>     group by rollup(field),<br>     group by rollup(field1, field2),<br>     group by cube(field1, field2),<br>     group by grouping sets((), field1, field2)<blockquote>
+<p>select region, avg(production) from t_oil group by region;<br>select region, avg(production) from t_oil group by rollup(region)<br>select region, country, avg(production) from t_oil where country in (‘USA’,’Canada’,’Iram’,’Oman’) group by rollup(region, country)<br>select region, country, avg(production) from t_oil where country in (‘USA’,’Canada’,’Iran’,’Oman’) group by cube(region,country)<br>select region, country, avg(production) from t_oil where country in (‘USA’,’Canada’,’Iran’,’Oman’) group by grouping sets((),region,country)</p>
+</blockquote>
+</li>
+<li>組合分組集 與 filter(where condition)<blockquote>
+<p>select region, avg(production) as all, avg(production) filter(where year&lt;1990) as old, avg(production) filter(where year &gt;&#x3D;1990) as new from t_oil group by rollup(region)</p>
+</blockquote>
+</li>
+</ol>
+<p>有序集 WITHIN GROUP</p>
+<ol>
+<li><p>中位數<br>select region, percentile_disc(0.5) within group (order by production) from t_oil group by 1;<br>select region, percentile_disc(0.5) within group (order by production) from t_oil group by rollup(1);</p>
+</li>
+<li><p>有序集與分組集一起使用<br>select region, percentile_disc(0.5) within group (order by production) from t_oil group by rollup(1)</p>
+</li>
+</ol>
+<h3 id="HAVING從句"><a href="#HAVING從句" class="headerlink" title="HAVING從句"></a>HAVING從句</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SELECT</span> count(*), town <br><span class="hljs-keyword">FROM</span> customer <br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> town <span class="hljs-keyword">HAVING</span> count(*) &gt; <span class="hljs-number">1</span>;<br><br>Count(<span class="hljs-keyword">DISTINCT</span> 列名)<br><span class="hljs-keyword">SELECT</span> count(<span class="hljs-keyword">DISTINCT</span> town) <span class="hljs-keyword">AS</span> &quot;distinct&quot;, count(town) <span class="hljs-keyword">AS</span> &quot;all&quot; <br><span class="hljs-keyword">FROM</span> customer;<br></code></pre></td></tr></table></figure>
+<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs vbnet">v_curr_wrkst_no := <span class="hljs-comment">&#x27;start&#x27;</span><br><span class="hljs-keyword">while</span> v_curr_wrkst_no &lt;&gt; <span class="hljs-comment">&#x27;end&#x27;</span><br><span class="hljs-keyword">loop</span><br><span class="hljs-keyword">select</span> ...<br><span class="hljs-keyword">if</span> <span class="hljs-built_in">not</span> fund <span class="hljs-keyword">then</span><br>    o_resultcode := <span class="hljs-comment">&#x27;500&#x27;;</span><br>    o_resultmsg  := <span class="hljs-comment">&#x27;错误&#x27;;</span><br>    <span class="hljs-keyword">return</span>;<br><span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;<br><span class="hljs-keyword">end</span> <span class="hljs-keyword">loop</span>;<br><br><span class="hljs-keyword">for</span> temprow <span class="hljs-keyword">in</span> (<br>    <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> tablename <span class="hljs-keyword">where</span> a=<span class="hljs-number">1</span><br>)<br><span class="hljs-keyword">loop</span><br><span class="hljs-keyword">if</span> a &lt;&gt; b <span class="hljs-keyword">then</span> <br>    ....<br>    <span class="hljs-keyword">return</span>;<br><span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;<br><span class="hljs-keyword">end</span> <span class="hljs-keyword">loop</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="递归查询"><a href="#递归查询" class="headerlink" title="递归查询"></a>递归查询</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> digui_test(id <span class="hljs-type">int</span> , pid <span class="hljs-type">int</span> , <span class="hljs-type">name</span> <span class="hljs-type">varchar</span>(<span class="hljs-number">10</span>)); <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">2</span> , <span class="hljs-number">0</span> , <span class="hljs-string">&#x27;a&#x27;</span>); <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span> , <span class="hljs-number">0</span> , <span class="hljs-string">&#x27;b&#x27;</span>); <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">3</span> , <span class="hljs-number">2</span> , <span class="hljs-string">&#x27;c&#x27;</span>);  <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">4</span> , <span class="hljs-number">2</span> , <span class="hljs-string">&#x27;d&#x27;</span>) ; <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">5</span> , <span class="hljs-number">2</span> , <span class="hljs-string">&#x27;e&#x27;</span>);  <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">6</span> , <span class="hljs-number">2</span> , <span class="hljs-string">&#x27;f&#x27;</span>) ; <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">7</span> , <span class="hljs-number">3</span> , <span class="hljs-string">&#x27;g&#x27;</span>);  <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">8</span> , <span class="hljs-number">3</span> , <span class="hljs-string">&#x27;h&#x27;</span>) ; <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">9</span> , <span class="hljs-number">4</span> , <span class="hljs-string">&#x27;i&#x27;</span>);  <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">10</span> , <span class="hljs-number">5</span> , <span class="hljs-string">&#x27;j&#x27;</span>) ; <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">11</span> , <span class="hljs-number">7</span> , <span class="hljs-string">&#x27;k&#x27;</span>);  <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">12</span> , <span class="hljs-number">2</span> , <span class="hljs-string">&#x27;l&#x27;</span>) ; <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">13</span> , <span class="hljs-number">9</span> , <span class="hljs-string">&#x27;m&#x27;</span>);  <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">14</span> , <span class="hljs-number">9</span> , <span class="hljs-string">&#x27;n&#x27;</span>) ; <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> digui_test <span class="hljs-keyword">values</span>(<span class="hljs-number">15</span> , <span class="hljs-number">4</span> , <span class="hljs-string">&#x27;o&#x27;</span>);  <br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-comment">--给出一个数据id号，求出其下所有节点的信息</span><br><span class="hljs-keyword">begin</span>;<br><span class="hljs-keyword">with</span> <span class="hljs-keyword">RECURSIVE</span> t <span class="hljs-keyword">as</span><br>(<br><span class="hljs-keyword">select</span> a.id,a.name,a.pid <span class="hljs-keyword">from</span> digui_test a <span class="hljs-keyword">where</span> id=<span class="hljs-number">3</span><br> <span class="hljs-keyword">union</span> <span class="hljs-keyword">all</span><br><span class="hljs-keyword">select</span> k.id,k.name,k.pid  <span class="hljs-keyword">from</span> digui_test k , t c <span class="hljs-keyword">where</span> c.id = k.pid<br> )<br><span class="hljs-keyword">select</span> id,<span class="hljs-type">name</span>,pid <span class="hljs-keyword">from</span> t;<br><span class="hljs-keyword">end</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-comment">--求出树深度，路径，是否为环数据</span><br><span class="hljs-keyword">begin</span>;<br><span class="hljs-keyword">with</span> <span class="hljs-keyword">RECURSIVE</span> t(id,<span class="hljs-type">name</span>,pid,depth,<span class="hljs-type">path</span>,<span class="hljs-keyword">cycle</span>) <span class="hljs-keyword">as</span><br>(<br><span class="hljs-keyword">select</span> a.id,a.name,a.pid,<span class="hljs-number">1</span>,<span class="hljs-keyword">array</span>[a.id],<span class="hljs-keyword">false</span> <span class="hljs-keyword">from</span> digui_test a <span class="hljs-keyword">where</span> id=<span class="hljs-number">3</span><br><span class="hljs-keyword">union</span> <span class="hljs-keyword">all</span><br><span class="hljs-keyword">select</span> k.id,k.name,k.pid,c.depth+<span class="hljs-number">1</span>,<span class="hljs-type">path</span>||k.id,k.id=<span class="hljs-keyword">any</span>(<span class="hljs-type">path</span>) <span class="hljs-keyword">from</span> digui_test k , t c <span class="hljs-keyword">where</span> c.id = k.pid <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">cycle</span><br>)<br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> t;<br><span class="hljs-keyword">end</span>;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Explain"><a href="#Explain" class="headerlink" title="Explain"></a>Explain</h3><p>select *<br>from sfc_scan_master_params_d<br>where request_id in (<br>    select t2.request_id<br>    from del_code_info t1<br>    inner join sfc_scan_master_params t2 on t1.bar_uuid &#x3D; t2.bar_uuid<br>    where del_lot &#x3D; ‘5’<br>);</p>
+<p>Gather  (cost&#x3D;9423.40..36679638.18 rows&#x3D;439194 width&#x3D;71)<br>  Workers Planned: 2<br>  -&gt;  Parallel Hash Semi Join  (cost&#x3D;9423.40..36679638.18 rows&#x3D;182998 width&#x3D;71)<br>        Hash Cond: (sfc_scan_master_params_d.request_id &#x3D; (t2.request_id)::text)<br>        -&gt;  Parallel Seq Scan on sfc_scan_master_params_d  (cost&#x3D;0.00..34446288.70 rows&#x3D;846434370 width&#x3D;71)<br>        -&gt;  Parallel Hash  (cost&#x3D;9300.61..9300.61 rows&#x3D;9823 width&#x3D;38)<br>              -&gt;  Nested Loop  (cost&#x3D;48.51..9300.61 rows&#x3D;9823 width&#x3D;38)<br>                    -&gt;  Parallel Bitmap Heap Scan on del_code_info t1  (cost&#x3D;47.95..2054.67 rows&#x3D;1178 width&#x3D;8)<br>                          Recheck Cond: ((del_lot)::text &#x3D; ‘5’::text)<br>                          -&gt;  Bitmap Index Scan on indx_del_code_04  (cost&#x3D;0.00..47.45 rows&#x3D;2002 width&#x3D;0)<br>                                Index Cond: ((del_lot)::text &#x3D; ‘5’::text)<br>                    -&gt;  Index Scan using idx_sfc_scan_master_params_01 on sfc_scan_master_params t2  (cost&#x3D;0.57..6.07 rows&#x3D;8 width&#x3D;46)<br>                          Index Cond: ((bar_uuid)::text &#x3D; (t1.bar_uuid)::text)</p>
+<p>set enable_seqscan &#x3D; off;<br>set enable_parallel_hash &#x3D; off;<br>Nested Loop  (cost&#x3D;9343.06..363482435.95 rows&#x3D;439198 width&#x3D;71)<br>  -&gt;  HashAggregate  (cost&#x3D;9342.36..9509.35 rows&#x3D;16699 width&#x3D;38)<br>        Group Key: (t2.request_id)::text<br>        -&gt;  Gather  (cost&#x3D;48.51..9300.61 rows&#x3D;16699 width&#x3D;38)<br>              Workers Planned: 1<br>              -&gt;  Nested Loop  (cost&#x3D;48.51..9300.61 rows&#x3D;9823 width&#x3D;38)<br>                    -&gt;  Parallel Bitmap Heap Scan on del_code_info t1  (cost&#x3D;47.95..2054.67 rows&#x3D;1178 width&#x3D;8)<br>                          Recheck Cond: ((del_lot)::text &#x3D; ‘5’::text)<br>                          -&gt;  Bitmap Index Scan on indx_del_code_04  (cost&#x3D;0.00..47.45 rows&#x3D;2002 width&#x3D;0)<br>                                Index Cond: ((del_lot)::text &#x3D; ‘5’::text)<br>                    -&gt;  Index Scan using idx_sfc_scan_master_params_01 on sfc_scan_master_params t2  (cost&#x3D;0.57..6.07 rows&#x3D;8 width&#x3D;46)<br>                          Index Cond: ((bar_uuid)::text &#x3D; (t1.bar_uuid)::text)<br>  -&gt;  Index Scan using idx_sfc_scan_master_params_d_01 on sfc_scan_master_params_d  (cost&#x3D;0.70..21364.42 rows&#x3D;40173 width&#x3D;71)<br>        Index Cond: (request_id &#x3D; (t2.request_id)::text)</p>
+<ol>
+<li>執行查詢時，內存調用模型</li>
+<li>流複製的配置和原理</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/database/" class="category-chain-item">database</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/postgresql/" class="print-no-link">#postgresql</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>PostgreSQL SQL Advance</div>
+      <div>http://example.com/2022/09/01/PostgreSQL-SQL-Advance/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 1, 2022</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/01/PostgreSQL-Function-And-Transaction/" title="PostgreSQL Function And Transaction">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PostgreSQL Function And Transaction</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/01/PostgreSQL-SQL-Base/" title="PostgreSQL SQL Base">
+                        <span class="hidden-mobile">PostgreSQL SQL Base</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

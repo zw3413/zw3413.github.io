@@ -1,0 +1,687 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Conceptskernel_initializerwhen construct a convolutional layer, we need to specify the kernel_initializer glorot_uniform (Xavier Uniform) defaultIt is designed to maintain a balance between variance o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Study of U_CARFnet and Tensorflow">
+<meta property="og:url" content="http://example.com/2025/02/08/Study-of-U-CARFnet/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="Conceptskernel_initializerwhen construct a convolutional layer, we need to specify the kernel_initializer glorot_uniform (Xavier Uniform) defaultIt is designed to maintain a balance between variance o">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-08T15:10:09.000Z">
+<meta property="article:modified_time" content="2025-02-11T03:39:42.685Z">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Study of U_CARFnet and Tensorflow - Elvin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Elvin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg1.JPG') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Study of U_CARFnet and Tensorflow"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-08 10:10" pubdate>
+          February 8, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Study of U_CARFnet and Tensorflow</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h1><h2 id="kernel-initializer"><a href="#kernel-initializer" class="headerlink" title="kernel_initializer"></a>kernel_initializer</h2><p>when construct a convolutional layer, we need to specify the kernel_initializer</p>
+<h3 id="glorot-uniform-Xavier-Uniform-default"><a href="#glorot-uniform-Xavier-Uniform-default" class="headerlink" title="glorot_uniform (Xavier Uniform) default"></a>glorot_uniform (Xavier Uniform) default</h3><p>It is designed to maintain a balance between variance of activations and gradients across layers, helping to prevent vanishing or exploding gradients.<br>$$<br>W \sim U ( - \frac{\sqrt{6}}{sqrt(n_{in} + n_{out})} , \frac{\sqrt{6}}{\sqrt{n_{in} + n_{out}}}  )<br>$$<br>$n_{in}$ &#x3D; Number of inpurt units to the layer<br>$n_{out}$ &#x3D; Number of output units<br>This ensures that the variance of activations remains consistent throughout the network.</p>
+<p>When to use:</p>
+<ul>
+<li>works well with sigmoid, tanh, and softmax activations</li>
+<li>Suitable for both shallow and deep networks, but for ReLU-based networks, HeNormal() is ofter preferred</li>
+</ul>
+<h3 id="he-normal"><a href="#he-normal" class="headerlink" title="he_normal"></a>he_normal</h3><p>It is designed specifically for deep neural networks using ReLU and its variants(e.g., LeakyReLU, ELU). It helps prevent vanishing or exploding gradients by ensuring that the variance of activations remains stable throughout the layers.</p>
+<p>$$<br>W \sim N(0, \frac{2}{n_{in}})<br>$$</p>
+<ul>
+<li>$n_{in}$ is the number of input units to the layer</li>
+<li>The variance $\frac{2}{n_{in}}$ is derived from keeping the variance of activations stable in ReLU networks.</li>
+</ul>
+<h2 id="Padding"><a href="#Padding" class="headerlink" title="Padding"></a>Padding</h2><ul>
+<li>valid<br>No padding is added to the input.<br>The output feature map is smaller than the input, as it only considers the valid region.<br>Effect: The output size decreases based on the kernel size and stride.</li>
+<li>same<br>Padding is added to the input so that the output feature map has the same size as the input (when the stride is 1).<br>Effect: The output size stays the same as the input, with padding applied to the borders of the input.</li>
+</ul>
+<h2 id="layers"><a href="#layers" class="headerlink" title="layers"></a>layers</h2><h3 id="BatchNormalization"><a href="#BatchNormalization" class="headerlink" title="BatchNormalization"></a>BatchNormalization</h3><p>The key components of batch normalization are:</p>
+<ol>
+<li>Mini-batch statistics:<br>For a given feature in a mini-batch, we calculate:</li>
+</ol>
+<ul>
+<li>Mean($\mu_B$) of that feature across all samples in the mini-batch:<br>$$<br>\mu_B &#x3D; \frac{1}{m} \sum_{i&#x3D;1}^{m} x_i<br>$$<br>where m is the number of samples in the mini-batch, and $x_i$ is the value of the feature for sample i;</li>
+<li>Variance($\sigma_B^2$) of that feature:<br>$$<br>\sigma_B^2 &#x3D; \frac{1}{m} \sum_{i&#x3D;1}^m (x_i - \mu_B)^2<br>$$<br>This tells us how spread out the values are for the feature.</li>
+</ul>
+<ol start="2">
+<li>Normalization:</li>
+</ol>
+<ul>
+<li>The calculated mean and variance are used to normalize each feature:<br>$$<br>\hat{x} &#x3D; \frac{x_i-\mu_B}{\sqrt(\sigma^2_B + \epsilon)}<br>$$<br>$x_i$ is the original value for sample i,<br>$\mu_B$ is the mean of the feature in the mini-batch<br>$\sigma_B^2$ is the variance of the feature in the mini-batch<br>$\epsilon$ is a small constant (like $10^{-5}$) added to avoid division by zero.</li>
+</ul>
+<p>This process makes sure that the feature values are centered around 0 with a standard deviation of 1.<br>3.<br>After normalizing, we scale and shift the values using learnable parameters $\gamma$ and $\beta$ to allow the model to adjust:<br>$$<br>y_i &#x3D; \gamma \hat{x_i} + \beta<br>$$<br>$\hat{x_i}$ is the normalized value<br>$\gamma$ is the scaling factor (learned by the model)<br>$\beta$ is the shifing factor (also learned by the model)</p>
+<h3 id="GlobalAveragePooling2D"><a href="#GlobalAveragePooling2D" class="headerlink" title="GlobalAveragePooling2D"></a>GlobalAveragePooling2D</h3><p>GLobalAveragePooling2D layer tabkes a 4D tensor as input ( typically the output of a convolutional layer ) and performs global average pooling across the spatial dimensions( height and width).<br>How it works:</p>
+<ul>
+<li>It calculates the average value for each channel across the entire spatial dimensions( height and width) of the input tensor.</li>
+<li>It outputs a 2D tensor where each element represents the average value for a specific channel<br>Key role:</li>
+<li>Reduces dimensionality: It significantly reduces the number of parameters in the model by replacing spatial dimensions with channel-wise averages.</li>
+<li>Feature aggregation: It aggregates spatial information into a compact representation for each channel.</li>
+<li>Regularization: It can help prevent overfitting by reducing the number of parameters</li>
+</ul>
+<h3 id="Dense"><a href="#Dense" class="headerlink" title="Dense"></a>Dense</h3><p>Dense Layers are the most basic and widely used type of layer in neural networks. In a dense layer, every neuron is connected to every neuron in the previous layer.<br>How they work:</p>
+<ul>
+<li>Linear Transformation: The input is multiplied by a weight matrix and then a bias is added.</li>
+<li>Activation Function: A non-linear function (like ReLU, sigmoid, etc.) is applied element-wise to the result. This introduces non-linearity, which is essential for learning complex patterns.<br>Key role:</li>
+<li>Feature Extraction: Dense layers learn to combine features from the previous layer in complex ways.</li>
+<li>Classification&#x2F;Regression: Often used as the final layer(s) to make predictions</li>
+</ul>
+<h2 id="Local-and-Global-Relationships"><a href="#Local-and-Global-Relationships" class="headerlink" title="Local and Global Relationships"></a>Local and Global Relationships</h2><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Local Relationships</th>
+<th>Global Relationships</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scope</td>
+<td>Close, neighboring elements</td>
+<td>Distant, non-adjacent elements</td>
+</tr>
+<tr>
+<td>CNN Capture</td>
+<td>Convolutional kernels</td>
+<td>Larger kernels, pooling, or other techniques</td>
+</tr>
+<tr>
+<td>Importance</td>
+<td>Basic feature extraction</td>
+<td>High-level understanding, context</td>
+</tr>
+</tbody></table>
+<h2 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h2><h3 id="SE-Squeeze-and-Excitation-Block"><a href="#SE-Squeeze-and-Excitation-Block" class="headerlink" title="SE - Squeeze and Excitation Block"></a>SE - Squeeze and Excitation Block</h3><p>Focus: Channel attention. It learns to weight the importance of different channels in a feature map.<br>Mechanism:</p>
+<ol>
+<li>Squeeze: Global average pooling reduces spatial dimensions, creating a channel-wise descriptor.</li>
+<li>Excitation: Two fully connected layers learn channel-wise scaling factors.</li>
+<li>Scaling: The original feature map is multiplied by the learned scaling factors.</li>
+</ol>
+<h3 id="ECA-Efficient-Channel-Attention-Block"><a href="#ECA-Efficient-Channel-Attention-Block" class="headerlink" title="ECA - Efficient Channel Attention Block"></a>ECA - Efficient Channel Attention Block</h3><p>Focus: Channel attention, with improved efficiency.<br>Mechanism:</p>
+<ol>
+<li>Global Average Pooling: Similar to SE block.</li>
+<li>1D Convolution: Instead of fully connected layers, it uses a 1D convolution with adaptive kernel size to capture local cross-channel interactions.</li>
+<li>Scaling: Same as SE block.<br>Key Improvement: More efficient than SE block due to the 1D convolution.</li>
+</ol>
+<h3 id="CBAM-convolutional-Block-Attention-Block"><a href="#CBAM-convolutional-Block-Attention-Block" class="headerlink" title="CBAM - convolutional Block Attention Block"></a>CBAM - convolutional Block Attention Block</h3><p>Focus: Both channel and spatial attention.<br>Mechanism:</p>
+<ol>
+<li>Channel Attention: Similar to SE block, but uses both global average pooling and global max pooling.</li>
+<li>Spatial Attention: Learns to weight the importance of different spatial locations in the feature map using convolutional layers.</li>
+<li>Combination: The channel and spatial attention maps are multiplied with the input feature map.</li>
+</ol>
+<h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="TensorBoard"><a href="#TensorBoard" class="headerlink" title="TensorBoard"></a>TensorBoard</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Study of U_CARFnet and Tensorflow</div>
+      <div>http://example.com/2025/02/08/Study-of-U-CARFnet/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 8, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/02/11/Summary-of-The-Multi-layer-Perceptron/" title="Summary of The Multi-layer Perceptron">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Summary of The Multi-layer Perceptron</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/06/Ep2-Artificial-Intelligence-The-magic-of-convergence/" title="Ep2: Artificial Intelligence - The magic of convergence">
+                        <span class="hidden-mobile">Ep2: Artificial Intelligence - The magic of convergence</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
