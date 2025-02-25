@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2025/02/08/Study-of-U-CARFnet/UCARFnetStructure.png">
 <meta property="article:published_time" content="2025-02-08T15:10:09.000Z">
-<meta property="article:modified_time" content="2025-02-21T00:19:52.899Z">
+<meta property="article:modified_time" content="2025-02-24T22:03:52.143Z">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2025/02/08/Study-of-U-CARFnet/UCARFnetStructure.png">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          18k words
+          20k words
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          151 mins
+          168 mins
         
       </span>
     
@@ -564,7 +564,50 @@ y_i = \gamma \hat{x_i} + \beta</annotation></semantics></math></span><span class
 <li>Weighted Avaraging: For regression tasks, predictions are combined using weighted averages, where weights reflect model confidence or performance.</li>
 <li>Threshold-Based Selection: Results are accepted only if they meet a predefined agreement threshold(e.g., 80% of models agree)</li>
 </ul>
-<h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="TensorBoard"><a href="#TensorBoard" class="headerlink" title="TensorBoard"></a>TensorBoard</h2><p>TensorBoard is the built-in graphic tool to show the model and training status.</p>
+<h1 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a>Tensorflow</h1><h2 id="Load-Dataset"><a href="#Load-Dataset" class="headerlink" title="Load Dataset"></a>Load Dataset</h2><ol>
+<li><p>load dataset from folder</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br>train_dataset = tf.keras.utils.image_dataset_from_directory(<br>    <span class="hljs-string">&quot;path_to_data&quot;</span>,<br>    image_size = (<span class="hljs-number">224</span>,<span class="hljs-number">224</span>),<br>    batch_size = <span class="hljs-number">32</span>,<br>    label_mode = <span class="hljs-string">&quot;categorical&quot;</span> <span class="hljs-comment"># &quot;int&quot;, &quot;categorical&quot;, &quot;binary&quot;</span><br>)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>load dataset from NumPy array</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment"># suppose there are 1000  224*224 RGB images</span><br>x_train = np.random.rand(<span class="hljs-number">1000</span>, <span class="hljs-number">224</span>, <span class="hljs-number">224</span>, <span class="hljs-number">3</span>)<br>y_train = np.random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, (<span class="hljs-number">1000</span>, )) <span class="hljs-comment"># 10 classes</span><br><br>train_dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train)).batch(<span class="hljs-number">32</span>)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>load dataset from TFRecord file<br>if the data is in TFRecord format, the t.data.TFRecordDataset is suggested to parse dataset:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">raw_dataset = tf.data.TFRecordDataset(<span class="hljs-string">&quot;path_to_data.tfrecord&quot;</span>)<br>train_dataset = raw_dataset.<span class="hljs-built_in">map</span>(parse_function).batch(<span class="hljs-number">32</span>)<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>data structure of train_dataset</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> images, labels <span class="hljs-keyword">in</span> train_dataset.take(<span class="hljs-number">1</span>)<br>    <span class="hljs-built_in">print</span>(images.shape, labels.shape)<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>output<br>(32,224,224,3)(32,num_classes)  # 32 images of size 224*224 and RGB mode</p>
+</blockquote>
+<h2 id="Data-Augmentation"><a href="#Data-Augmentation" class="headerlink" title="Data Augmentation"></a>Data Augmentation</h2><ol>
+<li><p>Apply image augmentation directly on train_dataset</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">augment</span>(<span class="hljs-params">image, label</span>):<br>    image = tf.image.random.flip_left_right(image)<br>    image = tf.image.random_brightness(image, max_delta=<span class="hljs-number">0.2</span>)<br>    <span class="hljs-keyword">return</span> image, label<br>train_dataset = train_dataset.<span class="hljs-built_in">map</span>(augment)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>ImageDataGenerator (deprecated)<br>GPU is not supported, and cannot work with tf.data.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tensorflow.keras.preprocesing.image <span class="hljs-keyword">import</span> ImageDataGenerator<br>datagen = ImageDataGenerator(<br>    rescale = <span class="hljs-number">1.</span>/<span class="hljs-number">255</span>,<br>    rotation_range = <span class="hljs-number">40</span>,<br>    width_shift_range = <span class="hljs-number">0.2</span>,<br>    height_shift_range = <span class="hljs-number">0.2</span>,<br>    shear_range = <span class="hljs-number">0.2</span>,<br>    zoom_range = <span class="hljs-number">0.2</span>,<br>    horizontal_flip = <span class="hljs-literal">True</span><br>)<br>train_generator = datagen.flow_from_directory(<br>    <span class="hljs-string">&quot;path_to_data&quot;</span>,<br>    target_size = (<span class="hljs-number">224</span>,<span class="hljs-number">224</span>),<br>    batch_size = <span class="hljs-number">32</span>,<br>    class_mode = <span class="hljs-string">&quot;categorical&quot;</span><br>    )<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h3 id="model-training"><a href="#model-training" class="headerlink" title="model training"></a>model training</h3><p>model.fit( )</p>
+<pre>
+fit(
+    x = None,
+    y = None,
+    batch_size = None,
+    epochs = 1,
+    verbose = 'auto',
+    callbacks = None,
+    validation_split = 0.0,
+    validation_data = None,
+    shuffle= True,
+    class_weight = None,
+    sample_weight = None,
+    initial_epoch = 0,
+    steps_per_epoch = None,
+    validation_steps = None, 
+    validation_batch_size = None,
+    validation_freq = 1
+)
+</pre>
+<h2 id="which"><a href="#which" class="headerlink" title="which:"></a>which:</h2><h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="TensorBoard"><a href="#TensorBoard" class="headerlink" title="TensorBoard"></a>TensorBoard</h2><p>TensorBoard is the built-in graphic tool to show the model and training status.</p>
 <ul>
 <li>add TensorBoard in the training process</li>
 </ul>
