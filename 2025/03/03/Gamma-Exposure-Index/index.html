@@ -16,20 +16,20 @@
   <meta name="author" content="">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Q1: When training a model, if number of training examples increases to infinity, how it affects your model variance?A1: As the number of training examples approaches infinity, the model variance decre">
+    <meta name="description" content="期权交易与 Gamma 的简单解析基础知识 期权 (Options)    定义：期权 (Options) 是一种金融衍生品，赋予持有者在未来某个时间以特定价格买入（看涨期权，Call Option）或卖出（看跌期权，Put Option）标的资产（如股票，Stock）的权利，但不是义务。   示例：假设你看好苹果公司 (Apple) 的股票 (Stock)，当前价格是 $150。你买了一份一个月">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Some Questions about Mechine Learning">
-<meta property="og:url" content="http://example.com/2025/02/25/Some-Questions-about-Mechine-Learning/index.html">
+<meta property="og:title" content="Gamma Exposure Index">
+<meta property="og:url" content="http://example.com/2025/03/03/Gamma-Exposure-Index/index.html">
 <meta property="og:site_name" content="Elvin&#39;s Blog">
-<meta property="og:description" content="Q1: When training a model, if number of training examples increases to infinity, how it affects your model variance?A1: As the number of training examples approaches infinity, the model variance decre">
+<meta property="og:description" content="期权交易与 Gamma 的简单解析基础知识 期权 (Options)    定义：期权 (Options) 是一种金融衍生品，赋予持有者在未来某个时间以特定价格买入（看涨期权，Call Option）或卖出（看跌期权，Put Option）标的资产（如股票，Stock）的权利，但不是义务。   示例：假设你看好苹果公司 (Apple) 的股票 (Stock)，当前价格是 $150。你买了一份一个月">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-02-26T02:13:14.000Z">
-<meta property="article:modified_time" content="2025-02-26T18:09:19.962Z">
+<meta property="article:published_time" content="2025-03-04T00:07:49.000Z">
+<meta property="article:modified_time" content="2025-03-04T00:10:03.179Z">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Some Questions about Mechine Learning - Elvin&#39;s Blog</title>
+  <title>Gamma Exposure Index - Elvin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -187,7 +187,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Some Questions about Mechine Learning"></span>
+            <span id="subtitle" data-typed-text="Gamma Exposure Index"></span>
           
         </div>
 
@@ -198,8 +198,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-02-25 21:13" pubdate>
-          February 25, 2025 pm
+        <time datetime="2025-03-03 19:07" pubdate>
+          March 3, 2025 pm
         </time>
       </span>
     
@@ -210,7 +210,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.7k words
+          3.6k words
         
       </span>
     
@@ -221,7 +221,7 @@
         
         
         
-          40 mins
+          30 mins
         
       </span>
     
@@ -258,20 +258,130 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Some Questions about Mechine Learning</h1>
+            <h1 id="seo-header">Gamma Exposure Index</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Q1: <em>When training a model, if number of training examples increases to infinity, how it affects your model variance?</em><br>A1: As the number of training examples approaches infinity, the model variance decreases. This is because a larger dataset provides a more comprehensive representation of the true data distribution, reducing the model’s sensitivity to fluctuations in individual training samples. As a result, the model generalizes better and becomes less dependent on specific training subsets leading to more stable predictions.</p>
-<p>Q2: <em>Discuss overfitting and under-fitting in regression problem.</em><br>A2: In a regression problem, the goal is to model the relationship between the input features and a continuous output variable. Overfitting and underfitting are two common issue that affect model performance.<br><strong>Overfitting</strong> occus when a model learns not only the underlying pattern in the training data but also noise and random fluctuation. It typically happens when the model is too complex(e.g. using high degree polynomial regression). While it performs well on training data, it generalizes poorly to new data, leading to high variance.<br><strong>Underfitting</strong> occurs when a model is too simple to capture the true relationship between input and output variables. It happens when the model lacks sufficient complexity(e.g. using linear regression for a nonlinear relationship). Underfitting results in poor performance on both training and test data, leading to high bias. </p>
-<p>Q3: <em>What are the techniques to prevent overfitting?</em><br>A3: To prevent overfitting, us <strong>regularization(L1&#x2F;L2)</strong>, <strong>data augmentation</strong>, <strong>increasing training data</strong>, <strong>dropout</strong>, <strong>early stopping</strong>, <strong>reducing model complexity</strong>, <strong>batch normalization</strong> etc methods .</p>
-<p>Q4: <em>How we can solve the issues of local minimum?</em><br>A4: 1.<strong>Random restarts</strong>: run the optimization algorithm multiple times with different initial starting points. 2.<strong>Gradient-based methods with Momentum</strong>, momentum help the optimizer overcome small local minima by considering past gradients in the update step. 3.<strong>Stochastic gradient descent(SGD)</strong> introduces noise into the gradient estimates, wich can help escape shallow local minima. 4.<strong>Higher-order optimizaiton methods</strong>, use some methods that consider second-order derivatives to better navigate the optimization landscape.5.<strong>Regularization</strong>, add regularization terms(e.g., L1 or L2) to the objective function to smooth the landscape and reduce the likelihood of getting stuck in local minima. 6.<strong>Transfer learning</strong>, use knowledge from related problem or pre-trained models to initialize the optimization process in a better region of the solution space. 7.<strong>Learning rate scheduling</strong>, dynamically adjusting the learning rate during training, starting with a larger rate to escape local minima and gradually reducing it for precise convergence..</p>
-<p>Q5: <em>Assume we have a set of data from a robot which includes joint position, velocity, acceleration(i.e., inputs). A set of features (e.g., joint motor torques(output)) have been recorded fro each joint of robot. For the new task, we need new trajectory. Our goal is to predict the join torques for new (inputs) (a) We have decided to use a neural network to solve this problem. We have two choices:</em><br><em>ii&gt; either to train a separate neural network for each of the joints(i.e., multi-input-single output model MISO) or</em><br><em>iii&gt; to train a single neural network with one output neuron for each joint torque( Multi-Input-Multi-Output MIMO) model, but with a shared hidden layer. Which method do you suggest? Explain your answer.</em><br><em>Hint: Consider dependencies between outputs.</em><br>A5: I suggest using the Multi-Input-Multi-Output(MIMO) model with shared hidden layers for this task. Here is why:<br>    1. Dependencies between outputs: Joint for torques are likely interdependent, as the torque required for one joint may depend on other joints. A MIMO model can capture these dependencies effectively with shared hidden layers.<br>    2. Efficiency: A single neural network with shared layers can learn common feature across all joints, making it more efficient than training separate models for each joint(MISO).<br>    3. Scalability: MIMO models are easier to scale as you can add more output neurons without needing separate networks for each joint, unlink MISO.<br>Overall, MIMO with shared hidden layers is more efficient, better at captureing interdependencies, and scalable.</p>
-<p>Q6-1: <em>(True&#x2F;Flase)Training error provides an unbiased estimate of true error.</em><br>A6-1: False. Training error is typically biased and underestimates the true error because the model is evaluated on the same data it was trained on, leading to overfitting. A better estimate of true error comes from validation or test error.</p>
-<p>Q6-2: <em>(True&#x2F;False)Test error provides an unbiased estimate of true error.</em><br>A6-2: True. Because training and test set examples are recorded independently at random test.</p>
-<p>Q6-3: <em>(True&#x2F;False)Training accuracy minus test accuracy provides an unbiased estimate of the degree of overfitting.</em><br>A6-3: True. If training accuracy is very close to test accuracy, then most likely overfitting has not occured.</p>
-<p>Q7: <em>Model evalution can be performed in four different ways:</em><br>A7:<br>    1. Under-fitting - Validation and training error high<br>    2. Overfitting - Validation error is high, training error low<br>    3. Good fit - Validation error low, slightly highter than the training error<br>    4. Unknown fit - Validation error low, training error ‘high’<br>    5. <strong>Overfitting is a modeling error that introduces bias to the model because it is to closely related to the training data set</strong></p>
+                <h1 id="期权交易与-Gamma-的简单解析"><a href="#期权交易与-Gamma-的简单解析" class="headerlink" title="期权交易与 Gamma 的简单解析"></a>期权交易与 Gamma 的简单解析</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><ol>
+<li><p><strong>期权 (Options)</strong>  </p>
+<ul>
+<li><strong>定义</strong>：期权 (Options) 是一种金融衍生品，赋予持有者在未来某个时间以特定价格买入（看涨期权，Call Option）或卖出（看跌期权，Put Option）标的资产（如股票，Stock）的权利，但不是义务。  </li>
+<li><strong>示例</strong>：假设你看好苹果公司 (Apple) 的股票 (Stock)，当前价格是 $150。你买了一份一个月后以 $160 买入的看涨期权 (Call Option)，支付 $5 的权利金 (Premium)。如果到期时股价涨到 $170，你可以用 $160 买股票，赚 $10（减去 $5 权利金）；如果跌到 $140，期权作废，你只亏 $5。</li>
+</ul>
+</li>
+<li><p><strong>做市商 (Market Maker)</strong>  </p>
+<ul>
+<li><strong>定义</strong>：做市商 (Market Maker) 是金融市场中的参与者，负责提供买卖报价，确保市场有足够的流动性 (Liquidity)。他们通过买卖期权 (Options) 和股票 (Stock) 赚取差价，同时需要对冲自己的风险敞口 (Exposure)。  </li>
+<li><strong>示例</strong>：某做市商 (Market Maker) 在市场中同时卖出看跌期权 (Put Option) 和买入看涨期权 (Call Option)，通过调整股票 (Stock) 持仓来避免大亏。</li>
+</ul>
+</li>
+<li><p><strong>Delta (δ)</strong>  </p>
+<ul>
+<li><strong>定义</strong>：Delta (δ) 衡量期权 (Options) 价格对标的股票 (Stock) 价格变动的敏感度。通常用 0 到 1（看涨期权，Call）或 -1 到 0（看跌期权，Put）表示。  </li>
+<li><strong>特性</strong>：  <ul>
+<li>看涨期权 (Call Option)：Delta 为正，股票涨期权价格也涨。  </li>
+<li>看跌期权 (Put Option)：Delta 为负，股票跌期权价格涨。</li>
+</ul>
+</li>
+<li><strong>示例</strong>：你持有一份 Delta 为 0.5 的看涨期权 (Call Option)。如果股票 (Stock) 价格涨 $1，期权价格涨 $0.5；如果 Delta 为 -0.5 的看跌期权 (Put Option)，股票跌 $1，期权涨 $0.5。</li>
+</ul>
+</li>
+<li><p><strong>Gamma (γ)</strong>  </p>
+<ul>
+<li><strong>定义</strong>：Gamma (γ) 是 Delta (δ) 的变化率，衡量 Delta 对股票 (Stock) 价格变动的敏感度。高 Gamma 意味着 Delta 变化快，风险和对冲难度增加。  </li>
+<li><strong>特性</strong>：  <ul>
+<li>**正 Gamma (Positive Gamma)**：股票涨时 Delta 增加更快，跌时减少更快。  </li>
+<li>**负 Gamma (Negative Gamma)**：股票涨时 Delta 减少更快，跌时增加更快。</li>
+</ul>
+</li>
+<li><strong>示例</strong>：假设你买了一份看涨期权 (Call Option)，Gamma 为 0.1。如果股票 (Stock) 涨 $1，Delta 从 0.5 变成 0.6；再涨 $1，Delta 变成 0.7。负 Gamma 则相反。</li>
+</ul>
+</li>
+<li><p><strong>GEX (Gamma Exposure)</strong>  </p>
+<ul>
+<li><strong>定义</strong>：GEX (Gamma Exposure) 是做市商 (Market Maker) 在期权 (Options) 市场中的净 Gamma (γ) 敞口，反映他们需要买卖多少股票 (Stock) 来对冲整个市场的期权头寸 (Position)。  </li>
+<li><strong>示例</strong>：如果市场下跌，做市商的 GEX 显示负值，他们可能需要卖出 10万股股票 (Stock) 来对冲；反弹时 GEX 转正，他们需要买入 5万股。</li>
+</ul>
+</li>
+<li><p><strong>波动率 (Volatility)</strong>  </p>
+<ul>
+<li><strong>定义</strong>：波动率 (Volatility) 表示股票 (Stock) 价格波动的剧烈程度。市场下跌时，波动率通常上升，期权 (Options) 价格也会因此上涨。  </li>
+<li><strong>示例</strong>：某股票 (Stock) 平时每天波动 1%，但发布财报后波动率 (Volatility) 升至 5%，期权价格因此大涨。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="原文拆解与解释"><a href="#原文拆解与解释" class="headerlink" title="原文拆解与解释"></a>原文拆解与解释</h2><h3 id="市场波动与对冲"><a href="#市场波动与对冲" class="headerlink" title="市场波动与对冲"></a>市场波动与对冲</h3><blockquote>
+<p>“市场 volatile（大多数对应下跌行情，Downtrend），很多人都会买 put (Put Option) or sell call (Call Option) 来对冲 (Hedge)。”</p>
+</blockquote>
+<ul>
+<li><strong>详细解释</strong>：  <ul>
+<li>当市场进入下跌行情 (Downtrend)，波动率 (Volatility) 升高，投资者担心亏损。  </li>
+<li>**买看跌期权 (Buy Put Option)**：投资者通过买入看跌期权 (Put Option) 来保护持仓。如果股票 (Stock) 下跌，Put 的价值上升，抵消损失。  </li>
+<li>**卖出看涨期权 (Sell Call Option)**：投资者卖出看涨期权 (Call Option)，收取权利金 (Premium)。如果股价下跌，Call 作废，卖家赚权利金。</li>
+</ul>
+</li>
+<li><strong>示例</strong>：你持有特斯拉 (Tesla) 股票 (Stock)，怕它跌，买了一份 $200 的看跌期权 (Put Option)。如果股价跌到 $180，Put 赚的钱弥补股票亏损。</li>
+</ul>
+<h3 id="做市商的头寸"><a href="#做市商的头寸" class="headerlink" title="做市商的头寸"></a>做市商的头寸</h3><blockquote>
+<p>“这个时候期权 (Options) 做市商 (Market Maker) 的 position (Position) 就变成了卖 put（负 gamma，Negative Gamma）和买 call（正 gamma，Positive Gamma）。”</p>
+</blockquote>
+<ul>
+<li><strong>详细解释</strong>：  <ul>
+<li>做市商 (Market Maker) 必须响应市场交易。当投资者买看跌期权 (Put Option)，做市商卖出；投资者卖看涨期权 (Call Option)，做市商买入。  </li>
+<li>**卖 Put (Negative Gamma)**：负 Gamma 意味着股价下跌时，Delta (δ) 变得更负，做市商需卖股票 (Stock) 对冲。  </li>
+<li>**买 Call (Positive Gamma)**：正 Gamma 意味着股价上涨时，Delta 变得更正，做市商需买股票对冲。</li>
+</ul>
+</li>
+<li><strong>示例</strong>：做市商卖出一份 Delta 为 -0.4 的看跌期权 (Put Option)，股价跌 $1，Delta 变成 -0.5，他们卖出更多股票 (Stock)。</li>
+</ul>
+<h3 id="Gamma-不平衡与下跌"><a href="#Gamma-不平衡与下跌" class="headerlink" title="Gamma 不平衡与下跌"></a>Gamma 不平衡与下跌</h3><blockquote>
+<p>“卖 Put (Put Option) 的 Gamma (γ) 刚开始会大幅高于买 Call (Call Option) 的 Gamma (γ)，所以这个时候他们 net 需要买很多 shares (Stock) 来对冲 exposure (Exposure)，推进股价下跌 (Downtrend)。”</p>
+</blockquote>
+<ul>
+<li><strong>详细解释</strong>：  <ul>
+<li>下跌行情 (Downtrend) 初期，投资者疯狂买看跌期权 (Put Option)，做市商的负 Gamma (Negative Gamma) 占主导。  </li>
+<li>负 Gamma 下，股价每跌一点，Delta 更负，做市商卖出股票 (Stock) 对冲，卖压推低股价。  </li>
+<li><strong>澄清</strong>：原文说“买 shares”可能有误，应为“卖 shares”，因为负 Gamma 需要卖出对冲。</li>
+</ul>
+</li>
+<li><strong>示例</strong>：股价从 $100 跌到 $98，负 Gamma 让 Delta 从 -0.3 变 -0.5，做市商卖出 2000 股股票 (Stock)，股价进一步跌到 $95。</li>
+</ul>
+<h3 id="转折点"><a href="#转折点" class="headerlink" title="转折点"></a>转折点</h3><blockquote>
+<p>“但直到股票 (Stock) 跌到一个极值 (Extreme Low)，买 Call (Call Option) 的正 Gamma (Positive Gamma) 超过了卖 Put (Put Option) 的负 Gamma (Negative Gamma) 时，做市商 (Market Maker) 就需要买 shares (Stock) 来对冲 (Hedge) 了。”</p>
+</blockquote>
+<ul>
+<li><strong>详细解释</strong>：  <ul>
+<li>股价跌到极低点时，看跌期权 (Put Option) 的 Gamma 效应减弱（可能接近实值，In-the-Money），而看涨期权 (Call Option) 的正 Gamma 开始显现。  </li>
+<li>正 Gamma 下，股价上涨时 Delta 迅速增加，做市商买股票 (Stock) 对冲，形成买盘支撑。</li>
+</ul>
+</li>
+<li><strong>示例</strong>：股价跌到 $90，Call 的 Delta 从 0.2 涨到 0.4，做市商买入 3000 股股票 (Stock)，股价反弹到 $92。</li>
+</ul>
+<h3 id="V-型反转"><a href="#V-型反转" class="headerlink" title="V 型反转"></a>V 型反转</h3><blockquote>
+<p>“这就是为什么你看到 GEX (Gamma Exposure) 每次跌到一个点市场就会小 V 型反转 (V-Shaped Reversal)。”</p>
+</blockquote>
+<ul>
+<li><strong>详细解释</strong>：  <ul>
+<li>GEX (Gamma Exposure) 从负值（卖压主导）转为正值（买盘主导），股价触底反弹，形成 V 型反转 (V-Shaped Reversal)。  </li>
+<li>这是短期现象，常出现在期权到期日 (Expiration Date) 或关键支撑位 (Support Level)。</li>
+</ul>
+</li>
+<li><strong>示例</strong>：某股票 (Stock) 从 $100 跌到 $85，GEX 转正，做市商买入 5000 股，股价反弹到 $90，形成小 V 型。</li>
+</ul>
+<hr>
+<h2 id="总结与建议"><a href="#总结与建议" class="headerlink" title="总结与建议"></a>总结与建议</h2><h3 id="核心逻辑"><a href="#核心逻辑" class="headerlink" title="核心逻辑"></a>核心逻辑</h3><ol>
+<li>**初期下跌 (Downtrend)**：负 Gamma (Negative Gamma) 主导，做市商 (Market Maker) 卖股票 (Stock)，加剧跌势。  </li>
+<li><strong>转折</strong>：正 Gamma (Positive Gamma) 超负 Gamma，做市商买股票 (Stock)，股价反弹。  </li>
+<li>**V 型反转 (V-Shaped Reversal)**：GEX (Gamma Exposure) 从负转正，市场触底。</li>
+</ol>
+<h3 id="新手建议"><a href="#新手建议" class="headerlink" title="新手建议"></a>新手建议</h3><ul>
+<li><strong>从简单开始</strong>：先熟悉股票 (Stock) 交易，再学期权 (Options)。  </li>
+<li><strong>关注 Delta 和 Gamma</strong>：理解它们如何影响期权价格和市场波动。  </li>
+<li><strong>观察市场情绪</strong>：用 Put&#x2F;Call 比率 (Put&#x2F;Call Ratio) 判断恐慌程度，计算方法是看跌期权 (Put Option) 交易量除以看涨期权 (Call Option) 交易量。  </li>
+<li><strong>示例</strong>：某日 Put 交易量 10万手，Call 交易量 5万手，Put&#x2F;Call 比率 &#x3D; 2，表明市场看空情绪强。</li>
+</ul>
 
                 
               </div>
@@ -289,15 +399,15 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Some Questions about Mechine Learning</div>
-      <div>http://example.com/2025/02/25/Some-Questions-about-Mechine-Learning/</div>
+      <div>Gamma Exposure Index</div>
+      <div>http://example.com/2025/03/03/Gamma-Exposure-Index/</div>
     </div>
     <div class="license-meta">
       
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 25, 2025</div>
+          <div>March 3, 2025</div>
         </div>
       
       
@@ -329,18 +439,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/03/Gamma-Exposure-Index/" title="Gamma Exposure Index">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Gamma Exposure Index</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/02/21/Matrix-Computation-Methods-in-ICA-Infomax-vs-FastICA/" title="Matrix Methods in ICA: Infomax vs. FastICA">
-                        <span class="hidden-mobile">Matrix Methods in ICA: Infomax vs. FastICA</span>
+                      <a href="/2025/02/25/Some-Questions-about-Mechine-Learning/" title="Some Questions about Mechine Learning">
+                        <span class="hidden-mobile">Some Questions about Mechine Learning</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
