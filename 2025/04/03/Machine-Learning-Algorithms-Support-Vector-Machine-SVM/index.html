@@ -16,20 +16,20 @@
   <meta name="author" content="">
   <meta name="keywords" content="">
   
-    <meta name="description" content="期权交易与 Gamma 的简单解析基础知识 期权 (Options)    定义：期权 (Options) 是一种金融衍生品，赋予持有者在未来某个时间以特定价格买入（看涨期权，Call Option）或卖出（看跌期权，Put Option）标的资产（如股票，Stock）的权利，但不是义务。   示例：假设你看好苹果公司 (Apple) 的股票 (Stock)，当前价格是 $150。你买了一份一个月">
+    <meta name="description" content="Support Vector Machines1. Optimal Separation2. Kernels3. The Support Vector Machine Algorithm svm算法的核心是要找到分割超平面wx+b&#x3D;0 w表示分割超平面的法向量 要想找到分割超平面的法向量，可以找到两个类别中的支持向量 要找支持向量，使用它们的性质：它们距离分割平面的距离可以被表示为 wx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Gamma Exposure Index">
-<meta property="og:url" content="http://example.com/2025/03/03/Gamma-Exposure-Index/index.html">
+<meta property="og:title" content="Machine Learning Algorithms - Support Vector Machine (SVM)">
+<meta property="og:url" content="http://example.com/2025/04/03/Machine-Learning-Algorithms-Support-Vector-Machine-SVM/index.html">
 <meta property="og:site_name" content="Elvin&#39;s Blog">
-<meta property="og:description" content="期权交易与 Gamma 的简单解析基础知识 期权 (Options)    定义：期权 (Options) 是一种金融衍生品，赋予持有者在未来某个时间以特定价格买入（看涨期权，Call Option）或卖出（看跌期权，Put Option）标的资产（如股票，Stock）的权利，但不是义务。   示例：假设你看好苹果公司 (Apple) 的股票 (Stock)，当前价格是 $150。你买了一份一个月">
+<meta property="og:description" content="Support Vector Machines1. Optimal Separation2. Kernels3. The Support Vector Machine Algorithm svm算法的核心是要找到分割超平面wx+b&#x3D;0 w表示分割超平面的法向量 要想找到分割超平面的法向量，可以找到两个类别中的支持向量 要找支持向量，使用它们的性质：它们距离分割平面的距离可以被表示为 wx">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-03-04T00:07:49.000Z">
-<meta property="article:modified_time" content="2025-03-04T00:10:03.179Z">
+<meta property="article:published_time" content="2025-04-03T17:50:17.000Z">
+<meta property="article:modified_time" content="2025-04-09T12:50:44.087Z">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Gamma Exposure Index - Elvin&#39;s Blog</title>
+  <title>Machine Learning Algorithms - Support Vector Machine (SVM) - Elvin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -187,7 +187,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Gamma Exposure Index"></span>
+            <span id="subtitle" data-typed-text="Machine Learning Algorithms - Support Vector Machine (SVM)"></span>
           
         </div>
 
@@ -198,8 +198,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-03 19:07" pubdate>
-          March 3, 2025 pm
+        <time datetime="2025-04-03 13:50" pubdate>
+          April 3, 2025 pm
         </time>
       </span>
     
@@ -210,7 +210,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k words
+          644 words
         
       </span>
     
@@ -221,7 +221,7 @@
         
         
         
-          30 mins
+          6 mins
         
       </span>
     
@@ -258,131 +258,24 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Gamma Exposure Index</h1>
+            <h1 id="seo-header">Machine Learning Algorithms - Support Vector Machine (SVM)</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="期权交易与-Gamma-的简单解析"><a href="#期权交易与-Gamma-的简单解析" class="headerlink" title="期权交易与 Gamma 的简单解析"></a>期权交易与 Gamma 的简单解析</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><ol>
-<li><p><strong>期权 (Options)</strong>  </p>
-<ul>
-<li><strong>定义</strong>：期权 (Options) 是一种金融衍生品，赋予持有者在未来某个时间以特定价格买入（看涨期权，Call Option）或卖出（看跌期权，Put Option）标的资产（如股票，Stock）的权利，但不是义务。  </li>
-<li><strong>示例</strong>：假设你看好苹果公司 (Apple) 的股票 (Stock)，当前价格是 $150。你买了一份一个月后以 $160 买入的看涨期权 (Call Option)，支付 $5 的权利金 (Premium)。如果到期时股价涨到 $170，你可以用 $160 买股票，赚 $10（减去 $5 权利金）；如果跌到 $140，期权作废，你只亏 $5。</li>
-</ul>
-</li>
-<li><p><strong>做市商 (Market Maker)</strong>  </p>
-<ul>
-<li><strong>定义</strong>：做市商 (Market Maker) 是金融市场中的参与者，负责提供买卖报价，确保市场有足够的流动性 (Liquidity)。他们通过买卖期权 (Options) 和股票 (Stock) 赚取差价，同时需要对冲自己的风险敞口 (Exposure)。  </li>
-<li><strong>示例</strong>：某做市商 (Market Maker) 在市场中同时卖出看跌期权 (Put Option) 和买入看涨期权 (Call Option)，通过调整股票 (Stock) 持仓来避免大亏。</li>
-</ul>
-</li>
-<li><p><strong>Delta (δ)</strong>  </p>
-<ul>
-<li><strong>定义</strong>：Delta (δ) 衡量期权 (Options) 价格对标的股票 (Stock) 价格变动的敏感度。通常用 0 到 1（看涨期权，Call）或 -1 到 0（看跌期权，Put）表示。  </li>
-<li><strong>特性</strong>：  <ul>
-<li>看涨期权 (Call Option)：Delta 为正，股票涨期权价格也涨。  </li>
-<li>看跌期权 (Put Option)：Delta 为负，股票跌期权价格涨。</li>
-</ul>
-</li>
-<li><strong>示例</strong>：你持有一份 Delta 为 0.5 的看涨期权 (Call Option)。如果股票 (Stock) 价格涨 $1，期权价格涨 $0.5；如果 Delta 为 -0.5 的看跌期权 (Put Option)，股票跌 $1，期权涨 $0.5。</li>
-</ul>
-</li>
-<li><p><strong>Gamma (γ)</strong>  </p>
-<ul>
-<li><strong>定义</strong>：Gamma (γ) 是 Delta (δ) 的变化率，衡量 Delta 对股票 (Stock) 价格变动的敏感度。高 Gamma 意味着 Delta 变化快，风险和对冲难度增加。  </li>
-<li><strong>特性</strong>：  <ul>
-<li>**正 Gamma (Positive Gamma)**：股票涨时 Delta 增加更快，跌时减少更快。  </li>
-<li>**负 Gamma (Negative Gamma)**：股票涨时 Delta 减少更快，跌时增加更快。</li>
-</ul>
-</li>
-<li><strong>示例</strong>：假设你买了一份看涨期权 (Call Option)，Gamma 为 0.1。如果股票 (Stock) 涨 $1，Delta 从 0.5 变成 0.6；再涨 $1，Delta 变成 0.7。负 Gamma 则相反。</li>
-</ul>
-</li>
-<li><p><strong>GEX (Gamma Exposure)</strong>  </p>
-<ul>
-<li><strong>定义</strong>：GEX (Gamma Exposure) 是做市商 (Market Maker) 在期权 (Options) 市场中的净 Gamma (γ) 敞口，反映他们需要买卖多少股票 (Stock) 来对冲整个市场的期权头寸 (Position)。  </li>
-<li><strong>示例</strong>：如果市场下跌，做市商的 GEX 显示负值，他们可能需要卖出 10万股股票 (Stock) 来对冲；反弹时 GEX 转正，他们需要买入 5万股。</li>
-</ul>
-</li>
-<li><p><strong>波动率 (Volatility)</strong>  </p>
-<ul>
-<li><strong>定义</strong>：波动率 (Volatility) 表示股票 (Stock) 价格波动的剧烈程度。市场下跌时，波动率通常上升，期权 (Options) 价格也会因此上涨。  </li>
-<li><strong>示例</strong>：某股票 (Stock) 平时每天波动 1%，但发布财报后波动率 (Volatility) 升至 5%，期权价格因此大涨。</li>
-</ul>
-</li>
+                <h2 id="Support-Vector-Machines"><a href="#Support-Vector-Machines" class="headerlink" title="Support Vector Machines"></a>Support Vector Machines</h2><h3 id="1-Optimal-Separation"><a href="#1-Optimal-Separation" class="headerlink" title="1. Optimal Separation"></a>1. Optimal Separation</h3><h3 id="2-Kernels"><a href="#2-Kernels" class="headerlink" title="2. Kernels"></a>2. Kernels</h3><h3 id="3-The-Support-Vector-Machine-Algorithm"><a href="#3-The-Support-Vector-Machine-Algorithm" class="headerlink" title="3. The Support Vector Machine Algorithm"></a>3. The Support Vector Machine Algorithm</h3><ol>
+<li>svm算法的核心是要找到分割超平面wx+b&#x3D;0</li>
+<li>w表示分割超平面的法向量</li>
+<li>要想找到分割超平面的法向量，可以找到两个类别中的支持向量</li>
+<li>要找支持向量，使用它们的性质：它们距离分割平面的距离可以被表示为 wx_i+b &#x3D;1或者-1</li>
+<li>另外我们需要支持向量距离分割超平面的距离最远，这样找到的分割超平面才是最优的分割超平面</li>
+<li>基于以上两点，我们得到了优化问题的目标函数和约束条件，5是目标函数，4是约束条件</li>
+<li>目标函数5，通过变形及带入约束条件4，可以将优化问题转换为找最小2-norm法向量</li>
+<li>这样我们就得到了svm算法的优化问题的目标函数和约束条件</li>
+<li>使用拉格朗日函数来求解这个优化问题，通过将约束条件乘以拉格朗日乘子然后求和后，组合进目标函数构成拉格朗日函数。</li>
+<li>然后就是利用原目标函数是严格凸的，约束时线性的，也就是原优化问题时个凸优化问题，其满足强对偶性，将拉格朗日函数转换为对偶问题，通过求拉格朗日函数对于\omega和b的偏导，并令其等于零，得到对偶优化问题及条件。解对偶优化问题得到拉格朗日乘子(只有支持向量的\alpha_i &gt;0)。再恢复原始变量\omega， 选择任意一个支持向量带入约束条件求得b。这样就解得了分割超平面。</li>
 </ol>
-<hr>
-<h2 id="原文拆解与解释"><a href="#原文拆解与解释" class="headerlink" title="原文拆解与解释"></a>原文拆解与解释</h2><h3 id="市场波动与对冲"><a href="#市场波动与对冲" class="headerlink" title="市场波动与对冲"></a>市场波动与对冲</h3><blockquote>
-<p>“市场 volatile（大多数对应下跌行情，Downtrend），很多人都会买 put (Put Option) or sell call (Call Option) 来对冲 (Hedge)。”</p>
-</blockquote>
-<ul>
-<li><strong>详细解释</strong>：  <ul>
-<li>当市场进入下跌行情 (Downtrend)，波动率 (Volatility) 升高，投资者担心亏损。  </li>
-<li>**买看跌期权 (Buy Put Option)**：投资者通过买入看跌期权 (Put Option) 来保护持仓。如果股票 (Stock) 下跌，Put 的价值上升，抵消损失。  </li>
-<li>**卖出看涨期权 (Sell Call Option)**：投资者卖出看涨期权 (Call Option)，收取权利金 (Premium)。如果股价下跌，Call 作废，卖家赚权利金。</li>
-</ul>
-</li>
-<li><strong>示例</strong>：你持有特斯拉 (Tesla) 股票 (Stock)，怕它跌，买了一份 $200 的看跌期权 (Put Option)。如果股价跌到 $180，Put 赚的钱弥补股票亏损。</li>
-</ul>
-<h3 id="做市商的头寸"><a href="#做市商的头寸" class="headerlink" title="做市商的头寸"></a>做市商的头寸</h3><blockquote>
-<p>“这个时候期权 (Options) 做市商 (Market Maker) 的 position (Position) 就变成了卖 put（负 gamma，Negative Gamma）和买 call（正 gamma，Positive Gamma）。”</p>
-</blockquote>
-<ul>
-<li><strong>详细解释</strong>：  <ul>
-<li>做市商 (Market Maker) 必须响应市场交易。当投资者买看跌期权 (Put Option)，做市商卖出；投资者卖看涨期权 (Call Option)，做市商买入。  </li>
-<li>**卖 Put (Negative Gamma)**：负 Gamma 意味着股价下跌时，Delta (δ) 变得更负，做市商需卖股票 (Stock) 对冲。  </li>
-<li>**买 Call (Positive Gamma)**：正 Gamma 意味着股价上涨时，Delta 变得更正，做市商需买股票对冲。</li>
-</ul>
-</li>
-<li><strong>示例</strong>：做市商卖出一份 Delta 为 -0.4 的看跌期权 (Put Option)，股价跌 $1，Delta 变成 -0.5，他们卖出更多股票 (Stock)。</li>
-</ul>
-<h3 id="Gamma-不平衡与下跌"><a href="#Gamma-不平衡与下跌" class="headerlink" title="Gamma 不平衡与下跌"></a>Gamma 不平衡与下跌</h3><blockquote>
-<p>“卖 Put (Put Option) 的 Gamma (γ) 刚开始会大幅高于买 Call (Call Option) 的 Gamma (γ)，所以这个时候他们 net 需要买很多 shares (Stock) 来对冲 exposure (Exposure)，推进股价下跌 (Downtrend)。”</p>
-</blockquote>
-<ul>
-<li><strong>详细解释</strong>：  <ul>
-<li>下跌行情 (Downtrend) 初期，投资者疯狂买看跌期权 (Put Option)，做市商的负 Gamma (Negative Gamma) 占主导。  </li>
-<li>负 Gamma 下，股价每跌一点，Delta 更负，做市商卖出股票 (Stock) 对冲，卖压推低股价。  </li>
-<li><strong>澄清</strong>：原文说“买 shares”可能有误，应为“卖 shares”，因为负 Gamma 需要卖出对冲。</li>
-</ul>
-</li>
-<li><strong>示例</strong>：股价从 $100 跌到 $98，负 Gamma 让 Delta 从 -0.3 变 -0.5，做市商卖出 2000 股股票 (Stock)，股价进一步跌到 $95。</li>
-</ul>
-<h3 id="转折点"><a href="#转折点" class="headerlink" title="转折点"></a>转折点</h3><blockquote>
-<p>“但直到股票 (Stock) 跌到一个极值 (Extreme Low)，买 Call (Call Option) 的正 Gamma (Positive Gamma) 超过了卖 Put (Put Option) 的负 Gamma (Negative Gamma) 时，做市商 (Market Maker) 就需要买 shares (Stock) 来对冲 (Hedge) 了。”</p>
-</blockquote>
-<ul>
-<li><strong>详细解释</strong>：  <ul>
-<li>股价跌到极低点时，看跌期权 (Put Option) 的 Gamma 效应减弱（可能接近实值，In-the-Money），而看涨期权 (Call Option) 的正 Gamma 开始显现。  </li>
-<li>正 Gamma 下，股价上涨时 Delta 迅速增加，做市商买股票 (Stock) 对冲，形成买盘支撑。</li>
-</ul>
-</li>
-<li><strong>示例</strong>：股价跌到 $90，Call 的 Delta 从 0.2 涨到 0.4，做市商买入 3000 股股票 (Stock)，股价反弹到 $92。</li>
-</ul>
-<h3 id="V-型反转"><a href="#V-型反转" class="headerlink" title="V 型反转"></a>V 型反转</h3><blockquote>
-<p>“这就是为什么你看到 GEX (Gamma Exposure) 每次跌到一个点市场就会小 V 型反转 (V-Shaped Reversal)。”</p>
-</blockquote>
-<ul>
-<li><strong>详细解释</strong>：  <ul>
-<li>GEX (Gamma Exposure) 从负值（卖压主导）转为正值（买盘主导），股价触底反弹，形成 V 型反转 (V-Shaped Reversal)。  </li>
-<li>这是短期现象，常出现在期权到期日 (Expiration Date) 或关键支撑位 (Support Level)。</li>
-</ul>
-</li>
-<li><strong>示例</strong>：某股票 (Stock) 从 $100 跌到 $85，GEX 转正，做市商买入 5000 股，股价反弹到 $90，形成小 V 型。</li>
-</ul>
-<hr>
-<h2 id="总结与建议"><a href="#总结与建议" class="headerlink" title="总结与建议"></a>总结与建议</h2><h3 id="核心逻辑"><a href="#核心逻辑" class="headerlink" title="核心逻辑"></a>核心逻辑</h3><ol>
-<li>**初期下跌 (Downtrend)**：负 Gamma (Negative Gamma) 主导，做市商 (Market Maker) 卖股票 (Stock)，加剧跌势。  </li>
-<li><strong>转折</strong>：正 Gamma (Positive Gamma) 超负 Gamma，做市商买股票 (Stock)，股价反弹。  </li>
-<li>**V 型反转 (V-Shaped Reversal)**：GEX (Gamma Exposure) 从负转正，市场触底。</li>
-</ol>
-<h3 id="新手建议"><a href="#新手建议" class="headerlink" title="新手建议"></a>新手建议</h3><ul>
-<li><strong>从简单开始</strong>：先熟悉股票 (Stock) 交易，再学期权 (Options)。  </li>
-<li><strong>关注 Delta 和 Gamma</strong>：理解它们如何影响期权价格和市场波动。  </li>
-<li><strong>观察市场情绪</strong>：用 Put&#x2F;Call 比率 (Put&#x2F;Call Ratio) 判断恐慌程度，计算方法是看跌期权 (Put Option) 交易量除以看涨期权 (Call Option) 交易量。  </li>
-<li><strong>示例</strong>：某日 Put 交易量 10万手，Call 交易量 5万手，Put&#x2F;Call 比率 &#x3D; 2，表明市场看空情绪强。</li>
-</ul>
-
+<h3 id="4-Extensions-to-the-SVM"><a href="#4-Extensions-to-the-SVM" class="headerlink" title="4. Extensions to the SVM"></a>4. Extensions to the SVM</h3><h3 id="5-Quadratic-Programming-SOlver"><a href="#5-Quadratic-Programming-SOlver" class="headerlink" title="5. Quadratic Programming SOlver"></a>5. Quadratic Programming SOlver</h3>
                 
               </div>
             
@@ -399,15 +292,15 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Gamma Exposure Index</div>
-      <div>http://example.com/2025/03/03/Gamma-Exposure-Index/</div>
+      <div>Machine Learning Algorithms - Support Vector Machine (SVM)</div>
+      <div>http://example.com/2025/04/03/Machine-Learning-Algorithms-Support-Vector-Machine-SVM/</div>
     </div>
     <div class="license-meta">
       
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 3, 2025</div>
+          <div>April 3, 2025</div>
         </div>
       
       
@@ -439,9 +332,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/" title="Radial Basis Functions and Splines / Dimensionality Reduction">
+                      <a href="/2025/04/16/Stock-Market-Analyse/" title="Stock Market Analyse">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Radial Basis Functions and Splines / Dimensionality Reduction</span>
+                        <span class="hidden-mobile">Stock Market Analyse</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -449,8 +342,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/02/25/Some-Questions-about-Mechine-Learning/" title="Some Questions about Mechine Learning">
-                        <span class="hidden-mobile">Some Questions about Mechine Learning</span>
+                      <a href="/2025/03/22/The-Way-To-An-AI-Agent-Developer/" title="The Way To An AI Agent Developer">
+                        <span class="hidden-mobile">The Way To An AI Agent Developer</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
