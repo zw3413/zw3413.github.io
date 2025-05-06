@@ -1,0 +1,894 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Attention Deficit Hyperactivity Disorder Diagnosis using non-linear univariate and multivariate EEG measurements: a preliminary study Most of these studies conducted on children with ADHD have reporte">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEG Papers Reading">
+<meta property="og:url" content="http://example.com/2025/05/05/EEG-Papers-Reading/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="Attention Deficit Hyperactivity Disorder Diagnosis using non-linear univariate and multivariate EEG measurements: a preliminary study Most of these studies conducted on children with ADHD have reporte">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image-1.png">
+<meta property="article:published_time" content="2025-05-05T16:16:25.000Z">
+<meta property="article:modified_time" content="2025-05-06T02:18:22.118Z">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/image-1.png">
+  
+  
+  
+  <title>EEG Papers Reading - Elvin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Elvin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg1.JPG') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="EEG Papers Reading"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-05 12:16" pubdate>
+          May 5, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          101 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">EEG Papers Reading</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Attention-Deficit-Hyperactivity-Disorder-Diagnosis-using-non-linear-univariate-and-multivariate-EEG-measurements-a-preliminary-study"><a href="#Attention-Deficit-Hyperactivity-Disorder-Diagnosis-using-non-linear-univariate-and-multivariate-EEG-measurements-a-preliminary-study" class="headerlink" title="Attention Deficit Hyperactivity Disorder Diagnosis using non-linear univariate and multivariate EEG measurements: a preliminary study"></a>Attention Deficit Hyperactivity Disorder Diagnosis using non-linear univariate and multivariate EEG measurements: a preliminary study</h1><ol>
+<li>Most of these studies conducted on children with ADHD have reported that they have a <ul>
+<li><strong>reduced power in fast frequency bands, such as alpha and beta,</strong>  </li>
+<li><strong>an increased power in slow frequency bands, such as delta and theta</strong></li>
+</ul>
+</li>
+</ol>
+<p>  qEEG measurement of Theta&#x2F;Beta Ratio(TBR)<br>    - TBR is a utilization approved by U.S. Food and Drug Administration(FDA) as a robust diagnostic tool for patients who may have ADHD.<br>    - TBR is the ratio of the amount of <strong>theta</strong> activity divided by the amount of <strong>beta</strong> activity.<br>    - both theta and beta are measured at the scalp vertext site Cz.<br>    - recent studies did not find a significant difference in TBR between two groups and <strong>they proposed that TBR may not be a dependable maker of ADHD</strong>.</p>
+<ol start="2">
+<li>Non-linear analysis to EEG signals provides information about the complex dynamics of underlying neuronal networks.<ul>
+<li>Approximate Entropy (AppEn)</li>
+<li>Fractal Demension (FD)</li>
+<li>Lyapunov exponent and wavelet entropy</li>
+</ul>
+</li>
+</ol>
+<p>Entropy is a prevailing way to quantify the regularity of systems. </p>
+<ul>
+<li>Shannon Entropy(ShanEn) was used in epilepsy diagnosis, sleep stages, Alzheimer, and brain injury after cardiac arrest.</li>
+<li>Sample Entropy (SampEn), was used fewly in biomedical studies, but for analyzing epileptic seizures EEG background activity of Alzheimer’s disease and Magnetoencephalography (MEG) activity of ADHD patients.</li>
+<li>Dispersion entropy (DispEn),</li>
+</ul>
+<ol start="3">
+<li>Traditional approaches for estimating complexity of biological signals</li>
+</ol>
+<ul>
+<li><strong>Lampel-Ziv complexity (LZC)</strong>, fail to explain multiple time-scales inherent in such time series.<br>LZC是一种基于压缩算法的非线性度量，衡量一个时间序列中新模式出现的频率。它反应的是序列的复杂程度或信息熵的近似。<br>比如：周期性序列010101 LZC低， 随机序列010110100101 LZC高</li>
+</ul>
+<p>多时间尺度：EEG往往包含多个频率成分或不同时长的动态过程，比如：<br>    - 快速变化(如 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span> 波)<br>    - 缓慢波动(如 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span></span></span></span> 波)<br>    - 长期趋势(比如睡眠周期)</p>
+<p>为什么LZC午发很好的解释时间序列中固有的多时间尺度结构<br>    - 不考虑局部时间结构<br>    - 也不区分不同时间尺度上的规律性或随机性<br>    - 本质上是全局的复杂度度量<br>即 LZC无法识别一个信号中同时存在的快慢变化模式，不能区分在短期内简单、长期内复杂这样的结构。</p>
+<ul>
+<li><p>**Multiscale Sample Entropy (MSE)**多尺度样本熵 is a method overcome above limitation</p>
+<ul>
+<li>potent, prevalent</li>
+<li>but not able to manifest the dynamics across the channels.  不能发现通道间的动力学</li>
+</ul>
+</li>
+<li><p>**Multivariate Sample Entropy (mvSE)**多元样本熵 leading to an extension of MSE to multivariate signals, that is mvMSE.</p>
+<ul>
+<li>a tool for complexity analysis of mutichannel data and <strong>has obtained much attention in biomedical fields</strong>.</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li><p>non-linear features - Univariate entropic measures:</p>
+<ul>
+<li>ShanEn (Shannon entropy)</li>
+<li>SampEn (Sample entropy)</li>
+<li>DispEn (Dispersion entropy)</li>
+<li>MSE (Multiscale sample entropy)</li>
+</ul>
+<p>non-linear features - Multivariate features</p>
+<ul>
+<li>mvSE (Multivariate sample entropy)</li>
+<li>mvMSE (Multivariate multiscale sample entropy)</li>
+</ul>
+<p>Linear features</p>
+<ul>
+<li>average power</li>
+<li>TBR</li>
+</ul>
+<p>EEG topographic maps of SampEn, ShanEn and DispEn to visually compare entropy differences in brain regions.</p>
+</li>
+<li><p>methods in the paper</p>
+<ol>
+<li>traditional spectral analysis </li>
+<li>two feature extraction methods<ul>
+<li>one is based on extracting linear and non-linear univariate features, including average power, TBR, ShanEn, SampEn, DispEn and MSE, from all recording channels.</li>
+<li>The other one based on extracting multivariate features from main brain regions: frontal, central, parietal(顶骨), occipital(枕部) and temporal(太阳穴).</li>
+</ul>
+</li>
+<li>clasifiers<ul>
+<li>SVM<br> KNN<br> PNN</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>data (participants)</p>
+<ul>
+<li>24 children between 7-12 years old, 12 ADHD and 12 normal subjects.</li>
+<li>EEG data was collected according to the 10-20 international system by 19 channels. </li>
+<li>eyes closed. </li>
+<li>256 Hz sampling rate, </li>
+<li>digitized using a 16-bit AD converter.</li>
+</ul>
+</li>
+<li><p>Pre-processing</p>
+<ul>
+<li>Butterworth band-pass filter 0.5-80 Hz was applied</li>
+<li>Notch filter at 50 Hz was applied to suppress the remained line noise.</li>
+<li>normalized the whole database.</li>
+</ul>
+</li>
+</ol>
+<p><img src="/image-1.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<ol start="8">
+<li><p>Feature extraction</p>
+</li>
+<li><p>Classification </p>
+<ul>
+<li>SVM with RBF and tenfold cross validation.</li>
+<li>75% for training and 25% for testing</li>
+<li>Rearranged the data 20 times to ensure that data is randomly selected for training and testing</li>
+<li>The average accuracy was calculated for 20 iterations. </li>
+<li>Classification performances of classifiers were measured using confusion matrix</li>
+</ul>
+</li>
+<li><p>Results</p>
+<ol>
+<li>Spectral analysis<ul>
+<li>As shown in Figure 3, ADHD children have highter MAP (Mean Average Power) values in all recording channels.</li>
+<li>Using t-test statistical measure also confirms the significant difference in average power between two groups (p&lt;0.05)</li>
+<li>As shown in Figure 4, ADHD children have the highest brain activity in occipital regions while the lowest brain activity is in parietal regions.<br> …</li>
+</ul>
+</li>
+<li>Non-linear analysis<br> Calculation<ul>
+<li>ShanEn, SampEn, DispEn, MSE, mvSE and mvMSE</li>
+<li>devide original signals into 30s windows with 50% overlap.</li>
+<li>calculated MSE and mvMSE measures considering approximatedly 43s of original signals.<br> Analyze</li>
+<li>ShanEn:<ul>
+<li>there is a <strong>significant difference (p&lt;0.05) in ShanEn values of all recording channels</strong>, except for <strong>channel P3 (7)</strong></li>
+<li>ADHD children have lower ShanEn values in all recording channels</li>
+<li>From the topographic brain maps for z-scored mean ShanEn, ADHD children has the highest ShanEn values in right temporal regions. WHile the lowest ShanEn values are in frontal regions of brain</li>
+</ul>
+</li>
+<li>SampEn<ul>
+<li>there is a <strong>significant difference(p&lt;0.5&gt;) in SampEn values of all recording channels</strong>, except for <strong>channel Cz(18) and C3(5)</strong></li>
+<li>ADHD children have lower SampEn values in all recording channels. According to Fig.11, it is possible to implement a linear threshod for SampEn values of all recording channels to distinguish SampEn values between two groups. which is approximately 0.6.</li>
+<li>From the topographic brain maps for z-scored SampEn, ADHD children have the highest SampEn values in parietal regions and the lowest values in frontal regions.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="Region-Wise-Brain-Response-Classification-of-ASD-Children-Using-EEG-and-BiLSTM-RNN"><a href="#Region-Wise-Brain-Response-Classification-of-ASD-Children-Using-EEG-and-BiLSTM-RNN" class="headerlink" title="Region-Wise Brain Response Classification of ASD Children Using EEG and BiLSTM RNN"></a>Region-Wise Brain Response Classification of ASD Children Using EEG and BiLSTM RNN</h1><ol>
+<li><p>Autism spectrum disorder (ASD 自闭症谱系障碍)<br>ASD is a neurodevelopmental disorder (神经发育障碍) characterized by impairment in sensory modulation. (特征是感觉调节能力受损) These sensory modulation deficits would ultimately lead them to difficulties in adaptive behavior(适应性行为) and intellectual functioning(智力功能). The purpose of this study was to observe changes in the nervous system with response to auditory&#x2F;visual and only audio stimuli in children with autism and typically developing (TD) through electroencephalography(EEG).<br>The neural dynamics could be understood by non-linear analysis of the EEG signal.<br>this research reveal the underlying nonlinear EEG dynamics, recurrence quantification analysis(RQA) is applied</p>
+</li>
+<li><p>non-linear feature and RQA<br>The basic criterion for nonlinear analysis is to represent trajectories in phase space. Recurrences of system trajectories in the phase space are the best method for systems with nonlinear and nonstationary behavior.<br>非线性分析最基础的准则是表示在相空间的轨迹。 系统轨迹在相空间的重复出现是分析带有非线性非稳定系统的方法。<br>This representation reveals the underlying information of the complex systems. 这种表示揭示了复杂系统的底层信息。<br>The recurrence plot(RP) provides useful perceptions of the dynamic systems. 复现图提供了对于动态系统的有用的认知。<br>These RPs have to be visually interpreted with the patterns based on the observer’s views, hence, interpretation differs from one person to another. To overcome such disadvantages of RP, complex measures are derived from RP which are denoted as recurrence quantification annlysis (RQA)</p>
+</li>
+</ol>
+<p>RQA features were extracted in various researches such as classification of different sleep stages, epilepsy identification, differentiating ASD and epileptic signals, and drowsiness detection.</p>
+<p>Some studies have used RQA in detecting cardiovascular problems and motor developmental problems. RQA is concluded to be a suitable tool for chaotic nonlinear signals like EEG. </p>
+<p>The parameters which play a crucial role in RP are <strong>embedding dimension distance metric</strong>, and <strong>neighborhood selection</strong>.</p>
+<ol start="3">
+<li>Classifier<br>A classifier must be selected to consider both past and present sequences for classification.<br>RNN is considered for classification.<br>RNN is not limited to the fixed-length input.<br>problems in RNN<ul>
+<li>short-term memory</li>
+<li>vanishing gradient problem</li>
+<li>it does not perform well with long sequences.<br>To overcome such limitations, LSTM is used with RNN. Interocular-modulated attentional LSTM network distinguished the subgroups of ASD at an accuracy of 66.5%<br>Identification of ASD using an eye-tracking technique with specific LSTM network at an accuracy of 83%.</li>
+</ul>
+</li>
+</ol>
+<p>3 main modules in this study:<br>    - Preprocessing of EEG signal<br>    - Features extracted using various parameter combinations (cosine distance metric) in RQA and RNN with BiLSTM for classification.<br>    - Brain region with a higher response fo the presented stimuli is identified.(对所呈现刺激反应更强烈的大脑区域被识别出来)</p>
+<ol start="4">
+<li><p>data (participants)</p>
+<ul>
+<li>total 20 children with ASD and TD participated in the study. DSM V was conducted prior to the participation to assess the cognition level of the participants under study.</li>
+<li>Wavelet denoising method was applied to the eeg signal to preserve the signal characteristics.<ul>
+<li>its threshold strategies which provide a chance on chosen coefficients reconstruction</li>
+<li>Discrete wavelet function was used to remove the noise from the EEG signal of epileptic and healthy subjects. </li>
+<li>Coiflet and SURE thresholding is the best denoising method for the input signal.</li>
+<li>various denoising algorithms simulated in MATLAB and MSE approach were carried out to check the efficiency of the algorithm.</li>
+<li>The mother wavelets(<strong>db7, coif5, sym5</strong>) were selected and compared for the analysis of autism EEF signals.</li>
+<li>From the MSE, coif5 wavelet with SURE soft thresholding is found suitable for EEG signal  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>MSE</mtext><mo>=</mo><mfrac><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></msubsup><mo stretchy="false">(</mo><mi>s</mi><mo>−</mo><msub><mi>s</mi><mi>e</mi></msub><msubsup><mo stretchy="false">)</mo><mi>i</mi><mn>2</mn></msubsup></mrow><mi>N</mi></mfrac></mrow><annotation encoding="application/x-tex">\text{MSE} = \frac{\sum_{i=1}^N (s - s_e)_i ^2}{N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord">MSE</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.5234em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1784em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.535em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mop op-symbol small-op mtight" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9191em;"><span style="top:-2.1786em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3214em;"><span></span></span></span></span></span></span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">s</span><span class="mbin mtight">−</span><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1645em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mclose mtight"><span class="mclose mtight">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.214em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>
+<pre><code class="hljs">  - N is the number of data points;
+  - s and &#123;% katex %&#125;s_e&#123;% endkatex %&#125; represent the observed and predicted values respectively.
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Feature Extraction</p>
+<ol>
+<li>RQA (Recurrent Quantification Analysis)<ul>
+<li>Dynamic characteristics of any time series can be computed by a graphical tool representation known as recurrence plots. (任意时序动态特征可以使用一个叫做递归图的图形工具表示计算)</li>
+<li>RP represents the number of times a particular state recurs in phase space. RP表示一个特定状态在相空间重复出现的次数</li>
+<li>This graphical tool initially was developed to provide a better understanding of the high-dimensional dynamic system as it was challenging to visualize and analyze in those phase space trajectories. 这个图形化工具开始是被开发用来理解高维度动态系统，因为它们很难在这些相空间轨迹中被分析和可视化。</li>
+<li>Advantages of RP<ul>
+<li>function well on noisy data, nonlinear data, and also short datasets.</li>
+<li>The preservation of the fundamental structures of the initial trajectory is certain, only if it satisfies the condition m &gt; 2d +1 in which d is the <strong>dimension of the attractor</strong> and m is the <strong>embedding dimension</strong>. 若要保留原始动力系统轨迹的基本结构(拓扑特征)，就必须满足这个条件 m&gt;2d+1, d 是吸引子位数(系统真实的自由度或复杂度)， m 是嵌入维数。<ul>
+<li>Taken 定理： 一个未知动力系统（如EEG）的相空间轨迹，可以通过延迟嵌入从单变量信号中重构出来，只要选择的嵌入维度m&gt;2d或更严格 m&gt;2d+1</li>
+<li>在实际使用RQA（基于Recurrence Plot）时，我们通常只有EEG的单通道时间序列，但真实的大脑系统时高维的非线性系统。</li>
+<li>为了用RQA捕捉系统的轨迹结构，我们先对信号做延迟嵌入：  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo>+</mo><mi>τ</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo>+</mo><mn>2</mn><mi>τ</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo>⋅</mo><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo>+</mo><mo stretchy="false">(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mi>τ</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">X(t) = [x(t), x(t+\tau), x(t+2\tau), \cdot, x(t+(m-1)\tau)] </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">⋅</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mclose">)]</span></span></span></span></li>
+<li>只有当嵌入维数m足够大(&gt;2d+1)时，这个嵌入空间中的轨迹才能反应真实系统的吸引子结构。</li>
+<li>否则，RP图中就可能出现虚假的轨迹相交、结构破坏、误判复现行为。</li>
+<li>总结： 使用RQA的前提时通过时间延迟嵌入还原系统轨迹， 而这种轨迹结构(如吸引子)只有在嵌入维度m&gt;2d+1时才可保留，这是RQA有效捕捉非线性动力学行为的理论基础之一。</li>
+<li>在实际应用中，由于d(吸引子维数)通常未知，我们会通过：<ul>
+<li>False Nearest Neighbors(FNN) 方法估计合适的m</li>
+<li>或经验设置m &#x3D; 3~10来平衡计算与保真度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>四个核心RQA指标 RR,DET,L,ENTR，分别刻画了系统的稳定性、可预测性、动态持续性与行为复杂度，是非线性时间序列分析的重要工具<ul>
+<li>RR （Recurrence Rate 复现率），所有复现点占总点数的比例，动力学解释：系统状态回到以前状态的频率，反映稳定性&#x2F;周期性强度</li>
+<li>DET （Determinism 决定性） 所有对角线复现点占总复现点的比例，动力学解释：轨迹是否按规律重复演化，反应系统的可预测性</li>
+<li>L （Average Diagnoal Line Length 平均对角线长度）, 所有对角线长度的平均值， 动力学解释：可预测行为的持续时间，越长表示动态过程越持久一致。</li>
+<li>ENTR （Entropy 对角线熵） 所有对角线长度的分布熵，动力学解释：行为模式的多样性与复杂读，高熵说明轨迹模式多、系统复杂或混沌。</li>
+</ul>
+</li>
+<li>在RP中<ul>
+<li>点状分布 –&gt; 随机系统 –&gt; 低DET,低L, 低ENTR</li>
+<li>写现状 –&gt; 可预测系统(如周期、准周期) –&gt; 高DET， 高L</li>
+<li>斑块状或网格 –&gt; 稳定吸引子结构 –&gt; 高RR</li>
+<li>碎片化斜线 –&gt; 混沌 –&gt; 中等DET, 高ENTR</li>
+</ul>
+</li>
+<li>EEG例子<ul>
+<li>RR高： 表示脑电信号状态经常复现，可能处于某种稳定节律状态(如 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span>波)</li>
+<li>DET高： 表示信号烟花遵循某种可预测轨迹，可能是清醒、任务状态</li>
+<li>L高： 表示脑电状态连续性强，波形持久</li>
+<li>ENTR高： 表示信号复杂多变，可能反映混沌、意识变化或认知负荷高</li>
+</ul>
+</li>
+<li>应用<ul>
+<li>setting up the embedding dimension and time delay, </li>
+<li>a suitable neighborhood method, 2 neighborhood selections were tested such as <strong>FAN</strong> and <strong>fixed radius method</strong>.<ul>
+<li><strong>FAN</strong>(Fixed Amount of Nearest neighbors)邻域选择法，它适用于构建RP时的一种”距离阈值选择策略”，特别适用于非线性数据 FAN neighborhood selection chooses a radius hence it contains a fixed number of closed states, FAN 邻域选择法会为每个状态点选择一个半径 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">R_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, 这个半径是这样的:它恰好包含固定数量的“近邻状态”。 The radius changes for each closed state (I &#x3D; 1, …., N), where N is the number of closed states and the neighborhood of xi and xj does not have to be the same (Ri ≠ Rji). FAN is significantly used in nonlinear data and for the comparison of 2 different systems.</li>
+<li><strong>Fixed radius method</strong> chooses threshold ensuring Rij &#x3D; Rji. Selection of threshold depends on 2 conditions such as &lt; 10% of the maximum diameter of phase space and for classification&#x2F;signal detection purpose, the threshold is set at a range between 20% and 40% of standard deviation (σ) of the signal</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>Electrodes <ul>
+<li>Electrodes selected for research were Fp1 , T3, T5, Q1, Fp2, F8, F4, Fz and O2</li>
+<li>From each electrode, 10 RQA features were extracted.</li>
+<li>20 children in each group, with 5 different stimuli, 2-min for each duration</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="Experiment-Design"><a href="#Experiment-Design" class="headerlink" title="Experiment Design"></a>Experiment Design</h1><ol>
+<li><p>Data Collection</p>
+<ul>
+<li>10-20 international standard</li>
+<li>0.5-40 Hz</li>
+<li>250 Hz sampling</li>
+<li>close eyes</li>
+<li>48 ADHD + 38 Control</li>
+</ul>
+</li>
+<li><p>Date pre-processing</p>
+<ul>
+<li>ICA</li>
+<li>wavelet denoise (在尝试)</li>
+<li>normalization</li>
+<li>non-linear features calculation<ul>
+<li>lzc_mean</li>
+<li>lzc_median</li>
+<li>lzc_midp</li>
+<li>lzc_kmeans</li>
+<li>plzc</li>
+<li>PE</li>
+<li>SampEn</li>
+<li>AppEn<br>  (以下四个，基于Recurrence Plot复现图的RQA Recurrence Quantification Analysis特征， 提取时间序列的非线性动态特征)</li>
+<li>RR Recurrence Rate 信号中状态的复现密度，表示周期性程度</li>
+<li>DET Determinism 复现点中组成对角线的比例，高值表示系统更“可预测”</li>
+<li>ENTR Entropy of Diagonal Lengths 对角线长度的熵，反应复杂性与多样性</li>
+<li>L Average Diagonal Line Length 系统中“稳定可预测行为”的平均持续时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Classification</p>
+<ul>
+<li>normalization (z-score)</li>
+<li>feature selection (auto:ttest, fscnca, relief,  Search:Simulated Annealing(SA),  , )</li>
+<li>k-fold cross validation  k&#x3D;5 (5 data schema, with 80% of training data and 20% testing data in each fold.)</li>
+<li>sample rebalance with weight</li>
+<li>SVM with RBF kernel, using bayes optimizer get the parameter of BoxConstraint and KernelScale, with 5-fold</li>
+<li>metrics: accuracy, sensitivity, specificity, F1-Score ,AUC</li>
+</ul>
+</li>
+<li><p>Result</p>
+<ul>
+<li>逐指标逐电极的分析 12*19</li>
+<li>Z-scored mean topographic</li>
+<li>Mean feature values of all recording channels line chart</li>
+</ul>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>EEG Papers Reading</div>
+      <div>http://example.com/2025/05/05/EEG-Papers-Reading/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 5, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/05/Machine-Learning-in-Cyber-Security/" title="Machine Learning in Cyber Security">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Machine Learning in Cyber Security</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/04/23/OpenHands-Learning/" title="OpenHands Learning">
+                        <span class="hidden-mobile">OpenHands Learning</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
