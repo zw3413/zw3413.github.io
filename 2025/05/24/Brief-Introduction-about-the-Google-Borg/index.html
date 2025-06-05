@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="BorgGoogle’s Borg system is a large-scale cluster manager that automates the deployment, scaling, and management of applications across tens of thousands of machines in its data centers. It was design">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Brief Introduction about the Google Borg and Kubernetes">
+<meta property="og:url" content="http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="BorgGoogle’s Borg system is a large-scale cluster manager that automates the deployment, scaling, and management of applications across tens of thousands of machines in its data centers. It was design">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-24T16:28:20.000Z">
+<meta property="article:modified_time" content="2025-05-25T00:08:45.206Z">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Brief Introduction about the Google Borg and Kubernetes</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/05/21/Advanced-Python-Programming-and-Project-Organizing/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&text=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&title=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&is_video=false&description=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Brief Introduction about the Google Borg and Kubernetes&body=Check out this article: http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&title=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&title=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&title=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&title=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&name=Brief Introduction about the Google Borg and Kubernetes&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&t=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Borg"><span class="toc-number">1.</span> <span class="toc-text">Borg</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-three-basic-functionalities-that-Borg-accomplishes-are"><span class="toc-number">1.1.</span> <span class="toc-text">The three basic functionalities that Borg accomplishes are:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Separation-of-Duties-x2F-Isolation-in-Borg"><span class="toc-number">1.2.</span> <span class="toc-text">Separation of Duties&#x2F;Isolation in Borg</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Main-Components-of-Borg-and-Their-Architectural-Definition"><span class="toc-number">1.3.</span> <span class="toc-text">Main Components of Borg and Their Architectural Definition</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Kubernetes"><span class="toc-number">2.</span> <span class="toc-text">Kubernetes</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Architecture-and-Main-Components-of-Kubernetes"><span class="toc-number">2.1.</span> <span class="toc-text">Architecture and Main Components of Kubernetes:</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Brief Introduction about the Google Borg and Kubernetes
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-05-24T16:28:20.000Z" class="dt-published" itemprop="datePublished">2025-05-24</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Borg"><a href="#Borg" class="headerlink" title="Borg"></a>Borg</h1><p>Google’s Borg system is a large-scale cluster manager that automates the deployment, scaling, and management of applications across tens of thousands of machines in its data centers. It was designed to handle a diverse workload, including long-running services and batch jobs, and to maximize resource utilization while ensuring high availability.</p>
+<h2 id="The-three-basic-functionalities-that-Borg-accomplishes-are"><a href="#The-three-basic-functionalities-that-Borg-accomplishes-are" class="headerlink" title="The three basic functionalities that Borg accomplishes are:"></a>The three basic functionalities that Borg accomplishes are:</h2><ol>
+<li><p>.Resource Management and Failure Handling<br>Borg hides the complexities of managing machines and their resources, allowing users to focus on application development. It handles resource allocation, task placement, installation of programs and dependencies, monitoring, and restarting failed tasks.</p>
+</li>
+<li><p>High Reliability and Availability<br>Borg is designed to operate with very high reliability and availability, supporting applications that require the same. It automatically reschedules tasks, spreads them across different machines and failure domains to reduce correlated failures, and limits the number of tasks that can be simultaneously down during upgrades.</p>
+</li>
+<li><p>Efficient Resource Utilization<br>Borg archives high utilization by combining admission control, efficient task-packing, over-commitment, and machine sharing with process-level performance isolation. This allows it to co-locate diverse workloads on the same physical machines.</p>
+</li>
+</ol>
+<h2 id="Separation-of-Duties-x2F-Isolation-in-Borg"><a href="#Separation-of-Duties-x2F-Isolation-in-Borg" class="headerlink" title="Separation of Duties&#x2F;Isolation in Borg"></a>Separation of Duties&#x2F;Isolation in Borg</h2><p>Borg achieves separation of duties and isolation through several mechanisms:</p>
+<ol>
+<li><p>Containerization (Linux Containers): Borg relies heavily on Linux containers to provide resource and execution isolation between different tasks running on the same physical machine. Containers isolate processes, ensuring that one application’s resource consumption( CPU, memory, disk I&#x2F;O) does not negatively impact others. While containers provide a good level of isolation, Google also implements additional security layers (such as virtual machines for external software like Google App Engine and Google Compute Engine) for enhanced protection.</p>
+</li>
+<li><p>Resource Allocation and Quota: Borg enforces resource limits and quotas for jobs. Users request a certain amount of CPU, memory, and other resources for their jobs, and Borg ensures these allocations are respected. This prevents a single misbehaving or overly resource-hungry job form monopolizing machine resources and affecting other co-located workloads. Quotas are used for admission control, determining which jobs can be scheduled.</p>
+</li>
+<li><p>Priority Levels: Borg has different priority bands (e.,., monitoring, production, batch, best effort). Higher-priority jobs can preempt lower-priority ones if resources become scarce, ensuring that critical services remain operational. This creates a logical separation of importance among workloads.<br>Binary Authorization for Borg (BAB): BAB is critical security control that helps reduce insider risk and ensures the integrity of code running on Borg. It enforces policies that dictate the security requirements for services, such as:</p>
+</li>
+</ol>
+<ul>
+<li>Code Review: Require production software to be reviewed and approved before deployment.<br>Verifiable Builds: Ensure that container images can be traced back to their human-readable sources, providing an audit trail.</li>
+<li>Containerized Deployment: All deployment happen with containers<br>Service-based Identity :Jobs are provisioned with cryptographic credentials to prove their identity when communicating with other services.</li>
+<li>Submitted Configurations: Configuration changes also undergo a review and submission process, preventing unauthorized modifications.</li>
+</ul>
+<ol start="4">
+<li><p>Deploy-time Enforcement and Continuous Validation: BAB blocks non-compliant jobs from deploying and continuously monitors and alerts on non-compliant jobs that were deployed.<br>Network Isolation (Implicit) : While Borg tasks on a machine share the host’s IP address, Borg manages port assignments as a resource and enforces port isolation. This means that tasks need to declare the ports they require, and the Borglet (node agent) ensures that port conflicts are avoided, providing a form of network isolation within the shared host environment.</p>
+</li>
+<li><p>Separation of Concerns in Architecture: The evolution of Borg (and its successor, Omega, which influenced Kubernetes) involved breaking down monolithic functionalities into separate, peer components. This architectural decoupling contributes to isolation by limiting the blast radius of failure and allowing individual components to manage their specific state space, improving overall system resilience and manageability.</p>
+</li>
+</ol>
+<h2 id="Main-Components-of-Borg-and-Their-Architectural-Definition"><a href="#Main-Components-of-Borg-and-Their-Architectural-Definition" class="headerlink" title="Main Components of Borg and Their Architectural Definition"></a>Main Components of Borg and Their Architectural Definition</h2><p>Borg employs a master-slave architecture within each “cell” (a collection of machines managed as a unit within a data center). The main components are:</p>
+<ol>
+<li><p>BorgMaster:<br><strong>Role</strong>: The “brain” of the Borg cell. It’s a centralized controller that manages the overall state of the cluster, and accepts client requests (job submissions). And orchestrates the scheduling and execution of tasks.<br><strong>Architecture</strong>: The BorgMaster is replicated for high availability, often using Paxos for distributed consensus to maintain a consistent view of the cell’s state across replicas.It interacts with both external components( users, other Google services) and the Borglets on individual machines. Its state, including job configurations and task assignments, is persistently recorded in a Paxos store.<br><strong>Definition of Architecture</strong>: The BorgMaster defines the centralized control plane of the Borg system. It acts as the single source of truth for the desired state of the cell, making high-level decisions about job placement and resource allocation. Its replication ensures fault tolerance and continuous operation even if one master fails.</p>
+</li>
+<li><p>Scheduler:<br><strong>Role</strong>: An Independent service responsible for assigning tasks to machines. It continuously scans pending jobs and determines the most suitable machines for their execution based on resource availability, constraints, priorities, and other policies.<br><strong>Architecture</strong>: The scheduler operates asynchronously, pulling state changes from the elected BorgMaster and updating its local copy. It performs feasibility checks (identifying machines with enough resources that meet job constraints) and scoring( selecting the best machine based on various criteria like minimizing preemptions, optimizing packing, and distributing tasks across failure domains). Once a task is assigned, the scheduler informs the BorgMaster.<br><strong>Definition of Architecture</strong>: The scheduler represents the intelligent decision-making engine of Borg. By being a separate component, it allows for complex scheduling algorithms to be developed and evolved independently of the core state management, contributing to Borg’s efficiency and ability to handle diverse workloads. Its asynchronous nature prevents it from becoming a bottleneck for the BorgMaster.</p>
+</li>
+<li><p>Borglet:<br><strong>Role</strong>: A local agent process that runs on every machine within a Borg cell. It’s responsible for managing the tasks assigned to its host machine, including starting and stopping containers, monitoring task health, reporting machine status, and managing local resources.<br><strong>Architecture</strong>: The Borglet received instructions from the BorgMaster regarding which tasks to run. It interacts directly with the underlying Linux kernel’s container functionalities to enforce resource isolation It also reports back the health and resource usage of tasks and the machine itself to the BorgMaster for monitoring and scheduling decision.<br><strong>Definition of Architecture</strong>: The Borglet defines the execution plaine of the Borg system. It’s the worker component that directly interacts with the host operating system to implement the decisions made by the BorgMaster and scheduler. Its presence on every machine makes Borg a distributed system, allowing for scalable and fault- tolerant execution of tasks across the entire cluster.<br>In essence, the BrogMaster maintains the desired state, the Scheduler decides where to archive that state, and the Borglets execute the commands to reach that state on individual machines. This distributed and loosely coupled architecture, with a centralized control plane (BorgMaster) and distributed agents (Borglets) coordinated by a smart scheduler, enables Borg to manage massive clusters efficiently, reliably, and with strong isolation guarantees.</p>
+</li>
+</ol>
+<h1 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h1><p>While Google’s internal Borg system was developed with C++, Kubernetes, which drew heavy inspiration from Borg and brought its core concepts to the open-source word, wa sprimarily built with Go. Both systems offer similar functionalities for managing containerized workloads.</p>
+<h2 id="Architecture-and-Main-Components-of-Kubernetes"><a href="#Architecture-and-Main-Components-of-Kubernetes" class="headerlink" title="Architecture and Main Components of Kubernetes:"></a>Architecture and Main Components of Kubernetes:</h2><p>Kubernetes operates on a cluster of machines, typically divided into a control plane( formerly master nodes) and worker nodes.</p>
+<ul>
+<li><p>Control Plane Components (formerly Master Node Components), The control plane components are responsible for managing the cluster’s state, scheduling workload, and responding to cluster events. They typically run on dedicated “master” nodes (though in production, these are often highly available and distributed across multiple machines).</p>
+<ol>
+<li>Kube-apiserver: The front end of the Kubernetes control plane. It exposes the Kubernetes API. All communication with the cluster (from users, other control plane components, and worker nodes) goes through the API server. It validates and configures data for API objects (pods, services, replicationcontrollers) and persistes them in etcd.</li>
+<li>etcd: A consistent and highly available key-value store. It stores all cluster data, including the desired state of the cluster (e.g., which applications should be running, how many replicas, their configurations) and the actual state. It’s crucial for the cluster’s health and consistency.</li>
+<li>Kube-scheduler: Watches for newly created Pods with no assigned node and selects a node for them to run on. It considers various for scheduling, including individual and collective resource requirements, hardware&#x2F;software&#x2F;policy constraints, affinity and anti-affinity specifications, data locality, inter-workload interference, and deadlines.</li>
+<li>Kube-controller-manager: Runs controller processes. These controllers watch the shared state of the cluster through the API server and make changes attempting to move the current state towards the desired state. Examples include:</li>
+<li>Node Controller: Responsible for noticing and responding when nodes go down.</li>
+<li>Replication Controller: Maintains the correct number of pods for every replication controller object.</li>
+<li>Endpoints Controller: Populates the Endpoints object (which joins Services and Pods). </li>
+<li>Service Account &amp; Token Controller: create default accounts and API access tokens for new namespaces.</li>
+<li>cloud-controller-manager(Optional): Embeds cloud-specific control login. This component runs controllers that interact with the underlying cloud provider’s APIs. For example, in a cloud environment, it might handle creating load balancers, managing cloud-specific storage columns, and routing network traffic. It allows Kubernetes to integrate with the cloud provider without needing to modify the core Kubernetes code.</li>
+</ol>
+</li>
+<li><p>Worker Node Components (formerly Minion&#x2F;Node components)</p>
+<ol>
+<li><p>These components run on each worker node and are responsible for running the containerized applications and communicating with the control plane.</p>
+</li>
+<li><p>kubelet: An agent that runs on each node in the cluster.  It ensures that containers are running in a Pod. It registers the node with the API server, reports the node’s status, takes PodSpecs (configurations for pods) from the API server, and ensures the described containers are running and healthy. It does not manage containers not created by Kubernetes.</p>
+</li>
+<li><p>Kub-proxy: A network proxy that runs on each node.  It maintains network rules on nodes, allowing network communication to your Pods from inside or outside the cluster. It can perform simple TCP&#x2F;UDP&#x2F;SCTP stream forwarding or round-robin forwarding across a set of backend Pods.</p>
+</li>
+<li><p>Container Runtime: The software responsible for running containers. Kubernetes supports various container runtimes through the Container Runtime Interface (CRI). Examples include:</p>
+</li>
+<li><p>Contrainerd: A core container runtime that Docker is built on.</p>
+</li>
+<li><p>CRI-O: A lightweight runtime specifically for Kubernetes’ CRI.</p>
+</li>
+<li><p>Docker Engine: While Kubernetes doesn’t directly interface with Docker Daemon anymore, containerd (which Docker uses) is a widely used runtime.</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>This architectural breakdown illustrates how Kubernetes provides a robus, self-healing, and scalable platform for managing containerized applications.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Borg"><span class="toc-number">1.</span> <span class="toc-text">Borg</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-three-basic-functionalities-that-Borg-accomplishes-are"><span class="toc-number">1.1.</span> <span class="toc-text">The three basic functionalities that Borg accomplishes are:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Separation-of-Duties-x2F-Isolation-in-Borg"><span class="toc-number">1.2.</span> <span class="toc-text">Separation of Duties&#x2F;Isolation in Borg</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Main-Components-of-Borg-and-Their-Architectural-Definition"><span class="toc-number">1.3.</span> <span class="toc-text">Main Components of Borg and Their Architectural Definition</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Kubernetes"><span class="toc-number">2.</span> <span class="toc-text">Kubernetes</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Architecture-and-Main-Components-of-Kubernetes"><span class="toc-number">2.1.</span> <span class="toc-text">Architecture and Main Components of Kubernetes:</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&text=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&title=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&is_video=false&description=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Brief Introduction about the Google Borg and Kubernetes&body=Check out this article: http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&title=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&title=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&title=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&title=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&name=Brief Introduction about the Google Borg and Kubernetes&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/24/Brief-Introduction-about-the-Google-Borg/&t=Brief Introduction about the Google Borg and Kubernetes"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

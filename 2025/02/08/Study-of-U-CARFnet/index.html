@@ -1,21 +1,11 @@
-
-
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
-
-
-
+<html lang=en>
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="">
-  <meta name="keywords" content="">
-  
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="Deep Neural Network ConceptsEvaluationHigh Recall RegimeHigh recall regime refers to a training strategy where the model is optimized to capture as many of relevant positive samples as possible, even">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Study of U_CARFnet and Tensorflow">
@@ -26,246 +16,150 @@
 <meta property="og:image" content="http://example.com/2025/02/08/Study-of-U-CARFnet/UCARFnetStructure.png">
 <meta property="article:published_time" content="2025-02-08T15:10:09.000Z">
 <meta property="article:modified_time" content="2025-03-30T00:14:16.532Z">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2025/02/08/Study-of-U-CARFnet/UCARFnetStructure.png">
-  
-  
-  
-  <title>Study of U_CARFnet and Tensorflow - Elvin&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Study of U_CARFnet and Tensorflow</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+    <!-- Umami Analytics -->
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
 
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/02/11/Summary-of-The-Multi-layer-Perceptron/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/02/06/Ep2-Artificial-Intelligence-The-magic-of-convergence/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/02/08/Study-of-U-CARFnet/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&text=Study of U_CARFnet and Tensorflow"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&title=Study of U_CARFnet and Tensorflow"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&is_video=false&description=Study of U_CARFnet and Tensorflow"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Study of U_CARFnet and Tensorflow&body=Check out this article: http://example.com/2025/02/08/Study-of-U-CARFnet/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&title=Study of U_CARFnet and Tensorflow"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&title=Study of U_CARFnet and Tensorflow"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&title=Study of U_CARFnet and Tensorflow"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&title=Study of U_CARFnet and Tensorflow"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&name=Study of U_CARFnet and Tensorflow&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/02/08/Study-of-U-CARFnet/&t=Study of U_CARFnet and Tensorflow"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-<body>
-  
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Deep-Neural-Network-Concepts"><span class="toc-number">1.</span> <span class="toc-text">Deep Neural Network Concepts</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Evaluation"><span class="toc-number">1.1.</span> <span class="toc-text">Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#High-Recall-Regime"><span class="toc-number">1.1.1.</span> <span class="toc-text">High Recall Regime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#F-score"><span class="toc-number">1.1.2.</span> <span class="toc-text">F-score</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Normalization"><span class="toc-number">1.2.</span> <span class="toc-text">Normalization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Min-Max-Normalization-is-a-commonly-used-method-for-normalization"><span class="toc-number">1.2.1.</span> <span class="toc-text">Min-Max Normalization is a commonly used method for normalization.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Z-score-normalization-Standardization"><span class="toc-number">1.2.2.</span> <span class="toc-text">Z-score normalization(Standardization)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scaling-to-Unit-Length"><span class="toc-number">1.2.3.</span> <span class="toc-text">Scaling to Unit Length:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Overfitting"><span class="toc-number">1.3.</span> <span class="toc-text">Overfitting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Increasing-training-dataset"><span class="toc-number">1.3.1.</span> <span class="toc-text">Increasing training dataset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Early-Stopping"><span class="toc-number">1.3.2.</span> <span class="toc-text">Early Stopping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Regularization"><span class="toc-number">1.3.3.</span> <span class="toc-text">Regularization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Local-Minima"><span class="toc-number">1.4.</span> <span class="toc-text">Local Minima</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Momentum"><span class="toc-number">1.4.1.</span> <span class="toc-text">Momentum</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sequential-Training"><span class="toc-number">1.5.</span> <span class="toc-text">Sequential Training</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch-gradient-descent"><span class="toc-number">1.5.1.</span> <span class="toc-text">Batch gradient descent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stochastic-Gradient-Descent-SGD"><span class="toc-number">1.5.2.</span> <span class="toc-text">Stochastic Gradient Descent (SGD)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mini-Batch-Gradient-Descent"><span class="toc-number">1.5.3.</span> <span class="toc-text">Mini-Batch Gradient Descent</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Local-and-Global-Relationships"><span class="toc-number">1.6.</span> <span class="toc-text">Local and Global Relationships</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention-Block"><span class="toc-number">1.7.</span> <span class="toc-text">Attention Block</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SE-Squeeze-and-Excitation-Block"><span class="toc-number">1.7.1.</span> <span class="toc-text">SE - Squeeze and Excitation Block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ECA-Efficient-Channel-Attention-Block"><span class="toc-number">1.7.2.</span> <span class="toc-text">ECA - Efficient Channel Attention Block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CBAM-convolutional-Block-Attention-Block"><span class="toc-number">1.7.3.</span> <span class="toc-text">CBAM - convolutional Block Attention Block</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Loss-Functions"><span class="toc-number">1.8.</span> <span class="toc-text">Loss Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cross-entropy"><span class="toc-number">1.8.1.</span> <span class="toc-text">Cross_entropy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Focal-loss"><span class="toc-number">1.8.2.</span> <span class="toc-text">Focal loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dice-loss"><span class="toc-number">1.8.3.</span> <span class="toc-text">Dice loss</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#U-CARFnet"><span class="toc-number">2.</span> <span class="toc-text">U-CARFnet</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Development"><span class="toc-number">2.1.</span> <span class="toc-text">Development</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Attention-Mechanism"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.Attention Mechanism</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Residual-learning-module"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.Residual learning module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Focal-Loss-Function"><span class="toc-number">2.1.3.</span> <span class="toc-text">3.Focal Loss Function</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#model"><span class="toc-number">2.2.</span> <span class="toc-text">model</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HED"><span class="toc-number">3.</span> <span class="toc-text">HED</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Deep-Supervision-and-Weighted-Fusion-Supervision"><span class="toc-number">3.1.</span> <span class="toc-text">Deep Supervision and Weighted Fusion Supervision</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Consensus-Sampling"><span class="toc-number">3.2.</span> <span class="toc-text">Consensus Sampling</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tensorflow"><span class="toc-number">4.</span> <span class="toc-text">Tensorflow</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Layers"><span class="toc-number">4.1.</span> <span class="toc-text">Layers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Convolutional"><span class="toc-number">4.1.1.</span> <span class="toc-text">Convolutional</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Padding"><span class="toc-number">4.1.1.1.</span> <span class="toc-text">Padding</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BatchNormalization"><span class="toc-number">4.1.2.</span> <span class="toc-text">BatchNormalization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GlobalAveragePooling2D"><span class="toc-number">4.1.3.</span> <span class="toc-text">GlobalAveragePooling2D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dense"><span class="toc-number">4.1.4.</span> <span class="toc-text">Dense</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Upsampling"><span class="toc-number">4.2.</span> <span class="toc-text">Upsampling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#In-Network-Bilinear-Interpolation"><span class="toc-number">4.2.1.</span> <span class="toc-text">In-Network Bilinear Interpolation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#In-Network-Deconvolutional-Layer"><span class="toc-number">4.2.2.</span> <span class="toc-text">In-Network Deconvolutional Layer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kernel-initializer"><span class="toc-number">4.3.</span> <span class="toc-text">kernel_initializer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-glorot-uniform-Xavier-Uniform-default"><span class="toc-number">4.3.1.</span> <span class="toc-text">1.glorot_uniform (Xavier Uniform) default</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-he-normal"><span class="toc-number">4.3.2.</span> <span class="toc-text">2.he_normal</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Load-Dataset"><span class="toc-number">4.4.</span> <span class="toc-text">Load Dataset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Augmentation"><span class="toc-number">4.5.</span> <span class="toc-text">Data Augmentation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Type"><span class="toc-number">4.5.1.</span> <span class="toc-text">Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Processing"><span class="toc-number">4.5.2.</span> <span class="toc-text">Processing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Model"><span class="toc-number">4.6.</span> <span class="toc-text">Model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Optimizer"><span class="toc-number">4.6.1.</span> <span class="toc-text">Optimizer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#model-training"><span class="toc-number">4.6.2.</span> <span class="toc-text">model training</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tools"><span class="toc-number">5.</span> <span class="toc-text">Tools</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TensorBoard"><span class="toc-number">5.1.</span> <span class="toc-text">TensorBoard</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
 
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
   <header>
     
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Study of U_CARFnet and Tensorflow
+    </h1>
 
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Elvin&#39;s Blog</strong>
-    </a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
 
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-02-08T15:10:09.000Z" class="dt-published" itemprop="datePublished">2025-02-08</time>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>Home</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>Categories</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>Tags</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>About</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
+      
     </div>
-  </div>
-</nav>
 
+
+      
+
+      
+
+    </div>
+  </header>
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/bg/bg1.JPG') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="Study of U_CARFnet and Tensorflow"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-02-08 10:10" pubdate>
-          February 8, 2025 am
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          29k words
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          242 mins
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">Study of U_CARFnet and Tensorflow</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h1 id="Deep-Neural-Network-Concepts"><a href="#Deep-Neural-Network-Concepts" class="headerlink" title="Deep Neural Network Concepts"></a>Deep Neural Network Concepts</h1><h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><h3 id="High-Recall-Regime"><a href="#High-Recall-Regime" class="headerlink" title="High Recall Regime"></a>High Recall Regime</h3><p>High recall regime refers to a training strategy where the model is optimized to capture as many of relevant positive samples as possible, even if it means including some incorrect predictions( fasle positives).</p>
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Deep-Neural-Network-Concepts"><a href="#Deep-Neural-Network-Concepts" class="headerlink" title="Deep Neural Network Concepts"></a>Deep Neural Network Concepts</h1><h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><h3 id="High-Recall-Regime"><a href="#High-Recall-Regime" class="headerlink" title="High Recall Regime"></a>High Recall Regime</h3><p>High recall regime refers to a training strategy where the model is optimized to capture as many of relevant positive samples as possible, even if it means including some incorrect predictions( fasle positives).</p>
 <p>Recall is a metric that quantifies how well the model finds all the actual positives:</p>
 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>l</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>r</mi><mi>u</mi><mi>e</mi><mi>P</mi><mi>o</mi><mi>s</mi><mi>i</mi><mi>t</mi><mi>i</mi><mi>v</mi><mi>e</mi><mi>s</mi></mrow><mrow><mi>T</mi><mi>r</mi><mi>u</mi><mi>e</mi><mi>P</mi><mi>o</mi><mi>s</mi><mi>i</mi><mi>t</mi><mi>i</mi><mi>v</mi><mi>e</mi><mi>s</mi><mo>+</mo><mi>F</mi><mi>a</mi><mi>l</mi><mi>s</mi><mi>e</mi><mi>N</mi><mi>e</mi><mi>g</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>v</mi><mi>e</mi><mi>s</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">Recall = \frac{True Positives}{True Positives + False Negatives}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">ll</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.3534em;vertical-align:-0.4811em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">P</span><span class="mord mathnormal mtight">os</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mord mathnormal mtight">es</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">se</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mord mathnormal mtight">es</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">P</span><span class="mord mathnormal mtight">os</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mord mathnormal mtight">es</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4811em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>
 
@@ -327,7 +221,7 @@ Penalizes large weights, leading to smaller but nonzero coefficients, helping wi
 <p><strong>Dropout</strong><br>Dropout is a radically different technique for regularization. Unlike L1 and L2 regularization, dropout doesn’t rely on modifying the cost function. Instead, in dropout we modify the network itself.<br>With dropout, the training process is modified. We start by randomly(and temporarily) deleting half of the hidden neurons in the network, while leaving the input and output neurons untouched.</p>
 <h2 id="Local-Minima"><a href="#Local-Minima" class="headerlink" title="Local Minima"></a>Local Minima</h2><h3 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h3><p>Momentum is an optimization technique that helps accelerate gradient descent and escape local minima by adding an exponentially weighted moving average of past gradients.</p>
 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mi>t</mi></msub><mo>←</mo><msub><mi>w</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mi>η</mi><mi mathvariant="normal">Δ</mi><mi>E</mi><mo stretchy="false">(</mo><msub><mi>w</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo>+</mo><mi>α</mi><mi mathvariant="normal">Δ</mi><msub><mi>w</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">w_t \leftarrow w_{t-1} + \eta \Delta E(w_{t-1}) + \alpha \Delta w_{t-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">←</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7917em;vertical-align:-0.2083em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">η</span><span class="mord">Δ</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8917em;vertical-align:-0.2083em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mord">Δ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span></span></span></span>
-<pre><code class="hljs">- &#123;% katex %&#125; w_t &#123;% endkatex %&#125; current weight in time t
+<pre><code>- &#123;% katex %&#125; w_t &#123;% endkatex %&#125; current weight in time t
 - &#123;% katex %&#125; w_&#123;t-1&#125; &#123;% endkatext %&#125; weight at previous time step
 - &#123;% katex %&#125; \eta &#123;% endkatext %&#125; : learning rate
 - &#123;% katex %&#125; \Delta E(w_&#123;t-1&#125;) &#123;% endkatext %&#125;: gradient 
@@ -477,7 +371,7 @@ L = - (1/N) * \sum \sum [y_{ic} * log(p_{ic})], i = \text{1 to N}, c = \text{1 t
 <h3 id="Dice-loss"><a href="#Dice-loss" class="headerlink" title="Dice loss"></a>Dice loss</h3><h1 id="U-CARFnet"><a href="#U-CARFnet" class="headerlink" title="U-CARFnet"></a>U-CARFnet</h1><h2 id="Development"><a href="#Development" class="headerlink" title="Development"></a>Development</h2><p>U-CARFnet introduced three developments.</p>
 <h3 id="1-Attention-Mechanism"><a href="#1-Attention-Mechanism" class="headerlink" title="1.Attention Mechanism"></a>1.Attention Mechanism</h3><p>SENet, CBAM and ECANet.</p>
 <h3 id="2-Residual-learning-module"><a href="#2-Residual-learning-module" class="headerlink" title="2.Residual learning module"></a>2.Residual learning module</h3><p>U-CARFnet applied residual learning modules which was proposed in the ResNet model. To solve infomation loss problems during transmission by traditional convolutional networks or fully connected networks. This structure can accelerate the training of neural networks and greatly enhance the model’s accuracy.</p>
-<h3 id="3-Focal-Loss-Function"><a href="#3-Focal-Loss-Function" class="headerlink" title="3.Focal Loss Function"></a>3.Focal Loss Function</h3><h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><img src="/2025/02/08/Study-of-U-CARFnet/UCARFnetStructure.png" srcset="/img/loading.gif" lazyload class="" title="Structure of U-CARFnet model">
+<h3 id="3-Focal-Loss-Function"><a href="#3-Focal-Loss-Function" class="headerlink" title="3.Focal Loss Function"></a>3.Focal Loss Function</h3><h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><img src="/2025/02/08/Study-of-U-CARFnet/UCARFnetStructure.png" class="" title="Structure of U-CARFnet model">
 
 <p>Above figure shows the residual learning module and the CEIB learning module modified from the deformable convolutional block integrated with the attention mechanism in the U-CARFnet model. In general, the deformable convolutional block can locally perceive each feature in the image using the convolution layer. The local features are integrated at a high level to extract the global feature information. The learning ability of skip connection in the residual learning module is then utilized to transmit the low-level and high-level information to the next stage. The features are extracted using the next group of the convolution operation. Finally, the attention learning module is introduced to optimize the information learning and extraction ability and solve the problem of information error and loss during learning and transmission.</p>
 <h1 id="HED"><a href="#HED" class="headerlink" title="HED"></a>HED</h1><h2 id="Deep-Supervision-and-Weighted-Fusion-Supervision"><a href="#Deep-Supervision-and-Weighted-Fusion-Supervision" class="headerlink" title="Deep Supervision and Weighted Fusion Supervision"></a>Deep Supervision and Weighted Fusion Supervision</h2><ol>
@@ -573,10 +467,10 @@ y_i = \gamma \hat{x_i} + \beta</annotation></semantics></math></span><span class
 <li><strong>Classification&#x2F;Regression</strong>: Often used as the final layer(s) to make predictions</li>
 </ul>
 <h2 id="Upsampling"><a href="#Upsampling" class="headerlink" title="Upsampling"></a>Upsampling</h2><h3 id="In-Network-Bilinear-Interpolation"><a href="#In-Network-Bilinear-Interpolation" class="headerlink" title="In-Network Bilinear Interpolation"></a>In-Network Bilinear Interpolation</h3><p>In-Network bilinear interpolation is a fixed upsampling method used to increase the resolution of feature maps by interpolating values based on weighted averages of neighboring pixels.<br>The interpolation weights are predefined and do not change during training. It’s computationally lishgtweight, makeing it suitable for real-time applications.<br>This upsampling method was used in semantic segmentation e.g., FCN, U-Net</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">in_network_bilinear_interpolation</span>(<span class="hljs-params">input_tensor, scale_factor</span>):<br>    _, h, w, _ = input_tensor.get_shape().as_list()<br>    nh, nw = h * scale_factor, w * scale_factor<br>    row_indices = tf.clip_by_value(tf.cast(tf.floor(tf.linspace(<span class="hljs-number">0.0</span>, <span class="hljs-built_in">float</span>(h-<span class="hljs-number">1</span>), nh)), tf.int32), <span class="hljs-number">0</span>, h-<span class="hljs-number">1</span>)<br>    col_indices = tf.clip_by_value(tf.cast(tf.floor(tf.linspace(<span class="hljs-number">0.0</span>, <span class="hljs-built_in">float</span>(w-<span class="hljs-number">1</span>), nw)), tf.int32), <span class="hljs-number">0</span>, w-<span class="hljs-number">1</span>)<br>    row_ceil = tf.minimum(row_indices + <span class="hljs-number">1</span>, h - <span class="hljs-number">1</span>)  <span class="hljs-comment"># Ensure we don&#x27;t go out of bounds</span><br>    col_ceil = tf.minimum(col_indices + <span class="hljs-number">1</span>, w - <span class="hljs-number">1</span>)<br><br>    row_weight = tf.cast(row_indices, tf.float32) - tf.floor(tf.cast(row_indices, tf.float32))<br>    col_weight = tf.cast(col_indices, tf.float32) - tf.floor(tf.cast(col_indices, tf.float32))<br><br>    gather_indices = tf.stack([<br>        tf.stack([row_indices, col_indices], axis=-<span class="hljs-number">1</span>),<br>        tf.stack([row_indices, col_ceil], axis=-<span class="hljs-number">1</span>),<br>        tf.stack([row_ceil, col_indices], axis=-<span class="hljs-number">1</span>),<br>        tf.stack([row_ceil, col_ceil], axis=-<span class="hljs-number">1</span>)<br>    ], axis=<span class="hljs-number">0</span>)<br><br>    gathered_values = tf.gather_nd(input_tensor, gather_indices)  <span class="hljs-comment"># Shape: (4, nh, nw, channels)</span><br><br>    <span class="hljs-comment"># Efficiently reshape weights</span><br>    row_weight = tf.reshape(row_weight, (<span class="hljs-number">1</span>, nh, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>))<br>    col_weight = tf.reshape(col_weight, (<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, nw, <span class="hljs-number">1</span>))<br><br>    interpolated = (<br>        gathered_values[<span class="hljs-number">0</span>] * (<span class="hljs-number">1</span> - row_weight) * (<span class="hljs-number">1</span> - col_weight) +<br>        gathered_values[<span class="hljs-number">1</span>] * (<span class="hljs-number">1</span> - row_weight) * col_weight +<br>        gathered_values[<span class="hljs-number">2</span>] * row_weight * (<span class="hljs-number">1</span> - col_weight) +<br>        gathered_values[<span class="hljs-number">3</span>] * row_weight * col_weight<br>    )<br><br>    interpolated = tf.reshape(interpolated, [<span class="hljs-number">1</span>, nh, nw, -<span class="hljs-number">1</span>])  <span class="hljs-comment"># Add back batch dim</span><br>    <span class="hljs-keyword">return</span> interpolated<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">in_network_bilinear_interpolation</span>(<span class="params">input_tensor, scale_factor</span>):</span><br><span class="line">    _, h, w, _ = input_tensor.get_shape().as_list()</span><br><span class="line">    nh, nw = h * scale_factor, w * scale_factor</span><br><span class="line">    row_indices = tf.clip_by_value(tf.cast(tf.floor(tf.linspace(<span class="number">0.0</span>, <span class="built_in">float</span>(h-<span class="number">1</span>), nh)), tf.int32), <span class="number">0</span>, h-<span class="number">1</span>)</span><br><span class="line">    col_indices = tf.clip_by_value(tf.cast(tf.floor(tf.linspace(<span class="number">0.0</span>, <span class="built_in">float</span>(w-<span class="number">1</span>), nw)), tf.int32), <span class="number">0</span>, w-<span class="number">1</span>)</span><br><span class="line">    row_ceil = tf.minimum(row_indices + <span class="number">1</span>, h - <span class="number">1</span>)  <span class="comment"># Ensure we don&#x27;t go out of bounds</span></span><br><span class="line">    col_ceil = tf.minimum(col_indices + <span class="number">1</span>, w - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    row_weight = tf.cast(row_indices, tf.float32) - tf.floor(tf.cast(row_indices, tf.float32))</span><br><span class="line">    col_weight = tf.cast(col_indices, tf.float32) - tf.floor(tf.cast(col_indices, tf.float32))</span><br><span class="line"></span><br><span class="line">    gather_indices = tf.stack([</span><br><span class="line">        tf.stack([row_indices, col_indices], axis=-<span class="number">1</span>),</span><br><span class="line">        tf.stack([row_indices, col_ceil], axis=-<span class="number">1</span>),</span><br><span class="line">        tf.stack([row_ceil, col_indices], axis=-<span class="number">1</span>),</span><br><span class="line">        tf.stack([row_ceil, col_ceil], axis=-<span class="number">1</span>)</span><br><span class="line">    ], axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    gathered_values = tf.gather_nd(input_tensor, gather_indices)  <span class="comment"># Shape: (4, nh, nw, channels)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Efficiently reshape weights</span></span><br><span class="line">    row_weight = tf.reshape(row_weight, (<span class="number">1</span>, nh, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">    col_weight = tf.reshape(col_weight, (<span class="number">1</span>, <span class="number">1</span>, nw, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    interpolated = (</span><br><span class="line">        gathered_values[<span class="number">0</span>] * (<span class="number">1</span> - row_weight) * (<span class="number">1</span> - col_weight) +</span><br><span class="line">        gathered_values[<span class="number">1</span>] * (<span class="number">1</span> - row_weight) * col_weight +</span><br><span class="line">        gathered_values[<span class="number">2</span>] * row_weight * (<span class="number">1</span> - col_weight) +</span><br><span class="line">        gathered_values[<span class="number">3</span>] * row_weight * col_weight</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    interpolated = tf.reshape(interpolated, [<span class="number">1</span>, nh, nw, -<span class="number">1</span>])  <span class="comment"># Add back batch dim</span></span><br><span class="line">    <span class="keyword">return</span> interpolated</span><br></pre></td></tr></table></figure>
 
 <h3 id="In-Network-Deconvolutional-Layer"><a href="#In-Network-Deconvolutional-Layer" class="headerlink" title="In-Network Deconvolutional Layer"></a>In-Network Deconvolutional Layer</h3><p>In-Network deconvolutional layer is a learnable upsampling method, also known as a transposed convolutional layer, that increase the resolution of feature maps by performing the inverse of a convolution operation.<br>The weights are optimized during training, allowing the layer to adapt to specific tasks. It’s capable of learning complex upsampling patterns, making it suitable for high-precision tasks. It’s more computationally expensive due to learnable weights.<br>In-Network deconvolutional layer was used in image generation in Generative Adversarial Networks, and in semantic segmentation e.g., SegNet, DeepLab. It is decoder part of autoencoders.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">in_network_deconvolution</span>(<span class="hljs-params">input_tensor, filters, ks, strides, padding, activation=<span class="hljs-literal">None</span></span>):<br>    <span class="hljs-keyword">return</span> tf.layers.conv2d_transpose(input_tensor, filters, ks, strides, padding, activation=activation)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">in_network_deconvolution</span>(<span class="params">input_tensor, filters, ks, strides, padding, activation=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">return</span> tf.layers.conv2d_transpose(input_tensor, filters, ks, strides, padding, activation=activation)</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="kernel-initializer"><a href="#kernel-initializer" class="headerlink" title="kernel_initializer"></a>kernel_initializer</h2><p>when construct a convolutional layer, we need to specify the kernel_initializer</p>
@@ -639,7 +533,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <blockquote>
 <p>How to get a uniform distribution array or matrix in with python</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">glorot_uniform</span>(<span class="hljs-params">shape, n_in, n_out</span>):<br>    limit = np.sqrt(<span class="hljs-number">6</span>/(n_in+n_out))<br>    <span class="hljs-keyword">return</span> np.random.uniform(low=-limit, hight=limit, size = shape)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">glorot_uniform</span>(<span class="params">shape, n_in, n_out</span>):</span><br><span class="line">    limit = np.sqrt(<span class="number">6</span>/(n_in+n_out))</span><br><span class="line">    <span class="keyword">return</span> np.random.uniform(low=-limit, hight=limit, size = shape)</span><br></pre></td></tr></table></figure>
 
 <p>When to use:</p>
 <ul>
@@ -660,21 +554,21 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <blockquote>
 <p>How to generate the random matrix with normal distribution in python</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">he_normal</span>(<span class="hljs-params">shape, n_in</span>):<br>    std_dev = np.sqrt(<span class="hljs-number">2</span>/n_in)<br>    <span class="hljs-keyword">return</span> np.random.normal(loc=<span class="hljs-number">0.0</span>, scale=std_dev, size= shape)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">he_normal</span>(<span class="params">shape, n_in</span>):</span><br><span class="line">    std_dev = np.sqrt(<span class="number">2</span>/n_in)</span><br><span class="line">    <span class="keyword">return</span> np.random.normal(loc=<span class="number">0.0</span>, scale=std_dev, size= shape)</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="Load-Dataset"><a href="#Load-Dataset" class="headerlink" title="Load Dataset"></a>Load Dataset</h2><ol>
 <li><p>load dataset from folder</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br>train_dataset = tf.keras.utils.image_dataset_from_directory(<br>    <span class="hljs-string">&quot;path_to_data&quot;</span>,<br>    image_size = (<span class="hljs-number">224</span>,<span class="hljs-number">224</span>),<br>    batch_size = <span class="hljs-number">32</span>,<br>    label_mode = <span class="hljs-string">&quot;categorical&quot;</span> <span class="hljs-comment"># &quot;int&quot;, &quot;categorical&quot;, &quot;binary&quot;</span><br>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">train_dataset = tf.keras.utils.image_dataset_from_directory(</span><br><span class="line">    <span class="string">&quot;path_to_data&quot;</span>,</span><br><span class="line">    image_size = (<span class="number">224</span>,<span class="number">224</span>),</span><br><span class="line">    batch_size = <span class="number">32</span>,</span><br><span class="line">    label_mode = <span class="string">&quot;categorical&quot;</span> <span class="comment"># &quot;int&quot;, &quot;categorical&quot;, &quot;binary&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>load dataset from NumPy array</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment"># suppose there are 1000  224*224 RGB images</span><br>x_train = np.random.rand(<span class="hljs-number">1000</span>, <span class="hljs-number">224</span>, <span class="hljs-number">224</span>, <span class="hljs-number">3</span>)<br>y_train = np.random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, (<span class="hljs-number">1000</span>, )) <span class="hljs-comment"># 10 classes</span><br><br>train_dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train)).batch(<span class="hljs-number">32</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># suppose there are 1000  224*224 RGB images</span></span><br><span class="line">x_train = np.random.rand(<span class="number">1000</span>, <span class="number">224</span>, <span class="number">224</span>, <span class="number">3</span>)</span><br><span class="line">y_train = np.random.randint(<span class="number">0</span>, <span class="number">10</span>, (<span class="number">1000</span>, )) <span class="comment"># 10 classes</span></span><br><span class="line"></span><br><span class="line">train_dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train)).batch(<span class="number">32</span>)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>load dataset from TFRecord file<br>if the data is in TFRecord format, the t.data.TFRecordDataset is suggested to parse dataset:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">raw_dataset = tf.data.TFRecordDataset(<span class="hljs-string">&quot;path_to_data.tfrecord&quot;</span>)<br>train_dataset = raw_dataset.<span class="hljs-built_in">map</span>(parse_function).batch(<span class="hljs-number">32</span>)<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">raw_dataset = tf.data.TFRecordDataset(<span class="string">&quot;path_to_data.tfrecord&quot;</span>)</span><br><span class="line">train_dataset = raw_dataset.<span class="built_in">map</span>(parse_function).batch(<span class="number">32</span>)</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p><strong>data structure of train_dataset</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> images, labels <span class="hljs-keyword">in</span> train_dataset.take(<span class="hljs-number">1</span>)<br>    <span class="hljs-built_in">print</span>(images.shape, labels.shape)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> images, labels <span class="keyword">in</span> train_dataset.take(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(images.shape, labels.shape)</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>output<br>(32,224,224,3)(32,num_classes)  # 32 images of size 224*224 and RGB mode</p>
 </blockquote>
@@ -696,10 +590,10 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <h3 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h3><p>In TensorFlow, using train_dataset.map(data_augmentation) applies data augmentation dynamically during training.</p>
 <h3 id="Processing"><a href="#Processing" class="headerlink" title="Processing"></a>Processing</h3><ol>
 <li><p>Apply image augmentation directly on train_dataset</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">augment</span>(<span class="hljs-params">image, label</span>):<br>    image = tf.image.random.flip_left_right(image)<br>    image = tf.image.random_brightness(image, max_delta=<span class="hljs-number">0.2</span>)<br>    <span class="hljs-keyword">return</span> image, label<br>train_dataset = train_dataset.<span class="hljs-built_in">map</span>(augment)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">augment</span>(<span class="params">image, label</span>):</span><br><span class="line">    image = tf.image.random.flip_left_right(image)</span><br><span class="line">    image = tf.image.random_brightness(image, max_delta=<span class="number">0.2</span>)</span><br><span class="line">    <span class="keyword">return</span> image, label</span><br><span class="line">train_dataset = train_dataset.<span class="built_in">map</span>(augment)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>ImageDataGenerator (deprecated)<br>GPU is not supported, and cannot work with tf.data.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tensorflow.keras.preprocesing.image <span class="hljs-keyword">import</span> ImageDataGenerator<br>datagen = ImageDataGenerator(<br>    rescale = <span class="hljs-number">1.</span>/<span class="hljs-number">255</span>,<br>    rotation_range = <span class="hljs-number">40</span>,<br>    width_shift_range = <span class="hljs-number">0.2</span>,<br>    height_shift_range = <span class="hljs-number">0.2</span>,<br>    shear_range = <span class="hljs-number">0.2</span>,<br>    zoom_range = <span class="hljs-number">0.2</span>,<br>    horizontal_flip = <span class="hljs-literal">True</span><br>)<br>train_generator = datagen.flow_from_directory(<br>    <span class="hljs-string">&quot;path_to_data&quot;</span>,<br>    target_size = (<span class="hljs-number">224</span>,<span class="hljs-number">224</span>),<br>    batch_size = <span class="hljs-number">32</span>,<br>    class_mode = <span class="hljs-string">&quot;categorical&quot;</span><br>    )<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.keras.preprocesing.image <span class="keyword">import</span> ImageDataGenerator</span><br><span class="line">datagen = ImageDataGenerator(</span><br><span class="line">    rescale = <span class="number">1.</span>/<span class="number">255</span>,</span><br><span class="line">    rotation_range = <span class="number">40</span>,</span><br><span class="line">    width_shift_range = <span class="number">0.2</span>,</span><br><span class="line">    height_shift_range = <span class="number">0.2</span>,</span><br><span class="line">    shear_range = <span class="number">0.2</span>,</span><br><span class="line">    zoom_range = <span class="number">0.2</span>,</span><br><span class="line">    horizontal_flip = <span class="literal">True</span></span><br><span class="line">)</span><br><span class="line">train_generator = datagen.flow_from_directory(</span><br><span class="line">    <span class="string">&quot;path_to_data&quot;</span>,</span><br><span class="line">    target_size = (<span class="number">224</span>,<span class="number">224</span>),</span><br><span class="line">    batch_size = <span class="number">32</span>,</span><br><span class="line">    class_mode = <span class="string">&quot;categorical&quot;</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h3 id="Optimizer"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</h3><p><strong>optimizers.Adam()</strong></p>
 <p><strong>optimizers.SGD</strong></p>
@@ -734,345 +628,149 @@ fit(
 <ul>
 <li>add TensorBoard in the training process</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">log_dir = <span class="hljs-string">&#x27;logs/fit&#x27;</span><br>tensorboard_callback = callbacks.TensorBoard(log_dir = log_dir, histogram_freq = <span class="hljs-number">1</span>)<br>history = model.fit(gen, verbose =<span class="hljs-number">1</span>, steps_per_epoch =<span class="hljs-number">30</span>, epochs = epochs, callbacks = [tensorboard_callback])<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log_dir = <span class="string">&#x27;logs/fit&#x27;</span></span><br><span class="line">tensorboard_callback = callbacks.TensorBoard(log_dir = log_dir, histogram_freq = <span class="number">1</span>)</span><br><span class="line">history = model.fit(gen, verbose =<span class="number">1</span>, steps_per_epoch =<span class="number">30</span>, epochs = epochs, callbacks = [tensorboard_callback])</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>start the tensorboard in command line<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tensorboard --logdir logs/fit<br></code></pre></td></tr></table></figure></li>
+<li>start the tensorboard in command line<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensorboard --logdir logs/fit</span><br></pre></td></tr></table></figure></li>
 </ul>
 
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-  
-</div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>Study of U_CARFnet and Tensorflow</div>
-      <div>http://example.com/2025/02/08/Study-of-U-CARFnet/</div>
-    </div>
-    <div class="license-meta">
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
-          <div>February 8, 2025</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>Licensed under</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
   </div>
+</article>
 
 
 
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2025/02/11/Summary-of-The-Multi-layer-Perceptron/" title="Summary of The Multi-layer Perceptron">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Summary of The Multi-layer Perceptron</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2025/02/06/Ep2-Artificial-Intelligence-The-magic-of-convergence/" title="Ep2: Artificial Intelligence - The magic of convergence">
-                        <span class="hidden-mobile">Ep2: Artificial Intelligence - The magic of convergence</span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-            
-          </article>
-        </div>
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Deep-Neural-Network-Concepts"><span class="toc-number">1.</span> <span class="toc-text">Deep Neural Network Concepts</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Evaluation"><span class="toc-number">1.1.</span> <span class="toc-text">Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#High-Recall-Regime"><span class="toc-number">1.1.1.</span> <span class="toc-text">High Recall Regime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#F-score"><span class="toc-number">1.1.2.</span> <span class="toc-text">F-score</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Normalization"><span class="toc-number">1.2.</span> <span class="toc-text">Normalization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Min-Max-Normalization-is-a-commonly-used-method-for-normalization"><span class="toc-number">1.2.1.</span> <span class="toc-text">Min-Max Normalization is a commonly used method for normalization.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Z-score-normalization-Standardization"><span class="toc-number">1.2.2.</span> <span class="toc-text">Z-score normalization(Standardization)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scaling-to-Unit-Length"><span class="toc-number">1.2.3.</span> <span class="toc-text">Scaling to Unit Length:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Overfitting"><span class="toc-number">1.3.</span> <span class="toc-text">Overfitting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Increasing-training-dataset"><span class="toc-number">1.3.1.</span> <span class="toc-text">Increasing training dataset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Early-Stopping"><span class="toc-number">1.3.2.</span> <span class="toc-text">Early Stopping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Regularization"><span class="toc-number">1.3.3.</span> <span class="toc-text">Regularization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Local-Minima"><span class="toc-number">1.4.</span> <span class="toc-text">Local Minima</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Momentum"><span class="toc-number">1.4.1.</span> <span class="toc-text">Momentum</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sequential-Training"><span class="toc-number">1.5.</span> <span class="toc-text">Sequential Training</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch-gradient-descent"><span class="toc-number">1.5.1.</span> <span class="toc-text">Batch gradient descent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stochastic-Gradient-Descent-SGD"><span class="toc-number">1.5.2.</span> <span class="toc-text">Stochastic Gradient Descent (SGD)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mini-Batch-Gradient-Descent"><span class="toc-number">1.5.3.</span> <span class="toc-text">Mini-Batch Gradient Descent</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Local-and-Global-Relationships"><span class="toc-number">1.6.</span> <span class="toc-text">Local and Global Relationships</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention-Block"><span class="toc-number">1.7.</span> <span class="toc-text">Attention Block</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SE-Squeeze-and-Excitation-Block"><span class="toc-number">1.7.1.</span> <span class="toc-text">SE - Squeeze and Excitation Block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ECA-Efficient-Channel-Attention-Block"><span class="toc-number">1.7.2.</span> <span class="toc-text">ECA - Efficient Channel Attention Block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CBAM-convolutional-Block-Attention-Block"><span class="toc-number">1.7.3.</span> <span class="toc-text">CBAM - convolutional Block Attention Block</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Loss-Functions"><span class="toc-number">1.8.</span> <span class="toc-text">Loss Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cross-entropy"><span class="toc-number">1.8.1.</span> <span class="toc-text">Cross_entropy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Focal-loss"><span class="toc-number">1.8.2.</span> <span class="toc-text">Focal loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dice-loss"><span class="toc-number">1.8.3.</span> <span class="toc-text">Dice loss</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#U-CARFnet"><span class="toc-number">2.</span> <span class="toc-text">U-CARFnet</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Development"><span class="toc-number">2.1.</span> <span class="toc-text">Development</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Attention-Mechanism"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.Attention Mechanism</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Residual-learning-module"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.Residual learning module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Focal-Loss-Function"><span class="toc-number">2.1.3.</span> <span class="toc-text">3.Focal Loss Function</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#model"><span class="toc-number">2.2.</span> <span class="toc-text">model</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HED"><span class="toc-number">3.</span> <span class="toc-text">HED</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Deep-Supervision-and-Weighted-Fusion-Supervision"><span class="toc-number">3.1.</span> <span class="toc-text">Deep Supervision and Weighted Fusion Supervision</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Consensus-Sampling"><span class="toc-number">3.2.</span> <span class="toc-text">Consensus Sampling</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tensorflow"><span class="toc-number">4.</span> <span class="toc-text">Tensorflow</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Layers"><span class="toc-number">4.1.</span> <span class="toc-text">Layers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Convolutional"><span class="toc-number">4.1.1.</span> <span class="toc-text">Convolutional</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Padding"><span class="toc-number">4.1.1.1.</span> <span class="toc-text">Padding</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BatchNormalization"><span class="toc-number">4.1.2.</span> <span class="toc-text">BatchNormalization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GlobalAveragePooling2D"><span class="toc-number">4.1.3.</span> <span class="toc-text">GlobalAveragePooling2D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dense"><span class="toc-number">4.1.4.</span> <span class="toc-text">Dense</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Upsampling"><span class="toc-number">4.2.</span> <span class="toc-text">Upsampling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#In-Network-Bilinear-Interpolation"><span class="toc-number">4.2.1.</span> <span class="toc-text">In-Network Bilinear Interpolation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#In-Network-Deconvolutional-Layer"><span class="toc-number">4.2.2.</span> <span class="toc-text">In-Network Deconvolutional Layer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kernel-initializer"><span class="toc-number">4.3.</span> <span class="toc-text">kernel_initializer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-glorot-uniform-Xavier-Uniform-default"><span class="toc-number">4.3.1.</span> <span class="toc-text">1.glorot_uniform (Xavier Uniform) default</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-he-normal"><span class="toc-number">4.3.2.</span> <span class="toc-text">2.he_normal</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Load-Dataset"><span class="toc-number">4.4.</span> <span class="toc-text">Load Dataset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Augmentation"><span class="toc-number">4.5.</span> <span class="toc-text">Data Augmentation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Type"><span class="toc-number">4.5.1.</span> <span class="toc-text">Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Processing"><span class="toc-number">4.5.2.</span> <span class="toc-text">Processing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Model"><span class="toc-number">4.6.</span> <span class="toc-text">Model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Optimizer"><span class="toc-number">4.6.1.</span> <span class="toc-text">Optimizer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#model-training"><span class="toc-number">4.6.2.</span> <span class="toc-text">model training</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tools"><span class="toc-number">5.</span> <span class="toc-text">Tools</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TensorBoard"><span class="toc-number">5.1.</span> <span class="toc-text">TensorBoard</span></a></li></ol></li></ol>
       </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/02/08/Study-of-U-CARFnet/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&text=Study of U_CARFnet and Tensorflow"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&title=Study of U_CARFnet and Tensorflow"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&is_video=false&description=Study of U_CARFnet and Tensorflow"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Study of U_CARFnet and Tensorflow&body=Check out this article: http://example.com/2025/02/08/Study-of-U-CARFnet/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&title=Study of U_CARFnet and Tensorflow"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&title=Study of U_CARFnet and Tensorflow"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&title=Study of U_CARFnet and Tensorflow"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&title=Study of U_CARFnet and Tensorflow"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/02/08/Study-of-U-CARFnet/&name=Study of U_CARFnet and Tensorflow&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/02/08/Study-of-U-CARFnet/&t=Study of U_CARFnet and Tensorflow"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
     </div>
 
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>Table of Contents</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
     </div>
+
   </div>
 </div>
 
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-
     
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
+    2016-2025
+    Elvin&#39;s Blog
   </div>
-</div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
 
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
-  
-  
-  
-  
-</div>
+    <!-- styles -->
 
-  </footer>
 
-  <!-- Scripts -->
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
   
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
     })
+  })
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script src="/js/main.js"></script>
 
+<!-- search -->
 
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Disqus Comments -->
 
+<!-- utterances Comments -->
 
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
-  </noscript>
 </body>
 </html>
