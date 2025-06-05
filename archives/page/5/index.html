@@ -56,15 +56,17 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
 
-<body class="max-width mx-auto px3 ltr">
-    
-    <div class="content index py4 ">
-        
-          <header id="header">
+<body class="ltr">
+    <div class="page-container">
+        <div class="content-side">
+            
+            <div class="content index py4 ">
+                
+                    <header id="header">
   <a class="u-url u-uid" href="/">
   
     
-      <img id="logo" alt class="u-logo" src="/images/logo.png" />
+      <img id="logo" alt class="u-logo1" src="/images/logo.png" />
     
   
     <div id="title">
@@ -82,15 +84,14 @@
      --><li><a href="/about/">About</a></li><!--
    --><!--
      --><li><a href="/archives/">Writing</a></li><!--
-   --><!--
-     --><li><a target="_blank" rel="noopener" href="http://resume.bakers.top">Projects</a></li><!--
    -->
     </ul>
   </div>
 </header>
 
-        
-        <div id="archive">
+                
+                <div class="main-container">
+                    <div id="archive">
   <ul class="post-list">
     
     
@@ -101,6 +102,30 @@
       
       
         <li class="post-year"><h2>2023</h2></li>
+      
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2023-11-27T00:35:42.000Z" class="dt-published" itemprop="datePublished">2023-11-26</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2023/11/26/The-Way-to-Use-Proxy-for-Discord/">The Way to Use Proxy for Discord</a>
+    
+
+
+</span>
+      </li>
+    
+      
+      
+      
       
       <li class="post-item">
         
@@ -316,30 +341,6 @@
 </span>
       </li>
     
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2022-10-26T02:27:04.000Z" class="dt-published" itemprop="datePublished">2022-10-25</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2022/10/25/Javascript-Notes/">Javascript Notes</a>
-    
-
-
-</span>
-      </li>
-    
   </ul>
   
     <div class="pagination">
@@ -356,8 +357,9 @@
 
 </div>
 
-        
-        <footer id="footer">
+                </div>
+                
+                <footer id="footer">
   <div class="footer-left">
     Copyright &copy;
     
@@ -374,15 +376,25 @@
        --><li><a href="/about/">About</a></li><!--
      --><!--
        --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="http://resume.bakers.top">Projects</a></li><!--
      -->
       </ul>
     </nav>
   </div>
 </footer>
 
+            </div>
+        </div>
+
+        <div class="resume-side">
+            <iframe 
+                src="https://resume.bakers.top" 
+                style="width: 100%; height: 100%; border: none;"
+                title="Resume"
+                loading="lazy">
+            </iframe>
+        </div>
     </div>
+
     <!-- styles -->
 
 
@@ -414,3 +426,61 @@
 
 </body>
 </html>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.page-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100vh;
+}
+
+.content-side {
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.resume-side {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+    }
+
+    .resume-side {
+        position: relative;
+        height: 100vh;
+    }
+}
+</style>
