@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta property="og:type" content="website">
 <meta property="og:title" content="Elvin&#39;s Blog">
-<meta property="og:url" content="http://example.com/tags/Go/index.html">
+<meta property="og:url" content="http://example.com/tags/go/index.html">
 <meta property="og:site_name" content="Elvin&#39;s Blog">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
@@ -31,7 +31,7 @@
       
     
     <!-- title -->
-    <title>Tag: Go</title>
+    <title>Tag: go</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -101,14 +101,14 @@
       
       
       
-        <li class="post-year"><h2>2024</h2></li>
+        <li class="post-year"><h2>2023</h2></li>
       
       <li class="post-item">
         
     <div class="meta">
       
         
-          <time datetime="2024-09-15T01:13:18.000Z" class="dt-published" itemprop="datePublished">2024-09-14</time>
+          <time datetime="2023-07-19T00:14:37.000Z" class="dt-published" itemprop="datePublished">2023-07-18</time>
         
       
     </div>
@@ -116,7 +116,33 @@
 
         <span>
     
-        <a class="" href="/2024/09/14/Golang-read-text-file/">Golang read text file</a>
+        <a class="" href="/2023/07/18/GIN-CORS-OPTIONS-issue/">GIN CORS OPTIONS issue</a>
+    
+
+
+</span>
+      </li>
+    
+      
+      
+      
+      
+        <li class="post-year"><h2>2022</h2></li>
+      
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2022-09-01T14:23:42.000Z" class="dt-published" itemprop="datePublished">2022-09-01</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2022/09/01/Golang-Basic/">Golang Basic</a>
     
 
 
@@ -212,6 +238,7 @@ body {
     grid-template-columns: 1fr 1fr;
     width: 100%;
     height: 100vh;
+    transition: grid-template-columns 0.3s ease;
 }
 
 .content-side {
@@ -239,19 +266,46 @@ body {
     padding: 0;
 }
 
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
 @media (max-width: 768px) {
     .page-container {
         grid-template-columns: 1fr;
+        height: auto;
     }
     
     .content-side,
     .resume-side {
         width: 100%;
+        height: 100vh;
     }
 
     .resume-side {
         position: relative;
-        height: 100vh;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
     }
 }
 </style>
