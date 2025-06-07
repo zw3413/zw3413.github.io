@@ -6,10 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta property="og:type" content="website">
+    <meta name="description" content="I write what I did.">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Elvin&#39;s Blog">
 <meta property="og:url" content="http://example.com/archives/2023/12/index.html">
 <meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="I write what I did.">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
     
@@ -62,33 +64,59 @@
             
             <div class="content index py4 ">
                 
+                    <div class="header-container">
                     <header id="header">
   <a class="u-url u-uid" href="/">
   
     
-      <img id="logo" alt class="u-logo1" src="/images/logo.png" />
+      <img id="logo" alt class="u-logo" src="/images/logo.png" />
     
   
     <div id="title">
       <h1 class="p-name">Elvin&#39;s Blog</h1>
     </div>
   </a>
-  <div id="nav">
+  <p class="social_links">
+    Find me on
+    
+    
+    
+      
+      
+        <a class="icon u-url" target="_blank" rel="noopener me" href="https://github.com/zw3413" aria-label="github" title="github">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      
+       and 
+      
+    
+      
+      
+        <a class="icon u-url" target="_blank" rel="noopener me" href="https://x.com/zhangweicalm" aria-label="twitter" title="twitter">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+      
+      .
+      
+    
+  </p>
+  <!-- <div id="nav" class="nav">
     <ul>
       <li class="icon">
         <a href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-2x"></i></a>
       </li>
-      <!--
-     --><li><a href="/">Home</a></li><!--
-   --><!--
-     --><li><a href="/about/">About</a></li><!--
-   --><!--
-     --><li><a href="/archives/">Writing</a></li><!--
-   -->
+      <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/archives/">Writing</a></li>
     </ul>
-  </div>
+  </div> -->
 </header>
 
+<style>
+.social_links {
+  display: inline;
+}
+
+</style>
+                </div>
                 
                 <div class="main-container">
                     <div id="archive">
@@ -238,6 +266,13 @@ body {
     max-width: 100%;
     margin: 0;
     padding: 0;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
 }
 
 /* Large screens */
