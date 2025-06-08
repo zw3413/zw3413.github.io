@@ -60,7 +60,7 @@
 
 <body class="ltr">
     <div class="page-container">
-        <div class="content-side">
+  
             
             <div class="content index py4 ">
                 
@@ -76,6 +76,16 @@
       <h1 class="p-name">Elvin&#39;s Blog</h1>
     </div>
   </a>
+  <div id="nav" class="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-2x"></i></a>
+      </li>
+      <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/#side-projects">Projects</a></li>
+    </ul>
+  </div>
+
+
   <p class="social_links">
     Find me on
     
@@ -100,21 +110,48 @@
       
     
   </p>
-  <!-- <div id="nav" class="nav">
-    <ul>
-      <li class="icon">
-        <a href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-2x"></i></a>
-      </li>
-      <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/archives/">Writing</a></li>
-    </ul>
-  </div> -->
+
 </header>
 
 <style>
-.social_links {
+#nav {
   display: inline;
 }
 
+.social_links {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+
+#nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1rem;
+}
+
+#nav li {
+    display: inline-block;
+}
+
+#nav a {
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (max-width: 768px) {
+    #nav {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+    
+    #nav ul {
+        gap: 0.5rem;
+    }
+}
 </style>
                 </div>
                 
@@ -351,8 +388,11 @@
 </div>
 
                 </div>
-                
-                <footer id="footer">
+                 
+                   
+                        
+                    
+                 <footer id="footer">
   <div class="footer-left">
     Copyright &copy;
     
@@ -363,31 +403,36 @@
   <div class="footer-right">
     <nav>
       <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     -->
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
       </ul>
     </nav>
   </div>
 </footer>
 
             </div>
-        </div>
 
-        <div class="resume-side">
-            <iframe 
-                src="https://resume.bakers.top" 
-                style="width: 100%; height: 100%; border: none;"
-                title="Resume"
-                loading="lazy">
-            </iframe>
-        </div>
-    </div>
+                
 
+                <section class="side-iframe" id="side-projects">
+
+                    <iframe 
+                        src = "https://resume.bakers.top"
+                        style="width: 100%; height: 100%; border: none;"
+                        title="Resume"
+                        loading="lazy">
+                    </iframe>
+                    
+                    </section>
+                
+
+
+        </div>
     <!-- styles -->
 
 
@@ -421,51 +466,56 @@
 </html>
 
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100vh;
-    overflow: hidden;
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
 }
-
 .page-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     width: 100%;
-    height: 100vh;
+    min-height: fit-content;
     transition: grid-template-columns 0.3s ease;
-}
 
-.content-side {
-    overflow-y: auto;
+    margin: 0 auto;
     padding: 1rem;
-}
-
-.resume-side {
-    height: 100vh;
-    position: sticky;
-    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
 }
 
 .content {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
+    width: 800px;
+    margin: 0 auto;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
 }
 
 .main-container {
     width: 100%;
     max-width: 100%;
-    margin: 0;
-    padding: 0;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
 }
 
 .header-container {
-    width: 100%;
-    max-width: 100%;
-    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
     padding: 1rem;
 }
 

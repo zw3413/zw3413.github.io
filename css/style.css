@@ -590,7 +590,7 @@ body {
   }
 }
 #header {
-  margin: 0 auto 2rem;
+  margin: 0 auto 0rem;
   width: 100%;
 }
 #header h1,
