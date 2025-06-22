@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="A good python project should prove resilient under tesam collaboration and in production environments, excelling in four key areas:  maintainability  extensibility  observability deliverability  1. Pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Best Practices for Python Project">
+<meta property="og:url" content="http://example.com/2025/06/22/Best-Practices-for-Python-Project/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="A good python project should prove resilient under tesam collaboration and in production environments, excelling in four key areas:  maintainability  extensibility  observability deliverability  1. Pr">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-22T13:21:35.000Z">
+<meta property="article:modified_time" content="2025-06-22T16:48:22.740Z">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Best Practices for Python Project</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/06/08/Useful-Webpage-Styling-Modifier/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/06/22/Best-Practices-for-Python-Project/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&text=Best Practices for Python Project"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&title=Best Practices for Python Project"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&is_video=false&description=Best Practices for Python Project"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Best Practices for Python Project&body=Check out this article: http://example.com/2025/06/22/Best-Practices-for-Python-Project/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&title=Best Practices for Python Project"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&title=Best Practices for Python Project"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&title=Best Practices for Python Project"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&title=Best Practices for Python Project"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&name=Best Practices for Python Project&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&t=Best Practices for Python Project"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Project-Layout"><span class="toc-number">1.</span> <span class="toc-text">1. Project Layout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Package-and-Building"><span class="toc-number">2.</span> <span class="toc-text">2. Package and Building</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Type-Hints-and-Documentation"><span class="toc-number">3.</span> <span class="toc-text">3. Type Hints and Documentation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Testing"><span class="toc-number">4.</span> <span class="toc-text">4. Testing</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Testing-Pyramid"><span class="toc-number">4.1.</span> <span class="toc-text">1. Testing Pyramid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Unit-Test-Integration-Test-Contract-Test-Example-Based-Test"><span class="toc-number">4.2.</span> <span class="toc-text">2. Unit Test + Integration Test + Contract Test (Example-Based Test)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Force-90-Test-Coverage"><span class="toc-number">4.3.</span> <span class="toc-text">3. Force 90% Test Coverage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Auto-Test-Property-Based-Testing"><span class="toc-number">4.4.</span> <span class="toc-text">4. Auto Test (Property-Based Testing)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-CI-x2F-CD"><span class="toc-number">5.</span> <span class="toc-text">5. CI&#x2F;CD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Logging-Monitoring-and-Tracing"><span class="toc-number">6.</span> <span class="toc-text">6. Logging, Monitoring and Tracing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Ohter-Advance-Practices"><span class="toc-number">7.</span> <span class="toc-text">7. Ohter Advance Practices</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Observability"><span class="toc-number">7.1.</span> <span class="toc-text">1. Observability</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Security-Baseline"><span class="toc-number">7.2.</span> <span class="toc-text">2. Security Baseline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Performance-Strategy"><span class="toc-number">7.3.</span> <span class="toc-text">3. Performance Strategy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Delivery-and-Operations"><span class="toc-number">7.4.</span> <span class="toc-text">4. Delivery and Operations</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Best Practices for Python Project
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-22T13:21:35.000Z" class="dt-published" itemprop="datePublished">2025-06-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/python/" rel="tag">python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>A good python project should prove resilient under tesam collaboration and in production environments, excelling in four key areas:</p>
+<ul>
+<li>maintainability </li>
+<li>extensibility </li>
+<li>observability</li>
+<li>deliverability</li>
+</ul>
+<h2 id="1-Project-Layout"><a href="#1-Project-Layout" class="headerlink" title="1. Project Layout"></a>1. Project Layout</h2><p><a target="_blank" rel="noopener" href="https://hynek.me/articles/testing-packaging/">Testing &amp; Packaging</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/piperliu/p/18634331">Best Practices for Python Project Orginazation</a></p>
+<p>myproject&#x2F;<br>├── pyproject.toml<br>├── README.md<br>├── .gitignore<br>├── .env.example          # Environment template<br>├── config&#x2F;               # YAML&#x2F;TOML&#x2F;JSON default configuration<br>│   ├── default.toml<br>│   └── logging.yml<br>├── src&#x2F;<br>│   ├── common&#x2F;            # public package<br>│   |   ├── <strong>init</strong>.py<br>│   |   ├── utils.py<br>│   |   ├── retry.py<br>│   |   ├── validators.py<br>│   |   ├── converters.py<br>│   |   ├── time.py<br>│   ├── module1&#x2F;            # API model<br>│   |   ├── <strong>init</strong>.py<br>│   |   ├── core.py<br>│   |   ├── api&#x2F;<br>│   |   │   ├──<strong>init</strong>.py<br>│   |   │   └── router.py<br>│   |   └── utils&#x2F;<br>│   ├── module2&#x2F;            # data pipline module<br>│   |   ├── <strong>init</strong>.py<br>│   |   ├── pipline.py<br>│   └── core&#x2F;                #<br>│       ├── <strong>init</strong>.py<br>|       ├── types.py<br>│       ├── logging.py<br>│       ├── exceptions.py<br>│       ├── security.py<br>│       └── settings.py      # universal configuration center<br>├── tests&#x2F;                 #pytest scripts<br>│   ├── conftest.py<br>│   └── test_core.py<br>└── scripts&#x2F;              # Helper script (unpackaged)</p>
+<ol>
+<li>Use some naming convention to seperate public and private variables, like using _ as prefix of private variables.</li>
+<li>Design public api via well config the <strong>init</strong>.py</li>
+<li>Using pyproject.toml + uv etc. package management tool</li>
+<li>Using pydantic.BaseSettings to read and manage configurations in confg&#x2F;<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># src/mypkg/settings.py</span></span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">from</span> pydantic <span class="keyword">import</span> BaseSettings</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Settings</span>(<span class="title class_ inherited__">BaseSettings</span>):</span><br><span class="line">    debug: <span class="built_in">bool</span> = <span class="literal">False</span></span><br><span class="line">    db_url: <span class="built_in">str</span></span><br><span class="line">    log_cfg: Path = Path(__file__).with_name(<span class="string">&quot;logging.yml&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Config</span>:</span><br><span class="line">        env_file = Path(__file__).parent.parent.parent / <span class="string">&quot;.env&quot;</span></span><br><span class="line"></span><br><span class="line">settings = Settings()</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>Using python_dotenv to load secret from .env (it should be git ignored.)</li>
+<li>Run project<br>linux:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PYTHONPATH=./src</span><br><span class="line">uvicorn mypkg1.main:app --reload</span><br><span class="line">python -m mypkg2.main</span><br></pre></td></tr></table></figure>
+windows:<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$env:PYTHONPATH</span> = <span class="string">&quot;.\src&quot;</span></span><br><span class="line">uvicorn mypkg1.main:app <span class="literal">--reload</span></span><br><span class="line">python <span class="literal">-m</span> mypkg2.main</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="2-Package-and-Building"><a href="#2-Package-and-Building" class="headerlink" title="2. Package and Building"></a>2. Package and Building</h2><p>A typical pyproject.toml</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[build-system]</span>            <span class="comment"># PEP 518 —— tell pip how to build</span></span><br><span class="line"><span class="attr">requires</span> = [<span class="string">&quot;hatchling&gt;=1.24&quot;</span>, <span class="string">&quot;hatch-vcs&quot;</span>]</span><br><span class="line"><span class="attr">build-backend</span> = <span class="string">&quot;hatchling.build&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">[project]</span>                 <span class="comment"># PEP 621 —— meta data of package</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">&quot;demo&quot;</span></span><br><span class="line"><span class="attr">dynamic</span> = [<span class="string">&quot;version&quot;</span>]     <span class="comment"># version was managed by VCS plugin, read from git tag</span></span><br><span class="line"><span class="attr">dependencies</span> = [<span class="string">&quot;requests&gt;=2.32&quot;</span>]</span><br><span class="line"><span class="attr">optional-dependencies.test</span> = [<span class="string">&quot;pytest&quot;</span>]</span><br><span class="line"><span class="attr">classifiers</span> = [<span class="string">&quot;Private :: Do Not Upload&quot;</span>]  <span class="comment">#pypi will reject publishing</span></span><br><span class="line"></span><br><span class="line"><span class="section">[tool.black]</span>              <span class="comment"># user setting, start with tool</span></span><br><span class="line"><span class="attr">line-length</span> = <span class="number">88</span></span><br><span class="line"></span><br><span class="line"><span class="section">[tool.hatch.version]</span>       <span class="comment"># hatch-vcs setting</span></span><br><span class="line"><span class="attr">source</span> = <span class="string">&quot;vcs&quot;</span></span><br><span class="line"><span class="attr">tag-pattern</span> = <span class="string">&quot;v&#123;version&#125;&quot;</span>   <span class="comment"># read Git tag v1.2.3</span></span><br><span class="line"></span><br><span class="line"><span class="section">[tool.hatch.build.targets.wheel]</span></span><br><span class="line"><span class="attr">packages</span> = [<span class="string">&quot;src/pkg_a&quot;</span>, <span class="string">&quot;src/pkg_b&quot;</span>, <span class="string">&quot;src/acme&quot;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>VCS driven versioning (uv+hatching.build)</li>
+</ol>
+<ul>
+<li>package version read from “git tab v1.2.3 &amp;&amp; git push –tags”</li>
+<li>“uv build” will write <strong>version</strong>&#x3D;”1.2.3” into the package level “<strong>init</strong>.py” automatically.</li>
+<li>dev branch will have special suffix, implemented by hatch-vcs.</li>
+</ul>
+<ol start="2">
+<li>uv build &#x2F; uv publish to build whl locally or publish to pypi.org( or self host repo)</li>
+</ol>
+<h2 id="3-Type-Hints-and-Documentation"><a href="#3-Type-Hints-and-Documentation" class="headerlink" title="3. Type Hints and Documentation"></a>3. Type Hints and Documentation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">x: <span class="built_in">int</span>, y: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Add two integers.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        x (int): First number.</span></span><br><span class="line"><span class="string">        y (int): Second number.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        int: The sum of x and y.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Using type hints for all function&#x2F;class&#x2F;module&#x2F;variable, following <a target="_blank" rel="noopener" href="https://peps.python.org/pep-0484/">PEP 484</a> including:<ul>
+<li>function: parameters and return value</li>
+<li>class: all fields</li>
+<li>variables</li>
+<li>generic container: generic type</li>
+<li>3-rd part module’s function&#x2F;return</li>
+</ul>
+</li>
+<li>Using mypy check type hints before integration.<br> mypy could work at <ul>
+<li>github action prebuilding</li>
+<li>local terminal</li>
+<li>local prebuilding</li>
+</ul>
+</li>
+<li>Using standard docstring format (google-style)</li>
+<li>Using Sphinx&#x2F;MkDocs generate documentation webpage through type hints and docstring automatically.</li>
+</ol>
+<h2 id="4-Testing"><a href="#4-Testing" class="headerlink" title="4. Testing"></a>4. Testing</h2><p>Construct test pyramid with pytest, based on unit test, supplimented with integration test and contract test.<br>Force test coverage &gt; 90% with pytest-cov in CI.<br>Adopting hypothesis(property-based testing) to includ massive random test case input.</p>
+<h3 id="1-Testing-Pyramid"><a href="#1-Testing-Pyramid" class="headerlink" title="1. Testing Pyramid"></a>1. <a target="_blank" rel="noopener" href="https://martinfowler.com/bliki/TestPyramid.html">Testing Pyramid</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">▲ UI Test (end to end) (emulate real business process)</span><br><span class="line">▲ Integration Test (components interaction) (verify the cooperation between mupltiple components)</span><br><span class="line">▲ Unit Test (function, class) (low cost, responsive)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Unit-Test-Integration-Test-Contract-Test-Example-Based-Test"><a href="#2-Unit-Test-Integration-Test-Contract-Test-Example-Based-Test" class="headerlink" title="2. Unit Test + Integration Test + Contract Test (Example-Based Test)"></a>2. Unit Test + Integration Test + Contract Test (Example-Based Test)</h3><p>pytest</p>
+<ol>
+<li><p>Unit Test</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">x: <span class="built_in">int</span>, y: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_add</span>():</span><br><span class="line">    <span class="keyword">assert</span> add(<span class="number">2</span>, <span class="number">3</span>) == <span class="number">5</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Integration Test</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test_user_login_and_access_db</span>():</span><br><span class="line">    token = login(<span class="string">&quot;alice&quot;</span>, <span class="string">&quot;pass&quot;</span>)</span><br><span class="line">    <span class="keyword">assert</span> db.get_user_by_token(token).name == <span class="string">&quot;alice&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Contract Test</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test_api_contract</span>(<span class="params">requests_mock</span>):</span><br><span class="line">    requests_mock.get(<span class="string">&quot;https://api.example.com/user&quot;</span>, json=&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;Elvin&quot;</span>&#125;)</span><br><span class="line">    resp = fetch_user(<span class="string">&quot;https://api.example.com/user&quot;</span>)</span><br><span class="line">    <span class="keyword">assert</span> resp[<span class="string">&quot;name&quot;</span>] == <span class="string">&quot;Elvin&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="3-Force-90-Test-Coverage"><a href="#3-Force-90-Test-Coverage" class="headerlink" title="3. Force 90% Test Coverage"></a>3. Force 90% Test Coverage</h3><p>pytest-cov</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest --cov=src/ --cov-report=term</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- name: Run tests with coverage</span><br><span class="line">  run: pytest --cov=src --cov-fail-under=90</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Auto-Test-Property-Based-Testing"><a href="#4-Auto-Test-Property-Based-Testing" class="headerlink" title="4. Auto Test (Property-Based Testing)"></a>4. Auto Test (Property-Based Testing)</h3><p>hypothesis</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hypothesis <span class="keyword">import</span> given</span><br><span class="line"><span class="keyword">from</span> hypothesis.strategies <span class="keyword">import</span> integers</span><br><span class="line"></span><br><span class="line"><span class="meta">@given(<span class="params">integers(<span class="params"></span>), integers(<span class="params"></span>)</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_add_commutative</span>(<span class="params">x, y</span>):</span><br><span class="line">    <span class="keyword">assert</span> add(x, y) == add(y, x)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-CI-x2F-CD"><a href="#5-CI-x2F-CD" class="headerlink" title="5. CI&#x2F;CD"></a>5. CI&#x2F;CD</h2><p>github action</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">CI/CD</span> <span class="string">Pipeline</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span>   <span class="comment"># trigger by push</span></span><br><span class="line">    <span class="attr">branches:</span> [ <span class="string">main</span> ]  </span><br><span class="line">  <span class="attr">pull_request:</span>         <span class="comment"># trigger by pull_request creating or updating</span></span><br><span class="line">    <span class="attr">branches:</span> [ <span class="string">main</span> ]</span><br><span class="line">  <span class="attr">workflow_dispatch:</span>  <span class="comment"># manually trigger</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build-test-publish:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span> <span class="string">Code</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Set</span> <span class="string">up</span> <span class="string">Python</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-python@v5</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">python-version:</span> <span class="string">&quot;3.11&quot;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">uv</span> <span class="string">&amp;</span> <span class="string">dependencies</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          curl -LsSf https://astral.sh/uv/install.sh | sh</span></span><br><span class="line"><span class="string">          uv pip install -r requirements.txt  # compatible fallback</span></span><br><span class="line"><span class="string">          uv pip install -r requirements-dev.txt  # dev dependencies</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Lint</span> <span class="string">(black)</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">uv</span> <span class="string">pip</span> <span class="string">install</span> <span class="string">black</span> <span class="string">&amp;&amp;</span> <span class="string">black</span> <span class="string">.</span> <span class="string">--check</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Type</span> <span class="string">check</span> <span class="string">(mypy)</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          uv pip install mypy</span></span><br><span class="line"><span class="string">          mypy src/</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Run</span> <span class="string">tests</span> <span class="string">with</span> <span class="string">coverage</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          uv pip install pytest pytest-cov</span></span><br><span class="line"><span class="string">          pytest --cov=src --cov-report=xml --cov-fail-under=90</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span> <span class="string">package</span> <span class="string">(PEP</span> <span class="number">517</span><span class="string">)</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">uv</span> <span class="string">build</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Publish</span> <span class="string">(optional)</span></span><br><span class="line">        <span class="attr">if:</span> <span class="string">startsWith(github.ref,</span> <span class="string">&#x27;refs/tags/v&#x27;</span><span class="string">)</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          uv pip install uv</span></span><br><span class="line"><span class="string">          uv publish --yes  #  PyPI Token need to be configed ahead</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">    <span class="attr">env:</span></span><br><span class="line">      <span class="attr">UV_SYSTEM_PYTHON:</span> <span class="string">&quot;true&quot;</span></span><br><span class="line">      <span class="attr">UV_CACHE_DIR:</span> <span class="string">&quot;$<span class="template-variable">&#123;&#123; github.workspace &#125;&#125;</span>/.uv-cache&quot;</span></span><br><span class="line">      <span class="comment"># this is for uv publish</span></span><br><span class="line">      <span class="attr">UV_PYPI_TOKEN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.PYPI_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="6-Logging-Monitoring-and-Tracing"><a href="#6-Logging-Monitoring-and-Tracing" class="headerlink" title="6. Logging, Monitoring and Tracing"></a>6. Logging, Monitoring and Tracing</h2><ol>
+<li>Structured Logging<br>logging + pythonjsonlogger</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> pythonjsonlogger <span class="keyword">import</span> jsonlogger</span><br><span class="line"></span><br><span class="line"><span class="comment">#base: LOG_LEVEL=DEBUG python app.py</span></span><br><span class="line">log_level = os.getenv(<span class="string">&quot;LOG_LEVEL&quot;</span>, <span class="string">&quot;INFO&quot;</span>).upper()</span><br><span class="line">logging.basicConfig(level=log_level)</span><br><span class="line"></span><br><span class="line">logger = logging.getLogger()</span><br><span class="line"><span class="comment">#logger.setLevel(logging.INFO)</span></span><br><span class="line"></span><br><span class="line">logHandler = logging.StreamHandler(sys.stdout)</span><br><span class="line">formatter = jsonlogger.JsonFormatter(<span class="string">&#x27;%(asctime)s %(levelname)s %(message)s %(request_id)s&#x27;</span>)</span><br><span class="line">logHandler.setFormatter(formatter)</span><br><span class="line">logger.addHandler(logHandler)</span><br><span class="line"></span><br><span class="line">logger.info(<span class="string">&quot;User logged in&quot;</span>, extra=&#123;<span class="string">&quot;request_id&quot;</span>: <span class="string">&quot;abc123&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;asctime&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2025-06-22 12:34:56&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;levelname&quot;</span><span class="punctuation">:</span> <span class="string">&quot;INFO&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;User logged in&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;request_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;abc123&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Metrics Monitoring</li>
+</ol>
+<p>Prometheus </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> prometheus_client <span class="keyword">import</span> Counter, start_http_server</span><br><span class="line"></span><br><span class="line">request_counter = Counter(<span class="string">&#x27;http_requests_total&#x27;</span>, <span class="string">&#x27;Total HTTP Requests&#x27;</span>, [<span class="string">&#x27;method&#x27;</span>, <span class="string">&#x27;endpoint&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">handle_request</span>(<span class="params">method, endpoint</span>):</span><br><span class="line">    request_counter.labels(method=method, endpoint=endpoint).inc()</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">start_http_server(<span class="number">8000</span>)  <span class="comment"># Prometheus 会抓取 localhost:8000/metrics</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Distributed Tracing<br>opentelemetry</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> opentelemetry <span class="keyword">import</span> trace</span><br><span class="line"><span class="keyword">from</span> opentelemetry.sdk.trace <span class="keyword">import</span> TracerProvider</span><br><span class="line"></span><br><span class="line">trace.set_tracer_provider(TracerProvider())</span><br><span class="line">tracer = trace.get_tracer(__name__)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tracer.start_as_current_span(<span class="string">&quot;my-function&quot;</span>):</span><br><span class="line">    ...  <span class="comment"># record execution time, exception, error, context </span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="7-Ohter-Advance-Practices"><a href="#7-Ohter-Advance-Practices" class="headerlink" title="7. Ohter Advance Practices"></a>7. Ohter Advance Practices</h2><h3 id="1-Observability"><a href="#1-Observability" class="headerlink" title="1. Observability"></a>1. Observability</h3><p><strong>Purpose</strong>: Make runtime behavior visible and measurable for debugging, monitoring, and alerting.</p>
+<p><strong>Key Practices</strong>:</p>
+<ul>
+<li><strong>Health Checks</strong>: Expose <code>/health</code>, <code>/ready</code>, or <code>/live</code> endpoints to indicate service status.</li>
+<li><strong>Metrics Exposure</strong>: Expose Prometheus-compatible <code>/metrics</code> endpoint.</li>
+<li><strong>Tracing and Exception Monitoring</strong>: Integrate tools to trace requests and capture errors.</li>
+</ul>
+<p><strong>Tools</strong>:</p>
+<ul>
+<li><code>FastAPI</code>, <code>Flask</code> with custom middleware for health&#x2F;ready endpoints</li>
+<li><code>Prometheus</code>, <code>OpenTelemetry</code>, <code>Grafana</code></li>
+<li><code>Sentry</code> for exception reporting</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/health&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">health_check</span>():</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;ok&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-Security-Baseline"><a href="#2-Security-Baseline" class="headerlink" title="2. Security Baseline"></a>2. Security Baseline</h3><p><strong>Purpose</strong>: Prevent security vulnerabilities during development and deployment.</p>
+<p><strong>Key Practices</strong>:</p>
+<ul>
+<li><strong>Dependency Vulnerability Scanning</strong></li>
+<li><strong>Static Code Analysis</strong></li>
+<li><strong>Secrets Detection</strong></li>
+<li><strong>Least Privilege Execution</strong></li>
+</ul>
+<p><strong>Tools</strong>:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://pypi.org/project/pip-audit/"><code>pip-audit</code></a>: detect vulnerable packages</li>
+<li><a target="_blank" rel="noopener" href="https://bandit.readthedocs.io/"><code>bandit</code></a>: static security analysis</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/gitleaks/gitleaks"><code>gitleaks</code></a>: find hardcoded secrets</li>
+<li>Docker <code>USER</code> directive: run containers as non-root</li>
+</ul>
+<p><strong>CI Integration Example</strong>:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Security</span> <span class="string">Audit</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    pip install pip-audit bandit</span></span><br><span class="line"><span class="string">    pip-audit</span></span><br><span class="line"><span class="string">    bandit -r src/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Performance-Strategy"><a href="#3-Performance-Strategy" class="headerlink" title="3. Performance Strategy"></a>3. Performance Strategy</h3><p><strong>Purpose</strong>: Optimize for critical paths, resource efficiency, and responsiveness.</p>
+<p><strong>Key Practices</strong>:</p>
+<ul>
+<li><strong>Profiling Critical Code Paths</strong></li>
+<li><strong>Accelerate with Native Extensions</strong></li>
+<li><strong>Caching Expensive Computations</strong></li>
+<li><strong>Separate Async vs Parallel Work</strong></li>
+</ul>
+<p><strong>Tools</strong>:</p>
+<ul>
+<li><code>cProfile</code>, <code>py-spy</code>, <code>line_profiler</code></li>
+<li><code>Cython</code>, <code>Rust + PyO3</code></li>
+<li><code>functools.lru_cache</code>, <code>Redis</code>, <code>memcached</code></li>
+<li><code>asyncio</code>, <code>concurrent.futures</code>, <code>multiprocessing</code></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> lru_cache</span><br><span class="line"></span><br><span class="line"><span class="meta">@lru_cache(<span class="params">maxsize=<span class="number">128</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">slow_query</span>(<span class="params">x</span>):</span><br><span class="line">    ...  <span class="comment"># expensive computation</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Delivery-and-Operations"><a href="#4-Delivery-and-Operations" class="headerlink" title="4. Delivery and Operations"></a>4. Delivery and Operations</h3><p><strong>Purpose</strong>: Enable containerized deployment, reproducibility, and safe infrastructure automation.</p>
+<p><strong>Key Practices</strong>:</p>
+<ul>
+<li><strong>Multi-stage Docker Build</strong></li>
+<li><strong>Non-root Containers</strong></li>
+<li><strong>Kubernetes Deployment with Helm</strong></li>
+<li><strong>Infrastructure as Code</strong></li>
+<li><strong>Safe Database Migrations</strong></li>
+</ul>
+<p><strong>Tools</strong>:</p>
+<ul>
+<li><code>Docker</code>, <code>docker-compose</code></li>
+<li><code>Helm</code>, <code>Terraform</code></li>
+<li><code>alembic</code>, <code>flyway</code>, <code>django-migrations</code></li>
+</ul>
+<p><strong>Example</strong>: Minimal Dockerfile with best practices</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> python:<span class="number">3.11</span>-slim AS base</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pip install -r requirements.txt</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> useradd -m appuser</span></span><br><span class="line"><span class="keyword">USER</span> appuser</span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;python&quot;</span>, <span class="string">&quot;main.py&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Project-Layout"><span class="toc-number">1.</span> <span class="toc-text">1. Project Layout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Package-and-Building"><span class="toc-number">2.</span> <span class="toc-text">2. Package and Building</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Type-Hints-and-Documentation"><span class="toc-number">3.</span> <span class="toc-text">3. Type Hints and Documentation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Testing"><span class="toc-number">4.</span> <span class="toc-text">4. Testing</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Testing-Pyramid"><span class="toc-number">4.1.</span> <span class="toc-text">1. Testing Pyramid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Unit-Test-Integration-Test-Contract-Test-Example-Based-Test"><span class="toc-number">4.2.</span> <span class="toc-text">2. Unit Test + Integration Test + Contract Test (Example-Based Test)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Force-90-Test-Coverage"><span class="toc-number">4.3.</span> <span class="toc-text">3. Force 90% Test Coverage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Auto-Test-Property-Based-Testing"><span class="toc-number">4.4.</span> <span class="toc-text">4. Auto Test (Property-Based Testing)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-CI-x2F-CD"><span class="toc-number">5.</span> <span class="toc-text">5. CI&#x2F;CD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Logging-Monitoring-and-Tracing"><span class="toc-number">6.</span> <span class="toc-text">6. Logging, Monitoring and Tracing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Ohter-Advance-Practices"><span class="toc-number">7.</span> <span class="toc-text">7. Ohter Advance Practices</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Observability"><span class="toc-number">7.1.</span> <span class="toc-text">1. Observability</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Security-Baseline"><span class="toc-number">7.2.</span> <span class="toc-text">2. Security Baseline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Performance-Strategy"><span class="toc-number">7.3.</span> <span class="toc-text">3. Performance Strategy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Delivery-and-Operations"><span class="toc-number">7.4.</span> <span class="toc-text">4. Delivery and Operations</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/06/22/Best-Practices-for-Python-Project/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&text=Best Practices for Python Project"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&title=Best Practices for Python Project"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&is_video=false&description=Best Practices for Python Project"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Best Practices for Python Project&body=Check out this article: http://example.com/2025/06/22/Best-Practices-for-Python-Project/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&title=Best Practices for Python Project"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&title=Best Practices for Python Project"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&title=Best Practices for Python Project"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&title=Best Practices for Python Project"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&name=Best Practices for Python Project&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/22/Best-Practices-for-Python-Project/&t=Best Practices for Python Project"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>
