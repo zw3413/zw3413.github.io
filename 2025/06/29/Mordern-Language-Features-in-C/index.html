@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Code Conciseness and New Features1. Pattern Matching, Mordern Switch Expression and Expression-Bodied MemberThese are powerful syntaxes, they liberate code from cumbersome if-else chains.  Pattern mat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mordern Language Features in C#">
+<meta property="og:url" content="http://example.com/2025/06/29/Mordern-Language-Features-in-C/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="Code Conciseness and New Features1. Pattern Matching, Mordern Switch Expression and Expression-Bodied MemberThese are powerful syntaxes, they liberate code from cumbersome if-else chains.  Pattern mat">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-29T19:25:36.000Z">
+<meta property="article:modified_time" content="2025-06-30T01:24:23.282Z">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Mordern Language Features in C#</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/06/22/Architectures-in-Python-Project/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/06/29/Mordern-Language-Features-in-C/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&text=Mordern Language Features in C#"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&title=Mordern Language Features in C#"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&is_video=false&description=Mordern Language Features in C#"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Mordern Language Features in C#&body=Check out this article: http://example.com/2025/06/29/Mordern-Language-Features-in-C/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&title=Mordern Language Features in C#"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&title=Mordern Language Features in C#"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&title=Mordern Language Features in C#"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&title=Mordern Language Features in C#"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&name=Mordern Language Features in C#&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&t=Mordern Language Features in C#"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Code-Conciseness-and-New-Features"><span class="toc-number">1.</span> <span class="toc-text">Code Conciseness and New Features</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Pattern-Matching-Mordern-Switch-Expression-and-Expression-Bodied-Member"><span class="toc-number">1.1.</span> <span class="toc-text">1. Pattern Matching, Mordern Switch Expression and Expression-Bodied Member</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Advance-Pattern-Matching-and-more-Switch-Expression"><span class="toc-number">1.2.</span> <span class="toc-text">2. Advance Pattern Matching and more Switch Expression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Primary-Constructors"><span class="toc-number">1.3.</span> <span class="toc-text">3. Primary Constructors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Collection-Expressions"><span class="toc-number">1.4.</span> <span class="toc-text">4. Collection Expressions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Nullable-Reference-Types-and-%E2%80%9Crequired%E2%80%9D-Keyword"><span class="toc-number">1.5.</span> <span class="toc-text">5. Nullable Reference Types and “required” Keyword</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Records"><span class="toc-number">1.6.</span> <span class="toc-text">6. Records</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Default-Interface-Methods"><span class="toc-number">1.7.</span> <span class="toc-text">7. Default Interface Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-NullReference-Dection"><span class="toc-number">1.8.</span> <span class="toc-text">8. NullReference Dection</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Mordern Language Features in C#
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-29T19:25:36.000Z" class="dt-published" itemprop="datePublished">2025-06-29</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Code-Conciseness-and-New-Features"><a href="#Code-Conciseness-and-New-Features" class="headerlink" title="Code Conciseness and New Features"></a>Code Conciseness and New Features</h2><h3 id="1-Pattern-Matching-Mordern-Switch-Expression-and-Expression-Bodied-Member"><a href="#1-Pattern-Matching-Mordern-Switch-Expression-and-Expression-Bodied-Member" class="headerlink" title="1. Pattern Matching, Mordern Switch Expression and Expression-Bodied Member"></a>1. Pattern Matching, Mordern Switch Expression and Expression-Bodied Member</h3><p>These are powerful syntaxes, they liberate code from cumbersome if-else chains.</p>
+<ul>
+<li><p>Pattern matching: </p>
+<ul>
+<li>type pattern </li>
+<li>property pattern</li>
+<li>list pattern</li>
+<li>{ }</li>
+</ul>
+</li>
+<li><p>Switch expression</p>
+<ul>
+<li>hightly recommended for returning a value based on pattern matching.</li>
+<li>when switch logic effectively functions as a mapping from an input to an output.</li>
+<li>for concise, immutbale assignments.</li>
+<li>leveraging new pattern features like property, positional, relational, and logical patterns</li>
+<li>when compiler exhaustiveness checking is desired to ensure all cases are handled.<br>The evolution of the switch construct in C# has made it a vastly more powerful and expressive tool for conditional logic, moving it from a simple constant dispatcher to a sophisticated pattern-matching engine.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">internal</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">ShapeProcessor</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// using the pattern matching feature introduced in C# 7.0</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">ProcessShapePatternMatching</span>(<span class="params">Object shape</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Using pattern matching to check the type of shape</span></span><br><span class="line">        <span class="keyword">if</span> (shape <span class="keyword">is</span> Circle circle)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">$&quot;Circle with radius: <span class="subst">&#123;circle.Radius&#125;</span>&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (shape <span class="keyword">is</span> Ractangle rectangle)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">$&quot;Rectangle with width: <span class="subst">&#123;rectangle.Width&#125;</span> and height: <span class="subst">&#123;rectangle.Height&#125;</span>&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (shape <span class="keyword">is</span> Shape)</span><br><span class="line">        &#123; </span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Unknown shape&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Unknown object&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// using the switch expression feature introduced in C# 8.0</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">ProcessShapeSwitchExpression</span>(<span class="params">Object shape</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> shape <span class="keyword">switch</span></span><br><span class="line">        &#123;</span><br><span class="line">            Circle c =&gt; <span class="string">$&quot;Circle with radius: <span class="subst">&#123;c.Radius&#125;</span>&quot;</span>,</span><br><span class="line">            Ractangle r =&gt; <span class="string">$&quot;Ractangle with width: <span class="subst">&#123;r.Width&#125;</span>, height: <span class="subst">&#123;r.Height&#125;</span>&quot;</span>,</span><br><span class="line">            Shape s =&gt; <span class="string">$&quot;Unknown shape&quot;</span>,</span><br><span class="line">            _ =&gt; <span class="string">&quot;Unknown object&quot;</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// using expression-bodied member introduced in C# 7.0</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">ProcessShapeExpressionBodiedMember</span>(<span class="params">Object shape</span>)</span> =&gt;</span><br><span class="line">        shape <span class="keyword">switch</span></span><br><span class="line">        &#123;</span><br><span class="line">            Circle c =&gt; <span class="string">$&quot;Circle with radius: <span class="subst">&#123;c.Radius&#125;</span>&quot;</span>,</span><br><span class="line">            Ractangle r =&gt; <span class="string">$&quot;Ractangle with width: <span class="subst">&#123;r.Width&#125;</span>, height: <span class="subst">&#123;r.Height&#125;</span>&quot;</span>,</span><br><span class="line">            Shape s =&gt; <span class="string">$&quot;Unknown shape&quot;</span>,</span><br><span class="line">            _ =&gt; <span class="string">&quot;Unknown object&quot;</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// using pattern matching with a property</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">ProcessShapeWithPropertyPattern</span>(<span class="params">Shape shape</span>)</span> =&gt;</span><br><span class="line">        shape.Category <span class="keyword">switch</span></span><br><span class="line">        &#123;</span><br><span class="line">            ShapeCategory.Circle =&gt; <span class="string">$&quot;Circle with radius: <span class="subst">&#123;(shape <span class="keyword">as</span> Circle)?.Radius&#125;</span>&quot;</span>,</span><br><span class="line">            ShapeCategory.Rectangle =&gt; <span class="string">$&quot;Rectangle with width: <span class="subst">&#123;(shape <span class="keyword">as</span> Ractangle)?.Width&#125;</span>, height: <span class="subst">&#123;(shape <span class="keyword">as</span> Ractangle)?.Height&#125;</span>&quot;</span>,</span><br><span class="line">            ShapeCategory.Unknown =&gt; <span class="string">&quot;Unknown shape&quot;</span>,</span><br><span class="line">            _ =&gt; <span class="string">&quot;Unknown object&quot;</span></span><br><span class="line">        &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Advance-Pattern-Matching-and-more-Switch-Expression"><a href="#2-Advance-Pattern-Matching-and-more-Switch-Expression" class="headerlink" title="2. Advance Pattern Matching and more Switch Expression"></a>2. Advance Pattern Matching and more Switch Expression</h3><ul>
+<li><p>List Pattern</p>
+<ul>
+<li>Matching list of basic types</li>
+<li>Matching list of mixed types</li>
+<li>Matching list of properties</li>
+<li>Matching list of types with properties</li>
+<li>Matching list pattern with logical operator (and, or, not)</li>
+<li>Matching list pattern with relational operator (&lt;, &gt;, &lt;&#x3D;, &gt;&#x3D;)</li>
+<li>Matching list of recursive pattern</li>
+</ul>
+</li>
+<li><p>{}       </p>
+<ul>
+<li>check if an object is non-null</li>
+<li>check the values of one or more of an object’s properties</li>
+<li>recursively apply more patterns to those properties (including other property patterns, relational patterns, type patterns, etc.)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. Simple Null Check/type Check(implicit)</span></span><br><span class="line"><span class="built_in">object</span> item = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (item <span class="keyword">is</span> <span class="built_in">string</span> &#123;&#125;)<span class="comment">// equivalent to item != null</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//do something, if item is a non-null string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">object</span>? nullableItem = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">if</span> (nullableItem <span class="keyword">is</span> <span class="built_in">object</span> &#123;&#125;)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//do something, if nullableItem is any object other than null</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. Property value matching</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> Age &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> City &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line">Person p1 = <span class="keyword">new</span> Person &#123; Name = <span class="string">&quot;Alice&quot;</span>, Age = <span class="number">30</span>, City = <span class="string">&quot;New York&quot;</span> &#125;;</span><br><span class="line">Person p2 = <span class="keyword">new</span> Person &#123; Name = <span class="string">&quot;Bob&quot;</span>, Age = <span class="number">25</span>, City = <span class="string">&quot;London&quot;</span> &#125;;</span><br><span class="line">Person p3 = <span class="keyword">new</span> Person &#123; Name = <span class="string">&quot;Charlie&quot;</span>, Age = <span class="number">30</span>, City = <span class="string">&quot;Paris&quot;</span> &#125;;</span><br><span class="line"><span class="keyword">if</span> (p1 <span class="keyword">is</span> Person &#123; Name: <span class="string">&quot;Alice&quot;</span>, Age: <span class="number">30</span> &#125;) </span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">$&quot;<span class="subst">&#123;p1.Name&#125;</span> is Alice and 30.&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> description = p3 <span class="keyword">switch</span></span><br><span class="line">&#123;</span><br><span class="line">    Person &#123; Name: <span class="string">&quot;Charlie&quot;</span>, Age: <span class="number">30</span> &#125; =&gt; <span class="string">&quot;It&#x27;s Charlie, age 30.&quot;</span>,</span><br><span class="line">    Person &#123; Age: &gt; <span class="number">25</span> &#125; =&gt; <span class="string">&quot;It&#x27;s someone older than 25.&quot;</span>, <span class="comment">// Relational pattern inside &#123;&#125;</span></span><br><span class="line">    _ =&gt; <span class="string">&quot;Unknown person.&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line">Console.WriteLine(description); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. Nested property patterns (recursive patterns)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Address</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Street &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> City &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Customer</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> CustomerName &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> Address HomeAddress &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line">Customer cust = <span class="keyword">new</span> Customer</span><br><span class="line">&#123;</span><br><span class="line">    CustomerName = <span class="string">&quot;David&quot;</span>,</span><br><span class="line">    HomeAddress = <span class="keyword">new</span> Address &#123; Street = <span class="string">&quot;Main St&quot;</span>, City = <span class="string">&quot;New York&quot;</span> &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">if</span> (cust <span class="keyword">is</span> Customer &#123; CustomerName: <span class="string">&quot;David&quot;</span>, HomeAddress: &#123; City: <span class="string">&quot;New York&quot;</span> &#125; &#125;)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">$&quot;<span class="subst">&#123;cust.CustomerName&#125;</span> lives in New York.&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>Various switch expression with pattern matching<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Property pattern matching</span></span><br><span class="line"><span class="function"><span class="built_in">decimal</span> <span class="title">CalculateDeliveryFee</span>(<span class="params">Order order</span>)</span> =&gt; order <span class="keyword">switch</span></span><br><span class="line">&#123;</span><br><span class="line">    &#123;TotalAmount: &lt;<span class="number">50</span>&#125; =&gt; <span class="number">5.00</span>m,</span><br><span class="line">    &#123;TotalAmount: &gt;=<span class="number">50</span>&#125; =&gt; <span class="number">0.00</span>m,</span><br><span class="line">    - =&gt; <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentException(<span class="string">&quot;Invalid order&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Property pattern matching, or positional pattern, deconstruct an object</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">GetPointQuadrant</span>(<span class="params">Point p</span>)</span> =&gt; p <span class="keyword">switch</span></span><br><span class="line">&#123;</span><br><span class="line">    (<span class="number">0</span>, <span class="number">0</span>) =&gt; <span class="string">&quot;Origin&quot;</span>,</span><br><span class="line">    (<span class="built_in">int</span> x, <span class="built_in">int</span> y) <span class="keyword">when</span> x &gt; <span class="number">0</span> &amp;&amp; y &gt; <span class="number">0</span> =&gt; <span class="string">&quot;Quadrant I&quot;</span>,</span><br><span class="line">    (<span class="built_in">int</span> x, <span class="built_in">int</span> y) <span class="keyword">when</span> x &lt; <span class="number">0</span> &amp;&amp; y &gt; <span class="number">0</span> =&gt; <span class="string">&quot;Quadrant II&quot;</span>,</span><br><span class="line">    (<span class="built_in">int</span> x, <span class="built_in">int</span> y) <span class="keyword">when</span> x &lt; <span class="number">0</span> &amp;&amp; y &lt; <span class="number">0</span> =&gt; <span class="string">&quot;Quadrant III&quot;</span>,</span><br><span class="line">    (<span class="built_in">int</span> x, <span class="built_in">int</span> y) <span class="keyword">when</span> x &gt; <span class="number">0</span> &amp;&amp; y &lt; <span class="number">0</span> =&gt; <span class="string">&quot;Quadrant IV&quot;</span>,</span><br><span class="line">    (_, <span class="number">0</span>) =&gt; <span class="string">&quot;On X-axis&quot;</span>, <span class="comment">// Any X, Y is 0</span></span><br><span class="line">    (<span class="number">0</span>, _) =&gt; <span class="string">&quot;On Y-axis&quot;</span>, <span class="comment">// X is 0, Any Y</span></span><br><span class="line">    _ =&gt; <span class="string">&quot;Unknown&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">record</span> <span class="title">Point</span>(<span class="title">int</span> <span class="title">X</span>, <span class="title">int</span> <span class="title">Y</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Relational Patterns</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">GetTemperatureCategory</span>(<span class="params"><span class="built_in">double</span> temp</span>)</span> =&gt; temp <span class="keyword">switch</span></span><br><span class="line">&#123;</span><br><span class="line">    &lt; <span class="number">0</span> =&gt; <span class="string">&quot;Freezing&quot;</span>,</span><br><span class="line">    &gt;= <span class="number">0</span> <span class="keyword">and</span> &lt; <span class="number">10</span> =&gt; <span class="string">&quot;Cold&quot;</span>,</span><br><span class="line">    &gt;= <span class="number">10</span> <span class="keyword">and</span> &lt; <span class="number">20</span> =&gt; <span class="string">&quot;Mild&quot;</span>,</span><br><span class="line">    &gt;= <span class="number">20</span> =&gt; <span class="string">&quot;Hot&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Logical patterns</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-Primary-Constructors"><a href="#3-Primary-Constructors" class="headerlink" title="3. Primary Constructors"></a>3. Primary Constructors</h3><p>Simplifies constructor declarations by allowing to define parameters directly in the class or struct declaration.</p>
+<ul>
+<li><p>Syntax</p>
+<ul>
+<li>Omit explicit constructor body</li>
+<li>Parameters on Class Signature</li>
+<li>Parameters are in scope for the entire class body</li>
+<li>Initialize properties(or fields) directly with parameters</li>
+</ul>
+</li>
+<li><p>Compiler behavior under the hood </p>
+<ul>
+<li>Generate an implicit constructor - Primary Constructor</li>
+<li>Compiler implicitly create a private backing field to store the parameter’s value, for property&#x2F;field&#x2F;instance method using</li>
+<li>If parameters were only refered by base(), no implicit backing field will be created</li>
+</ul>
+</li>
+<li><p>Work with normal constructor</p>
+<ul>
+<li>this() has to be called in any other explicitly declared constructors</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">internal</span> <span class="keyword">class</span> <span class="title">Vehicle</span>(<span class="params"><span class="built_in">string</span> make, <span class="built_in">int</span> year</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Make &#123; <span class="keyword">get</span>; &#125; = make;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">decimal</span> Year &#123; <span class="keyword">get</span>; <span class="keyword">private</span> <span class="keyword">set</span>; &#125; = year;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DisplayVehicleInfo</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">$&quot;Vehicle:<span class="subst">&#123;Make&#125;</span>, Year: <span class="subst">&#123;Year&#125;</span>&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Explicit constructor must call the primary constructor</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Vehicle</span>(<span class="params"><span class="built_in">string</span> make</span>): <span class="title">this</span>(<span class="params">make, DateTime.Now.Year</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">$&quot;Vehicle created with make &#x27;<span class="subst">&#123;make&#125;</span>&#x27; and current year.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">internal</span> <span class="keyword">class</span> <span class="title">Car</span>(<span class="params"><span class="built_in">string</span> make, <span class="built_in">int</span> year, <span class="built_in">string</span> model, <span class="built_in">string</span> fuelType</span>) : <span class="title">Vehicle</span>(<span class="params">make, year</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">public</span> <span class="built_in">string</span> Model &#123; <span class="keyword">get</span>; &#125; = model;</span><br><span class="line">      <span class="keyword">public</span> <span class="built_in">string</span> FuelType &#123; <span class="keyword">get</span>; &#125; = fuelType;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">public</span> <span class="built_in">int</span> Odometer &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DisplayCarInfo</span>()</span></span><br><span class="line">      &#123;</span><br><span class="line">          Console.WriteLine(<span class="string">$&quot;Car: <span class="subst">&#123;Make&#125;</span> <span class="subst">&#123;Model&#125;</span> (<span class="subst">&#123;Year&#125;</span>), Fuel: <span class="subst">&#123;FuelType&#125;</span>&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="title">Car</span>(<span class="params"><span class="built_in">string</span> make, <span class="built_in">int</span> year, <span class="built_in">string</span> model, <span class="built_in">string</span> fuelType, <span class="built_in">int</span> odometer</span>) : <span class="title">this</span>(<span class="params">make, year, model, fuelType</span>)</span></span><br><span class="line">      &#123;</span><br><span class="line">          Odometer = odometer;</span><br><span class="line">          Console.WriteLine(<span class="string">$&quot;Car created with odometer: <span class="subst">&#123;odometer&#125;</span>&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Any explicit constructor must call the primary constructor</span></span><br><span class="line">      <span class="comment">//public Car(string model):base(&quot;Unknown Make&quot;)</span></span><br><span class="line">      <span class="comment">//&#123;</span></span><br><span class="line">      <span class="comment">//    Model = model;</span></span><br><span class="line">      <span class="comment">//    FuelType = &quot;Petrol&quot;;</span></span><br><span class="line">      <span class="comment">//&#125;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Collection-Expressions"><a href="#4-Collection-Expressions" class="headerlink" title="4. Collection Expressions"></a>4. Collection Expressions</h3><p>A concise syntax making code readable for arrays, lists, and spans.</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Console.WriteLine(<span class="string">&quot;Collection Expressions&quot;</span>);</span><br><span class="line"><span class="comment">// Traditional initialization</span></span><br><span class="line"><span class="built_in">int</span>[] numbers1 = <span class="keyword">new</span> <span class="built_in">int</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">List&lt;<span class="built_in">string</span>&gt; names1 = <span class="keyword">new</span> List&lt;<span class="built_in">string</span>&gt; &#123; <span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Using collection expressions</span></span><br><span class="line"><span class="built_in">int</span>[] numbers2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">List&lt;<span class="built_in">string</span>&gt; names2 = [<span class="string">&quot;Charlie&quot;</span>, <span class="string">&quot;David&quot;</span>, <span class="string">&quot;Eve&quot;</span>];</span><br><span class="line">Span&lt;<span class="built_in">int</span>&gt; spanOfNumbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Sprading existing collections</span></span><br><span class="line"><span class="built_in">int</span>[] moreNumbers = [.. numbers2, <span class="number">6</span>, <span class="number">7</span>];</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-Nullable-Reference-Types-and-“required”-Keyword"><a href="#5-Nullable-Reference-Types-and-“required”-Keyword" class="headerlink" title="5. Nullable Reference Types and “required” Keyword"></a>5. Nullable Reference Types and “required” Keyword</h3><ul>
+<li><p>Nullable Reference Types</p>
+<ul>
+<li>Help to mitigate NullReferenceException errors by allowing to explicitly declare whether a reference type can be null. </li>
+<li>Help to writing more robust and error-free code</li>
+<li>Enabled via <Nullable>enable</Nullable>in .csproj or #nullable enable in file</li>
+<li>It’s about whether a reference can legally be null at any point in its lifetime(not just at initialization)</li>
+<li>This is a compile-time <strong>warning</strong> system to help prevent NullReferenceException.<ul>
+<li>declare a non-nullable reference type, but don’t initialize it to a non-null value by the time the constructor exits.</li>
+<li>assign null to a non-nullable reference type.</li>
+<li>dereference a nullable reference type without first checking for null</li>
+</ul>
+</li>
+<li>It don’t enforce initialization</li>
+</ul>
+</li>
+<li><p>required keyword </p>
+<ul>
+<li>enforce that a property or field must be assigned a value, etiher<ul>
+<li>in the obejct initializer( new MyClass {Prop &#x3D; value})</li>
+<li>Call a constructor explicitly marked with attribute [SetRequiredMembers](which tells the compiler that this constructor intends to set all required members, though the compiler doesn’t verify its internal logic)</li>
+</ul>
+</li>
+<li>This is a compile-time check primarily about initialization, compile-time error will be raised in compile-time if a property didn’t meet above rule.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#nullable enable</span></span><br><span class="line"><span class="keyword">internal</span> <span class="keyword">class</span> <span class="title">UserProfile</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> UserName &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; =<span class="string">&quot;Guest&quot;</span>; <span class="comment">// Non-nullable, must be initialized</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span>? Email &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; <span class="comment">// Nullable reference type, can be null</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> PhoneNumber &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; = <span class="built_in">string</span>.Empty; <span class="comment">// Non-nullable, must be initialized</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DisplayEmail</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(Email != <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">$&quot;User email: <span class="subst">&#123;Email.ToLower()&#125;</span>&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;User email is not provided.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-Records"><a href="#6-Records" class="headerlink" title="6. Records"></a>6. Records</h3><p>Records are reference types that provide built-in functionality for working with <strong>immutable data</strong> (data-centric classes). They automatically generate methods like </p>
+<ul>
+<li>Equals()</li>
+<li>GetHashCode()</li>
+<li>ToString()<br>Good to be used to define data models, especially in functional programming paradigms.</li>
+</ul>
+<p>Evolution from class to record:</p>
+<ul>
+<li>A significant shift in how we model data</li>
+<li>Especially when that data is primarily used for holding values and needs <strong>well-defined equality</strong> (“well-defined equality” refers to a precise and unambiguous definition of when two objects are considered to be the same mathematically, it’s not just about the symbol, but about the underlying properties and rules that govern when that symbol can be used truthfully.).</li>
+<li>A common pain point in OOP: class is a reference, if want to compare the equality of values, we have to manually implement the Equals() and GetHashCode() methods, </li>
+<li>With record, it automates these mundane tasks, providing a dedicated construct for types that embody “value semantics”. It simplifies the creation of <strong>immutable data</strong> transfer objects (DTOs), domain models, and other data structures.</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">internal</span> <span class="keyword">class</span> <span class="title">OldProduct</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> Id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">decimal</span> Price &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">internal</span> <span class="keyword">record</span> <span class="title">Product</span>(<span class="params"><span class="built_in">int</span> Id, <span class="built_in">string</span> Name, <span class="built_in">decimal</span> Price</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Record properties are immutable by default, but you can use init-only setters</span></span><br><span class="line">    <span class="comment">// to allow setting them during object initialization.</span></span><br><span class="line">    <span class="comment">//public int Id &#123; get; init; &#125; = Id;</span></span><br><span class="line">    <span class="comment">//public string Name &#123; get; init; &#125; = Name;</span></span><br><span class="line">    <span class="comment">//public decimal Price &#123; get; init; &#125; = Price;</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span>/ You can add methods or additional functionality if needed</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DisplayProductInfo</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">$&quot;Product ID: <span class="subst">&#123;Id&#125;</span>, Name: <span class="subst">&#123;Name&#125;</span>, Price: <span class="subst">&#123;Price:C&#125;</span>&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-Default-Interface-Methods"><a href="#7-Default-Interface-Methods" class="headerlink" title="7. Default Interface Methods"></a>7. Default Interface Methods</h3><p>It allows to add new members to interfaces without breaking existing implementations.<br>It’s useful for evolving APIs and providing default behavior for interface members.</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ILogger</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">LogInfo</span>(<span class="params"><span class="built_in">string</span> message</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">LogError</span>(<span class="params"><span class="built_in">string</span> message, Exception ex</span>)</span>;</span><br><span class="line">    <span class="comment">// Default implementation for a new method without breaking existing implementers</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">LogWarning</span>(<span class="params"><span class="built_in">string</span> message</span>) <span class="comment">// Default Interface Method</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">$&quot;[WARNING] <span class="subst">&#123;message&#125;</span>&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ConsoleLogger</span> : <span class="title">ILogger</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">LogInfo</span>(<span class="params"><span class="built_in">string</span> message</span>)</span> =&gt; Console.WriteLine(<span class="string">$&quot;[INFO] <span class="subst">&#123;message&#125;</span>&quot;</span>);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">LogError</span>(<span class="params"><span class="built_in">string</span> message, Exception ex</span>)</span> =&gt; Console.WriteLine(<span class="string">$&quot;[ERROR] <span class="subst">&#123;</span></span></span><br><span class="line"><span class="subst"><span class="string">    // No need to implement LogWarning <span class="keyword">if</span> the <span class="literal">default</span> <span class="keyword">is</span> sufficient</span></span></span><br><span class="line"><span class="subst"><span class="string">&#125;</span></span></span><br><span class="line"><span class="string">// Usage:</span></span><br><span class="line"><span class="string">// ILogger logger = new ConsoleLogger(); //Have to use ILogger as the object type</span></span><br><span class="line"><span class="string">// logger.LogInfo(&quot;</span>Application started.<span class="string">&quot;);</span></span><br><span class="line"><span class="string">// logger.LogWarning(&quot;</span>Potential issue detected.<span class="string">&quot;); // Uses the default implementation</span></span><br></pre></td></tr></table></figure>
+<p>When good to use DIM:</p>
+<ul>
+<li>API evolution and backward compatibility, it’s also the primary use case</li>
+<li>Provider common helper methods</li>
+<li>Interoperability with other languages&#x2F;platforms, like Java and Swift with similar features.</li>
+</ul>
+<p>When bad to use DIM:</p>
+<ul>
+<li>Don’t use DIM to replace abstract classes</li>
+<li>Don’t use DIM as a magic to hidden behavior. DIM should be simple, predictable and well-documented.</li>
+<li>Don’t use it every where, there will be ambiguity problem</li>
+<li>Don’t use it every where, can violate the interface segregation principle(ISP) from SOLID</li>
+<li>It’s wrong to call DIM directly from implementing calss instance</li>
+</ul>
+<h3 id="8-NullReference-Dection"><a href="#8-NullReference-Dection" class="headerlink" title="8. NullReference Dection"></a>8. NullReference Dection</h3><ul>
+<li>Null-Coalescing Assignment Operator (??&#x3D;)<ul>
+<li>Assigning a value to a variable only if that variable is currently null</li>
+<li>It’s a shorthand for a common pattern of “initialize if null.”</li>
+<li>Syntax: variable ??&#x3D; expression;<ul>
+<li>if variable is not null, its value remains unchanged, the expression is not evaluated</li>
+<li>if variable is null, variable is assigned the result of expression, the expression is evaluated.</li>
+</ul>
+</li>
+<li>Equivalent to if(variable &#x3D;&#x3D; nul){variable &#x3D; expression;}</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>? userName = <span class="literal">null</span>; <span class="comment">//null</span></span><br><span class="line">userName ??= <span class="string">&quot;Guest&quot;</span>; <span class="comment">//Guest</span></span><br><span class="line">userName ??= <span class="string">&quot;Vistor&quot;</span>; <span class="comment">//Guest</span></span><br><span class="line">userName = <span class="string">&quot;Alice&quot;</span>; <span class="comment">//Alice</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Null Coalescing Operator(??)<ul>
+<li>hadle null values by providing a default value when an expression evaluates to null</li>
+<li>Syntax: expression1 ?? expression2<ul>
+<li>Evaluate expression1(the left-hand operand)</li>
+<li>check for null<ul>
+<li>if expression1 is not null, then its value is the result of the entire ?? operation, expression2 is not evaluated.</li>
+<li>if expression1 is null, then expression2(the right-hand operand) is evaluated, and its value is the result of the entire ?? operation.</li>
+</ul>
+</li>
+<li>Analogy: If the first thing exists(is not null), use it; otherwise, use the second thing.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>It’s use cases:</p>
+<ul>
+<li>Providing default values for nullable function parameters, or initializing variables with fallback values:<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>? myValue = GetValueFromSomewhere();</span><br><span class="line"><span class="built_in">string</span> result = myValue ?? myValue : <span class="string">&quot;Defalut Value&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//it is the concise version of </span></span><br><span class="line"><span class="built_in">string</span> result = (myValue != <span class="literal">null</span>)? myValue:<span class="string">&quot;Default Vaule&quot;</span>;</span><br><span class="line"><span class="comment">//and</span></span><br><span class="line"><span class="built_in">string</span> result;</span><br><span class="line"><span class="keyword">if</span>(myValue == <span class="literal">null</span>)</span><br><span class="line">&#123;</span><br><span class="line">    result = <span class="string">&quot;Default Value&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    result = myValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Chaining for multiple fallbacks:<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Try environment variable, then config file, then hardcoded default</span></span><br><span class="line"><span class="built_in">string</span>? environmentVar = Environment.GetEnvironmentVariable(<span class="string">&quot;MY_APP_SETTING&quot;</span>);</span><br><span class="line"><span class="built_in">string</span>? configFileSetting = GetConfigFileSetting(<span class="string">&quot;MyAppSetting&quot;</span>);</span><br><span class="line"><span class="built_in">string</span> finalSetting = environmentVar ?? configFileSetting ?? <span class="string">&quot;DefaultHardcodedValue&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li>Safely accessing properties&#x2F;methods on nullable value types:<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span>? age = <span class="literal">null</span>; <span class="comment">//syntactic sugar for Nullable&lt;int&gt;</span></span><br><span class="line"><span class="built_in">int</span> actualAge = age ?? <span class="number">1</span>;<span class="number">8</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Code-Conciseness-and-New-Features"><span class="toc-number">1.</span> <span class="toc-text">Code Conciseness and New Features</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Pattern-Matching-Mordern-Switch-Expression-and-Expression-Bodied-Member"><span class="toc-number">1.1.</span> <span class="toc-text">1. Pattern Matching, Mordern Switch Expression and Expression-Bodied Member</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Advance-Pattern-Matching-and-more-Switch-Expression"><span class="toc-number">1.2.</span> <span class="toc-text">2. Advance Pattern Matching and more Switch Expression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Primary-Constructors"><span class="toc-number">1.3.</span> <span class="toc-text">3. Primary Constructors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Collection-Expressions"><span class="toc-number">1.4.</span> <span class="toc-text">4. Collection Expressions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Nullable-Reference-Types-and-%E2%80%9Crequired%E2%80%9D-Keyword"><span class="toc-number">1.5.</span> <span class="toc-text">5. Nullable Reference Types and “required” Keyword</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Records"><span class="toc-number">1.6.</span> <span class="toc-text">6. Records</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Default-Interface-Methods"><span class="toc-number">1.7.</span> <span class="toc-text">7. Default Interface Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-NullReference-Dection"><span class="toc-number">1.8.</span> <span class="toc-text">8. NullReference Dection</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/06/29/Mordern-Language-Features-in-C/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&text=Mordern Language Features in C#"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&title=Mordern Language Features in C#"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&is_video=false&description=Mordern Language Features in C#"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Mordern Language Features in C#&body=Check out this article: http://example.com/2025/06/29/Mordern-Language-Features-in-C/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&title=Mordern Language Features in C#"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&title=Mordern Language Features in C#"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&title=Mordern Language Features in C#"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&title=Mordern Language Features in C#"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&name=Mordern Language Features in C#&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/29/Mordern-Language-Features-in-C/&t=Mordern Language Features in C#"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>
