@@ -14,7 +14,7 @@
 <meta property="og:description" content="Extend the width of chat window for gemini.google.com:  12345678const conversationContainers &#x3D; document.querySelectorAll(&quot;.conversation-container&quot;);if (conversationContainers.length &gt; 0)">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-08T16:38:48.000Z">
-<meta property="article:modified_time" content="2025-06-08T16:40:36.378Z">
+<meta property="article:modified_time" content="2025-07-02T21:45:18.130Z">
 <meta property="article:tag" content="Tools">
 <meta name="twitter:card" content="summary">
     
@@ -164,6 +164,12 @@
 <li>Extend the width of chat window for gemini.google.com:</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> conversationContainers = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;.conversation-container&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (conversationContainers.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> lastContainer = conversationContainers[conversationContainers.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">  lastContainer.<span class="property">style</span>.<span class="title function_">setProperty</span>(<span class="string">&quot;max-width&quot;</span>, <span class="string">&quot;100%&quot;</span>, <span class="string">&quot;important&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">&quot;No elements with class &#x27;conversation-container&#x27; found.&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>chatgpt<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;div[class*=&quot;thread-content-max-width&quot;]&#x27;</span>).<span class="title function_">forEach</span>(<span class="function"><span class="params">el</span> =&gt;</span> &#123;</span><br><span class="line">  el.<span class="property">style</span>.<span class="property">marginInline</span> = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">  el.<span class="property">style</span>.<span class="property">paddingInline</span> = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+
   </div>
 </article>
 
