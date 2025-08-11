@@ -14,7 +14,7 @@
 <meta property="og:description" content="1. Using orafce1.1 installation Install to Postgresql (linux) 12345678cd &#x2F;tmp \ &amp;&amp;  wget  https:&#x2F;&#x2F;codeload.github.com&#x2F;orafce&#x2F;orafce&#x2F;tar.gz&#x2F;refs&#x2F;tags&#x2F;VERSION_4_14_4 -O orafce.tar.gz \&amp;&amp;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-09T18:20:45.000Z">
-<meta property="article:modified_time" content="2025-08-11T20:18:41.615Z">
+<meta property="article:modified_time" content="2025-08-11T20:21:06.525Z">
 <meta property="article:tag" content="Database">
 <meta property="article:tag" content="PostgreSQL">
 <meta name="twitter:card" content="summary">
@@ -179,7 +179,7 @@
 </ol>
 <p>To use the functions provided in oracle schema, need to add the oracle schema in search_path, and put it ahead of pg_catalog</p>
 <ul>
-<li><p>Configuration postgresql.conf</p>
+<li><p>Configure postgresql.conf</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search_path = &#x27;&quot;$user&quot;, public, oracle, pg_catalog&#x27;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>or config in session</p>
