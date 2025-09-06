@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="As daily develop in C# .Net, I collected some of useful code snippet, including some tricky and system call. And this code snippet list will grow as long as further collecting. 1 Get the local IP and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# Winform Code Snippet">
+<meta property="og:url" content="http://example.com/2023/12/01/C-Winform-Code-Snippet/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="As daily develop in C# .Net, I collected some of useful code snippet, including some tricky and system call. And this code snippet list will grow as long as further collecting. 1 Get the local IP and">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-02T01:33:47.000Z">
+<meta property="article:modified_time" content="2025-09-01T12:00:42.948Z">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>C# Winform Code Snippet</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/01/19/Access-webservice-running-in-wsl2-with-mirrored-networkingmode/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/11/26/The-Way-to-Use-Proxy-for-Discord/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/12/01/C-Winform-Code-Snippet/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&text=C# Winform Code Snippet"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&title=C# Winform Code Snippet"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&is_video=false&description=C# Winform Code Snippet"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C# Winform Code Snippet&body=Check out this article: http://example.com/2023/12/01/C-Winform-Code-Snippet/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&title=C# Winform Code Snippet"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&title=C# Winform Code Snippet"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&title=C# Winform Code Snippet"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&title=C# Winform Code Snippet"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&name=C# Winform Code Snippet&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/12/01/C-Winform-Code-Snippet/&t=C# Winform Code Snippet"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Get-the-local-IP-and-MAC"><span class="toc-number">1.</span> <span class="toc-text">1 Get the local IP and MAC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Open-x2F-Close-Soft-Keyboard"><span class="toc-number">2.</span> <span class="toc-text">2 Open&#x2F;Close Soft Keyboard</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Hold-and-Move-the-Window"><span class="toc-number">3.</span> <span class="toc-text">3 Hold and Move the Window</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Read-XML"><span class="toc-number">4.</span> <span class="toc-text">4 Read XML</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Switch-Bwtween-Forms"><span class="toc-number">5.</span> <span class="toc-text">5 Switch Bwtween Forms</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Use-TableLayoutPanel-to-Switch-between-UIs"><span class="toc-number">6.</span> <span class="toc-text">6 Use TableLayoutPanel to Switch between UIs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-Only-one-running-instace"><span class="toc-number">7.</span> <span class="toc-text">7 Only one running instace</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-Show-a-Clock-on-UI"><span class="toc-number">8.</span> <span class="toc-text">8 Show a Clock on UI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-Clear-Memory-and-Interoperating-with-Unmanaged-Code"><span class="toc-number">9.</span> <span class="toc-text">9 Clear Memory and Interoperating with Unmanaged Code</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-check-if-a-character-is-a-digit"><span class="toc-number">10.</span> <span class="toc-text">10 check if a character is a digit</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        C# Winform Code Snippet
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-12-02T01:33:47.000Z" class="dt-published" itemprop="datePublished">2023-12-01</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/C/" rel="tag">C#</a>, <a class="p-category" href="/tags/Programming/" rel="tag">Programming</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>As daily develop in C# .Net, I collected some of useful code snippet, including some tricky and system call. And this code snippet list will grow as long as further collecting.</p>
+<h1 id="1-Get-the-local-IP-and-MAC"><a href="#1-Get-the-local-IP-and-MAC" class="headerlink" title="1 Get the local IP and MAC"></a>1 Get the local IP and MAC</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Net; </span><br><span class="line"><span class="keyword">using</span> System.Net.NetworkInformation;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">GetLocalIp</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">string</span> hostname = Dns.GetHostName();</span><br><span class="line">    IPHostEntry localhost = Dns.GetHostByName(hostname);</span><br><span class="line">    <span class="keyword">if</span> (localhost.AddressList == <span class="literal">null</span> || localhost.AddressList.Length&lt;=<span class="number">0</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    IPAddress localaddr = localhost.AddressList.Where(p=&gt;p.ToStr().StartsWith(<span class="string">&quot;10.&quot;</span>)).FirstOrDefault() ;</span><br><span class="line">    <span class="keyword">return</span> localaddr == <span class="literal">null</span> ? localhost.AddressList[<span class="number">0</span>].ToStr() : localaddr.ToStr();</span><br><span class="line">&#125;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">GetMacString</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">string</span> strMac = <span class="string">&quot;&quot;</span>;</span><br><span class="line">            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();</span><br><span class="line">            <span class="keyword">foreach</span> (NetworkInterface ni <span class="keyword">in</span> interfaces)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (ni.OperationalStatus == OperationalStatus.Up)</span><br><span class="line">                &#123;</span><br><span class="line">                    PhysicalAddress address = ni.GetPhysicalAddress();</span><br><span class="line">                    <span class="built_in">byte</span>[] bytes = address.GetAddressBytes();</span><br><span class="line">                    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; bytes.Length; i++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        strMac = strMac + bytes[i].ToString(<span class="string">&quot;X2&quot;</span>);</span><br><span class="line">                        <span class="keyword">if</span> (i != bytes.Length - <span class="number">1</span>)</span><br><span class="line">                        &#123;</span><br><span class="line">                            strMac = strMac + <span class="string">&quot;-&quot;</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> strMac;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-Open-x2F-Close-Soft-Keyboard"><a href="#2-Open-x2F-Close-Soft-Keyboard" class="headerlink" title="2 Open&#x2F;Close Soft Keyboard"></a>2 Open&#x2F;Close Soft Keyboard</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Diagnostics;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">bool</span> UseSoftKeyBoard = <span class="literal">false</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OpenKeyBord</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!UseSoftKeyBoard)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">bool</span> findKeyBord = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">string</span> file = <span class="built_in">string</span>.Empty;</span><br><span class="line">        <span class="built_in">string</span> file1 = <span class="string">&quot;C:\\Program Files\\Common Files\\microsoft shared\\ink\\TabTip.exe&quot;</span>;</span><br><span class="line">        <span class="built_in">string</span> file2 = <span class="string">&quot;C:\\Windows\\System32\\osk.exe&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (System.IO.File.Exists(file1))</span><br><span class="line">        &#123;</span><br><span class="line">            findKeyBord = <span class="literal">true</span>;</span><br><span class="line">            file = file1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!findKeyBord)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (System.IO.File.Exists(file2))</span><br><span class="line">            &#123;</span><br><span class="line">                findKeyBord = <span class="literal">true</span>;</span><br><span class="line">                file = file2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">string</span>.IsNullOrEmpty(file))</span><br><span class="line">        &#123;</span><br><span class="line">            Process.Start(file);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (System.Exception ex)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">CloseKeyBord</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!UseSoftKeyBoard)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">try</span></span><br><span class="line">            &#123;</span><br><span class="line">                Process[] processes = Process.GetProcesses();</span><br><span class="line">                <span class="keyword">foreach</span> (Process process <span class="keyword">in</span> processes)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (process.ProcessName.Equals(<span class="string">&quot;TabTip&quot;</span>)</span><br><span class="line">                            || process.ProcessName.Equals(<span class="string">&quot;osk&quot;</span>))</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span> (!process.CloseMainWindow())</span><br><span class="line">                        &#123;</span><br><span class="line">                            process.Kill();</span><br><span class="line">                            GC.Collect();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span> (System.Exception ex)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-Hold-and-Move-the-Window"><a href="#3-Hold-and-Move-the-Window" class="headerlink" title="3 Hold and Move the Window"></a>3 Hold and Move the Window</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Windows.Forms;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Boolean isMouseDown;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Point mouseStartPoint = <span class="keyword">new</span> Point(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Point formStartPosition = <span class="keyword">new</span> Point(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">MouseDown</span>(<span class="params"><span class="built_in">object</span> sender, MouseEventArgs e</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (e.Button == MouseButtons.Left)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            formStartPosition = (((Control)sender).TopLevelControl).Location;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        isMouseDown = <span class="literal">true</span>;</span><br><span class="line">        mouseStartPoint.X = Control.MousePosition.X;</span><br><span class="line">        mouseStartPoint.Y = Control.MousePosition.Y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">MouseUp</span>(<span class="params"><span class="built_in">object</span> sender, MouseEventArgs e</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (e.Button == MouseButtons.Left)</span><br><span class="line">    &#123;</span><br><span class="line">        isMouseDown = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">MouseMove</span>(<span class="params"><span class="built_in">object</span> sender, MouseEventArgs e</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (isMouseDown)</span><br><span class="line">    &#123;</span><br><span class="line">        Point mouseNowPoint = Control.MousePosition;</span><br><span class="line">        Point formNowPosition = <span class="keyword">new</span> Point(formStartPosition.X + mouseNowPoint.X - mouseStartPoint.X, formStartPosition.Y + mouseNowPoint.Y - mouseStartPoint.Y);</span><br><span class="line">        (((Control)sender).TopLevelControl).Location = formNowPosition;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//register the event on the form</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Form_Load</span>(<span class="params"><span class="built_in">object</span> sender, EventArgs e</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>.MouseDown += <span class="keyword">new</span> MouseEventHandler(SFC.Common.Common.MouseDown);</span><br><span class="line">    <span class="keyword">this</span>.MouseUp += <span class="keyword">new</span> MouseEventHandler(SFC.Common.Common.MouseUp);</span><br><span class="line">    <span class="keyword">this</span>.MouseMove += <span class="keyword">new</span> MouseEventHandler(SFC.Common.Common.MouseMove);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-Read-XML"><a href="#4-Read-XML" class="headerlink" title="4 Read XML"></a>4 Read XML</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Xml</span><br><span class="line"></span><br><span class="line">XmlDocument docxml = <span class="keyword">new</span> XmlDocument();</span><br><span class="line">XmlReaderSettings settings = <span class="keyword">new</span> XmlReaderSettings();</span><br><span class="line">settings.IgnoreComments = <span class="literal">true</span>;<span class="comment">//ignore comments</span></span><br><span class="line">XmlReader reader = XmlReader.Create(Path, settings);</span><br><span class="line">docxml.Load(reader);</span><br><span class="line">reader.Close();</span><br><span class="line"><span class="comment">//XmlNode xn = docxml.GetElementsByTagName(NodeName);</span></span><br><span class="line">XmlNodeList xnl = docxml.GetElementsByTagName(NodeName);</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+
+
+<h1 id="5-Switch-Bwtween-Forms"><a href="#5-Switch-Bwtween-Forms" class="headerlink" title="5 Switch Bwtween Forms"></a>5 Switch Bwtween Forms</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Form1 form1 = <span class="keyword">new</span> Form1();</span><br><span class="line">        <span class="keyword">if</span> (form1.ShowDialog() == DialogResult.OK)</span><br><span class="line">        &#123;</span><br><span class="line">            Application.Run(<span class="keyword">new</span> Form2());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-Use-TableLayoutPanel-to-Switch-between-UIs"><a href="#6-Use-TableLayoutPanel-to-Switch-between-UIs" class="headerlink" title="6 Use TableLayoutPanel to Switch between UIs"></a>6 Use TableLayoutPanel to Switch between UIs</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ShowUI</span>(<span class="params"><span class="built_in">int</span> tag</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; tableLayoutPanel1.ColumnCount; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == tag)</span><br><span class="line">        &#123;</span><br><span class="line">            tableLayoutPanel1.ColumnStyles[i].SizeType = SizeType.Percent;</span><br><span class="line">            tableLayoutPanel1.ColumnStyles[i].Width = <span class="number">100</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            tableLayoutPanel1.ColumnStyles[i].SizeType = SizeType.Absolute;</span><br><span class="line">            tableLayoutPanel1.ColumnStyles[i].Width = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Form_Load</span>(<span class="params"><span class="built_in">object</span> sender, EventArgs e</span>)</span></span><br><span class="line"> &#123;</span><br><span class="line">    ShowUI(<span class="number">0</span>) <span class="comment">//show the column1 or column2 of tableLayoutPanel1</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-Only-one-running-instace"><a href="#7-Only-one-running-instace" class="headerlink" title="7 Only one running instace"></a>7 Only one running instace</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Diagnostics;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkMultiOpen</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    Process currentProcess = Process.GetCurrentProcess();</span><br><span class="line">    Process[] processesByName = Process.GetProcessesByName(currentProcess.ProcessName);</span><br><span class="line">    <span class="keyword">if</span> (processesByName.Count() &gt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        MessageBox.Show(<span class="string">&quot;Only one instance is allowed.&quot;</span>);</span><br><span class="line">        Application.Exit();</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="8-Show-a-Clock-on-UI"><a href="#8-Show-a-Clock-on-UI" class="headerlink" title="8 Show a Clock on UI"></a>8 Show a Clock on UI</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowClock</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    _clock_change = <span class="keyword">new</span> System.Threading.Timer(_ =&gt; UIInvoke(lab_time_clock, () =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        lab_time_clock.Text = DateTime.Now.ToString(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line">        <span class="keyword">var</span> i_mod_value = DateTime.Now.Ticks % <span class="number">1000</span>;</span><br><span class="line">        <span class="keyword">if</span> (i_mod_value == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ClearMemory();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;));</span><br><span class="line">    _clock_change.Change(<span class="number">0</span>, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="9-Clear-Memory-and-Interoperating-with-Unmanaged-Code"><a href="#9-Clear-Memory-and-Interoperating-with-Unmanaged-Code" class="headerlink" title="9 Clear Memory and Interoperating with Unmanaged Code"></a>9 Clear Memory and Interoperating with Unmanaged Code</h1><p> Code that executes under the control of the runtime is called managed code. In contrast, code that runs outside the runtime is called unmanaged code. COM components, ActiveX interfaces, and Win32 API functions are all examples of unmanaged code.<br> Managed code is the one that is executed by the CLR of the . NET framework while unmanaged or unsafe code is executed by the operating system.<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/dotnet/framework/interop/">https://learn.microsoft.com/en-us/dotnet/framework/interop/</a><br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.dllimportattribute?view=net-8.0&amp;redirectedfrom=MSDN">https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.dllimportattribute?view=net-8.0&amp;redirectedfrom=MSDN</a></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">[<span class="meta">DllImport(<span class="string">&quot;kernel32.dll&quot;</span>, EntryPoint = <span class="string">&quot;SetProcessWorkingSetSize&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="built_in">int</span> <span class="title">SetProcessWorkingSetSize</span>(<span class="params">IntPtr process, <span class="built_in">int</span> minSize, <span class="built_in">int</span> maxSize</span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ClearMemory</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    GC.Collect();</span><br><span class="line">    GC.WaitForPendingFinalizers();</span><br><span class="line">    <span class="keyword">if</span> (Environment.OSVersion.Platform == PlatformID.Win32NT)</span><br><span class="line">    &#123;</span><br><span class="line">        SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, <span class="number">-1</span>, <span class="number">-1</span>);<span class="comment">//the function removes as many pages as possible from the working set of the specified process.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>below is a comment on the using of “SetProcessWorkingSetSize”, which demonstrates that this function is useful in two situation:</p>
+<ol>
+<li>An application with GUI, this function could be execute after the application initialized.</li>
+<li>You want your application to run in swap pages, and occupy less memory.</li>
+</ol>
+<blockquote>
+<p>We have found out that, for a GUI application written in Delphi for Win32&#x2F;Win64 or written in a similar way that uses large and heavy libraries on top of the Win32 API (GDI, etc), it is worth calling SetProcessWorkingSetSize once. </p>
+<p>We call it with (… -1, -1) parameters, within a fraction of second after the application has fully opened and showed the main window to the user. In this case, the SetProcessWorkingSetSize(… -1, -1) releases lots of startup code that seem to not be needed any more. The memory quickly restores to about 1&#x2F;3 of what it would have been without the SetProcessWorkingSetSize(… -1, -1), and does not grow more since then (unless the application allocates more memory). So we have effectively saved 2&#x2F;3 of the memory of mostly startup code (loading and parsing of configuration files, initializing GUI, etc) that would not be needed to continue running the application.</p>
+<p>If you have a GUI application, you may test on your own application the same way - just call SetProcessWorkingSetSize once and see how many memory have been released definitely.</p>
+<p>Even for a server (service) application that don’t have GUI - I think that calling SetProcessWorkingSetSize once after the server has fully loaded and initialized might have been useful.</p>
+</blockquote>
+<h1 id="10-check-if-a-character-is-a-digit"><a href="#10-check-if-a-character-is-a-digit" class="headerlink" title="10 check if a character is a digit"></a>10 check if a character is a digit</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// use system</span></span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="comment">// create class</span></span><br><span class="line"><span class="keyword">class</span> <span class="title">DigitChecker</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="comment">// create characters</span></span><br><span class="line">      <span class="built_in">char</span> char1 = <span class="string">&#x27;5&#x27;</span>;</span><br><span class="line">      <span class="built_in">char</span> char2 = <span class="string">&#x27;p&#x27;</span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// create strings</span></span><br><span class="line">      <span class="built_in">string</span> str1 = <span class="string">&quot;1234&quot;</span>;</span><br><span class="line">      <span class="built_in">string</span> str2 = <span class="string">&quot;hi&quot;</span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// check characters</span></span><br><span class="line">      <span class="built_in">bool</span> a = Char.IsDigit(char1);</span><br><span class="line">      <span class="built_in">bool</span> b = Char.IsDigit(char2);</span><br><span class="line">      <span class="built_in">bool</span> c = Char.IsDigit(str1, <span class="number">2</span>);   <span class="comment">// position 3</span></span><br><span class="line">      <span class="built_in">bool</span> d = Char.IsDigit(str2, <span class="number">0</span>);    <span class="comment">// position 1</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// print out returned values</span></span><br><span class="line">      System.Console.WriteLine(a);</span><br><span class="line">      System.Console.WriteLine(b);</span><br><span class="line">      System.Console.WriteLine(c);</span><br><span class="line">      System.Console.WriteLine(d);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Get-the-local-IP-and-MAC"><span class="toc-number">1.</span> <span class="toc-text">1 Get the local IP and MAC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Open-x2F-Close-Soft-Keyboard"><span class="toc-number">2.</span> <span class="toc-text">2 Open&#x2F;Close Soft Keyboard</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Hold-and-Move-the-Window"><span class="toc-number">3.</span> <span class="toc-text">3 Hold and Move the Window</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Read-XML"><span class="toc-number">4.</span> <span class="toc-text">4 Read XML</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Switch-Bwtween-Forms"><span class="toc-number">5.</span> <span class="toc-text">5 Switch Bwtween Forms</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Use-TableLayoutPanel-to-Switch-between-UIs"><span class="toc-number">6.</span> <span class="toc-text">6 Use TableLayoutPanel to Switch between UIs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-Only-one-running-instace"><span class="toc-number">7.</span> <span class="toc-text">7 Only one running instace</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-Show-a-Clock-on-UI"><span class="toc-number">8.</span> <span class="toc-text">8 Show a Clock on UI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-Clear-Memory-and-Interoperating-with-Unmanaged-Code"><span class="toc-number">9.</span> <span class="toc-text">9 Clear Memory and Interoperating with Unmanaged Code</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-check-if-a-character-is-a-digit"><span class="toc-number">10.</span> <span class="toc-text">10 check if a character is a digit</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/12/01/C-Winform-Code-Snippet/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&text=C# Winform Code Snippet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&title=C# Winform Code Snippet"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&is_video=false&description=C# Winform Code Snippet"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C# Winform Code Snippet&body=Check out this article: http://example.com/2023/12/01/C-Winform-Code-Snippet/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&title=C# Winform Code Snippet"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&title=C# Winform Code Snippet"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&title=C# Winform Code Snippet"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&title=C# Winform Code Snippet"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/12/01/C-Winform-Code-Snippet/&name=C# Winform Code Snippet&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/12/01/C-Winform-Code-Snippet/&t=C# Winform Code Snippet"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Asynchronous Programming in PythonWhat is asynchronous programming in pythonAsynchronous programming is a paradigm that enables programs to perform multiple tasks concurrently without blocking the exe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Asynchronous Programming in Python">
+<meta property="og:url" content="http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="Asynchronous Programming in PythonWhat is asynchronous programming in pythonAsynchronous programming is a paradigm that enables programs to perform multiple tasks concurrently without blocking the exe">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-22T01:36:06.000Z">
+<meta property="article:modified_time" content="2025-09-01T12:00:42.948Z">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Asynchronous Programming in Python</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/05/24/Brief-Introduction-about-the-Google-Borg/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/05/20/LLM-agents-building-with-simple-composable-patterns/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&text=Asynchronous Programming in Python"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&title=Asynchronous Programming in Python"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&is_video=false&description=Asynchronous Programming in Python"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Asynchronous Programming in Python&body=Check out this article: http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&title=Asynchronous Programming in Python"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&title=Asynchronous Programming in Python"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&title=Asynchronous Programming in Python"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&title=Asynchronous Programming in Python"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&name=Asynchronous Programming in Python&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&t=Asynchronous Programming in Python"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Asynchronous-Programming-in-Python"><span class="toc-number">1.</span> <span class="toc-text">Asynchronous Programming in Python</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-asynchronous-programming-in-python"><span class="toc-number">1.1.</span> <span class="toc-text">What is asynchronous programming in python</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-components-and-concepts"><span class="toc-number">1.2.</span> <span class="toc-text">Key components and concepts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-Libraries-and-Tools"><span class="toc-number">1.3.</span> <span class="toc-text">Key Libraries and Tools</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Concurrency-in-FastAPI-vs-Java-Spring"><span class="toc-number">2.</span> <span class="toc-text">Concurrency in FastAPI (vs Java Spring)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Baseline-Java-Spring%E2%80%99-Traditional-Concurrency-Model-Thread-Per-Request"><span class="toc-number">2.1.</span> <span class="toc-text">Baseline: Java Spring’ Traditional Concurrency Model( Thread-Per-Request)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FastAPI%E2%80%99s-Concurrency-Model-Asynchronous-I-x2F-O-with-Conroutines"><span class="toc-number">2.2.</span> <span class="toc-text">FastAPI’s Concurrency Model (Asynchronous I&#x2F;O with Conroutines)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-FastAPI-handles-Different-Concurrency-Scenarios"><span class="toc-number">2.3.</span> <span class="toc-text">How FastAPI handles Different Concurrency Scenarios</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-I-x2F-O-Bound-Tasks-Native-Asynchronous-Strength"><span class="toc-number">2.3.1.</span> <span class="toc-text">1. I&#x2F;O-Bound Tasks (Native Asynchronous Strength)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-CPU-Bound-Tasks-Automatic-Thread-Pool-Offloading"><span class="toc-number">2.3.2.</span> <span class="toc-text">2. CPU-Bound Tasks (Automatic Thread Pool Offloading)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Achieving-True-Parallelism-with-FastAPI"><span class="toc-number">2.4.</span> <span class="toc-text">Achieving True Parallelism with FastAPI</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Asynchronous Programming in Python
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-05-22T01:36:06.000Z" class="dt-published" itemprop="datePublished">2025-05-21</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Programming/" rel="tag">Programming</a>, <a class="p-category" href="/tags/Python/" rel="tag">Python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Asynchronous-Programming-in-Python"><a href="#Asynchronous-Programming-in-Python" class="headerlink" title="Asynchronous Programming in Python"></a>Asynchronous Programming in Python</h1><h2 id="What-is-asynchronous-programming-in-python"><a href="#What-is-asynchronous-programming-in-python" class="headerlink" title="What is asynchronous programming in python"></a>What is asynchronous programming in python</h2><p>Asynchronous programming is a paradigm that enables programs to perform multiple tasks concurrently without blocking the execution of the main thread. </p>
+<p>Unlike traditional synchronous programming where tasks execute one after another, asynchronous programming allows a program to initiate an operation(e.g., a network request) and then yield control to other tasks while waiting for the operation to complete. </p>
+<p>Once the operation is done, control is returned to the original task to continue its execution.</p>
+<p>Core idea: Concurrency without Parallelish (Often)<br>The fundamental concept behind asynchronous programming in Python is concurrency, not necessarily true parallelism (which typically requires multiple CPU cores or precesses). Python’s Global Interpreter Lock (GIL) limits true multithreading for CPU-bound tasks, but asynchronous programming excels at I&#x2F;O-bound tasks.</p>
+<p>The “waiting” in asynchronous programming typically refers to I&#x2F;O operations like:</p>
+<ul>
+<li>Network requests: Fetching data from a web API, downloading files.</li>
+<li>Database queries: Waiting for a response from a database server.</li>
+<li>File I&#x2F;O: Reading from or writing to disk.</li>
+<li>Time delays: asyncio.sleep().<br>During these waiting periods, the program doesn’t sit idle; it can execute other waiting tasks.</li>
+</ul>
+<h2 id="Key-components-and-concepts"><a href="#Key-components-and-concepts" class="headerlink" title="Key components and concepts"></a>Key components and concepts</h2><ol>
+<li>Event Loop:</li>
+</ol>
+<ul>
+<li>Event loop is the heart of asynchromous programming. It’s a single-threaded loop that monitors for events (e.g., “network data arrived,” “timer expired”) and dispatches tasks to handle those events. It manages the execution flow of coroutines.</li>
+<li><strong>asyncio</strong> library is python’s built-in library for writing concurrent code using the <strong>async</strong>&#x2F;<strong>await</strong> syntax. The event loop is a central part of <strong>asyncio</strong>.<br><strong>asyncio.run()</strong> can be used to start the event loop. <strong>asyncio.get_event_loop()</strong> can be used to obtain and manage the event loop directly.</li>
+</ul>
+<ol start="2">
+<li>Coroutines (Cooperative Routines):</li>
+</ol>
+<ul>
+<li>Functions defined with <strong>async def</strong> can pause their execution at <strong>await</strong> points and resume later. They are “cooperative” because they explicitly yield control to the event loop.</li>
+<li>Calling an <strong>async def</strong> function does not execute it immediately; it returns a coroutine object. To run it, you must <strong>await</strong> it or schedule it on the event loop (e.g., using <strong>asyncio.create_task()</strong>)</li>
+</ul>
+<ol start="3">
+<li><strong>async</strong> and <strong>await</strong>:</li>
+</ol>
+<ul>
+<li><strong>async</strong> marks a function as a coroutine. It tells Python that this function can contain <strong>await</strong> expressions and will run cooperatively on the event loop.</li>
+<li><strong>awati</strong> used inside an <strong>async def</strong> function to pause its execution until an “awaitable” (another coroutine, task, future, etc.) completes. When <strong>await</strong> is called, control is returned to the event loop, which can then run other pending tasks. it can only be used inside an <strong>async def</strong> function.</li>
+</ul>
+<ol start="4">
+<li>Awaitables:</li>
+</ol>
+<ul>
+<li>Awaitables are any object that can be “awaited”. the most common awaitables are:<ul>
+<li>Coroutines: Objects returned by calling an <strong>async def</strong> function.</li>
+<li>Tasks: Objects created by <strong>asyncio.create_task()</strong> to schedule a corountine for execution on the event loop. </li>
+<li>Futures: Low-level objects representing the result of an asynchronous operation. Tasks are built on top of Future.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">greet</span>(<span class="params">name,delay</span>):</span><br><span class="line">    <span class="keyword">await</span> asyncio.sleep(delay)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Hello,<span class="subst">&#123;name&#125;</span>!&quot;</span>)</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="comment"># Creating coroutine objects (not yet running)</span></span><br><span class="line">    coro1 = greet(<span class="string">&quot;Alice&quot;</span>, <span class="number">2</span>)</span><br><span class="line">    coro2 = greet(<span class="string">&quot;Bob&quot;</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="comment">#Scheduling coroutines as tasks to run concurrently</span></span><br><span class="line">    task1 = asyncio.create_task(coro1)</span><br><span class="line">    taks2 = asyncio.create_task(coro2)</span><br><span class="line">    <span class="comment">#await the completion of tasks</span></span><br><span class="line">    <span class="keyword">await</span> task1</span><br><span class="line">    <span class="keyword">await</span> task2</span><br><span class="line">    <span class="comment"># Or simply await coroutines if you don&#x27;t need explicit task objects</span></span><br><span class="line">    results = <span class="keyword">await</span> greet(<span class="string">&quot;Charlie&quot;</span>, <span class="number">0.5</span>)</span><br><span class="line">    <span class="comment"># Running multiple awaitables concurrently and gathering results</span></span><br><span class="line">    results = <span class="keyword">await</span> asyncio.gather(</span><br><span class="line">        greet(<span class="string">&quot;David&quot;</span>, <span class="number">0.3</span>),</span><br><span class="line">        greet(<span class="string">&quot;Eve&quot;</span>,<span class="number">0.1</span>)</span><br><span class="line">    )</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;All greeting done.&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    asyncio.run(main())</span><br></pre></td></tr></table></figure>
+
+<h2 id="Key-Libraries-and-Tools"><a href="#Key-Libraries-and-Tools" class="headerlink" title="Key Libraries and Tools"></a>Key Libraries and Tools</h2><ol>
+<li><strong>asyncio</strong> (Standard Library):<br><strong>asyncio</strong> is the foundation for asynchronous I&#x2F;O in python. it provides the event loop, coroutine utilities, task management, and primitives for networking, subprocesses, and synchronization.<br>Key functions&#x2F;classes:</li>
+</ol>
+<ul>
+<li><strong>asyncio.run(coro)</strong>: runs the given coroutine until it complete, managing the event loop automatically. Best for top-level entry point.</li>
+<li><strong>asyncio.create_task(coro)</strong>: schedules a coroutine to run on the event loop as a task.</li>
+<li><strong>asyncio.sleep(delay)</strong>: An awaitable that pauses the current coroutine for delay seconds, yeilding control.</li>
+<li>**asyncio.gather(*awaitables)**: Runs multiple awaitables concurrently and waits for all of them to complete. Returns their results in the order they were passed.</li>
+<li><strong>asyncio.Queue</strong>, <strong>asyncio.Lock</strong>, <strong>asyncio.Semaphore</strong>: Asynchronous synchronization primitives.</li>
+</ul>
+<ol start="2">
+<li><strong>contextlib</strong> (Standard Library) - <strong>AsyncExitStack</strong> &amp; <strong>asynccontextmanager</strong>:<br><strong>AsyncExitStack</strong> provides a robust way to manage the lifecycle of multiple synchronous or asynchronous context managers, especially when their number is dynamic. <strong>asynccontextmanager</strong> is a decorator for easily creating asynchronous context managers.</li>
+</ol>
+<ul>
+<li><p><strong>AsyncExitStack</strong> (Class) is a stack-like structure that collects cleanup operations( from <strong><strong>aexit</strong></strong>, <strong><strong>exit</strong></strong>, or custom callbacks) and executes them in LIFO order when the stack exits.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> AsyncExitStack</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">connect_db</span>(<span class="params">uri</span>):</span><br><span class="line">    <span class="comment"># simulate a asynchronously db connecting</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Connecting to <span class="subst">&#123;url&#125;</span> ...&quot;</span>)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">MockConnection</span>:</span><br><span class="line">        <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">close</span>(<span class="params">self</span>):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;Closing connection to <span class="subst">&#123;uri&#125;</span>...&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> MockConnection()</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">process_data</span>(<span class="params">connection_uris</span>):</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">with</span> AsyncExitStack() <span class="keyword">as</span> stack:</span><br><span class="line">        connections = []</span><br><span class="line">        <span class="keyword">for</span> uri <span class="keyword">in</span> connection_uris:</span><br><span class="line">            conn = <span class="keyword">await</span> stack.enter_async_context(connect_db(uri))</span><br><span class="line">            connections.append(conn)</span><br><span class="line">        <span class="comment"># Now, all connections in the list connections will be automatically closed when the async with block complete.</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;All connections established. Processing data...&quot;</span>)</span><br><span class="line">        <span class="comment"># Simulate the data processing</span></span><br><span class="line">        <span class="keyword">await</span> asyncio.sleep(<span class="number">0.1</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Data processing finished.&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line">asyncio.run(process_data([<span class="string">&quot;db_url_1&quot;</span>,<span class="string">&quot;db_url_2&quot;</span>,<span class="string">&quot;db_url_3&quot;</span>]))</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p><strong>@asynccontextmanager</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> asynccontextmanager</span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="meta">@asynccontextmanager</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">my_async_resource</span>(<span class="params">name</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Acquiring async resource: <span class="subst">&#123;name&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">await</span> asyncio.sleep(<span class="number">0.05</span>) <span class="comment"># Simulate async setup</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">yield</span> <span class="string">f&quot;DATA_FROM_<span class="subst">&#123;name&#125;</span>&quot;</span> <span class="comment"># Yield control to the &#x27;async with&#x27; block</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Releasing async resource:<span class="subst">&#123;name&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">await</span> asyncio.sleep(<span class="number">0.02</span>) <span class="comment"># Simulate async teardown</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">use_my_resource</span>():</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">with</span> my_async_resource(<span class="string">&quot;DB_Connection&quot;</span>) <span class="keyword">as</span> db:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Using <span class="subst">&#123;db&#125;</span>...&quot;</span>)</span><br><span class="line">        <span class="keyword">await</span> asyncio.sleep(<span class="number">0.1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Finishing using DB_Connection.&#x27;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># asyncio.run(use_my_resource())</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>async with</strong> is designed to work with <strong>@asynccontextmanager</strong>. it is to ensure that asynchronous resources are properly set up(<strong><strong>aenter</strong></strong>) before a block of code executes, and properly torn down (<strong><strong>aexit</strong></strong>) afterward, even if errors occur within that block. It is the asynchronous version of <strong>with</strong><br>How it works:</p>
+<ol>
+<li>When pyton encounters <strong>async with expression as variable:</strong>, it first evaluates <strong>expression</strong>. This <strong>expression</strong> is expected to return an asynchronous context manager object.</li>
+<li>It then <strong>awaits</strong> the <strong><strong>aenter</strong></strong> method of that context manager object. The result of <strong><strong>aenter</strong></strong> is assigned to <strong>variable</strong> (if <strong>as variable</strong> is used)</li>
+<li>Then code inside the <strong>async with</strong> block then executes.</li>
+<li>Crucially regardless of whether the <strong>async with</strong> block finishes normally or exits due to an exception, python guarantees that it will await the <strong><strong>aexit</strong></strong> method of the context manager.</li>
+<li>The <strong><strong>aexit</strong></strong> method receives information about any exception that occurred within the block, allowing the context manager to handle or suppress it.</li>
+</ol>
+<p><strong>asynccontextmanager</strong> Decorator is a decorator that provide a convenient, generator-based way to create asynchronous context managers without having to write a full class with <strong>aenter</strong> and <strong><strong>aexit</strong></strong> methods. It wraps an <strong>async def</strong> generator function and transforms it into an object that adheres to the asynchronous context manager protocol.<br>How it works:</p>
+<ol>
+<li>define the async def function with decorator of <strong>@asynccontextmanager</strong> such as my_async_resource.</li>
+<li>Inside this function, any code before the <strong>yield</strong> statement is considered the asynchronous setup logic (what would typically go in <strong><strong>aenter</strong></strong>).</li>
+<li>The <strong>yield</strong> statement is the point where control is passed to the <strong>async with</strong> block. The value <strong>yield</strong>ed(e.g., f””DATA_FROM_{NAME}””) becomes the value bound to the <strong>as</strong> variable in the <strong>async with</strong> statement (e.g., db).</li>
+<li>Any code after the <strong>yield</strong> statement (typically in a <strong>finally</strong> block to ensure execution) is considered the asynchronous teardown logic( what would typically go in <strong><strong>aexit</strong></strong>). This code will run when the <strong>async with</strong> blcok is exited, whether normally or due to an exception.</li>
+</ol>
+<h1 id="Concurrency-in-FastAPI-vs-Java-Spring"><a href="#Concurrency-in-FastAPI-vs-Java-Spring" class="headerlink" title="Concurrency in FastAPI (vs Java Spring)"></a>Concurrency in FastAPI (vs Java Spring)</h1><p>Understanding concurrency is fundamental to building hight-performance web application. While both python’s FastAPI and Java’s Spring can handle many requests simultaneously, their underlying concurrency models differ significantly.</p>
+<p><strong>Concurrency vs. Parallelism</strong></p>
+<ul>
+<li>Concurrency deals with many things at once, but tasks take turns on a signle CPU core.</li>
+<li>Parallelism is truly doing many things at once, with tasks literally executing simultaneously on different CPU cores or precessors.</li>
+</ul>
+<h2 id="Baseline-Java-Spring’-Traditional-Concurrency-Model-Thread-Per-Request"><a href="#Baseline-Java-Spring’-Traditional-Concurrency-Model-Thread-Per-Request" class="headerlink" title="Baseline: Java Spring’ Traditional Concurrency Model( Thread-Per-Request)"></a>Baseline: Java Spring’ Traditional Concurrency Model( Thread-Per-Request)</h2><p>In SpringMVC efore reactive Spring WebFlux became popular,  the traditional concurrency model is thread-based and ofent relies on blocking I&#x2F;O:</p>
+<ul>
+<li>Core Unit: Operating System (OS) Threads.</li>
+<li>Request Handling:<ul>
+<li>When a request arrives, the web server(e.g., Tomcat embedded in Spring Boot) picks an available thread from its thread pool.</li>
+<li>This thread is then dedicated to handling that specific request from start to finish.</li>
+</ul>
+</li>
+<li>I&#x2F;O Handling (Blocking):<ul>
+<li>If the thread needs to perform an I&#x2F;O operation(e.g., fetching data from a database, calling an external API, reading from a file), it becomes blocked (or “waits”).</li>
+<li>While blocked, the thread cannot perform any other work; it effectively sits idle until the I&#x2F;O operation completes.</li>
+</ul>
+</li>
+<li>Archieving Concurrency: By having a pool of many threads(e.g., 200-400), the server can handle multiple simultaneous requests, each consuming one thread.</li>
+<li>Archieving Parallelism: On a multi-core CPU, the OS can truly run multiple threads in parallel across different cores.</li>
+<li>Pros:<ul>
+<li>Simple Mental Model: The code flows sequentially, making it easies to read and debug.</li>
+<li>Good for CPU-Bound Tasks: If a request handler is purely CPU-intensive, a dedicated thread effectively utilizes a CPU core.</li>
+</ul>
+</li>
+<li>Cons:<ul>
+<li>Resource Consumption: Each OS thread consumes significant memory (stack space) and OS resources. For very high concurrency (throusands of requests), this can lead to memory exhaustion and performance degradation( the “C10k problem”)</li>
+<li>Context Switching Overhead: The OS incurs overhead when switching between a large number of active threads.</li>
+<li>I&#x2F;O-Bound Bottleneck: Threads are idle while waiting for I&#x2F;O, wasting valuable server resources.</li>
+</ul>
+</li>
+</ul>
+<h2 id="FastAPI’s-Concurrency-Model-Asynchronous-I-x2F-O-with-Conroutines"><a href="#FastAPI’s-Concurrency-Model-Asynchronous-I-x2F-O-with-Conroutines" class="headerlink" title="FastAPI’s Concurrency Model (Asynchronous I&#x2F;O with Conroutines)"></a>FastAPI’s Concurrency Model (Asynchronous I&#x2F;O with Conroutines)</h2><p>FastAPI is built on ASGI (Asynchronous Server Gateway Interface), leveraging python’s <strong>async&#x2F;await</strong> syntax, which enables asynchronous I&#x2F;O and coroutines. This model is fundamentally different from traditional Spring:</p>
+<ul>
+<li>Core Unit: Coroutines(Python’s lightweight concurrency primitives)</li>
+<li>Request Handling:<ul>
+<li>An ASGI server (like Uvicorn, which FastAPI uses) typically starts a small number of worker processes (often matching the number of CPU cores)</li>
+<li>Within each worker proccess, there’s one or more event loops running on a single OS thread.</li>
+<li>When a reqeust arrives, the event loop creates and schedules coroutines to handle it.</li>
+</ul>
+</li>
+<li>I&#x2F;O Handling (Non-Blocking):<ul>
+<li>When a coroutine encounters an <strong>await</strong>able I&#x2F;O operation (e.g., <strong>await database.fetch_data(), await httpx.get(…)</strong>), it yields control back to the event loop instead of blocking the thread.</li>
+<li>The event loop immediately picks up another pending coroutine or a new incoming request.</li>
+<li>When the I&#x2F;O operation completes, the event loop receives a notification and resumes the previously suspended coroutine from where it left off.</li>
+</ul>
+</li>
+<li>Archieving Concurrency: A single thread (running an event loop) can efficiently manage thousands of concurrent I&#x2F;O-bound connections by switching between coroutines that are waiting for I&#x2F;O.</li>
+<li>Archieving Parallelism: This is achieved by running multiple Uvicorn worker processes (each with its own event loop and threads), allowing different processes to utilize different CPU cores.</li>
+<li>Pros:<ul>
+<li>High Concurrency for I&#x2F;O-Bound Tasks: Excellent for modern web APIs that frequently interact with databases, external services, or file systems. </li>
+<li>Low Resource Consumption: Coroutines are very lightweight; their overhead (memory, context switching) is significantly lower than OS threads.</li>
+<li>Scalability: More scalable for I&#x2F;O-intensive workloads.</li>
+</ul>
+</li>
+<li>Cons:<ul>
+<li>Programming Model Shift: Requires understanding <strong>async</strong>&#x2F;<strong>await</strong></li>
+<li>Blocking Code Issue: If you accidentally run a blocking(non-async) I&#x2F;O operation or a CPU-bound task directly within an <strong>async def</strong> coroutine without explicitly offloading it, it will block the entire event loop, severely degrading performance for all other concurrent requests in that worker thread.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p> <strong>FastAPI’s Automatic Offloading:</strong><br>If an entire endpoint is defined as a standard <strong>def</strong> function (not <strong>async def</strong>), FastAPI will automatically run that entire endpoint in its thread pool. Similary, if a <strong>def</strong> dependecy function is called from an <strong>async def</strong> endpoint, that dependency function will also be automatically run in the thread pool.<br><strong>Explicitly Control Offloading:</strong><br>While above automatic behavior covers many common cases. the <strong>run_in_threadpool</strong> also gives the explicit control when need to call a specific part of an async def function sysnchronously.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># main.py - CORRECT WAY (offloads to thread pool)</span></span><br><span class="line"><span class="keyword">from</span> fastapi <span class="keyword">import</span> FastAPI</span><br><span class="line"><span class="keyword">from</span> starlette.concurrency <span class="keyword">import</span> run_in_threadpool <span class="comment"># Explicit import for clarity</span></span><br><span class="line"><span class="keyword">import</span> time <span class="comment"># For simulation in example</span></span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">perform_heavy_computation</span>(<span class="params">data: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    A synchronous, CPU-bound function.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Starting heavy computation for <span class="subst">&#123;data&#125;</span>...&quot;</span>)</span><br><span class="line">    time.sleep(<span class="number">3</span>) <span class="comment"># Simulate 3 seconds of CPU-bound work</span></span><br><span class="line">    result = data * data * <span class="number">123456789</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Finished heavy computation for <span class="subst">&#123;data&#125;</span>.&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/offloaded_cpu_task/&#123;data&#125;&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">offloaded_cpu_task_endpoint</span>(<span class="params">data: <span class="built_in">int</span></span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Endpoint received request (offloaded_cpu_task_endpoint)&quot;</span>)</span><br><span class="line">    <span class="comment"># Explicitly offload the blocking function to a separate thread pool.</span></span><br><span class="line">    <span class="comment"># The current async function will await this operation, but the event loop</span></span><br><span class="line">    <span class="comment"># will NOT be blocked. It can process other requests while this runs in a thread.</span></span><br><span class="line">    result = <span class="keyword">await</span> run_in_threadpool(perform_heavy_computation, data)</span><br><span class="line">    <span class="comment"># Or using the app instance (often available via dependency injection if needed):</span></span><br><span class="line">    <span class="comment"># result = await app.run_in_threadpool(perform_heavy_computation, data)</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Endpoint finished request (offloaded_cpu_task_endpoint)&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;Offloaded task completed&quot;</span>, <span class="string">&quot;result&quot;</span>: result&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="How-FastAPI-handles-Different-Concurrency-Scenarios"><a href="#How-FastAPI-handles-Different-Concurrency-Scenarios" class="headerlink" title="How FastAPI handles Different Concurrency Scenarios"></a>How FastAPI handles Different Concurrency Scenarios</h2><p>FastAPI is designed to handle both I&#x2F;O-bound and CPU-bound tasks gracefully:</p>
+<h3 id="1-I-x2F-O-Bound-Tasks-Native-Asynchronous-Strength"><a href="#1-I-x2F-O-Bound-Tasks-Native-Asynchronous-Strength" class="headerlink" title="1. I&#x2F;O-Bound Tasks (Native Asynchronous Strength)"></a>1. I&#x2F;O-Bound Tasks (Native Asynchronous Strength)</h3><p>Use <strong>async def</strong> for endpoint functions and <strong>await</strong> for all I&#x2F;O operations (e.g., database clients, HTTP clients like <strong>httpx</strong>, file I&#x2F;O libraries that support <strong>asyncio</strong>).</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import FastAPI</span><br><span class="line">import httpx # An async HTTP client</span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line">@app.get(&quot;/item/&#123;item_id&#125;&quot;)</span><br><span class="line">async def read_item(item_id:int):</span><br><span class="line">    #This will yield control while waiting for the external API response</span><br><span class="line">    async with httpx.AsyncClient() as client:</span><br><span class="line">        response = await client.get(f&quot;https://some-external-api.com/items/&#123;item_id&#125;&quot;)</span><br><span class="line">        return response.json()</span><br></pre></td></tr></table></figure>
+<p>While the <strong>client.get()</strong> waits, the event loop can process other incoming requests or resume other coroutines.</p>
+<h3 id="2-CPU-Bound-Tasks-Automatic-Thread-Pool-Offloading"><a href="#2-CPU-Bound-Tasks-Automatic-Thread-Pool-Offloading" class="headerlink" title="2. CPU-Bound Tasks (Automatic Thread Pool Offloading)"></a>2. CPU-Bound Tasks (Automatic Thread Pool Offloading)</h3><p>For a blocking (synchronous) function or a CPU-intensive calculation that cannot be easily made asynchronous, it is still ok in FastAPI.</p>
+<ul>
+<li>in a <strong>async def</strong> endpoint, call a regular <strong>def</strong> function that perform blocking I&#x2F;O or heavy computation, FastAPI (via Starlette’s underlying AnyIO&#x2F;asyncio) will automatically run that blocking function in a separate thread pool. This prevents it from blocking the main event loop.</li>
+<li>if the entire endpoint is <strong>def</strong> (synchronous), FastAPI will also run the entire endpoint in this thread pool.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import FastAPI</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line">def complex_calculation(n: int) -&gt; int:</span><br><span class="line">    # This is a CPU-bound, blocking function</span><br><span class="line">    time.sleep(n) # Simulate heavy computation</span><br><span class="line">    return n * 2</span><br><span class="line"></span><br><span class="line">@app.get(&quot;/calculate/&#123;n&#125;&quot;)</span><br><span class="line">async def get_calculation(n: int):</span><br><span class="line">    # FastAPI will run complex_calculation in a thread pool</span><br><span class="line">    result = await app.run_in_threadpool(complex_calculation, n)</span><br><span class="line">    return &#123;&quot;result&quot;: result&#125;</span><br><span class="line"></span><br><span class="line"># Alternatively, define the endpoint itself as synchronous:</span><br><span class="line">@app.get(&quot;/calculate_sync/&#123;n&#125;&quot;)</span><br><span class="line">def get_calculation_sync(n: int):</span><br><span class="line">    # FastAPI will automatically run this entire sync endpoint in a thread pool</span><br><span class="line">    result = complex_calculation(n)</span><br><span class="line">    return &#123;&quot;result&quot;: result&#125;</span><br></pre></td></tr></table></figure>
+This allows the main event loop to remain free for I&#x2F;O-bound tasks, ensuring overall responsiveness.</li>
+</ul>
+<h2 id="Achieving-True-Parallelism-with-FastAPI"><a href="#Achieving-True-Parallelism-with-FastAPI" class="headerlink" title="Achieving True Parallelism with FastAPI"></a>Achieving True Parallelism with FastAPI</h2><p>While <strong>async</strong>&#x2F;<strong>await</strong> provides concurrency, true parallelism across multiple CPU cores is achieved by running multiple worker processes for the ASGI application.</p>
+<ul>
+<li>Uvicorn Workers: typically run Uvicorn with the <strong>–workers</strong> flag:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uvicorn main:app --workers 4 --reload</span><br></pre></td></tr></table></figure>
+This command will start 4 Uvicorn processes. Each process will then handle its own event loop and manage its own set of concurrent coroutines. This setup allows the FastAPI application to fully utilize multiple CPU cores for CPU-bound tasks (distributed across processes) and efficiently handle I&#x2F;O-bound tasks within each process.</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Asynchronous-Programming-in-Python"><span class="toc-number">1.</span> <span class="toc-text">Asynchronous Programming in Python</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-asynchronous-programming-in-python"><span class="toc-number">1.1.</span> <span class="toc-text">What is asynchronous programming in python</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-components-and-concepts"><span class="toc-number">1.2.</span> <span class="toc-text">Key components and concepts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-Libraries-and-Tools"><span class="toc-number">1.3.</span> <span class="toc-text">Key Libraries and Tools</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Concurrency-in-FastAPI-vs-Java-Spring"><span class="toc-number">2.</span> <span class="toc-text">Concurrency in FastAPI (vs Java Spring)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Baseline-Java-Spring%E2%80%99-Traditional-Concurrency-Model-Thread-Per-Request"><span class="toc-number">2.1.</span> <span class="toc-text">Baseline: Java Spring’ Traditional Concurrency Model( Thread-Per-Request)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FastAPI%E2%80%99s-Concurrency-Model-Asynchronous-I-x2F-O-with-Conroutines"><span class="toc-number">2.2.</span> <span class="toc-text">FastAPI’s Concurrency Model (Asynchronous I&#x2F;O with Conroutines)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-FastAPI-handles-Different-Concurrency-Scenarios"><span class="toc-number">2.3.</span> <span class="toc-text">How FastAPI handles Different Concurrency Scenarios</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-I-x2F-O-Bound-Tasks-Native-Asynchronous-Strength"><span class="toc-number">2.3.1.</span> <span class="toc-text">1. I&#x2F;O-Bound Tasks (Native Asynchronous Strength)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-CPU-Bound-Tasks-Automatic-Thread-Pool-Offloading"><span class="toc-number">2.3.2.</span> <span class="toc-text">2. CPU-Bound Tasks (Automatic Thread Pool Offloading)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Achieving-True-Parallelism-with-FastAPI"><span class="toc-number">2.4.</span> <span class="toc-text">Achieving True Parallelism with FastAPI</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&text=Asynchronous Programming in Python"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&title=Asynchronous Programming in Python"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&is_video=false&description=Asynchronous Programming in Python"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Asynchronous Programming in Python&body=Check out this article: http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&title=Asynchronous Programming in Python"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&title=Asynchronous Programming in Python"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&title=Asynchronous Programming in Python"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&title=Asynchronous Programming in Python"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&name=Asynchronous Programming in Python&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/21/Asynchronous%20Programming%20in%20Python/&t=Asynchronous Programming in Python"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>

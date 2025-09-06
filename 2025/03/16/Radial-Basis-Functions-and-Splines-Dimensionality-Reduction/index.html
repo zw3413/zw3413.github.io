@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Chapter 5 : Radial Basis Functions and Splines5.1 Receptive fieldsDifferent weight vector reponse to different input vector differently in term of the distence between them.  5.2 The radial basis func">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Radial Basis Functions and Splines &#x2F; Dimensionality Reduction">
+<meta property="og:url" content="http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="Chapter 5 : Radial Basis Functions and Splines5.1 Receptive fieldsDifferent weight vector reponse to different input vector differently in term of the distence between them.  5.2 The radial basis func">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-16T19:49:17.000Z">
+<meta property="article:modified_time" content="2025-09-01T12:00:42.970Z">
+<meta property="article:tag" content="Algorithm">
+<meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Radial Basis Functions and Splines / Dimensionality Reduction</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/03/22/The-Way-To-An-AI-Agent-Developer/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/03/Gamma-Exposure-Index/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&text=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&title=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&is_video=false&description=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Radial Basis Functions and Splines / Dimensionality Reduction&body=Check out this article: http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&title=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&title=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&title=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&title=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&name=Radial Basis Functions and Splines / Dimensionality Reduction&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&t=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-5-Radial-Basis-Functions-and-Splines"><span class="toc-number">1.</span> <span class="toc-text">Chapter 5 : Radial Basis Functions and Splines</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-Receptive-fields"><span class="toc-number">1.1.</span> <span class="toc-text">5.1 Receptive fields</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-The-radial-basis-function-RBF-network"><span class="toc-number">1.2.</span> <span class="toc-text">5.2 The radial basis function(RBF) network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-Interpolation-and-basis-functions"><span class="toc-number">1.3.</span> <span class="toc-text">5.3 Interpolation and basis functions</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-6-Dimensionality-Reduction"><span class="toc-number">2.</span> <span class="toc-text">Chapter 6 : Dimensionality Reduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-Linear-discriminant-analysis-LDA"><span class="toc-number">2.1.</span> <span class="toc-text">6.1 Linear discriminant analysis (LDA)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-Principal-components-analysis-PCA"><span class="toc-number">2.2.</span> <span class="toc-text">6.2 Principal components analysis (PCA)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-Factor-analysis"><span class="toc-number">2.3.</span> <span class="toc-text">6.3 Factor analysis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-Independent-components-analysis-ICA"><span class="toc-number">2.4.</span> <span class="toc-text">6.4 Independent components analysis (ICA)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-amp-6-6-Locally-linear-embedding-and-ISOMAP"><span class="toc-number">2.5.</span> <span class="toc-text">6.5&amp;6.6 Locally linear embedding and ISOMAP</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Radial Basis Functions and Splines / Dimensionality Reduction
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-16T19:49:17.000Z" class="dt-published" itemprop="datePublished">2025-03-16</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Algorithm/" rel="tag">Algorithm</a>, <a class="p-category" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Chapter-5-Radial-Basis-Functions-and-Splines"><a href="#Chapter-5-Radial-Basis-Functions-and-Splines" class="headerlink" title="Chapter 5 : Radial Basis Functions and Splines"></a>Chapter 5 : Radial Basis Functions and Splines</h2><h3 id="5-1-Receptive-fields"><a href="#5-1-Receptive-fields" class="headerlink" title="5.1 Receptive fields"></a>5.1 Receptive fields</h3><p>Different weight vector reponse to different input vector differently in term of the distence between them. </p>
+<h3 id="5-2-The-radial-basis-function-RBF-network"><a href="#5-2-The-radial-basis-function-RBF-network" class="headerlink" title="5.2 The radial basis function(RBF) network"></a>5.2 The radial basis function(RBF) network</h3><p>RBF function is a radial basis function, which response to input differently according to the distance between the input vector and the weight vector, it is more sensitive as the distance shorted, and vice versa.<br>RBF can be a layer or a component of a neural network.<br>Gaussian function is an often used RBF which is as below :</p>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>w</mi><mo separator="true">,</mo><mi>σ</mi><mo stretchy="false">)</mo><mo>=</mo><mi>e</mi><mi>x</mi><mi>p</mi><mo stretchy="false">(</mo><mfrac><mrow><mo>−</mo><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo>−</mo><mi>w</mi><mi mathvariant="normal">∣</mi><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> 
+g(x,w,\sigma) = exp(\frac{-||x-w||^2}{2\sigma ^2})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.4539em;vertical-align:-0.345em;"></span><span class="mord mathnormal">e</span><span class="mord mathnormal">x</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1089em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463em;"><span style="top:-2.786em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">∣∣</span><span class="mord mathnormal mtight">x</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span><span class="mord mtight">∣</span><span class="mord mtight"><span class="mord mtight">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span>
+
+<p>Or the normalised Gaussians, </p>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>w</mi><mo separator="true">,</mo><mi>σ</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>e</mi><mi>x</mi><mi>p</mi><mo stretchy="false">(</mo><mo>−</mo><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo>−</mo><mi>w</mi><mi mathvariant="normal">∣</mi><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mi mathvariant="normal">/</mi><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><mrow><msub><mo>∑</mo><mi>i</mi></msub><mi>e</mi><mi>x</mi><mi>p</mi><mo stretchy="false">(</mo><mo>−</mo><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo>−</mo><msub><mi>w</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">/</mi><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex"> 
+g(x,w,\sigma) = \frac{exp(-||x-w||^2 / 2\sigma ^2)}{\sum_i exp(-||x-w_i|| / 2\sigma^2)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.6789em;vertical-align:-0.57em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1089em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mop op-symbol small-op mtight" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1496em;"><span style="top:-2.1786em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3214em;"><span></span></span></span></span></span></span><span class="mspace mtight" style="margin-right:0.1952em;"></span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">x</span><span class="mord mathnormal mtight">p</span><span class="mopen mtight">(</span><span class="mord mtight">−</span><span class="mord mtight">∣∣</span><span class="mord mathnormal mtight">x</span><span class="mbin mtight">−</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3281em;"><span style="top:-2.357em;margin-left:-0.0269em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mord mtight">∣∣/2</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463em;"><span style="top:-2.786em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">x</span><span class="mord mathnormal mtight">p</span><span class="mopen mtight">(</span><span class="mord mtight">−</span><span class="mord mtight">∣∣</span><span class="mord mathnormal mtight">x</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span><span class="mord mtight">∣</span><span class="mord mtight"><span class="mord mtight">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mtight">/2</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.57em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>
+
+<ul>
+<li>d is maximum distance between the locations of the hidden nodes</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo>=</mo><mi>d</mi><mi mathvariant="normal">/</mi><msqrt><mo stretchy="false">(</mo></msqrt><mn>2</mn><mi>M</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sigma = d / \sqrt(2M) </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.24em;vertical-align:-0.305em;"></span><span class="mord mathnormal">d</span><span class="mord">/</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.935em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mopen" style="padding-left:1em;">(</span></span><span style="top:-2.895em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.28em" viewBox="0 0 400000 1296" preserveAspectRatio="xMinYMin slice"><path d="M263,681c0.7,0,18,39.7,52,119
+c34,79.3,68.167,158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120
+c340,-704.7,510.7,-1060.3,512,-1067
+l0 -0
+c4.7,-7.3,11,-11,19,-11
+H40000v40H1012.3
+s-271.3,567,-271.3,567c-38.7,80.7,-84,175,-136,283c-52,108,-89.167,185.3,-111.5,232
+c-22.3,46.7,-33.8,70.3,-34.5,71c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1
+s-109,-253,-109,-253c-72.7,-168,-109.3,-252,-110,-252c-10.7,8,-22,16.7,-34,26
+c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26s76,-59,76,-59s76,-60,76,-60z
+M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.305em;"><span></span></span></span></span></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mclose">)</span></span></span></span></li>
+</ul>
+<p>RBF networks never have more than one layer of non-linear neurons.</p>
+<ul>
+<li><p>Training the RBF network</p>
+<ol>
+<li>position the RBF nodes</li>
+<li>use the activations of those nodes to train the linear outputs</li>
+</ol>
+</li>
+<li><p>How to position the RBF nodes</p>
+<ol>
+<li>Randomly picking some of the datapoints to act as basis locations.</li>
+<li>Use k-means algorithm (unsupervised learning) to position the nodes which are representative of typical inputs.</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>The Radial Basic Function Algorithm</p>
+<ol>
+<li>Position the RBF centres by either:<ul>
+<li>Using the k-means algorithm to initialise the positions of the RBF centres Or</li>
+<li>Setitng the RBF centres to be randomly chosen datapoints</li>
+</ul>
+</li>
+<li>Calculate the actions of the RBF nodes using Gaussian Equation</li>
+<li>Train the output weights by either:<ul>
+<li>Using the perceptron Or</li>
+<li>Computing the pseudo-inverse of the activations of the RBF centres</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<ul>
+<li>Problem with the RBF netwrok, when the input dimensionality increase, there will need more RBF nodes to cover the weight space.</li>
+</ul>
+<h3 id="5-3-Interpolation-and-basis-functions"><a href="#5-3-Interpolation-and-basis-functions" class="headerlink" title="5.3 Interpolation and basis functions"></a>5.3 Interpolation and basis functions</h3><p>RBF nodes in weight space can fit the input data and get an interpolation with splines, cubic function is often effectively. Data out of the bounds will be expressed as linearly.</p>
+<h2 id="Chapter-6-Dimensionality-Reduction"><a href="#Chapter-6-Dimensionality-Reduction" class="headerlink" title="Chapter 6 : Dimensionality Reduction"></a>Chapter 6 : Dimensionality Reduction</h2><p>Analysising and reduce the input dimensionality is useful to recovery the underneeth relationship of the data and reduce the network dimension.</p>
+<h3 id="6-1-Linear-discriminant-analysis-LDA"><a href="#6-1-Linear-discriminant-analysis-LDA" class="headerlink" title="6.1 Linear discriminant analysis (LDA)"></a>6.1 Linear discriminant analysis (LDA)</h3><p>Converiance within class and converiance between classes could tesll us the scatter of the dataset. It doesn’t apply any manipulation on dataset.</p>
+<h3 id="6-2-Principal-components-analysis-PCA"><a href="#6-2-Principal-components-analysis-PCA" class="headerlink" title="6.2 Principal components analysis (PCA)"></a>6.2 Principal components analysis (PCA)</h3><p>The Principal Components Analysis Algorithm</p>
+<ol>
+<li>Write input data points as matrix X, n*m, n is the number of inputs, and m is the dimension of one input.</li>
+<li>Centre the data by substracting off the mean of each column</li>
+<li>Compute the covariance matrix <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>N</mi><msup><mi>B</mi><mi>T</mi></msup><mi>B</mi></mrow><annotation encoding="application/x-tex">C = 1/N B^TB </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0913em;vertical-align:-0.25em;"></span><span class="mord">1/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span></li>
+<li>Compute the eigenvalues and eigenvectors of C, so <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>V</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>C</mi><mi>V</mi><mo>=</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">V^{-1}CV=D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>, where V holds the eigenvectors of C and D is the M*M diagnoal eigenvalue matrix</li>
+<li>Sort the columns of D into order of decreasing eigenvalues, and aply the same order to the columns of V</li>
+<li>Reject those with eigenvalue less than some  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>η</mi></mrow><annotation encoding="application/x-tex">\eta </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">η</span></span></span></span>, leaving L dimensions in the data.</li>
+</ol>
+<p>Kernel PCA add a kernel function to project the input data first, then apply PCA which can help to increase the complex of the shape of the axis.</p>
+<h3 id="6-3-Factor-analysis"><a href="#6-3-Factor-analysis" class="headerlink" title="6.3 Factor analysis"></a>6.3 Factor analysis</h3><p>Factor analysis is to ask whether the data that is observed can be explained by a smaller number of uncorrelated factors or latent variables.</p>
+<h3 id="6-4-Independent-components-analysis-ICA"><a href="#6-4-Independent-components-analysis-ICA" class="headerlink" title="6.4 Independent components analysis (ICA)"></a>6.4 Independent components analysis (ICA)</h3><p>ICA is a related approach to factor analysis, and a well known solver of blind source separation through compute the unmixing matrix which defined as the inverse of mixing matrix A:</p>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mi>A</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">x=As</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal">s</span></span></span></span>
+<p>Mutual information and negentropy are used in ICA, and FastICA&#x2F;informaxICA are two popular ICA algorithm implementations.</p>
+<h3 id="6-5-amp-6-6-Locally-linear-embedding-and-ISOMAP"><a href="#6-5-amp-6-6-Locally-linear-embedding-and-ISOMAP" class="headerlink" title="6.5&amp;6.6 Locally linear embedding and ISOMAP"></a>6.5&amp;6.6 Locally linear embedding and ISOMAP</h3><p>Locally linear embedding and ISOMAP are two very powerful input analysising and dimension reduction algorithm.<br>ISOMAP is based on Multi-Dimensional scaling (MDS).</p>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-5-Radial-Basis-Functions-and-Splines"><span class="toc-number">1.</span> <span class="toc-text">Chapter 5 : Radial Basis Functions and Splines</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-Receptive-fields"><span class="toc-number">1.1.</span> <span class="toc-text">5.1 Receptive fields</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-The-radial-basis-function-RBF-network"><span class="toc-number">1.2.</span> <span class="toc-text">5.2 The radial basis function(RBF) network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-Interpolation-and-basis-functions"><span class="toc-number">1.3.</span> <span class="toc-text">5.3 Interpolation and basis functions</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-6-Dimensionality-Reduction"><span class="toc-number">2.</span> <span class="toc-text">Chapter 6 : Dimensionality Reduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-Linear-discriminant-analysis-LDA"><span class="toc-number">2.1.</span> <span class="toc-text">6.1 Linear discriminant analysis (LDA)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-Principal-components-analysis-PCA"><span class="toc-number">2.2.</span> <span class="toc-text">6.2 Principal components analysis (PCA)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-Factor-analysis"><span class="toc-number">2.3.</span> <span class="toc-text">6.3 Factor analysis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-Independent-components-analysis-ICA"><span class="toc-number">2.4.</span> <span class="toc-text">6.4 Independent components analysis (ICA)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-amp-6-6-Locally-linear-embedding-and-ISOMAP"><span class="toc-number">2.5.</span> <span class="toc-text">6.5&amp;6.6 Locally linear embedding and ISOMAP</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&text=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&title=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&is_video=false&description=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Radial Basis Functions and Splines / Dimensionality Reduction&body=Check out this article: http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&title=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&title=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&title=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&title=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&name=Radial Basis Functions and Splines / Dimensionality Reduction&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/&t=Radial Basis Functions and Splines / Dimensionality Reduction"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>

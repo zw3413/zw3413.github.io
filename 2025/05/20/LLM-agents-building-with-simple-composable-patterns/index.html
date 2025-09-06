@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="This is a study journal of the blog Building effective agents What are agentsWe can seperate tools build with ability of LLM into two categories:  Workflows: systems where LLMS and tools are orchestra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LLM agents building with simple, composable patterns">
+<meta property="og:url" content="http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="This is a study journal of the blog Building effective agents What are agentsWe can seperate tools build with ability of LLM into two categories:  Workflows: systems where LLMS and tools are orchestra">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/building_block.png">
+<meta property="og:image" content="http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/prompt_chaining.webp">
+<meta property="og:image" content="http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/routing.webp">
+<meta property="og:image" content="http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/parallelization.webp">
+<meta property="og:image" content="http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/orchestrator.webp">
+<meta property="og:image" content="http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/evaluator-optimizer.webp">
+<meta property="og:image" content="http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/agents.webp">
+<meta property="og:image" content="http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/coding_agent.webp">
+<meta property="article:published_time" content="2025-05-20T19:46:11.000Z">
+<meta property="article:modified_time" content="2025-09-01T12:00:42.954Z">
+<meta property="article:tag" content="AI Programming">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/building_block.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>LLM agents building with simple, composable patterns</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/05/21/Asynchronous%20Programming%20in%20Python/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/05/19/Standard-usage-of-uv-the-Python-virtual-environment-and-package-management-tool/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&text=LLM agents building with simple, composable patterns"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&title=LLM agents building with simple, composable patterns"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&is_video=false&description=LLM agents building with simple, composable patterns"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=LLM agents building with simple, composable patterns&body=Check out this article: http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&title=LLM agents building with simple, composable patterns"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&title=LLM agents building with simple, composable patterns"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&title=LLM agents building with simple, composable patterns"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&title=LLM agents building with simple, composable patterns"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&name=LLM agents building with simple, composable patterns&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&t=LLM agents building with simple, composable patterns"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-are-agents"><span class="toc-number">1.</span> <span class="toc-text">What are agents</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#When-and-when-not-to-use-agents"><span class="toc-number">2.</span> <span class="toc-text">When (and when not) to use agents</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#When-to-use-frameworks"><span class="toc-number">3.</span> <span class="toc-text">When to use frameworks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#frameworks-for-agentic-system"><span class="toc-number">3.1.</span> <span class="toc-text">frameworks for agentic system</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Agentic-system-patterns"><span class="toc-number">4.</span> <span class="toc-text">Agentic system patterns</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Building-blocks-the-augmented-LLM"><span class="toc-number">4.1.</span> <span class="toc-text">Building blocks - the augmented LLM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compositional-Workflows"><span class="toc-number">4.2.</span> <span class="toc-text">Compositional Workflows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Prompt-chaining"><span class="toc-number">4.2.1.</span> <span class="toc-text">1. Prompt chaining</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Routing"><span class="toc-number">4.2.2.</span> <span class="toc-text">2. Routing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Parallelization"><span class="toc-number">4.2.3.</span> <span class="toc-text">3. Parallelization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Orchestrator-workers"><span class="toc-number">4.2.4.</span> <span class="toc-text">4. Orchestrator-workers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Evaluator-optimizer"><span class="toc-number">4.2.5.</span> <span class="toc-text">5. Evaluator-optimizer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Autonomous-Agents"><span class="toc-number">4.3.</span> <span class="toc-text">Autonomous Agents</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Combining-and-customizing-these-patterns"><span class="toc-number">4.4.</span> <span class="toc-text">Combining and customizing these patterns</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">5.</span> <span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appendix-1-Agents-in-practice"><span class="toc-number">6.</span> <span class="toc-text">Appendix 1: Agents in practice</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Customer-support"><span class="toc-number">6.1.</span> <span class="toc-text">A. Customer support</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-Coding-agents"><span class="toc-number">6.2.</span> <span class="toc-text">B. Coding agents</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appendix-2-Prompt-engineering-your-tools"><span class="toc-number">7.</span> <span class="toc-text">Appendix 2: Prompt engineering your tools</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        LLM agents building with simple, composable patterns
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-05-20T19:46:11.000Z" class="dt-published" itemprop="datePublished">2025-05-20</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/AI-Programming/" rel="tag">AI Programming</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>This is a study journal of the blog <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a></p>
+<h1 id="What-are-agents"><a href="#What-are-agents" class="headerlink" title="What are agents"></a>What are agents</h1><p>We can seperate tools build with ability of LLM into two categories:</p>
+<ul>
+<li>Workflows: systems where LLMS and tools are orchestrated through predefined code paths.</li>
+<li>Agents: systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks.</li>
+</ul>
+<h1 id="When-and-when-not-to-use-agents"><a href="#When-and-when-not-to-use-agents" class="headerlink" title="When (and when not) to use agents"></a>When (and when not) to use agents</h1><ol>
+<li>finding the simplest solution possible, this might mean not building agentic systems at all. Only increasing complexity when needed, as agentic systems often trade latency and cost for better task performance, and this should be considered when this tradeoff makes sense.</li>
+<li>for many applications, optimizing single LLM calls with retrieval and in-context examples (RAG) is usually enough.</li>
+<li>workflows can offer predictability and consistency for well-defined tasks, when more complexity is warranted.</li>
+<li>Agents are the better option when flexibility and model-driven decision-making are needed at scale.</li>
+</ol>
+<h1 id="When-to-use-frameworks"><a href="#When-to-use-frameworks" class="headerlink" title="When to use frameworks"></a>When to use frameworks</h1><h2 id="frameworks-for-agentic-system"><a href="#frameworks-for-agentic-system" class="headerlink" title="frameworks for agentic system"></a>frameworks for agentic system</h2><ul>
+<li>LangGraph from LangChain</li>
+<li>Amazon Bedrock’s AI Agent framework</li>
+<li>Rivet, a drag and drop GUI LLM workflow builder</li>
+<li>Vellum, another GUI tool for building and testing complex workflows</li>
+<li>AutoGen, LlamaIndex, DSPY, OpenHands</li>
+</ul>
+<ol>
+<li>start by using LLM APIs directly: many patterns can be implemented in a few lines of code.</li>
+<li>If a framework was employed, ensure it is well understood about the underlying code. Incorrect assumptions about what’s under the hood are a common source of error.</li>
+</ol>
+<h1 id="Agentic-system-patterns"><a href="#Agentic-system-patterns" class="headerlink" title="Agentic system patterns"></a>Agentic system patterns</h1><h2 id="Building-blocks-the-augmented-LLM"><a href="#Building-blocks-the-augmented-LLM" class="headerlink" title="Building blocks - the augmented LLM"></a>Building blocks - the augmented LLM</h2><ol>
+<li>The basic building block of agentic systems is an LLM enhanced with augmentations such as retrieval, tools, and memory.</li>
+<li>Current LLM can actively use these abilities <ul>
+<li>generating their own search queries</li>
+<li>selecting appropriate tools</li>
+<li>determining what information to retain</li>
+</ul>
+</li>
+</ol>
+<img src="/2025/05/20/LLM-agents-building-with-simple-composable-patterns/building_block.png" class="" title="building_block">
+
+<p>Two key aspects of implementation:</p>
+<ul>
+<li>tailoring these capabilities to the specific use case and ensuring they provide an easy, well-documented interface for LLM (like <a target="_blank" rel="noopener" href="https://modelcontextprotocol.io/quickstart/client#building-mcp-clients">MCP</a>)</li>
+</ul>
+<p>These augmented capabilities should be accessable for each LLM call.</p>
+<h2 id="Compositional-Workflows"><a href="#Compositional-Workflows" class="headerlink" title="Compositional Workflows"></a>Compositional Workflows</h2><h3 id="1-Prompt-chaining"><a href="#1-Prompt-chaining" class="headerlink" title="1. Prompt chaining"></a>1. Prompt chaining</h3><ol>
+<li>Prompt chaining decomposes a task into a sequence of steps, where each LLM call processes the output of the previous one. </li>
+<li>Programmatic checks(“gate” in diagram below) can be added on any intermediate steps to ensure that the process is still on track.</li>
+</ol>
+<img src="/2025/05/20/LLM-agents-building-with-simple-composable-patterns/prompt_chaining.webp" class="" title="prompt_chaining">
+
+
+
+<p><strong>When to use this workflow:</strong></p>
+<ul>
+<li>Prompt chaining is ideal for situations where the task can be easily cleanly decomposed into fixed subtasks.</li>
+<li>The main goal is to trade off latency for higher accuracy, by making each LLM can an easier task.</li>
+</ul>
+<p><strong>Examples where prompt chaining is useful:</strong></p>
+<ul>
+<li>Generating marketing copy, then translating it into a different language.</li>
+<li>Writing an outline of a document, checking that the outline meets certain criteria, then writing the document based on the outline.</li>
+</ul>
+<h3 id="2-Routing"><a href="#2-Routing" class="headerlink" title="2. Routing"></a>2. Routing</h3><ol>
+<li>Routing classifies an input and directs it to a specialized followup task. </li>
+<li>This workflow allows for separation of concerns, and building more specialized prompts. Without this workflow, optimizing for one kind of input can hurt performance on other inputs.</li>
+</ol>
+<img src="/2025/05/20/LLM-agents-building-with-simple-composable-patterns/routing.webp" class="" title="prompt_routing">
+
+
+<p><strong>When to use this workflow:</strong></p>
+<ul>
+<li>Routing works well for complex tasks where there are distinct categories that are better handled separately, </li>
+<li>and where classification can be handled accuratedly, either by an LLM or a more traditional classification model&#x2F;algorithm.</li>
+</ul>
+<p><strong>Examples where routing is useful:</strong></p>
+<ul>
+<li>Directing different types of customer service queries (general questions, refund requests, technical support) into different downstream processes, prompts, and tools.</li>
+<li>Routing easy&#x2F;common questions to smaller models, and hard questions to more capable models to optimize cost and speed.</li>
+</ul>
+<h3 id="3-Parallelization"><a href="#3-Parallelization" class="headerlink" title="3. Parallelization"></a>3. Parallelization</h3><p>LLMs can sometimes work simultaneously on a task and have their outputs aggregated programmatically.<br>This workflow, parallelization, manifests in two key variations:<br>    - Sectioning: Breaking a task into independent subtasks run in parallel.<br>    - Voting: Running the same task multiple times to get diverse outputs.</p>
+<img src="/2025/05/20/LLM-agents-building-with-simple-composable-patterns/parallelization.webp" class="" title="parallelization">
+
+<p><strong>When to use this workflow:</strong></p>
+<ul>
+<li>Parallelization is effective when the divided subtasks can be parallelized for speed, </li>
+<li>or when multiple perspectives or attempts are needed for higher confidence results.<br>For complex tasks with multiple considerations, LLMs generally perform better when each consideration is handled by a separate LLM call, allowing focused attention on each specific aspect.</li>
+</ul>
+<p><strong>Examples where parallelization is useful:</strong></p>
+<ul>
+<li>Sectioning:<ul>
+<li>Implementing guardrails<br>  one model instance processes user queries, while another screens them for inappropriate content or requests.</li>
+<li>Automating evals for evaluating LLM performance<br>  where each LLM call evaluates a different aspect of the model’s performance on a given prompt.</li>
+</ul>
+</li>
+<li>Voting:<ul>
+<li>Reviewing a pieve of code for vulnerabilities, where several different prompts review and flag the code if they find a problem.</li>
+<li>Evaluating whether a given piece of content is inappropriate, with multiple prompts evaluating different aspects or requiring different vote thresholds to balance false positives and negatives.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-Orchestrator-workers"><a href="#4-Orchestrator-workers" class="headerlink" title="4. Orchestrator-workers"></a>4. Orchestrator-workers</h3><p>In the orchestrator-workers workflow, a central LLM dynamically breaks down tasks, delegated them to worker LLMs, and synthesizes their results.</p>
+<img src="/2025/05/20/LLM-agents-building-with-simple-composable-patterns/orchestrator.webp" class="" title="orchestrator">
+
+
+<p><strong>When to use this workflow:</strong></p>
+<ul>
+<li>This workflow is well-suited for complex tasks where it is not predictable for subtasks needed( in coding, for example, the number of files that need to be changed and the nature of the change in each file likely depend on the task). </li>
+<li>Wehreas it’s topographically similar from parallelization, the key difference is its flexibility- subtasks aren’t pre-defined, but determined by the orchestrator based on the specific input.</li>
+</ul>
+<p><strong>Example where orchestrator-workers is useful</strong></p>
+<ul>
+<li>Coding products that make complex changes to multiple files each time.</li>
+<li>Search tasks that involve gathering and analyzing information from multiple sources for possible relevant information.</li>
+</ul>
+<h3 id="5-Evaluator-optimizer"><a href="#5-Evaluator-optimizer" class="headerlink" title="5. Evaluator-optimizer"></a>5. Evaluator-optimizer</h3><p>In the evaluator-optimizer workflow, one LLM call generates a response while another provides evaluation and feedback in a loop.</p>
+<img src="/2025/05/20/LLM-agents-building-with-simple-composable-patterns/evaluator-optimizer.webp" class="" title="evaluator-optimizer">
+
+
+<p><strong>When to use this workflow:</strong></p>
+<ul>
+<li>Evaluator-optimizer is particularly effective when we have clear evaluation criteria, and when iterative refinement provides measurable value. </li>
+<li>The two signs of good fit are <ul>
+<li><ol>
+<li>LLM responses can be demonstrably improved when a human articulates their feedback;</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>LLM can provide such feedback</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Examples where evaluator-optimizer is useful:</strong></p>
+<ul>
+<li>Literary translation where there are nuances that the translator LLM might not capture initially, but where an evaluator LLM can provide useful critiques.</li>
+<li>Complex search tasks that require multiple rounds of searching and analysis to gather comprehensive information, where the evaluator decides whether further searches are warranted.</li>
+</ul>
+<h2 id="Autonomous-Agents"><a href="#Autonomous-Agents" class="headerlink" title="Autonomous Agents"></a>Autonomous Agents</h2><p>The key capailities of LLMs mature which understanding compplex inputs, engaging in reasoning and planning, using tools reliably, and recovering from errors,  lead to the usage of agents.</p>
+<ol>
+<li>Agents begin their work with either a command from, or interactive discussion with, the human user.</li>
+<li>Once the task is clear, agents plan and operate independently, potentially returning to the human for further information or judgement.</li>
+<li>During executiion, it’s curcial for the agents to gain “ground truth” from the environment at each step( such as tool call results or code execution) to assess its progress.</li>
+<li>Agents can then pause for human feedback at checkpoints or when encountering blockers. </li>
+<li>The task often terminates upon completion, but it’s also common to include stopping conditions( such as a maximum number of iterations) to maintain control.</li>
+</ol>
+<ul>
+<li>Agents can handle sophisticated tasks, but their implementation is often straightforward. They are typically just LLMs using tools based on environmental feedback in a loop.</li>
+<li>It is crucial to design toolsets and their documentation clearly and thoughtfully.</li>
+</ul>
+<img src="/2025/05/20/LLM-agents-building-with-simple-composable-patterns/agents.webp" class="" title="agent">
+
+<p><strong>When to use agents:</strong></p>
+<ul>
+<li>Agents can be used for open-ended problems where it’s difficult or impossible to predict the required number of steps, and where you can’t hardcode a fixed path. The LLM will potentially operate for many turns, and you must have some level of trust in its decision-making.</li>
+<li>Agents’ automy makes them ideal for scaling tasks in trusted environments.</li>
+</ul>
+<p><strong>Examples where agents are useful:</strong></p>
+<ul>
+<li>A coding agent to resolve SWE-bench tasks, which involve edits to many files based on a task description</li>
+<li>Claude computer use reference implementation, where Claude uses a computer to accomplish tasks.</li>
+</ul>
+<img src="/2025/05/20/LLM-agents-building-with-simple-composable-patterns/coding_agent.webp" class="" title="coding_agent">
+
+
+<h2 id="Combining-and-customizing-these-patterns"><a href="#Combining-and-customizing-these-patterns" class="headerlink" title="Combining and customizing these patterns"></a>Combining and customizing these patterns</h2><p>These building blocks aren’t prescritive. They’re common patterns that developers can shape and combine to fit different use cases.<br>The key to success, as with any LLM features, is measuring performance and iterating on implementations.<br>To repeat: Considering adding complexity only when it demonstrably improves outcomes.</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>Success in the LLM space isn’t about building the most sophisticated system. It’s about building the right system in suffice to requirements.<br>Start with simple prompts, optimize them with comprehensive evaluation, and add multi-step agentic systems only when simpler solutions fall short.</p>
+<p><strong>When implementing agents, we try to follow three core principles:</strong></p>
+<ol>
+<li>Maintain simplicity in agent’s design</li>
+<li>Prioritize transparency by explicitly showing the agent’s planning steps.</li>
+<li>Carefully craft agent-computer interface(ACI) through thorough tool documentation and testing.</li>
+</ol>
+<p>Frameworks can help you get started quickly, but don’t hesitate to reduce abstraction layers and build with basic components as you move to production.<br>By following these principles, you can create agents that are not only powerful but also reliable, maintable, and trusted by their users.</p>
+<h1 id="Appendix-1-Agents-in-practice"><a href="#Appendix-1-Agents-in-practice" class="headerlink" title="Appendix 1: Agents in practice"></a>Appendix 1: Agents in practice</h1><p>Two particularly promising applications for AI agents that demonstrate the practical value of the patterns discussed above.<br>Both applications illustrate how agents add the most value for tasks that require both conversation and action, have clear success criteria, enable feedback loops, and integrate meaningful human oversight.</p>
+<h2 id="A-Customer-support"><a href="#A-Customer-support" class="headerlink" title="A. Customer support"></a>A. Customer support</h2><p>Customer support combines familiar chatbot interfaces with enhanced capabilities through tool integration. This is natural fit for more openended agents because:</p>
+<ul>
+<li>Support interactions naturally follow a conversation flow while requiring access to external infomation and actions.</li>
+<li>Tools can be integrated to pull customer data, order history, and knowledge base articles;</li>
+<li>Actions such as issuing refunds or updating tickets can be handled programmatically;</li>
+<li>Success can be clearly measured through user-defined resolutions.</li>
+</ul>
+<p>Several companies have demonstrated the viability of this approach through usage-based pricing models that charge only for successful resolutions, showing confidence in their agents’ effectiveness.</p>
+<h2 id="B-Coding-agents"><a href="#B-Coding-agents" class="headerlink" title="B. Coding agents"></a>B. Coding agents</h2><p>The software development space has shown remarkable potential for LLM features, with capabilities evolving from code completion to autonomous problem-solving. Agents are particularly effective because:</p>
+<ul>
+<li>Code solutions are verifiable through automated tests</li>
+<li>Agents can iterate on solutions using test results as feedback</li>
+<li>The problem space is well-defined and structured;</li>
+<li>Output quality can be measured objectively</li>
+</ul>
+<p>In Claude implementation, agents can now solve real GitHub issues in the SWE-bench Verified benchmark based on the pull request description alone. However, whereas automated testing helps verify functionality, human review remains crucial for ensuring solutions align with broader system requirements.</p>
+<h1 id="Appendix-2-Prompt-engineering-your-tools"><a href="#Appendix-2-Prompt-engineering-your-tools" class="headerlink" title="Appendix 2: Prompt engineering your tools"></a>Appendix 2: Prompt engineering your tools</h1><p>Tools is likely be an important part for an agentic system, it enables LLM to interact with external services and APIs by specifying their exact structure and definition in API.<br>In response of LLM, it will include a tool use block in the API response if it plans to invoke a tool.<br>Tool definations and specifications should be given just as much prompt engineering attention as the overall prompts.<br>This appendix, it will be described how to prompt engineer our tools.</p>
+<p>There are often several ways to specify the same action. For instance, we can specify a file edit by writing a diff, or by rewriting the entire file. For structured output, we can return code inside markdown or inside JSON.<br>In software engineering, differences like these are cosmetic and can be converted losslessly from one to the other.<br>However, some formats are much more diffcult for an LLM to write than others. Writing a diff requires knowing how many lines are changing in the chunk header before the new code is written.<br>Written code inside JOSN(compared to markdown) requires extra escaping of newlines and quotes.</p>
+<p>The suggestions for deciding on tool formats are the following:</p>
+<ul>
+<li>Give the model enough tokens to “think” before it writes itself into a corner.</li>
+<li>Keep the format close to what the model has seen naturally occuring in text on the internet.</li>
+<li>Make sure there’s no formatting “overhead” such as having to keep an accurate count of thousands of lines of code, or string-escaping any code it writes.</li>
+</ul>
+<p>One rule of thumb is to think about how much effort goes into human-computer interfaces(HCI), and plan to invest just as much effort in creating good agent-computer interfaces(ACI)</p>
+<ul>
+<li>A good tool definition offten includes example usage, edge cases, input format requirements, and clear boundaries from other tools. it should be obvious how to use this tool based on the description and parameters.</li>
+<li>When using many similar tools, changing parameter names or descriptions to make things more obvious is especially important.</li>
+<li>Test how the model uses these tools, Run many example inputs in the workbench to see what mistakes the model makes, and iterate.</li>
+<li>Poka-yoke the tools.</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-are-agents"><span class="toc-number">1.</span> <span class="toc-text">What are agents</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#When-and-when-not-to-use-agents"><span class="toc-number">2.</span> <span class="toc-text">When (and when not) to use agents</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#When-to-use-frameworks"><span class="toc-number">3.</span> <span class="toc-text">When to use frameworks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#frameworks-for-agentic-system"><span class="toc-number">3.1.</span> <span class="toc-text">frameworks for agentic system</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Agentic-system-patterns"><span class="toc-number">4.</span> <span class="toc-text">Agentic system patterns</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Building-blocks-the-augmented-LLM"><span class="toc-number">4.1.</span> <span class="toc-text">Building blocks - the augmented LLM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compositional-Workflows"><span class="toc-number">4.2.</span> <span class="toc-text">Compositional Workflows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Prompt-chaining"><span class="toc-number">4.2.1.</span> <span class="toc-text">1. Prompt chaining</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Routing"><span class="toc-number">4.2.2.</span> <span class="toc-text">2. Routing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Parallelization"><span class="toc-number">4.2.3.</span> <span class="toc-text">3. Parallelization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Orchestrator-workers"><span class="toc-number">4.2.4.</span> <span class="toc-text">4. Orchestrator-workers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Evaluator-optimizer"><span class="toc-number">4.2.5.</span> <span class="toc-text">5. Evaluator-optimizer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Autonomous-Agents"><span class="toc-number">4.3.</span> <span class="toc-text">Autonomous Agents</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Combining-and-customizing-these-patterns"><span class="toc-number">4.4.</span> <span class="toc-text">Combining and customizing these patterns</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">5.</span> <span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appendix-1-Agents-in-practice"><span class="toc-number">6.</span> <span class="toc-text">Appendix 1: Agents in practice</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Customer-support"><span class="toc-number">6.1.</span> <span class="toc-text">A. Customer support</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-Coding-agents"><span class="toc-number">6.2.</span> <span class="toc-text">B. Coding agents</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appendix-2-Prompt-engineering-your-tools"><span class="toc-number">7.</span> <span class="toc-text">Appendix 2: Prompt engineering your tools</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&text=LLM agents building with simple, composable patterns"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&title=LLM agents building with simple, composable patterns"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&is_video=false&description=LLM agents building with simple, composable patterns"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=LLM agents building with simple, composable patterns&body=Check out this article: http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&title=LLM agents building with simple, composable patterns"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&title=LLM agents building with simple, composable patterns"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&title=LLM agents building with simple, composable patterns"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&title=LLM agents building with simple, composable patterns"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&name=LLM agents building with simple, composable patterns&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/20/LLM-agents-building-with-simple-composable-patterns/&t=LLM agents building with simple, composable patterns"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>

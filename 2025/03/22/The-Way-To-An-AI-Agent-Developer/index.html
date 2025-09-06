@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="General Requirement for an AI Agent developer Reinforcement Learning (RL): Deep Q-Networks(DQN), Proximal Policy Optimization(PPO), A3C, etc. Large Language Model(LLM) agents: Learn how to use LangCha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Way To An AI Agent Developer">
+<meta property="og:url" content="http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="General Requirement for an AI Agent developer Reinforcement Learning (RL): Deep Q-Networks(DQN), Proximal Policy Optimization(PPO), A3C, etc. Large Language Model(LLM) agents: Learn how to use LangCha">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-22T14:56:00.000Z">
+<meta property="article:modified_time" content="2025-09-01T12:00:42.986Z">
+<meta property="article:tag" content="Career Development">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>The Way To An AI Agent Developer</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/04/03/Machine-Learning-Algorithms-Support-Vector-Machine-SVM/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/16/Radial-Basis-Functions-and-Splines-Dimensionality-Reduction/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&text=The Way To An AI Agent Developer"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&title=The Way To An AI Agent Developer"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&is_video=false&description=The Way To An AI Agent Developer"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=The Way To An AI Agent Developer&body=Check out this article: http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&title=The Way To An AI Agent Developer"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&title=The Way To An AI Agent Developer"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&title=The Way To An AI Agent Developer"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&title=The Way To An AI Agent Developer"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&name=The Way To An AI Agent Developer&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&t=The Way To An AI Agent Developer"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#General-Requirement-for-an-AI-Agent-developer"><span class="toc-number">1.</span> <span class="toc-text">General Requirement for an AI Agent developer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1-Beginner-course-and-reading-paper"><span class="toc-number">2.</span> <span class="toc-text">Part-1. Beginner course and reading paper</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ReAct-Synergizing-Reasoning-And-Acting-in-Language-Models"><span class="toc-number">2.1.</span> <span class="toc-text">1. ReAct Synergizing Reasoning And Acting in Language Models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Generative-Agents-Interactive-SImulacra-of-Human-Behavior"><span class="toc-number">2.2.</span> <span class="toc-text">2. Generative Agents: Interactive SImulacra of Human Behavior</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-AutoGen-Enabling-Next-Gen-LLM-Application-via-Multi-Agent-Conversation"><span class="toc-number">2.3.</span> <span class="toc-text">3. AutoGen: Enabling Next-Gen LLM Application via Multi-Agent Conversation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-StateFlow-Enhancing-LLM-Task-Solving-through-State-Driven"><span class="toc-number">2.4.</span> <span class="toc-text">4. StateFlow: Enhancing LLM Task-Solving through State-Driven</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-2-Conception-and-Opensources"><span class="toc-number">3.</span> <span class="toc-text">Part-2. Conception and Opensources</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Chain-of-Thought"><span class="toc-number">3.1.</span> <span class="toc-text">1. Chain of Thought</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ReAct"><span class="toc-number">3.2.</span> <span class="toc-text">2. ReAct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Reinforcement-Learning"><span class="toc-number">3.3.</span> <span class="toc-text">3. Reinforcement Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-AutoGen"><span class="toc-number">3.4.</span> <span class="toc-text">4. AutoGen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-LlamaIndex"><span class="toc-number">3.5.</span> <span class="toc-text">5. LlamaIndex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-DSPy"><span class="toc-number">3.6.</span> <span class="toc-text">6. DSPy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-ColBERTv2-Retrieval"><span class="toc-number">3.7.</span> <span class="toc-text">7. ColBERTv2 Retrieval</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-3-Community"><span class="toc-number">4.</span> <span class="toc-text">Part-3. Community</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-4-Production"><span class="toc-number">5.</span> <span class="toc-text">Part-4. Production</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Youtube"><span class="toc-number">5.1.</span> <span class="toc-text">Youtube</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linkedin"><span class="toc-number">5.2.</span> <span class="toc-text">Linkedin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Twitter"><span class="toc-number">5.3.</span> <span class="toc-text">Twitter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%AF-%E8%81%8C%E4%B8%9A%E6%96%B9%E5%90%91%E7%9B%AE%E6%A0%87%EF%BC%88%E6%9C%AA%E6%9D%A5-1%E2%80%932-%E5%B9%B4%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">🎯 职业方向目标（未来 1–2 年）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A0-Part-1%EF%BC%9AAI-Agent-%E6%8A%80%E6%9C%AF%E6%A0%88%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92"><span class="toc-number">7.</span> <span class="toc-text">🧠 Part 1：AI Agent 技术栈学习计划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%98%81%EF%B8%8F-Part-2%EF%BC%9AAWS-%E4%BA%91%E6%9C%8D%E5%8A%A1-%E8%AE%A4%E8%AF%81%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92"><span class="toc-number">8.</span> <span class="toc-text">☁️ Part 2：AWS 云服务 + 认证路径规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%BB-%E6%8E%A8%E8%8D%90%E7%BB%84%E5%90%88%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5%EF%BC%88%E7%AE%80%E5%8E%86%E4%BA%AE%E7%82%B9%EF%BC%89"><span class="toc-number">9.</span> <span class="toc-text">💻 推荐组合项目实践（简历亮点）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%88-%E5%B0%B1%E4%B8%9A%E5%89%8D%E6%99%AF%E6%80%BB%E7%BB%93%EF%BC%88%E5%AE%89%E7%9C%81%EF%BC%89"><span class="toc-number">10.</span> <span class="toc-text">📈 就业前景总结（安省）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%B0-%E6%80%BB%E4%BD%93%E6%88%90%E6%9C%AC%E4%BC%B0%E7%AE%97"><span class="toc-number">11.</span> <span class="toc-text">💰 总体成本估算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93%E5%BB%BA%E8%AE%AE"><span class="toc-number">12.</span> <span class="toc-text">✅ 总结建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%97%93%EF%B8%8F-%E4%B8%80%E3%80%81%E6%95%B4%E4%BD%93%E5%AD%A6%E4%B9%A0%E6%97%B6%E9%97%B4%E8%A7%84%E5%88%92%EF%BC%88%E6%8E%A8%E8%8D%906%E4%B8%AA%E6%9C%88%E4%BB%A5%E5%86%85%E5%AE%8C%E6%88%90%EF%BC%89"><span class="toc-number">13.</span> <span class="toc-text">🗓️ 一、整体学习时间规划（推荐6个月以内完成）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9A-%E4%BA%8C%E3%80%81%E6%AF%8F%E5%BC%A0%E8%AF%81%E4%B9%A6%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E5%92%8C%E8%B5%84%E6%BA%90%E5%BB%BA%E8%AE%AE"><span class="toc-number">14.</span> <span class="toc-text">📚 二、每张证书的学习方法和资源建议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-1-AWS-Certified-Cloud-Practitioner-CLF-C02"><span class="toc-number">14.1.</span> <span class="toc-text">✅ [1] AWS Certified Cloud Practitioner (CLF-C02)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%8E%AF-%E7%9B%AE%E6%A0%87%EF%BC%9A"><span class="toc-number">14.1.1.</span> <span class="toc-text">🎯 目标：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">14.1.2.</span> <span class="toc-text">📚 推荐学习方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%95%92-%E6%97%B6%E9%97%B4%E5%AE%89%E6%8E%92%EF%BC%88%E5%BB%BA%E8%AE%AE-2%E2%80%933-%E5%91%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">14.1.3.</span> <span class="toc-text">🕒 时间安排（建议 2–3 周）：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-2-AWS-Certified-Machine-Learning-%E2%80%93-Specialty-MLS-C01"><span class="toc-number">14.2.</span> <span class="toc-text">✅ [2] AWS Certified Machine Learning – Specialty (MLS-C01)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%8E%AF-%E7%9B%AE%E6%A0%87%EF%BC%9A-1"><span class="toc-number">14.2.1.</span> <span class="toc-text">🎯 目标：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%EF%BC%9A-1"><span class="toc-number">14.2.2.</span> <span class="toc-text">📚 推荐学习方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%95%92-%E6%97%B6%E9%97%B4%E5%AE%89%E6%8E%92%EF%BC%88%E5%BB%BA%E8%AE%AE-6%E2%80%938-%E5%91%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">14.2.3.</span> <span class="toc-text">🕒 时间安排（建议 6–8 周）：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-3-AWS-Certified-Machine-Learning-Engineer-%E2%80%93-Associate-MLE-A01"><span class="toc-number">14.3.</span> <span class="toc-text">✅ [3] AWS Certified Machine Learning Engineer – Associate (MLE-A01)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%8E%AF-%E7%9B%AE%E6%A0%87%EF%BC%9A-2"><span class="toc-number">14.3.1.</span> <span class="toc-text">🎯 目标：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%EF%BC%882024%E5%B9%B4%E6%96%B0%E5%87%BA%EF%BC%8C%E8%B5%84%E6%BA%90%E8%BE%83%E5%B0%91%EF%BC%89%EF%BC%9A"><span class="toc-number">14.3.2.</span> <span class="toc-text">📚 推荐学习方法（2024年新出，资源较少）：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%95%92-%E6%97%B6%E9%97%B4%E5%AE%89%E6%8E%92%EF%BC%88%E5%BB%BA%E8%AE%AE-5%E2%80%936-%E5%91%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">14.3.3.</span> <span class="toc-text">🕒 时间安排（建议 5–6 周）：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E4%B8%89%E3%80%81%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7%E5%BB%BA%E8%AE%AE"><span class="toc-number">15.</span> <span class="toc-text">📌 三、学习技巧建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E5%9B%9B%E3%80%81%E5%BB%BA%E8%AE%AE%E6%97%B6%E9%97%B4%E8%8A%82%E7%82%B9%E5%AE%89%E6%8E%92%EF%BC%88%E5%A6%82%E6%9E%9C%E4%BB%8E6%E6%9C%88%E5%BC%80%E5%A7%8B%EF%BC%89"><span class="toc-number">16.</span> <span class="toc-text">✅ 四、建议时间节点安排（如果从6月开始）</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        The Way To An AI Agent Developer
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-22T14:56:00.000Z" class="dt-published" itemprop="datePublished">2025-03-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Career-Development/" rel="tag">Career Development</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="General-Requirement-for-an-AI-Agent-developer"><a href="#General-Requirement-for-an-AI-Agent-developer" class="headerlink" title="General Requirement for an AI Agent developer"></a>General Requirement for an AI Agent developer</h2><ol>
+<li>Reinforcement Learning (RL): Deep Q-Networks(DQN), Proximal Policy Optimization(PPO), A3C, etc.</li>
+<li>Large Language Model(LLM) agents: Learn how to use LangChain, AutoGPT, BabyAGI</li>
+<li>Multi-Agent Systems: Study game theory, cooperative&#x2F;competitive agents.</li>
+<li>Planning &amp; Decision-Making: Get comfortable with MDPs, POMDPs, Graph-based Planning.</li>
+<li>Simulation &amp; Environment Design: Work with OpenAI Gym, MuJoCo, CARLA(autonomous driving)</li>
+</ol>
+<p><strong>Resources</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://huggingface.co/learn/deep-rl-course/en/unit0/introduction">Deep Reinforcement Learning Course (Hugging Face)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Carmezim/MIT-6.S094?tab=readme-ov-file">MIT Deep Learning for Self-Driving Cars</a> <a target="_blank" rel="noopener" href="https://github.com/Carmezim/MIT-6.S094?tab=readme-ov-file">MIT-6.S094: Deep Learning for Self-Driving Cars Assignments solutions</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLqYmG7hTraZDVH599EItlEWsUOsJbAodm">Multi-Agent RL Course (DeepMind)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ">David Silver’s RL Course (Google DeepMind)</a></li>
+</ul>
+<p><strong>Other Resources</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/procgen-benchmark/">Procgen Benchmark</a></li>
+</ul>
+<p><strong>Gain Practical Experience (Projects &amp; Open Source)</strong></p>
+<ul>
+<li>Build AI Agents<ul>
+<li>Implement a chess AI, trading bot, game-playing agent(Atari, StarCraft, etc) using RL.</li>
+<li>Develop an AI assistant with LLMs (using LangChain, OpenAI API, or Anthropic Claude)</li>
+<li>Contribute to open-source projects (e.g., OpenAI Gym, RLlib)</li>
+</ul>
+</li>
+</ul>
+<h2 id="Part-1-Beginner-course-and-reading-paper"><a href="#Part-1-Beginner-course-and-reading-paper" class="headerlink" title="Part-1. Beginner course and reading paper"></a>Part-1. Beginner course and reading paper</h2><h3 id="1-ReAct-Synergizing-Reasoning-And-Acting-in-Language-Models"><a href="#1-ReAct-Synergizing-Reasoning-And-Acting-in-Language-Models" class="headerlink" title="1. ReAct Synergizing Reasoning And Acting in Language Models"></a>1. ReAct Synergizing Reasoning And Acting in Language Models</h3><h3 id="2-Generative-Agents-Interactive-SImulacra-of-Human-Behavior"><a href="#2-Generative-Agents-Interactive-SImulacra-of-Human-Behavior" class="headerlink" title="2. Generative Agents: Interactive SImulacra of Human Behavior"></a>2. Generative Agents: Interactive SImulacra of Human Behavior</h3><h3 id="3-AutoGen-Enabling-Next-Gen-LLM-Application-via-Multi-Agent-Conversation"><a href="#3-AutoGen-Enabling-Next-Gen-LLM-Application-via-Multi-Agent-Conversation" class="headerlink" title="3. AutoGen: Enabling Next-Gen LLM Application via Multi-Agent Conversation"></a>3. AutoGen: Enabling Next-Gen LLM Application via Multi-Agent Conversation</h3><h3 id="4-StateFlow-Enhancing-LLM-Task-Solving-through-State-Driven"><a href="#4-StateFlow-Enhancing-LLM-Task-Solving-through-State-Driven" class="headerlink" title="4. StateFlow: Enhancing LLM Task-Solving through State-Driven"></a>4. StateFlow: Enhancing LLM Task-Solving through State-Driven</h3><h2 id="Part-2-Conception-and-Opensources"><a href="#Part-2-Conception-and-Opensources" class="headerlink" title="Part-2. Conception and Opensources"></a>Part-2. Conception and Opensources</h2><h3 id="1-Chain-of-Thought"><a href="#1-Chain-of-Thought" class="headerlink" title="1. Chain of Thought"></a>1. Chain of Thought</h3><h3 id="2-ReAct"><a href="#2-ReAct" class="headerlink" title="2. ReAct"></a>2. ReAct</h3><h3 id="3-Reinforcement-Learning"><a href="#3-Reinforcement-Learning" class="headerlink" title="3. Reinforcement Learning"></a>3. Reinforcement Learning</h3><h3 id="4-AutoGen"><a href="#4-AutoGen" class="headerlink" title="4. AutoGen"></a>4. AutoGen</h3><h3 id="5-LlamaIndex"><a href="#5-LlamaIndex" class="headerlink" title="5. LlamaIndex"></a>5. LlamaIndex</h3><h3 id="6-DSPy"><a href="#6-DSPy" class="headerlink" title="6. DSPy"></a>6. DSPy</h3><h3 id="7-ColBERTv2-Retrieval"><a href="#7-ColBERTv2-Retrieval" class="headerlink" title="7. ColBERTv2 Retrieval"></a>7. ColBERTv2 Retrieval</h3><h2 id="Part-3-Community"><a href="#Part-3-Community" class="headerlink" title="Part-3. Community"></a>Part-3. Community</h2><h2 id="Part-4-Production"><a href="#Part-4-Production" class="headerlink" title="Part-4. Production"></a>Part-4. Production</h2><h3 id="Youtube"><a href="#Youtube" class="headerlink" title="Youtube"></a>Youtube</h3><h3 id="Linkedin"><a href="#Linkedin" class="headerlink" title="Linkedin"></a>Linkedin</h3><h3 id="Twitter"><a href="#Twitter" class="headerlink" title="Twitter"></a>Twitter</h3><p>成为一个专业的 AI Agent 工程师的路径：</p>
+<p>这是一个多层次、需要实践和理论结合的路径：</p>
+<p>扎实的 LLM 基础：</p>
+<p>理解 LLM 的工作原理（Transformer 架构、Attention 机制等），即使不是深入研究，也要有概念。<br>熟悉主流 LLM（OpenAI GPT 系列、Anthropic Claude 系列、Google Gemini、开源模型如 Llama 系列）的特点、优劣势和 API 调用。<br>掌握提示工程 (Prompt Engineering)：这是 Agent 的基石。高效的提示是 Agent 智能的关键。学习各种提示技巧（Chain-of-Thought, Tree-of-Thought, ReAct, CoT-SC 等）。<br>核心 Agent 概念和模式：</p>
+<p>工具使用 (Tool Usage&#x2F;Function Calling): 这是 Agent 的核心能力，让 LLM 能够与外部世界交互。深入理解如何设计、定义和调用工具。<br>规划 (Planning): Agent 如何分解复杂任务、制定执行计划。<br>记忆 (Memory): 短期记忆 (in-context learning) 和长期记忆 (vector databases, knowledge graphs)。<br>评估 (Evaluation): 如何衡量 Agent 的性能、准确性、成本等，这是 Anthropic 博客强调的重点。<br>Human-in-the-Loop (HITL): 如何在 Agent 流程中加入人工干预点，提高可靠性。<br>框架学习与实践：</p>
+<p>从 LangChain&#x2F;LangGraph 入手: 它们提供了构建 Agent 的通用抽象和模块。通过实际项目了解这些框架如何实现上述核心概念。<br>选择性学习其他框架: 根据你的具体需求和兴趣，选择性地学习 AutoGen (多 Agent 协作模拟)、LlamaIndex (RAG 优化)、DSPy (可编程优化) 等。<br>不要被框架束缚: 学习框架是为了理解其设计思想和常用模式，而不是为了“套用”框架。Anthropic 的观点是，如果几行代码能解决，就不要引入不必要的框架。<br>软件工程和 MLOps 能力：</p>
+<p>微服务架构: 理解如何将 Agent 部署为可伸缩的微服务。<br>容器化 (Docker, Kubernetes): 生产部署的必备技能。<br>云计算平台 (AWS&#x2F;Azure&#x2F;GCP): 掌握至少一个云平台上的相关服务（如模型部署、API Gateway、数据库、监控日志等）。这是 Agent 上线到生产环境的关键。<br>CI&#x2F;CD: 自动化部署和测试流程。<br>可观测性 (Observability): 日志、监控、追踪，以便调试和优化生产环境中的 Agent。<br>安全性: 如何保护 Agent 的数据和 API。<br>实践和项目经验：</p>
+<p>从小项目开始: 尝试构建一些简单的 Agent 应用，例如自动化信息查询、代码生成、数据分析等。<br>解决实际问题: 尝试将 Agent 应用于你所在领域或感兴趣的实际业务问题。<br>开源贡献&#x2F;个人项目: 参与开源项目或构建自己的 Agent 应用，展示你的能力。<br>自己实现还是使用 Framework？</p>
+<p>初期学习和原型开发： 强烈建议使用框架。 框架可以让你快速上手，了解 Agent 的基本组成和工作流程，避免重复造轮子。LangChain、LlamaIndex 等框架提供了大量开箱即用的组件。<br>生产环境和复杂需求：<br>简单且清晰的逻辑： 如果你的 Agent 逻辑非常简单，例如只是一个固定的多步骤链式调用，或者一个简单的工具使用，那么 Anthropic 的建议是正确的：自己实现几行代码可能更清晰、更易于调试和维护。 框架的抽象层反而可能带来不必要的复杂性。<br>复杂且动态的逻辑： 如果你的 Agent 需要复杂的规划、多轮迭代、多 Agent 协作、高级记忆管理、动态工具选择等，那么框架的抽象和模块化能力会大大提高开发效率和代码的可维护性。 例如，LangGraph 就非常适合构建带循环的复杂 Agent。<br>性能优化和定制化： 当你对 Agent 的底层原理非常熟悉后，如果框架在某些方面成为瓶颈（例如，性能、特定功能的定制化），你可以选择局部地绕过框架，自己实现核心部分，或者参考框架的设计思想进行优化。<br>结论： 学习框架是理解和快速构建 Agent 的重要一步。成为专业的 AI Agent 工程师，意味着你需要既能熟练运用现有框架快速构建，又能深入理解其底层原理，并在必要时能够定制化或从零开始构建，同时具备将 Agent 投入生产环境的软件工程和 MLOps 能力。</p>
+<ol start="3">
+<li>对于云计算，我想通过考证来增加自己的 Credit，那么推荐的路径是？<br>对于 AI Agent 工程师来说，云计算的“信用”体现在你能够将 AI&#x2F;ML 解决方案部署、管理和优化在云上的能力。AWS (Amazon Web Services) 是市场占有率最高的云平台，因此以 AWS 认证为例，推荐的路径如下：</li>
+</ol>
+<p>推荐路径 (循序渐进)：</p>
+<p>AWS Certified Cloud Practitioner (CLF-C02)</p>
+<p>目标: 获得对 AWS 云平台的基本了解，包括核心服务、定价、安全、架构概念等。<br>为什么推荐: 这是 AWS 认证体系的入门级证书，能帮助你快速建立对云计算和 AWS 的整体认知。对于非云计算背景的人来说，这是非常好的起点。<br>AWS Certified Solutions Architect – Associate (SAA-C03)</p>
+<p>目标: 掌握如何在 AWS 上设计和部署可伸缩、高可用、容错、经济高效的分布式系统。<br>为什么推荐: 这是一项非常通用的架构师认证，会让你熟悉大量的 AWS 服务，包括计算 (EC2, Lambda)、存储 (S3, EBS, RDS)、网络 (VPC)、数据库等。这些都是你部署任何应用（包括 AI Agent）的基础。对于 Agent 的微服务化、API 网关、数据存储等都非常有帮助。<br>AWS Certified Machine Learning – Specialty (MLS-C01)</p>
+<p>目标: 验证你在 AWS 上构建、训练、调优和部署机器学习解决方案的专业知识和技能。<br>为什么推荐: 这是 AI Agent 工程师最直接相关的专业认证。它会深入考察你在 AWS 上使用机器学习服务的经验，特别是 Amazon SageMaker。这包括数据预处理、模型训练、模型部署、MLOps 实践、以及如何选择合适的 ML 服务等。这张证书直接证明了你具备在 AWS 上处理 ML 工作负载（包括 LLM 和 Agent）的能力。<br>可选或进阶路径：</p>
+<p>AWS Certified Machine Learning Engineer – Associate (MLE-A01): 这是 AWS 在2024年新增的ML工程师认证，取代了原有的MLS。它更侧重于MMLOps和生产部署，如果你追求更新更贴合实际的MLOps技能，可以考虑直接考这个，或者将其作为MLS之后的进阶。<br>AWS Certified Developer – Associate (DVA-C02): 如果你的职责更偏向于开发，例如编写后端 API 或 Lambda 函数，这个认证会很有用。它会让你更深入地了解如何使用 AWS SDK、API Gateway、Lambda 等服务进行开发。<br>AWS Certified DevOps Engineer – Professional (DOP-C02): 如果你想在自动化部署、持续集成&#x2F;持续交付 (CI&#x2F;CD)、监控和运维方面达到更高水平，这个专业级认证非常有价值。它涵盖了生产环境中部署和管理复杂系统的最佳实践。<br>学习和备考建议：</p>
+<p>AWS Skill Builder: AWS 官方的学习平台，提供免费的数字课程、练习题和模拟考试。<br>官方文档: AWS 的服务文档非常详细和全面，是最好的学习资源。<br>实践: 最重要的是动手实践。在 AWS 控制台创建账户，部署实际的 Agent 应用，即使是小规模的也行。<br>第三方课程: Udemy, Coursera, A Cloud Guru 等平台有很多高质量的 AWS 认证准备课程。<br>模拟测试: 考前务必进行多次模拟测试，熟悉题型和时间管理。<br>总结： 对于 AI Agent 工程师，最核心的云计算认证是 AWS Certified Solutions Architect – Associate (提供通用云基础) 和 AWS Certified Machine Learning – Specialty &#x2F; Machine Learning Engineer – Associate (直接关联 ML&#x2F;LLM 部署)。这些认证将有力地证明你将 AI Agent 从概念转化为生产级应用所需的工程能力。</p>
+<p>非常好，Elvin。下面我为你制定一个<strong>职业发展路径规划</strong>，包括：</p>
+<ul>
+<li>技术栈学习路径（AI Agent + AWS）</li>
+<li>推荐学习资源与认证路径</li>
+<li>每项预计<strong>时间成本</strong>与<strong>经济成本</strong></li>
+<li>学完之后的<strong>职业方向建议</strong></li>
+</ul>
+<hr>
+<h2 id="🎯-职业方向目标（未来-1–2-年）"><a href="#🎯-职业方向目标（未来-1–2-年）" class="headerlink" title="🎯 职业方向目标（未来 1–2 年）"></a>🎯 职业方向目标（未来 1–2 年）</h2><p><strong>AI Agent 工程师 &#x2F; 云端智能应用开发工程师</strong><br>聚焦方向：企业级 LLM 应用构建 + 云部署 + 多 Agent 协作系统</p>
+<hr>
+<h2 id="🧠-Part-1：AI-Agent-技术栈学习计划"><a href="#🧠-Part-1：AI-Agent-技术栈学习计划" class="headerlink" title="🧠 Part 1：AI Agent 技术栈学习计划"></a>🧠 Part 1：AI Agent 技术栈学习计划</h2><table>
+<thead>
+<tr>
+<th>技术栈</th>
+<th>目标技能</th>
+<th>推荐资源</th>
+<th>时间成本</th>
+<th>经济成本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅ LangChain + LangGraph</td>
+<td>构建 RAG 系统，多 Agent 协同工作流</td>
+<td>LangChain 官方文档 + <a target="_blank" rel="noopener" href="https://docs.langchain.com/langgraph/">LangGraph 文档</a> + YouTube</td>
+<td>2–3 周（基础）<br>6–8 周（项目实践）</td>
+<td>免费</td>
+</tr>
+<tr>
+<td>✅ AutoGen + LlamaIndex</td>
+<td>多 Agent 协同对话 + 文档索引问答</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/autogen">AutoGen 官网</a> + <a target="_blank" rel="noopener" href="https://docs.llamaindex.ai/">LlamaIndex 教程</a> + 示例项目</td>
+<td>3–4 周</td>
+<td>免费</td>
+</tr>
+<tr>
+<td>✅ OpenHands + DSPy（可选）</td>
+<td>构建可解释性强的 Agent 工程 IDE</td>
+<td><a target="_blank" rel="noopener" href="https://openhands.dev/">OpenHands IDE + SDK</a> + <a target="_blank" rel="noopener" href="https://dspy-docs.vercel.app/">DSPy 文档</a></td>
+<td>2–3 周探索性学习</td>
+<td>免费</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 合理顺序建议：先 LangChain&#x2F;LangGraph，后 AutoGen，最后探索 OpenHands&#x2F;DSPy 生态。</p>
+</blockquote>
+<hr>
+<h2 id="☁️-Part-2：AWS-云服务-认证路径规划"><a href="#☁️-Part-2：AWS-云服务-认证路径规划" class="headerlink" title="☁️ Part 2：AWS 云服务 + 认证路径规划"></a>☁️ Part 2：AWS 云服务 + 认证路径规划</h2><table>
+<thead>
+<tr>
+<th>认证</th>
+<th>目标能力</th>
+<th>推荐资源</th>
+<th>时间成本</th>
+<th>考试费用（CAD）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅ AWS Certified Cloud Practitioner (CLF-C02)</td>
+<td>掌握 AWS 服务基础、计费模型、IAM、安全性等</td>
+<td><a target="_blank" rel="noopener" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials">AWS Skill Builder 免费课程</a></td>
+<td>2–3 周</td>
+<td>~$125 CAD</td>
+</tr>
+<tr>
+<td>✅ AWS Certified Machine Learning – Specialty (MLS-C01)</td>
+<td>构建、部署、监控 ML 模型（重点是 SageMaker）</td>
+<td>AWS 官方指南 + Udemy 课程 + 《Data Science on AWS》</td>
+<td>6–8 周</td>
+<td>~$300 CAD</td>
+</tr>
+<tr>
+<td>✅ AWS Certified Machine Learning Engineer – Associate (MLE-A01)</td>
+<td>构建 ML 系统 + MLOps 自动化部署（新认证）</td>
+<td>等官方课程（2024下半年上线）</td>
+<td>4–6 周（建议考前两证后再准备）</td>
+<td>~$180–225 CAD（待定）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 建议顺序：先 CLF-C02（1 周搞定），再 MLS-C01，最后考虑 MLE-A01（2025 上半年考）。</p>
+</blockquote>
+<hr>
+<h2 id="💻-推荐组合项目实践（简历亮点）"><a href="#💻-推荐组合项目实践（简历亮点）" class="headerlink" title="💻 推荐组合项目实践（简历亮点）"></a>💻 推荐组合项目实践（简历亮点）</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>技术栈</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅ 多语言 AI Agent 服务系统</td>
+<td>LangChain + LangGraph + Supabase + FastAPI + AWS</td>
+<td>接收用户需求 → 多 Agent 协作 → 生成回答&#x2F;搜索文档 → 云端部署</td>
+</tr>
+<tr>
+<td>✅ 私人知识库问答系统</td>
+<td>LlamaIndex + LangChain + AWS Lambda</td>
+<td>支持用户上传 PDF + 问答系统 + 云函数响应</td>
+</tr>
+<tr>
+<td>✅ LLM DevOps 管理平台（实验性）</td>
+<td>AutoGen + DSPy + Docker + CloudWatch</td>
+<td>用 AutoGen 模拟多个 LLM Agent 自动完成部署任务，观测云上指标变化</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📈-就业前景总结（安省）"><a href="#📈-就业前景总结（安省）" class="headerlink" title="📈 就业前景总结（安省）"></a>📈 就业前景总结（安省）</h2><table>
+<thead>
+<tr>
+<th>职位关键词</th>
+<th>近 30 天岗位数（Indeed）</th>
+<th>平均薪资</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LLM Engineer &#x2F; AI Agent Developer</td>
+<td>100+</td>
+<td>CA$90,000–140,000</td>
+</tr>
+<tr>
+<td>AWS ML Engineer &#x2F; MLOps Specialist</td>
+<td>200+</td>
+<td>CA$110,000–150,000</td>
+</tr>
+<tr>
+<td>Cloud AI Application Developer</td>
+<td>100+</td>
+<td>CA$95,000–130,000</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>✅ 拥有「LLM工具链 + AWS认证」的复合型技能组合，非常契合中小企业部署 AI 应用的实际需求。</p>
+</blockquote>
+<hr>
+<h2 id="💰-总体成本估算"><a href="#💰-总体成本估算" class="headerlink" title="💰 总体成本估算"></a>💰 总体成本估算</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>总时长（预估）</th>
+<th>总费用（CAD）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>技术栈学习（AI Agent）</td>
+<td>2–3 个月</td>
+<td>$0（主要免费资源）</td>
+</tr>
+<tr>
+<td>AWS 认证考试</td>
+<td>4–6 个月</td>
+<td>~$600–700 CAD</td>
+</tr>
+<tr>
+<td>设备和云服务</td>
+<td>（实践用 EC2&#x2F;SageMaker）</td>
+<td>~$50–100&#x2F;月（可控制）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="✅-总结建议"><a href="#✅-总结建议" class="headerlink" title="✅ 总结建议"></a>✅ 总结建议</h2><blockquote>
+<p>🎯 你选择以「AI Agent + 云部署 + AWS 实战」为职业发展路径是当前非常稳健的中期规划，尤其适合未来 1–3 年内结合生成式 AI 技术的广泛应用。</p>
+</blockquote>
+<p>如你希望我帮你规划一个<strong>周&#x2F;季度制的学习表格（含进度与复习安排）</strong>，我也可以立即为你生成。是否需要？</p>
+<p>非常好，Elvin。你打算考的三张 AWS 认证是：</p>
+<ol>
+<li><strong>AWS Certified Cloud Practitioner (CLF-C02)</strong> – 入门级</li>
+<li><strong>AWS Certified Machine Learning – Specialty (MLS-C01)</strong> – 中高级</li>
+<li><strong>AWS Certified Machine Learning Engineer – Associate (MLE-A01)</strong> – 新出的认证，聚焦工程部署与 MLOps</li>
+</ol>
+<p>这些证书的组合<strong>非常适合你当前“LLM 应用 + 工程部署”方向的职业路径</strong>，特别是在面向北美企业求职时，AWS 证书可以起到简历加分、筛选绿灯的作用。</p>
+<hr>
+<h2 id="🗓️-一、整体学习时间规划（推荐6个月以内完成）"><a href="#🗓️-一、整体学习时间规划（推荐6个月以内完成）" class="headerlink" title="🗓️ 一、整体学习时间规划（推荐6个月以内完成）"></a>🗓️ 一、整体学习时间规划（推荐6个月以内完成）</h2><table>
+<thead>
+<tr>
+<th>月份</th>
+<th>学习目标</th>
+<th>证书</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第1个月</td>
+<td>入门 + 云服务基础</td>
+<td>✅ CLF-C02</td>
+</tr>
+<tr>
+<td>第2–3个月</td>
+<td>ML建模、评估、调参 + SageMaker 应用</td>
+<td>✅ MLS-C01</td>
+</tr>
+<tr>
+<td>第4–5个月</td>
+<td>MLOps 实践、容器、自动化部署、工程流程</td>
+<td>✅ MLE-A01</td>
+</tr>
+<tr>
+<td>第6个月</td>
+<td>复习 &amp; 考试冲刺 &amp; 项目集成</td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📚-二、每张证书的学习方法和资源建议"><a href="#📚-二、每张证书的学习方法和资源建议" class="headerlink" title="📚 二、每张证书的学习方法和资源建议"></a>📚 二、每张证书的学习方法和资源建议</h2><hr>
+<h3 id="✅-1-AWS-Certified-Cloud-Practitioner-CLF-C02"><a href="#✅-1-AWS-Certified-Cloud-Practitioner-CLF-C02" class="headerlink" title="✅ [1] AWS Certified Cloud Practitioner (CLF-C02)"></a>✅ [1] AWS Certified Cloud Practitioner (CLF-C02)</h3><h4 id="🎯-目标："><a href="#🎯-目标：" class="headerlink" title="🎯 目标："></a>🎯 目标：</h4><ul>
+<li>掌握 AWS 核心服务（EC2&#x2F;S3&#x2F;RDS&#x2F;IAM&#x2F;VPC）</li>
+<li>理解计费、安全、共享责任模型、全球基础架构</li>
+</ul>
+<h4 id="📚-推荐学习方法："><a href="#📚-推荐学习方法：" class="headerlink" title="📚 推荐学习方法："></a>📚 推荐学习方法：</h4><table>
+<thead>
+<tr>
+<th>资源</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 官方课程</td>
+<td><a target="_blank" rel="noopener" href="https://www.aws.training/Details/Curriculum?id=20685">AWS Cloud Practitioner Essentials (免费)</a></td>
+</tr>
+<tr>
+<td>2. 视频课</td>
+<td><strong>Stephane Maarek 的 Udemy CLF-C02 课程</strong>（中文讲解也可配合 Bilibili）</td>
+</tr>
+<tr>
+<td>3. 练习题</td>
+<td>ExamTopics + Whizlabs（高频题型）</td>
+</tr>
+</tbody></table>
+<h4 id="🕒-时间安排（建议-2–3-周）："><a href="#🕒-时间安排（建议-2–3-周）：" class="headerlink" title="🕒 时间安排（建议 2–3 周）："></a>🕒 时间安排（建议 2–3 周）：</h4><table>
+<thead>
+<tr>
+<th>周数</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第1周</td>
+<td>跑完官方免费课程视频 + EC2&#x2F;S3&#x2F;IAM 操作演示</td>
+</tr>
+<tr>
+<td>第2周</td>
+<td>做练习题 + 阅读白皮书（Well Architected Framework）</td>
+</tr>
+<tr>
+<td>第3周</td>
+<td>模拟测试 ➝ 注册考试</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="✅-2-AWS-Certified-Machine-Learning-–-Specialty-MLS-C01"><a href="#✅-2-AWS-Certified-Machine-Learning-–-Specialty-MLS-C01" class="headerlink" title="✅ [2] AWS Certified Machine Learning – Specialty (MLS-C01)"></a>✅ [2] AWS Certified Machine Learning – Specialty (MLS-C01)</h3><h4 id="🎯-目标：-1"><a href="#🎯-目标：-1" class="headerlink" title="🎯 目标："></a>🎯 目标：</h4><ul>
+<li>精通机器学习流程、SageMaker、模型调优、监控</li>
+<li>熟悉端到端部署、特征工程、模型性能分析</li>
+</ul>
+<h4 id="📚-推荐学习方法：-1"><a href="#📚-推荐学习方法：-1" class="headerlink" title="📚 推荐学习方法："></a>📚 推荐学习方法：</h4><table>
+<thead>
+<tr>
+<th>资源</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 视频课</td>
+<td><strong>Udemy – AWS ML Specialty by Maarek &#x2F; Frank Kane</strong></td>
+</tr>
+<tr>
+<td>2. 官方实验</td>
+<td><a target="_blank" rel="noopener" href="https://catalog.workshops.aws/ml.html">SageMaker Studio Lab + AWS Hands-on Labs</a></td>
+</tr>
+<tr>
+<td>3. 书籍</td>
+<td>《Data Science on AWS》 or 《Amazon SageMaker Cookbook》</td>
+</tr>
+<tr>
+<td>4. 模拟题</td>
+<td><strong>Whizlabs</strong> + <strong>TutorialDojo</strong></td>
+</tr>
+</tbody></table>
+<h4 id="🕒-时间安排（建议-6–8-周）："><a href="#🕒-时间安排（建议-6–8-周）：" class="headerlink" title="🕒 时间安排（建议 6–8 周）："></a>🕒 时间安排（建议 6–8 周）：</h4><table>
+<thead>
+<tr>
+<th>周数</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第1–2周</td>
+<td>熟悉 SageMaker、AutoML、模型部署 pipeline</td>
+</tr>
+<tr>
+<td>第3–5周</td>
+<td>学习模型调参、数据偏差、评估指标（Precision&#x2F;Recall&#x2F;AUC）</td>
+</tr>
+<tr>
+<td>第6周</td>
+<td>MLOps流程、监控报警、资源自动扩展</td>
+</tr>
+<tr>
+<td>第7–8周</td>
+<td>模拟题训练 + 官方考试准备材料</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="✅-3-AWS-Certified-Machine-Learning-Engineer-–-Associate-MLE-A01"><a href="#✅-3-AWS-Certified-Machine-Learning-Engineer-–-Associate-MLE-A01" class="headerlink" title="✅ [3] AWS Certified Machine Learning Engineer – Associate (MLE-A01)"></a>✅ [3] AWS Certified Machine Learning Engineer – Associate (MLE-A01)</h3><h4 id="🎯-目标：-2"><a href="#🎯-目标：-2" class="headerlink" title="🎯 目标："></a>🎯 目标：</h4><ul>
+<li>构建生产级 ML 系统，涵盖部署、CI&#x2F;CD、版本管理、监控</li>
+<li>更强调工程实践（与 MLS-C01 的“建模理论”形成互补）</li>
+</ul>
+<h4 id="📚-推荐学习方法（2024年新出，资源较少）："><a href="#📚-推荐学习方法（2024年新出，资源较少）：" class="headerlink" title="📚 推荐学习方法（2024年新出，资源较少）："></a>📚 推荐学习方法（2024年新出，资源较少）：</h4><table>
+<thead>
+<tr>
+<th>资源</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 官方指南</td>
+<td><a target="_blank" rel="noopener" href="https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/">Exam Guide</a>（内容覆盖明确）</td>
+</tr>
+<tr>
+<td>2. 实战平台</td>
+<td>使用 SageMaker Pipelines + SageMaker Projects</td>
+</tr>
+<tr>
+<td>3. 视频课程</td>
+<td>等待 Maarek 出新课程（预计2024下半年）或追踪 Bilibili &#x2F; YouTube讲解</td>
+</tr>
+<tr>
+<td>4. GitHub 项目</td>
+<td>跟着 AWS 示例做模型训练、部署、监控、容器封装等实践</td>
+</tr>
+</tbody></table>
+<h4 id="🕒-时间安排（建议-5–6-周）："><a href="#🕒-时间安排（建议-5–6-周）：" class="headerlink" title="🕒 时间安排（建议 5–6 周）："></a>🕒 时间安排（建议 5–6 周）：</h4><table>
+<thead>
+<tr>
+<th>周数</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第1–2周</td>
+<td>理解整体 MLOps 流程、CI&#x2F;CD 构建方法</td>
+</tr>
+<tr>
+<td>第3–4周</td>
+<td>重点练习 SageMaker Pipelines &#x2F; Model Monitor &#x2F; Container Deployment</td>
+</tr>
+<tr>
+<td>第5–6周</td>
+<td>复习考试重点，做结构性总结题</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📌-三、学习技巧建议"><a href="#📌-三、学习技巧建议" class="headerlink" title="📌 三、学习技巧建议"></a>📌 三、学习技巧建议</h2><ul>
+<li>✅ <strong>边看视频边实操</strong>：不要纯刷视频，务必在 AWS Console + SageMaker Studio 实操</li>
+<li>✅ <strong>写总结文档或博客</strong>：将你学到的内容模块化记录（加分项 + 深度理解）</li>
+<li>✅ <strong>做错题整理</strong>：尤其是 MLS-C01 和 MLE-A01 中错题要分类分析（建模、部署、监控）</li>
+</ul>
+<hr>
+<h2 id="✅-四、建议时间节点安排（如果从6月开始）"><a href="#✅-四、建议时间节点安排（如果从6月开始）" class="headerlink" title="✅ 四、建议时间节点安排（如果从6月开始）"></a>✅ 四、建议时间节点安排（如果从6月开始）</h2><table>
+<thead>
+<tr>
+<th>时间</th>
+<th>任务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>6月上</td>
+<td>学完 CLF-C02 ➝ 考试</td>
+</tr>
+<tr>
+<td>6月中–7月底</td>
+<td>学 MLS-C01 + 完成 1–2 个 SageMaker 项目 + 考试</td>
+</tr>
+<tr>
+<td>8月</td>
+<td>学 MLE-A01 + 模拟 MLOps流程搭建 + 考试（或部署你的炒股助手项目作为练手）</td>
+</tr>
+</tbody></table>
+<hr>
+<p>如果你想，我可以：</p>
+<ul>
+<li>帮你整理一个「每日&#x2F;每周学习表格」</li>
+<li>或者提供 AWS SageMaker MLOps 全流程项目模版供你边学边练</li>
+</ul>
+<p>你想我从哪个开始准备？我来配套帮你安排资料与任务。</p>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#General-Requirement-for-an-AI-Agent-developer"><span class="toc-number">1.</span> <span class="toc-text">General Requirement for an AI Agent developer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1-Beginner-course-and-reading-paper"><span class="toc-number">2.</span> <span class="toc-text">Part-1. Beginner course and reading paper</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ReAct-Synergizing-Reasoning-And-Acting-in-Language-Models"><span class="toc-number">2.1.</span> <span class="toc-text">1. ReAct Synergizing Reasoning And Acting in Language Models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Generative-Agents-Interactive-SImulacra-of-Human-Behavior"><span class="toc-number">2.2.</span> <span class="toc-text">2. Generative Agents: Interactive SImulacra of Human Behavior</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-AutoGen-Enabling-Next-Gen-LLM-Application-via-Multi-Agent-Conversation"><span class="toc-number">2.3.</span> <span class="toc-text">3. AutoGen: Enabling Next-Gen LLM Application via Multi-Agent Conversation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-StateFlow-Enhancing-LLM-Task-Solving-through-State-Driven"><span class="toc-number">2.4.</span> <span class="toc-text">4. StateFlow: Enhancing LLM Task-Solving through State-Driven</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-2-Conception-and-Opensources"><span class="toc-number">3.</span> <span class="toc-text">Part-2. Conception and Opensources</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Chain-of-Thought"><span class="toc-number">3.1.</span> <span class="toc-text">1. Chain of Thought</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ReAct"><span class="toc-number">3.2.</span> <span class="toc-text">2. ReAct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Reinforcement-Learning"><span class="toc-number">3.3.</span> <span class="toc-text">3. Reinforcement Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-AutoGen"><span class="toc-number">3.4.</span> <span class="toc-text">4. AutoGen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-LlamaIndex"><span class="toc-number">3.5.</span> <span class="toc-text">5. LlamaIndex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-DSPy"><span class="toc-number">3.6.</span> <span class="toc-text">6. DSPy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-ColBERTv2-Retrieval"><span class="toc-number">3.7.</span> <span class="toc-text">7. ColBERTv2 Retrieval</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-3-Community"><span class="toc-number">4.</span> <span class="toc-text">Part-3. Community</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-4-Production"><span class="toc-number">5.</span> <span class="toc-text">Part-4. Production</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Youtube"><span class="toc-number">5.1.</span> <span class="toc-text">Youtube</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linkedin"><span class="toc-number">5.2.</span> <span class="toc-text">Linkedin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Twitter"><span class="toc-number">5.3.</span> <span class="toc-text">Twitter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%AF-%E8%81%8C%E4%B8%9A%E6%96%B9%E5%90%91%E7%9B%AE%E6%A0%87%EF%BC%88%E6%9C%AA%E6%9D%A5-1%E2%80%932-%E5%B9%B4%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">🎯 职业方向目标（未来 1–2 年）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A0-Part-1%EF%BC%9AAI-Agent-%E6%8A%80%E6%9C%AF%E6%A0%88%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92"><span class="toc-number">7.</span> <span class="toc-text">🧠 Part 1：AI Agent 技术栈学习计划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%98%81%EF%B8%8F-Part-2%EF%BC%9AAWS-%E4%BA%91%E6%9C%8D%E5%8A%A1-%E8%AE%A4%E8%AF%81%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92"><span class="toc-number">8.</span> <span class="toc-text">☁️ Part 2：AWS 云服务 + 认证路径规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%BB-%E6%8E%A8%E8%8D%90%E7%BB%84%E5%90%88%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5%EF%BC%88%E7%AE%80%E5%8E%86%E4%BA%AE%E7%82%B9%EF%BC%89"><span class="toc-number">9.</span> <span class="toc-text">💻 推荐组合项目实践（简历亮点）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%88-%E5%B0%B1%E4%B8%9A%E5%89%8D%E6%99%AF%E6%80%BB%E7%BB%93%EF%BC%88%E5%AE%89%E7%9C%81%EF%BC%89"><span class="toc-number">10.</span> <span class="toc-text">📈 就业前景总结（安省）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%B0-%E6%80%BB%E4%BD%93%E6%88%90%E6%9C%AC%E4%BC%B0%E7%AE%97"><span class="toc-number">11.</span> <span class="toc-text">💰 总体成本估算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93%E5%BB%BA%E8%AE%AE"><span class="toc-number">12.</span> <span class="toc-text">✅ 总结建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%97%93%EF%B8%8F-%E4%B8%80%E3%80%81%E6%95%B4%E4%BD%93%E5%AD%A6%E4%B9%A0%E6%97%B6%E9%97%B4%E8%A7%84%E5%88%92%EF%BC%88%E6%8E%A8%E8%8D%906%E4%B8%AA%E6%9C%88%E4%BB%A5%E5%86%85%E5%AE%8C%E6%88%90%EF%BC%89"><span class="toc-number">13.</span> <span class="toc-text">🗓️ 一、整体学习时间规划（推荐6个月以内完成）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9A-%E4%BA%8C%E3%80%81%E6%AF%8F%E5%BC%A0%E8%AF%81%E4%B9%A6%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E5%92%8C%E8%B5%84%E6%BA%90%E5%BB%BA%E8%AE%AE"><span class="toc-number">14.</span> <span class="toc-text">📚 二、每张证书的学习方法和资源建议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-1-AWS-Certified-Cloud-Practitioner-CLF-C02"><span class="toc-number">14.1.</span> <span class="toc-text">✅ [1] AWS Certified Cloud Practitioner (CLF-C02)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%8E%AF-%E7%9B%AE%E6%A0%87%EF%BC%9A"><span class="toc-number">14.1.1.</span> <span class="toc-text">🎯 目标：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">14.1.2.</span> <span class="toc-text">📚 推荐学习方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%95%92-%E6%97%B6%E9%97%B4%E5%AE%89%E6%8E%92%EF%BC%88%E5%BB%BA%E8%AE%AE-2%E2%80%933-%E5%91%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">14.1.3.</span> <span class="toc-text">🕒 时间安排（建议 2–3 周）：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-2-AWS-Certified-Machine-Learning-%E2%80%93-Specialty-MLS-C01"><span class="toc-number">14.2.</span> <span class="toc-text">✅ [2] AWS Certified Machine Learning – Specialty (MLS-C01)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%8E%AF-%E7%9B%AE%E6%A0%87%EF%BC%9A-1"><span class="toc-number">14.2.1.</span> <span class="toc-text">🎯 目标：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%EF%BC%9A-1"><span class="toc-number">14.2.2.</span> <span class="toc-text">📚 推荐学习方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%95%92-%E6%97%B6%E9%97%B4%E5%AE%89%E6%8E%92%EF%BC%88%E5%BB%BA%E8%AE%AE-6%E2%80%938-%E5%91%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">14.2.3.</span> <span class="toc-text">🕒 时间安排（建议 6–8 周）：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-3-AWS-Certified-Machine-Learning-Engineer-%E2%80%93-Associate-MLE-A01"><span class="toc-number">14.3.</span> <span class="toc-text">✅ [3] AWS Certified Machine Learning Engineer – Associate (MLE-A01)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%8E%AF-%E7%9B%AE%E6%A0%87%EF%BC%9A-2"><span class="toc-number">14.3.1.</span> <span class="toc-text">🎯 目标：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%EF%BC%882024%E5%B9%B4%E6%96%B0%E5%87%BA%EF%BC%8C%E8%B5%84%E6%BA%90%E8%BE%83%E5%B0%91%EF%BC%89%EF%BC%9A"><span class="toc-number">14.3.2.</span> <span class="toc-text">📚 推荐学习方法（2024年新出，资源较少）：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%95%92-%E6%97%B6%E9%97%B4%E5%AE%89%E6%8E%92%EF%BC%88%E5%BB%BA%E8%AE%AE-5%E2%80%936-%E5%91%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">14.3.3.</span> <span class="toc-text">🕒 时间安排（建议 5–6 周）：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E4%B8%89%E3%80%81%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7%E5%BB%BA%E8%AE%AE"><span class="toc-number">15.</span> <span class="toc-text">📌 三、学习技巧建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E5%9B%9B%E3%80%81%E5%BB%BA%E8%AE%AE%E6%97%B6%E9%97%B4%E8%8A%82%E7%82%B9%E5%AE%89%E6%8E%92%EF%BC%88%E5%A6%82%E6%9E%9C%E4%BB%8E6%E6%9C%88%E5%BC%80%E5%A7%8B%EF%BC%89"><span class="toc-number">16.</span> <span class="toc-text">✅ 四、建议时间节点安排（如果从6月开始）</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&text=The Way To An AI Agent Developer"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&title=The Way To An AI Agent Developer"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&is_video=false&description=The Way To An AI Agent Developer"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=The Way To An AI Agent Developer&body=Check out this article: http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&title=The Way To An AI Agent Developer"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&title=The Way To An AI Agent Developer"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&title=The Way To An AI Agent Developer"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&title=The Way To An AI Agent Developer"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&name=The Way To An AI Agent Developer&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/03/22/The-Way-To-An-AI-Agent-Developer/&t=The Way To An AI Agent Developer"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>

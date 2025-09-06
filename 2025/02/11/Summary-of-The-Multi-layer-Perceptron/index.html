@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Train a MLP system, need two step. Forward to calcualte the output for given inputs and current weights. Backward to feedback the error between predict and target to weights, and update weights with">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Summary of The Multi-layer Perceptron">
+<meta property="og:url" content="http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="Train a MLP system, need two step. Forward to calcualte the output for given inputs and current weights. Backward to feedback the error between predict and target to weights, and update weights with">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/MLP.png">
+<meta property="og:image" content="http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/GradientDescent.jpg">
+<meta property="article:published_time" content="2025-02-11T21:47:54.000Z">
+<meta property="article:modified_time" content="2025-09-01T12:00:42.970Z">
+<meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/MLP.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Summary of The Multi-layer Perceptron</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/02/16/Numerical-Computation-Methods-Summary/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/02/08/Study-of-U-CARFnet/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&text=Summary of The Multi-layer Perceptron"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&title=Summary of The Multi-layer Perceptron"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&is_video=false&description=Summary of The Multi-layer Perceptron"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Summary of The Multi-layer Perceptron&body=Check out this article: http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&title=Summary of The Multi-layer Perceptron"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&title=Summary of The Multi-layer Perceptron"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&title=Summary of The Multi-layer Perceptron"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&title=Summary of The Multi-layer Perceptron"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&name=Summary of The Multi-layer Perceptron&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&t=Summary of The Multi-layer Perceptron"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Summary of The Multi-layer Perceptron
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-02-11T21:47:54.000Z" class="dt-published" itemprop="datePublished">2025-02-11</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <img src="/2025/02/11/Summary-of-The-Multi-layer-Perceptron/MLP.png" class="" title="MLP">
+<ol>
+<li>Train a MLP system, need two step.</li>
+<li>Forward to calcualte the output for given inputs and current weights.</li>
+<li>Backward to feedback the error between predict and target to weights, and update weights with the gradient of error function.</li>
+<li>Traditional MLP systems use threshold function as activation function</li>
+<li>Mordern MLP system has replaced activations with Sigmoid, Soft-max, tanh, ReLU ect.</li>
+<li>These activations has 2 main advantage: non-linearity and continuous(differentiable)</li>
+<li>Non-linearity enable the system to learn the non-linearity features</li>
+<li>Continuous(differentiable) enables the system to do back-propogation learning, with gradient descent algorithm</li>
+<li>With the gradient descent algorithm, we can find the lowest error, with iterately adjust the weights. There are several components in gradient descent algorition: inputs, activation function, weights. </li>
+<li>In one layer, weights represents the direction of gradients, we need to find the lower gradients in every direction. </li>
+<li>Which means we need to update each weights in each iteration.</li>
+<li>The forward calculation is very straightforward, just sum the products of all activations or inputs and weights from previous layer, pass this number into the activation function of current layer, the output is the activation of this neuron.</li>
+<li>The back-propogation algorithm is based on the relation between error with weights of every layers, this relation is built with the gradients of error function, which is the partial derivative of error function with respect to the weights in each layers. </li>
+<li>To calculate the weights of output layer, we just need to calculate the partial derivative of error function with respect to each weight.</li>
+</ol>
+<img src="/2025/02/11/Summary-of-The-Multi-layer-Perceptron/GradientDescent.jpg" class="" title="Gradient Descent algorithm">
+
+<ol start="15">
+<li>Weights should be initialised to small random numbers, both positive and negative. If the weights was initialised too large, the activation function will easy to saturated, which means reached its maximum or minimum value.  If the weights are too small(close to zero), the activation will behave like a linear function.</li>
+<li>Two popular ways of initializing weights: glorot_uniform (Xavier Uniform) and he_normal.</li>
+<li>glorot_uniform(Xavier Uniform) initialise weights suit for activation functions like sigmoid, tanh, soft-max</li>
+<li>he_normal initialise weights suit for ReLU.</li>
+<li>Both weights initialiser pursue to uniform the input to the neuron to 1. don’t too small to reach to the linear area of activation function 2. don’t too large to saturate the activation function  </li>
+<li>When we consider how to set the input layer, and how to feed input into network, there are mainly two directions: sequential and batch training.</li>
+<li>MLP is designed to be a batch algorithm. All of the training examples are presented to the neural network. It perfoms a more accurate estimate of the error gradient, and will thus converge to the local minimum more quickly. And more possible to reach to a local minimum which is not what we want.</li>
+<li>We also can feed input one by one, which is sequentilly, weights will be update according to each input, It will take more time to converge ,and sometime could avoid local minima, potentially reaching better solutions. If choice sequentil input, we need to random the input order.</li>
+<li>Gradient Descent algorithm potiently drive us to a local minima, instead of we expected global minima.</li>
+<li>Several technique could help us overcome the local minima, like try different starting (initialising weights), Pick up momentum for the Gradient Descent algorithm, Weight decay which reduce the learning rate as learning progress.</li>
+<li>Minibatches can be employed to avoid the local minimun the same time to speed up the learning progress.</li>
+<li>Stochastic Gradient Descent is the extreme version of minibatch.</li>
+<li>Include information about the second derivatives of the error with respect to the weights could sometimes results in much larger performance gains.</li>
+<li>MLP could be applied to find solutions to four different types of problem: regression, classification, time-series prediction, and data compression.</li>
+<li>Training data should be 10 times of neuron number.  Neuron number is not as much as good, because large neuron number is more possible to overfit, and need more data and time to train.</li>
+<li>For MLP system, one hidden layer + one output layer could approximate almost all smooth function according to the Universal Approximation Theorem.</li>
+<li>Early stopping is what we pursued to finish the learning to avoid overfitting. Use the validation set to track the validation error, once it goes up, it’s just the time of early stopping.</li>
+<li>Except the Error function by calculating the sum of squares, we can use the cross-entropy error function, it emply the natural logarithm, it is nice to handle the soft-max activation.</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&text=Summary of The Multi-layer Perceptron"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&title=Summary of The Multi-layer Perceptron"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&is_video=false&description=Summary of The Multi-layer Perceptron"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Summary of The Multi-layer Perceptron&body=Check out this article: http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&title=Summary of The Multi-layer Perceptron"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&title=Summary of The Multi-layer Perceptron"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&title=Summary of The Multi-layer Perceptron"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&title=Summary of The Multi-layer Perceptron"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&name=Summary of The Multi-layer Perceptron&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/02/11/Summary-of-The-Multi-layer-Perceptron/&t=Summary of The Multi-layer Perceptron"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>
