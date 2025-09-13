@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="ref struct &#x2F; ref fieldstructwe usually use a struct type as a local variable, so it typically is a stack allocated value. But it can be allocalted on heap. struct is a value type, it will be allo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="High-Performance C#">
+<meta property="og:url" content="http://example.com/2025/08/24/High-Performance-C/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="ref struct &#x2F; ref fieldstructwe usually use a struct type as a local variable, so it typically is a stack allocated value. But it can be allocalted on heap. struct is a value type, it will be allo">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-24T18:15:10.000Z">
+<meta property="article:modified_time" content="2025-09-05T23:53:15.612Z">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>High-Performance C#</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/09/09/News-review/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/08/11/Ora2pg/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/08/24/High-Performance-C/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/08/24/High-Performance-C/&text=High-Performance C#"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/08/24/High-Performance-C/&title=High-Performance C#"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/08/24/High-Performance-C/&is_video=false&description=High-Performance C#"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=High-Performance C#&body=Check out this article: http://example.com/2025/08/24/High-Performance-C/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/08/24/High-Performance-C/&title=High-Performance C#"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/08/24/High-Performance-C/&title=High-Performance C#"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/08/24/High-Performance-C/&title=High-Performance C#"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/08/24/High-Performance-C/&title=High-Performance C#"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/08/24/High-Performance-C/&name=High-Performance C#&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/08/24/High-Performance-C/&t=High-Performance C#"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ref-struct-x2F-ref-field"><span class="toc-number">1.</span> <span class="toc-text">ref struct &#x2F; ref field</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#struct"><span class="toc-number">1.1.</span> <span class="toc-text">struct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref-struct"><span class="toc-number">1.2.</span> <span class="toc-text">ref struct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref-field"><span class="toc-number">1.3.</span> <span class="toc-text">ref field</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Span-lt-T-gt"><span class="toc-number">2.</span> <span class="toc-text">Span&lt;T&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Constructors-Explicit-Creation"><span class="toc-number">2.1.</span> <span class="toc-text">Constructors (Explicit Creation)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Implicit-Conversions"><span class="toc-number">2.2.</span> <span class="toc-text">Implicit Conversions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-a-normal-array-from-a-Span"><span class="toc-number">2.3.</span> <span class="toc-text">Get a normal array from a Span</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Strings-amp-chars-manipulation"><span class="toc-number">2.4.</span> <span class="toc-text">Strings &amp; chars manipulation</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        High-Performance C#
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-08-24T18:15:10.000Z" class="dt-published" itemprop="datePublished">2025-08-24</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="ref-struct-x2F-ref-field"><a href="#ref-struct-x2F-ref-field" class="headerlink" title="ref struct &#x2F; ref field"></a>ref struct &#x2F; ref field</h2><h3 id="struct"><a href="#struct" class="headerlink" title="struct"></a><strong>struct</strong></h3><p>we usually use a <strong>struct</strong> type as a local variable, so it typically is a stack allocated value. But it can be allocalted on heap.</p>
+<p><strong>struct</strong> is a value type, it will be allocated on somewhere it was declared:</p>
+<ol>
+<li>declared by a method local variable:  [stack]</li>
+<li>declared inside another struct: [where the containing struct locates]</li>
+<li>declared inside an array: [heap]</li>
+<li>declared as a field of a class: [heap]</li>
+<li>be boxed to as a object or interface type: [heap]</li>
+</ol>
+<p><strong>struct</strong> could contain reference type value like string or other object, a reference to their heap addresss will be hold by <strong>struct</strong>.</p>
+<h3 id="ref-struct"><a href="#ref-struct" class="headerlink" title="ref struct"></a><strong>ref struct</strong></h3><p><strong>ref struct</strong> is a strictly restricted stack allocation type, it has some strict restrictions:</p>
+<ol>
+<li>cannot has reference type field like string or other object</li>
+<li>cannot be a field of a class or a regular struct</li>
+<li>cannot be an element of an array</li>
+<li>cannot be boxed</li>
+<li>cannot be used in async(await&#x2F;yield) methods or lambda expressions</li>
+<li>cannot be returned by a method<br>All above restriction enfores the ref struct lifetime safety, to avoid dangling reference.<br>It allows a zero allocating manipulate memory on stack, heap, native buffers.</li>
+</ol>
+<h3 id="ref-field"><a href="#ref-field" class="headerlink" title="ref field"></a><strong>ref</strong> field</h3><p><strong>ref struct</strong> can has <strong>ref</strong> field, A <strong>ref</strong> field is a managed pointer that can point to a location on either the stack or the heap. This is the key to a <strong>ref struct</strong>‘s power.<br><strong>behaves like a managed pointer but</strong>:</p>
+<ol>
+<li>type safety: the pointing object has to be with same type of the <strong>ref</strong> field decalreation</li>
+<li>this pointer cannot be manipulated arithmetically or created like unmanaged pointer</li>
+<li>lifetime of <strong>ref</strong> field &lt;&#x3D; the lifetime of object it points to</li>
+</ol>
+<p><strong>byref</strong> (managed by-reference) is a runtime type in IL that represents a reference to a specific memory location (variable, arrayelement, field) inside managed memory or stack. In C#, </p>
+<ul>
+<li>ref and out parameters </li>
+<li>ref locals </li>
+<li>ref returns<br>are implemented in IL as a <strong>byref</strong>. In IL, a <strong>byref</strong> is represented as a type with a trailing <strong>&amp;</strong>.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.method public void Example(int32&amp; x)&#123; ... &#125; //int32&amp; means a managed* reference to an int32</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>what does the “managed” mean here:  this reference will be updated when GC move the targeting object. this reference is safe.</li>
+</ul>
+<h2 id="Span-lt-T-gt"><a href="#Span-lt-T-gt" class="headerlink" title="Span&lt;T&gt;"></a><strong>Span&lt;T&gt;</strong></h2><p><strong>Span&lt;T&gt;</strong> is a <strong>readonly</strong> <strong>ref struct</strong> that represents a contiguous block of memory on stack, heap or unmanaged memory, to mutate the data like string or any type of array. It’s a zero-allocation, safe, high-performance alternative to pointers.<br>Core fields:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ref T _reference; // a IL byref to the first element</span><br><span class="line">int _length; //number of elements.</span><br></pre></td></tr></table></figure>
+<p>they act like a safe, typed pointer + length.<br><a target="_blank" rel="noopener" href="https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Span.cs">src&#x2F;libraries&#x2F;System.Private.CoreLib&#x2F;src&#x2F;System&#x2F;Span.cs</a></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// System/Span.cs</span></span><br><span class="line">[<span class="meta">DebuggerTypeProxy(typeof(SpanDebugView&lt;&gt;))</span>]</span><br><span class="line">[<span class="meta">DebuggerDisplay(<span class="string">&quot;&#123;ToString(),raw&#125;&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">NonVersionable</span>]</span><br><span class="line">[<span class="meta">NativeMarshalling(typeof(SpanMarshaller&lt;,&gt;))</span>]</span><br><span class="line">[<span class="meta">Intrinsic</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">readonly</span> <span class="keyword">ref</span> <span class="keyword">struct</span> <span class="title">Span</span>&lt;<span class="title">T</span>&gt;</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// fields</span></span><br><span class="line">    <span class="keyword">internal</span> <span class="keyword">readonly</span> <span class="keyword">ref</span> T _reference;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> <span class="built_in">int</span> _length;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ctors</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Span</span>(<span class="params">T[]? array</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Span</span>(<span class="params">T[]? array, <span class="built_in">int</span> start, <span class="built_in">int</span> length</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">unsafe</span> <span class="title">Span</span>(<span class="params"><span class="keyword">void</span>* pointer, <span class="built_in">int</span> length</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Span</span>(<span class="params"><span class="keyword">ref</span> T reference</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">internal</span> <span class="title">Span</span>(<span class="params"><span class="keyword">ref</span> T reference, <span class="built_in">int</span> length</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">ref</span> T <span class="keyword">this</span>[<span class="built_in">int</span> index] &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> Length &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">bool</span> IsEmpty &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">implicit</span> <span class="keyword">operator</span> <span class="title">Span</span>&lt;<span class="title">T</span>&gt;(<span class="params">T[]? array</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">implicit</span> <span class="keyword">operator</span> <span class="title">Span</span>&lt;<span class="title">T</span>&gt;(<span class="params">ArraySegment&lt;T&gt; segment</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">implicit</span> <span class="keyword">operator</span> <span class="title">ReadOnlySpan</span>&lt;<span class="title">T</span>&gt;(<span class="params">Span&lt;T&gt; span</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// mutating helpers</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Clear</span>()</span>; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Fill</span>(<span class="params">T <span class="keyword">value</span></span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CopyTo</span>(<span class="params">Span&lt;T&gt; destination</span>)</span>; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">bool</span> <span class="title">TryCopyTo</span>(<span class="params">Span&lt;T&gt; destination</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> T[] <span class="title">ToArray</span>()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Span&lt;T&gt; <span class="title">Slice</span>(<span class="params"><span class="built_in">int</span> start</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Span&lt;T&gt; <span class="title">Slice</span>(<span class="params"><span class="built_in">int</span> start, <span class="built_in">int</span> length</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Span&lt;T&gt;</strong> enables zero-copy slicing, stackalloc buffers, interop with native memory, and efficient APIs. Providing pointer-like power with compiler&#x2F;runtime safety.</p>
+<blockquote>
+<p>defalut</p>
+</blockquote>
+<p>the defalut value for a <strong>Span&lt;T&gt;</strong> is <strong>default(T)</strong> or <strong>default</strong>(7.1), which is all-zero bits for value type, null for reference types and NullRef<T>() for a ref field (NullRef<T>() is a special byref that’s invalid to dereference). <strong>Span&lt;T&gt;</strong>.Empty is a default struct.</p>
+<h3 id="Constructors-Explicit-Creation"><a href="#Constructors-Explicit-Creation" class="headerlink" title="Constructors (Explicit Creation)"></a>Constructors (Explicit Creation)</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">readonly</span> <span class="keyword">ref</span> <span class="keyword">struct</span> Span&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// Construct from a array, most common way</span></span><br><span class="line">Span(T[]? array)</span><br><span class="line">Span(T[]? array, <span class="built_in">int</span> start, <span class="built_in">int</span> length)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Construct from an unmanaged pointer, this Span&lt;T&gt; has to be wrapped in a unsafe block</span></span><br><span class="line"><span class="comment">// We are responsible to manage its lifetime, compiler and runtime will not manage it</span></span><br><span class="line">Span(<span class="keyword">void</span>* ptr, <span class="built_in">int</span> length)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Construct from a ref</span></span><br><span class="line"><span class="comment">// Low-level way to create spans from a reference directly. Used heavily inside runtime and libraries.</span></span><br><span class="line">Span(<span class="keyword">ref</span> T reference)</span><br><span class="line">Span(<span class="keyword">ref</span> T Treference, <span class="built_in">int</span> lenght)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Implicit-Conversions"><a href="#Implicit-Conversions" class="headerlink" title="Implicit Conversions"></a>Implicit Conversions</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// From an array</span></span><br><span class="line">T[] arr = <span class="keyword">new</span> <span class="built_in">int</span>[<span class="number">5</span>];</span><br><span class="line">Span&lt;<span class="built_in">int</span>&gt; s = arr; <span class="comment">// implicitly using arr.AsSpan();</span></span><br><span class="line"><span class="comment">// and also, we can do slicing</span></span><br><span class="line">Span&lt;<span class="built_in">int</span>&gt; s0 = arr.AsSpan(<span class="number">3</span>);</span><br><span class="line">Span&lt;<span class="built_in">int</span>&gt; s1 = arr.AsSpan(<span class="number">3</span>, <span class="number">5</span>);</span><br><span class="line">Span&lt;<span class="built_in">int</span>&gt; s2 = <span class="keyword">new</span> Span&lt;T&gt;(arr, <span class="number">3</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//from ArraySegement&lt;T&gt; to Span&lt;T&gt; </span></span><br><span class="line">ArraySegment&lt;<span class="built_in">int</span>&gt; seg = <span class="keyword">new</span>(arr, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line">Span&lt;<span class="built_in">int</span>&gt; s2 = seg;</span><br><span class="line"></span><br><span class="line"><span class="comment">//from Span&lt;T&gt; to ReadOnlySpan&lt;T&gt;</span></span><br><span class="line">ReadOnlySpan&lt;<span class="built_in">int</span>&gt; ro = s; </span><br></pre></td></tr></table></figure>
+
+<h3 id="Get-a-normal-array-from-a-Span"><a href="#Get-a-normal-array-from-a-Span" class="headerlink" title="Get a normal array from a Span"></a>Get a normal array from a Span<T></h3><p><strong>Span&lt;T&gt;</strong>.ToArray() is to allocate a new managed array:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Span&lt;<span class="built_in">int</span>&gt; span = <span class="keyword">stackalloc</span> <span class="built_in">int</span>[<span class="number">3</span>]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;; <span class="comment">//create a value type array on stack with stackalloc keyword. </span></span><br><span class="line"><span class="built_in">int</span>[] arr = span.ToArray(); <span class="comment">// allocates and copies</span></span><br></pre></td></tr></table></figure>
+<p>This operation is typically to compatible to some old API which only accepts T[], usually we don’t need to do this as Span<T> changed the original reference.</p>
+<blockquote>
+<p>what is ArraySegement&lt;T&gt;, based on <strong>Span&lt;T&gt;</strong></p>
+</blockquote>
+<p><strong>ArraySegment<T></strong> in C# is a lightweight structure that represents a contiguous block of elements from a larger array without creating a new copy of the data. </p>
+<ul>
+<li>it’s a struct version of <strong>Span&lt;T&gt;</strong>, while <strong>Span&lt;T&gt;</strong> is a <strong>readonly ref struct</strong></li>
+<li>it’s an old version of <strong>Span&lt;T&gt;</strong></li>
+<li>it’s an heap storable version of <strong>Span&lt;T&gt;</strong><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">readonly</span> <span class="keyword">struct</span> ArraySegment&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> T[]? _array;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> <span class="built_in">int</span> _offset;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> <span class="built_in">int</span> _count;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArraySegment</span>(<span class="params">T[] array</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArraySegment</span>(<span class="params">T[] array, <span class="built_in">int</span> offset, <span class="built_in">int</span> count</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> T[]? Array &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> Offset &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> Count &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>When to use <strong>ReadOnlySpan&lt;T&gt;</strong>, other than <strong>Span&lt;T&gt;</strong></p>
+</blockquote>
+<p>Even <strong>Span&lt;T&gt;</strong> is a <strong>readonly ref struct</strong>, this readonly only means its ref and length is immutable, but we still can manipulate the data the ref points to.<br>For a string object, it is immutable, so we cannot point it with a <strong>Span&lt;T&gt;</strong>, we can only reference it on stack with a <strong>ReadOnlySpan&lt;T&gt;</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// System/ReadOnlySpan.cs</span></span><br><span class="line">[<span class="meta">DebuggerTypeProxy(typeof(ReadOnlySpanDebugView&lt;&gt;))</span>]</span><br><span class="line">[<span class="meta">DebuggerDisplay(<span class="string">&quot;&#123;ToString(),raw&#125;&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">NonVersionable</span>]</span><br><span class="line">[<span class="meta">Intrinsic</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">readonly</span> <span class="keyword">ref</span> <span class="keyword">struct</span> <span class="title">ReadOnlySpan</span>&lt;<span class="title">T</span>&gt;</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">internal</span> <span class="keyword">readonly</span> <span class="keyword">ref</span> T _reference;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> <span class="built_in">int</span> _length;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ReadOnlySpan</span>(<span class="params">T[]? array</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ReadOnlySpan</span>(<span class="params">T[]? array, <span class="built_in">int</span> start, <span class="built_in">int</span> length</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">unsafe</span> <span class="title">ReadOnlySpan</span>(<span class="params"><span class="keyword">void</span>* pointer, <span class="built_in">int</span> length</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ReadOnlySpan</span>(<span class="params"><span class="keyword">ref</span> T reference</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">internal</span> <span class="title">ReadOnlySpan</span>(<span class="params"><span class="keyword">ref</span> T reference, <span class="built_in">int</span> length</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">ref</span> <span class="keyword">readonly</span> T <span class="keyword">this</span>[<span class="built_in">int</span> index] &#123; <span class="keyword">get</span>; &#125;  <span class="comment">//indexing returns a readonly T, this is different from Span&lt;T&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> Length &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">bool</span> IsEmpty &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">implicit</span> <span class="keyword">operator</span> <span class="title">ReadOnlySpan</span>&lt;<span class="title">T</span>&gt;(<span class="params">T[]? array</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">implicit</span> <span class="keyword">operator</span> <span class="title">ReadOnlySpan</span>&lt;<span class="title">T</span>&gt;(<span class="params">ArraySegment&lt;T&gt; segment</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// there is no mutating helpers, need to convert to Span&lt;T&gt; firstly to mutate reference data</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ReadOnlySpan&lt;T&gt; <span class="title">Slice</span>(<span class="params"><span class="built_in">int</span> start</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ReadOnlySpan&lt;T&gt; <span class="title">Slice</span>(<span class="params"><span class="built_in">int</span> start, <span class="built_in">int</span> length</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Strings-amp-chars-manipulation"><a href="#Strings-amp-chars-manipulation" class="headerlink" title="Strings &amp; chars manipulation"></a>Strings &amp; chars manipulation</h3><ol>
+<li><p>reading operation for a string, with <strong>ReadOnlySpan&lt;char&gt;</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">ReadOnlySpan&lt;<span class="built_in">char</span>&gt; ro = s.AsSpan(); <span class="comment">//&quot;hello&quot;</span></span><br><span class="line">ReadOnlySpan&lt;<span class="built_in">char</span>&gt; sub = s.AsSpan(<span class="number">1</span>,<span class="number">3</span>);<span class="comment">//&quot;ell&quot;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>writing operation for a string, with <strong>Span&lt;char&gt;</strong></p>
+</li>
+</ol>
+<ul>
+<li>produce a string with Span<char><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//create empty Span&lt;char&gt;</span></span><br><span class="line">Span&lt;<span class="built_in">char</span>&gt; buf = <span class="keyword">stackalloc</span> <span class="built_in">char</span>[<span class="number">64</span>];<span class="comment">// writable buffer</span></span><br><span class="line"><span class="built_in">int</span> written = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// the **TryFormat** method parses data into the stack buffer directly without creating a temporary string</span></span><br><span class="line"><span class="comment">// append an int literal as chars</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="number">12345.</span>TryFormat(buf[written..], <span class="keyword">out</span> <span class="built_in">int</span> w)) </span><br><span class="line">    <span class="keyword">return</span>; </span><br><span class="line">written += w;</span><br><span class="line"></span><br><span class="line"><span class="comment">// append a string literal</span></span><br><span class="line"><span class="string">&quot; items - &quot;</span>.AsSpan().CopyTo(buf[written..]); </span><br><span class="line">written += <span class="string">&quot; items - &quot;</span>.Length;</span><br><span class="line"></span><br><span class="line"><span class="comment">// append a DateTime in ISO</span></span><br><span class="line">DateTime.UtcNow.TryFormat(buf[written..], <span class="keyword">out</span> w, <span class="string">&quot;yyyy-MM-ddTHH:mm:ssZ&quot;</span>);</span><br><span class="line">written += w;</span><br><span class="line"></span><br><span class="line"><span class="comment">// final string (single alloc)</span></span><br><span class="line"><span class="built_in">string</span> result = <span class="keyword">new</span>(buf[..written]);</span><br></pre></td></tr></table></figure></li>
+<li>transform a read-only data into a writable buffer<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//read a Span&lt;char&gt; from string</span></span><br><span class="line"><span class="built_in">string</span> s = <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">ReadOnlySpan&lt;<span class="built_in">char</span>&gt; src = s.AsSpan();</span><br><span class="line">Span&lt;<span class="built_in">char</span>&gt; dst = <span class="keyword">stackalloc</span> <span class="built_in">char</span>[src.Length];</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; src.Length; i++) dst[i] = src[i];</span><br></pre></td></tr></table></figure></li>
+<li>fast join of two spans<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ReadOnlySpan&lt;<span class="built_in">char</span>&gt; a = <span class="string">&quot;foo&quot;</span>.AsSpan(), b = <span class="string">&quot;bar&quot;</span>.AsSpan();</span><br><span class="line">Span&lt;<span class="built_in">char</span>&gt; buf = <span class="keyword">stackalloc</span> <span class="built_in">char</span>[a.Length+<span class="number">1</span>+b.Length];</span><br><span class="line"><span class="built_in">int</span> w = <span class="number">0</span>; </span><br><span class="line">a.CopyTo(buf[w..]); </span><br><span class="line">w += a.Length;</span><br><span class="line">buf[w++] = <span class="string">&#x27;-&#x27;</span>;</span><br><span class="line">b.CopyTo(buf[e..]);</span><br><span class="line">w += b.Length;</span><br><span class="line"><span class="built_in">string</span> joined = <span class="keyword">new</span>(buf[..w]);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="3">
+<li><strong>ReadOnlySpan&lt;char&gt;</strong> vs <strong>ReadOnlySpan&lt;byte&gt;</strong><br><strong>ReadOnlySpan&lt;char&gt;</strong> is to operate data originates as .NET string, while <strong>ReadOnlySpan&lt;byte&gt;</strong> is suit for data tranport.</li>
+</ol>
+<ul>
+<li>parsing utf-8 string in spans received via network or read from file<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ReadOnlySpan&lt;byte&gt; line = bufferSpan;      // e.g., a slice of a file</span><br><span class="line">int sep = line.IndexOf((byte)&#x27;,&#x27;);</span><br><span class="line">var left = line[..sep];</span><br><span class="line">var right = line[(sep + 1)..];</span><br><span class="line"></span><br><span class="line">// decode only when need</span><br><span class="line">string leftText = Encoding.UTF8.GetString(left);</span><br></pre></td></tr></table></figure></li>
+<li>formating date&#x2F;time, numbers data into stack buffers directly withou temporary strings<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Span&lt;char&gt; tmp = stackalloc char[64];</span><br><span class="line">if (DateTime.UtcNow.TryFormat(tmp, out int written, &quot;yyyy-MM-dd&quot;))</span><br><span class="line">&#123;</span><br><span class="line">    string s = new(tmp[..written]);  // single alloc at the end</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li><strong>string.Create()</strong><br>string.Create is designed for zero-allocation performance-critical formatting, it is designed for hot-paths with known output length(fixed-date formats, IDs, hashes etc), to replace StringBuilder when know the size upfront.<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">Create</span>&lt;<span class="title">TState</span>&gt;(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="built_in">int</span> length, </span></span></span><br><span class="line"><span class="params"><span class="function">    TState state, </span></span></span><br><span class="line"><span class="params"><span class="function">    SpanAction&lt;<span class="built_in">char</span>, TState&gt; action</span></span></span><br><span class="line"><span class="params"><span class="function"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> message = <span class="built_in">string</span>.Create(</span><br><span class="line">    <span class="number">20</span>,                          <span class="comment">// 1) Exact length of the string to create</span></span><br><span class="line">    DateTime.UtcNow,             <span class="comment">// 2) State object passed into the lambda</span></span><br><span class="line">    <span class="keyword">static</span> (dst, dt) =&gt;          <span class="comment">// 3) Static lambda: writes into span</span></span><br><span class="line">    &#123;</span><br><span class="line">        dt.TryFormat(dst, <span class="keyword">out</span> _, <span class="string">&quot;yyyy-MM-dd&quot;</span>);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+example show power of <strong>string.Create()</strong>, producing “2025-09-01Z (id&#x3D;12345)”</li>
+</ol>
+<ul>
+<li>traditional code<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">$&quot;<span class="subst">&#123;DateTime.UtcNow:yyyy-MM-dd&#125;</span>Z (id=<span class="subst">&#123;<span class="number">12345</span>&#125;</span>)&quot;</span>; <span class="comment">//ofter temporary strings are created.</span></span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"><span class="keyword">var</span> sb = <span class="keyword">new</span> StringBuilder();  <span class="comment">//but can resize, bring overhead.</span></span><br><span class="line">sb.Append(DateTime.UtcNow.ToString(<span class="string">&quot;yyyy-MM-dd&quot;</span>))</span><br><span class="line">    .Append(<span class="string">&#x27;Z&#x27;</span>)</span><br><span class="line">    .Append(<span class="string">&quot; (id=&quot;</span>)</span><br><span class="line">    .Append(<span class="number">12345</span>)</span><br><span class="line">    .Append(<span class="string">&#x27;)&#x27;</span>);</span><br><span class="line"><span class="built_in">string</span> s2 = sb.ToString();</span><br></pre></td></tr></table></figure></li>
+<li>zeor-copy finalization with string.Create<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s3 = <span class="built_in">string</span>.Create(</span><br><span class="line">    <span class="number">21</span>,</span><br><span class="line">    (DateTime.UtcNow, <span class="number">123456</span>),</span><br><span class="line">    <span class="keyword">static</span>(dst, st) =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> (dt, id) = st;</span><br><span class="line">        dt.TryFormat(dst, <span class="keyword">out</span> <span class="built_in">int</span> w, <span class="string">&quot;yyyy-MM-dd&quot;</span>);</span><br><span class="line">        dst[w++] = <span class="string">&#x27;Z&#x27;</span>;</span><br><span class="line">        <span class="string">&quot; (id=&quot;</span>.AsSpan().CopyTo(dst[w..]);</span><br><span class="line">        w += <span class="number">5</span>;</span><br><span class="line">        id.TryFormat(dst[w..], <span class="keyword">out</span> <span class="built_in">int</span> n);</span><br><span class="line">        w += n;</span><br><span class="line">        dst[w] = <span class="string">&#x27;)&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+only use when the target string length is known to take its advantage of high performance.</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ref-struct-x2F-ref-field"><span class="toc-number">1.</span> <span class="toc-text">ref struct &#x2F; ref field</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#struct"><span class="toc-number">1.1.</span> <span class="toc-text">struct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref-struct"><span class="toc-number">1.2.</span> <span class="toc-text">ref struct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref-field"><span class="toc-number">1.3.</span> <span class="toc-text">ref field</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Span-lt-T-gt"><span class="toc-number">2.</span> <span class="toc-text">Span&lt;T&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Constructors-Explicit-Creation"><span class="toc-number">2.1.</span> <span class="toc-text">Constructors (Explicit Creation)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Implicit-Conversions"><span class="toc-number">2.2.</span> <span class="toc-text">Implicit Conversions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-a-normal-array-from-a-Span"><span class="toc-number">2.3.</span> <span class="toc-text">Get a normal array from a Span</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Strings-amp-chars-manipulation"><span class="toc-number">2.4.</span> <span class="toc-text">Strings &amp; chars manipulation</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/08/24/High-Performance-C/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/08/24/High-Performance-C/&text=High-Performance C#"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/08/24/High-Performance-C/&title=High-Performance C#"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/08/24/High-Performance-C/&is_video=false&description=High-Performance C#"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=High-Performance C#&body=Check out this article: http://example.com/2025/08/24/High-Performance-C/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/08/24/High-Performance-C/&title=High-Performance C#"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/08/24/High-Performance-C/&title=High-Performance C#"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/08/24/High-Performance-C/&title=High-Performance C#"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/08/24/High-Performance-C/&title=High-Performance C#"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/08/24/High-Performance-C/&name=High-Performance C#&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/08/24/High-Performance-C/&t=High-Performance C#"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>
