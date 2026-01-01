@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="CUDA (Compute Unified Device Architecture)In the area of AI infrastructure, Nvdia was the dominator with its CUDA ecosystem, which has been the world’s most dominant AI-Computing Moat. NVDIA Driver &amp;a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI infrastructure">
+<meta property="og:url" content="http://example.com/2025/12/26/AI-infrastructure/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="CUDA (Compute Unified Device Architecture)In the area of AI infrastructure, Nvdia was the dominator with its CUDA ecosystem, which has been the world’s most dominant AI-Computing Moat. NVDIA Driver &amp;a">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-26T19:00:34.000Z">
+<meta property="article:modified_time" content="2026-01-01T16:00:43.652Z">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>AI infrastructure</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/12/16/Fine-Tuning-a-customized-LLM/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/12/26/AI-infrastructure/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/12/26/AI-infrastructure/&text=AI infrastructure"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/12/26/AI-infrastructure/&title=AI infrastructure"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/12/26/AI-infrastructure/&is_video=false&description=AI infrastructure"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AI infrastructure&body=Check out this article: http://example.com/2025/12/26/AI-infrastructure/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/12/26/AI-infrastructure/&title=AI infrastructure"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/12/26/AI-infrastructure/&title=AI infrastructure"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/12/26/AI-infrastructure/&title=AI infrastructure"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/12/26/AI-infrastructure/&title=AI infrastructure"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/12/26/AI-infrastructure/&name=AI infrastructure&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/12/26/AI-infrastructure/&t=AI infrastructure"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CUDA-Compute-Unified-Device-Architecture"><span class="toc-number">1.</span> <span class="toc-text">CUDA (Compute Unified Device Architecture)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NVDIA-Driver-amp-GPU"><span class="toc-number">1.1.</span> <span class="toc-text">NVDIA Driver &amp; GPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CUDA-Toolkit-and-CUDA-X"><span class="toc-number">1.2.</span> <span class="toc-text">CUDA Toolkit and CUDA-X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#High-level-Programming"><span class="toc-number">1.3.</span> <span class="toc-text">High-level Programming</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NV-LINK"><span class="toc-number">1.4.</span> <span class="toc-text">NV-LINK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyTorch"><span class="toc-number">2.</span> <span class="toc-text">PyTorch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eager-Mode-Dynamic-Computation-Graph"><span class="toc-number">2.1.</span> <span class="toc-text">Eager Mode (Dynamic Computation Graph):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Three-Pillars"><span class="toc-number">2.2.</span> <span class="toc-text">Three Pillars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PyTorch-Standard-Workflow-Core-libraries"><span class="toc-number">2.3.</span> <span class="toc-text">PyTorch Standard Workflow (Core libraries)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Domain-Libraries"><span class="toc-number">2.4.</span> <span class="toc-text">Domain Libraries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Extensions"><span class="toc-number">2.5.</span> <span class="toc-text">Extensions,</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROCm-Radeon-Open-Compute"><span class="toc-number">3.</span> <span class="toc-text">ROCm (Radeon Open Compute)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TPU"><span class="toc-number">4.</span> <span class="toc-text">TPU</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        AI infrastructure
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-12-26T19:00:34.000Z" class="dt-published" itemprop="datePublished">2025-12-26</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="CUDA-Compute-Unified-Device-Architecture"><a href="#CUDA-Compute-Unified-Device-Architecture" class="headerlink" title="CUDA (Compute Unified Device Architecture)"></a>CUDA (Compute Unified Device Architecture)</h2><p>In the area of AI infrastructure, Nvdia was the dominator with its CUDA ecosystem, which has been the world’s most dominant AI-Computing Moat.</p>
+<h3 id="NVDIA-Driver-amp-GPU"><a href="#NVDIA-Driver-amp-GPU" class="headerlink" title="NVDIA Driver &amp; GPU"></a>NVDIA Driver &amp; GPU</h3><ul>
+<li><p>Kernel-Mode Drivers</p>
+<ul>
+<li>WDDM(Windows Display Driver Model) on windows, defined by Windows and implemented by NVIDIA Driver .It Kill a compute kernel takes &gt;2 seconds to prevent the screen from freezing</li>
+<li>MPS(Multi-Process Service) on linux, it’s a daemon.</li>
+</ul>
+</li>
+<li><p>CUDA cores are also used on graphics rendering for shaders by OS, OS will be referee when Paralleling computing is resource conflicting with graphics rendering</p>
+</li>
+<li><p>Headless GPU is a card with no video output ports that OS will not often kill computing tasks (Kernels) due to the prioritized display task. 100% VRAM and power goes to AI program, no WDDM timeouts, no conflicts.</p>
+</li>
+</ul>
+<h3 id="CUDA-Toolkit-and-CUDA-X"><a href="#CUDA-Toolkit-and-CUDA-X" class="headerlink" title="CUDA Toolkit and CUDA-X"></a>CUDA Toolkit and CUDA-X</h3><p>~   - Kernel is a function (in c&#x2F;c++) to be executed on GPU, while defining kernel, a function is prefixed with keywork<br>    - CPU is host, GPU is device<br>    - <strong>global</strong>  kernel available to host<br>    - <strong>device</strong>  kernel only available to device<br>        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__device__ <span class="type">void</span> <span class="title">sub</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">__global__ <span class="type">void</span> <span class="title">add</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">sub</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">add</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>General parallel math (add, subtract, logic) are executed on CUDA cores</p>
+<ul>
+<li>SM, SP, CUDA cores:<ul>
+<li>SM: GPU consists of smaller components called as Strem Multiprocessores(SM). <ul>
+<li>On one SM, one or more blocks can be executed.</li>
+</ul>
+</li>
+<li>SP: Each SM consists of many Stream Processores(SP) on which actual computatin is done, each SP is also called a CUDA core. <ul>
+<li>On one SP, one or more threads can be executed.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Thread, Block, Grid<ul>
+<li>Thread is a single instance of execution, <ul>
+<li>one thread can only be executed on one SP.</li>
+</ul>
+</li>
+<li>Block is a group of threads, <ul>
+<li>one block can only be executed on one SM.</li>
+</ul>
+</li>
+<li>A group of blocks is called a Grid. One grid is generated for one Kernel and on one GPU. Only one kernel can be executed at one time instance.</li>
+</ul>
+</li>
+<li>Warp is number of threads in a block running simultaneously on a SM.<ul>
+<li>For a instruction pipline of 4 stages (say fetch, decode, execute, write-back), run on a SM with 8 SPs, then 4*8&#x3D;32 threads can be executed on this SM simultaneously. These 32 threads form one warp.</li>
+<li>Suppose a block has 128 threads and is going to run on this SM with 8 SPs, this block will have 4 warps.</li>
+<li>This means on this SM, first warp will get run, then second, third, forth and after that again first, second…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Deep Learing math (Mixed-precision matrix multiplication) on Tensor cores</p>
+<ul>
+<li>TBD</li>
+</ul>
+</li>
+<li><p>The Compiler: </p>
+<ul>
+<li>nvcc, static compiler<ul>
+<li>Separates code into host(CPU) and device(GPU)</li>
+<li>Sends the CPU code to a standard compiler(MSVC on Windows or GCC on Linux)</li>
+<li>Compiles the GPU code into PTX(parallel thread execution, intermediate GPU assembly)</li>
+<li>CUDA language extension to C++<ul>
+<li>kernel&lt;&lt;&lt;blocks </li>
+<li>threads&gt;&gt;&gt;(args) </li>
+<li>Both are compiled to CUDA Runtime API of cudaLaunchKernel</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>nvrtc (NVDIA Runtime Compilation), JIT compiler<ul>
+<li>pros<ul>
+<li>light weight environment, only need GPU driver and nvrtc.so</li>
+<li>dynamic transpilation</li>
+<li>extreme optimization</li>
+</ul>
+</li>
+<li>cons<ul>
+<li>only handle GPU code</li>
+<li>no static type checking</li>
+<li>launch overhead</li>
+<li>no hight-level libraries like Thrust or CUB support</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Debugger &amp; Profiler</p>
+<ul>
+<li>CUDA-GDB: finding bugs</li>
+<li>Nsight: measuring speed<ul>
+<li>Standalone desktop apps with a GUI</li>
+<li>Extension in VS Code~</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="High-level-Programming"><a href="#High-level-Programming" class="headerlink" title="High-level Programming"></a>High-level Programming</h3><ul>
+<li><p>NIM(NVIDIA Inference Microservices)(CUDA-X): Packaged as cloud APIs, easy to integrate, customize, and deploy.</p>
+<ul>
+<li>engage with GPU by docker container service</li>
+</ul>
+</li>
+<li><p>CUDA-X: Over 400+ libraries for building, optimizing, deploying and scaling applications. Customized operators, writing specific mathematical operation(like a new type of activation function) from scratch using CUDA C++; Hardware optimization, using shared memory, warp shuffles, and tiling to make an algorithm run at the maximum speed of the hardware.</p>
+<ul>
+<li><p>Operator Libraries: Operator is a specific mathematical function like a matrix multiplication, a convolution, or an activation function. Instead of writing these from scratch in CUDA C++, NVIDIA provides highly optimized operator libraies. </p>
+<ul>
+<li>Domain-Specific(High level), ready-to-use operators for AI, vision or video. :<ul>
+<li>cuDNN(standalone): Deep Neural Network library</li>
+<li>TensorRT(standalone):</li>
+<li>DeepStream(standalone):</li>
+<li>CV-CUDA(standalone):</li>
+</ul>
+</li>
+<li>Math &amp; Algorithms(Mid level)<ul>
+<li>cuBLAS: Basic linear algebra (matrix multiplication)</li>
+<li>cuSPARSE: Math for “Sparse” matrices (matrices full of zeros)</li>
+<li>cuFFT: Fast Fourier Transforms (Signal processing)</li>
+<li>cuRAND: Random number generation      </li>
+<li>cuSOLVER: Direct solvers for dense&#x2F;sparse linear systems</li>
+<li>Thrust: Parallel Algorithms Library, high-level “STL-Like” sorting, searching, and reducing</li>
+</ul>
+</li>
+<li>Template &amp; Primitive (Low level)<ul>
+<li>CUB: CUDA Unbound, a header-only library of collective primitives.</li>
+<li>CUTLASS(standalone): CUDA Templates for Linear Algebra Subroutines and Software. It is a collection of C++ templates.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Host-Level&#x2F;System programming, CUDA operation- managing the flow of the program</p>
+<ul>
+<li><p>cudart.dll or cudart.so: hight level api, CUDA Runtime API</p>
+<ul>
+<li>Memory management, manages the allocation and deallocation of VRAM <ul>
+<li>cudaMalloc() </li>
+<li>cudaFree()</li>
+</ul>
+</li>
+<li>Graph&#x2F;Stream capture, orchestrating how different kernels launch in sequence to minimize CPU overhead<ul>
+<li>cudaStreamCreate()</li>
+<li>cudaStreamSynchronize()</li>
+<li>cudaStreamWaitEvent()</li>
+<li>cudaGraphCreate()</li>
+<li>cudaGraphInstantiate()</li>
+<li>cudaGraphLaunch()</li>
+</ul>
+</li>
+<li>Data transfer, handles moving data back and forth between RAM and VRAM<ul>
+<li>cudaMemcpy()</li>
+</ul>
+</li>
+<li>Kernel execution: manages the launching of kernels(parallel functions that run on GPU cores)<ul>
+<li>cudaLaunchKernel()</li>
+</ul>
+</li>
+<li>Device management: identifies which GPUs are available in the system and initializes the execution environment</li>
+</ul>
+</li>
+<li><p>libcuda.so or nvcuda.dll: low level api, CUDA Driver API</p>
+<ul>
+<li>Offers much finer control but is significantly more complex to write.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>PyTorch: almost 99% of AI developers use CUDA through PyTorch</p>
+<ul>
+<li>most users never write a single line of   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__global__ <span class="type">void</span> <span class="title">kernel</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+  instead,  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">1024</span>, <span class="number">1024</span>).cuda() <span class="comment"># moves data via CUDART</span></span><br><span class="line">y = torch.matmul(x, x) <span class="comment"># runs math via cuBLAS</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="NV-LINK"><a href="#NV-LINK" class="headerlink" title="NV-LINK"></a>NV-LINK</h3><pre><code>- TBD
+</code></pre>
+<h2 id="PyTorch"><a href="#PyTorch" class="headerlink" title="PyTorch"></a>PyTorch</h2><p>Industry standard for AI research and leader in production deployment</p>
+<h3 id="Eager-Mode-Dynamic-Computation-Graph"><a href="#Eager-Mode-Dynamic-Computation-Graph" class="headerlink" title="Eager Mode (Dynamic Computation Graph):"></a>Eager Mode (Dynamic Computation Graph):</h3><ul>
+<li>TBD</li>
+</ul>
+<h3 id="Three-Pillars"><a href="#Three-Pillars" class="headerlink" title="Three Pillars"></a>Three Pillars</h3><ul>
+<li>torch.Tensor<ul>
+<li>Backend system, PyTorch is designed to be hardware-agnostic layer. It uses a “Backend” system. User code is based on torch.Tensor API. Under the hood, PyTorch has a CUDA Backedn, a CPU Backend, and an MPS(Apple Silicon) Backend.</li>
+<li>Relation to CUDA, PyTorch was developed with a “CUDA-first” mindset. Most of its C++ source code is hightly optimized specifically for NVIDIA GPUs. While it can run on other tech, its performance is most mature on CUDA.</li>
+</ul>
+</li>
+<li>torch.autograd<ul>
+<li>TBD</li>
+</ul>
+</li>
+<li>torch.nn<ul>
+<li>TBD</li>
+</ul>
+</li>
+</ul>
+<h3 id="PyTorch-Standard-Workflow-Core-libraries"><a href="#PyTorch-Standard-Workflow-Core-libraries" class="headerlink" title="PyTorch Standard Workflow (Core libraries)"></a>PyTorch Standard Workflow (Core libraries)</h3><ol>
+<li>Data Ingestion &amp; Pipeline Orchestration, abstracting raw data into structured tensors; managing btaching, shuffling, and multi-process memory pinning for GPU transfer.<ul>
+<li>torch.utils.data.Dataset, DataLoader</li>
+</ul>
+</li>
+<li>Model Architecture Definition, constructing the computational graph by subclassing nn.Module and initializing the linear or non-linear layers and stateful parameters<ul>
+<li>torch.nn.Module, nn.Paramter</li>
+</ul>
+</li>
+<li>Forward Propagation, Executing the sequence of mathematical transformations on input tensors to produce model outputs or latent representations.<ul>
+<li>model.forward(), Tensor Operations</li>
+</ul>
+</li>
+<li>Loss Computation &amp; Gradient Atrribution, quantifying error via an objective function and utilizing the Autograd engine to compute the partial deriatives of the loss with respect to all trainable parameters.<ul>
+<li>torch.nn.modules.loss</li>
+<li>torch.autograd.backward()</li>
+</ul>
+</li>
+<li>Parameter Optimization, applying optimization algorithms to update the model’s parameter state based on the calculated gradients to minimize the objective function.<ul>
+<li>torch.optim.Optimizer (e.g., Adam, SGD)</li>
+</ul>
+</li>
+</ol>
+<h3 id="Domain-Libraries"><a href="#Domain-Libraries" class="headerlink" title="Domain Libraries"></a>Domain Libraries</h3><ul>
+<li>TorchVision (Computer Vision): models like ResNet, YOLO</li>
+<li>Hugging Face Transformers (Natural Language): standard for LLMs</li>
+<li>PyTorch Lightning (Research): removes the boilerplate code </li>
+<li>TorchScript, ExecuTorch (production): tools to turn python code into a fast, standalone file that can run on a phone or a server without Python.</li>
+<li>TBD</li>
+</ul>
+<h3 id="Extensions"><a href="#Extensions" class="headerlink" title="Extensions,"></a>Extensions,</h3><ul>
+<li>Intel Extension for PyTorch(IPEX):  allows PyTorch to work better on Intel hardware</li>
+<li>XLA: an extension that allows PyTorch to run on Google’s TPU.</li>
+<li>TBD</li>
+</ul>
+<h2 id="ROCm-Radeon-Open-Compute"><a href="#ROCm-Radeon-Open-Compute" class="headerlink" title="ROCm (Radeon Open Compute)"></a>ROCm (Radeon Open Compute)</h2><p>TBD</p>
+<h2 id="TPU"><a href="#TPU" class="headerlink" title="TPU"></a>TPU</h2><p>Google has showed its ambitious to overset the LLM training and inferencing infrastructure with its TPU and software stack.</p>
+<p>TBD</p>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CUDA-Compute-Unified-Device-Architecture"><span class="toc-number">1.</span> <span class="toc-text">CUDA (Compute Unified Device Architecture)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NVDIA-Driver-amp-GPU"><span class="toc-number">1.1.</span> <span class="toc-text">NVDIA Driver &amp; GPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CUDA-Toolkit-and-CUDA-X"><span class="toc-number">1.2.</span> <span class="toc-text">CUDA Toolkit and CUDA-X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#High-level-Programming"><span class="toc-number">1.3.</span> <span class="toc-text">High-level Programming</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NV-LINK"><span class="toc-number">1.4.</span> <span class="toc-text">NV-LINK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyTorch"><span class="toc-number">2.</span> <span class="toc-text">PyTorch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eager-Mode-Dynamic-Computation-Graph"><span class="toc-number">2.1.</span> <span class="toc-text">Eager Mode (Dynamic Computation Graph):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Three-Pillars"><span class="toc-number">2.2.</span> <span class="toc-text">Three Pillars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PyTorch-Standard-Workflow-Core-libraries"><span class="toc-number">2.3.</span> <span class="toc-text">PyTorch Standard Workflow (Core libraries)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Domain-Libraries"><span class="toc-number">2.4.</span> <span class="toc-text">Domain Libraries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Extensions"><span class="toc-number">2.5.</span> <span class="toc-text">Extensions,</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROCm-Radeon-Open-Compute"><span class="toc-number">3.</span> <span class="toc-text">ROCm (Radeon Open Compute)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TPU"><span class="toc-number">4.</span> <span class="toc-text">TPU</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/12/26/AI-infrastructure/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/12/26/AI-infrastructure/&text=AI infrastructure"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/12/26/AI-infrastructure/&title=AI infrastructure"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/12/26/AI-infrastructure/&is_video=false&description=AI infrastructure"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AI infrastructure&body=Check out this article: http://example.com/2025/12/26/AI-infrastructure/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/12/26/AI-infrastructure/&title=AI infrastructure"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/12/26/AI-infrastructure/&title=AI infrastructure"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/12/26/AI-infrastructure/&title=AI infrastructure"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/12/26/AI-infrastructure/&title=AI infrastructure"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/12/26/AI-infrastructure/&name=AI infrastructure&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/12/26/AI-infrastructure/&t=AI infrastructure"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>
