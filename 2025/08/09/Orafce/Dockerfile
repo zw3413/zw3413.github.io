@@ -15,7 +15,7 @@ ENV PG_APP_HOME="/etc/docker-postgresql" \
     POSTGRES_HOST_AUTH_METHOD=password
 
 RUN apt  -y update \ 
-&& apt install -y make wget gcc postgresql-server-dev-17  postgresql-17-pldebugger vim
+&& apt install -y make wget gcc postgresql-server-dev-17  postgresql-17-pldebugger vim libicu-dev
 
 
 #COPY ./pg_hba.conf /${PGDATA}/pg_hba.conf

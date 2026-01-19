@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1. uvRust-based package and project manager that replace pip, pip-tools, venv, and potentially poetry. 1. install and initialize a new project install:   1pip install uv  Creates pyproject.toml (Initi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="uv">
+<meta property="og:url" content="http://example.com/2025/05/19/uv/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="1. uvRust-based package and project manager that replace pip, pip-tools, venv, and potentially poetry. 1. install and initialize a new project install:   1pip install uv  Creates pyproject.toml (Initi">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-19T19:29:40.000Z">
+<meta property="article:modified_time" content="2026-01-18T18:14:00.467Z">
+<meta property="article:tag" content="Tools">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>uv</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/05/20/LLM-agents-building-with-simple-composable-patterns/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/05/18/youtube-helper-%E6%8E%A8%E5%B9%BF%E7%AD%96%E7%95%A5/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/19/uv/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/19/uv/&text=uv"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/19/uv/&title=uv"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/19/uv/&is_video=false&description=uv"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=uv&body=Check out this article: http://example.com/2025/05/19/uv/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/19/uv/&title=uv"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/19/uv/&title=uv"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/19/uv/&title=uv"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/19/uv/&title=uv"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/19/uv/&name=uv&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/19/uv/&t=uv"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-uv"><span class="toc-number">1.</span> <span class="toc-text">1. uv</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-install-and-initialize-a-new-project"><span class="toc-number">1.1.</span> <span class="toc-text">1. install and initialize a new project</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Setup-cloned-project"><span class="toc-number">1.2.</span> <span class="toc-text">2. Setup cloned project:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Denpendencies-management"><span class="toc-number">1.3.</span> <span class="toc-text">3. Denpendencies management:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Run-Scripts-x2F-Commands"><span class="toc-number">1.4.</span> <span class="toc-text">4. Run Scripts&#x2F;Commands</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Python-package"><span class="toc-number">2.</span> <span class="toc-text">2. Python package</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Module"><span class="toc-number">2.1.</span> <span class="toc-text">Module:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Package"><span class="toc-number">2.2.</span> <span class="toc-text">Package:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dependency"><span class="toc-number">2.3.</span> <span class="toc-text">Dependency:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Virtual-Environment"><span class="toc-number">2.4.</span> <span class="toc-text">Virtual Environment:</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        uv
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-05-19T19:29:40.000Z" class="dt-published" itemprop="datePublished">2025-05-19</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Python/" rel="tag">Python</a>, <a class="p-category" href="/tags/Tools/" rel="tag">Tools</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="1-uv"><a href="#1-uv" class="headerlink" title="1. uv"></a>1. <strong>uv</strong></h2><p>Rust-based package and project manager that replace pip, pip-tools, venv, and potentially poetry.</p>
+<h3 id="1-install-and-initialize-a-new-project"><a href="#1-install-and-initialize-a-new-project" class="headerlink" title="1. install and initialize a new project"></a>1. install and initialize a new project</h3><ul>
+<li><p>install:</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install uv</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Creates pyproject.toml (Initializes a new project)</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> project_folder  </span><br><span class="line"><span class="built_in">cd</span> project_folder</span><br><span class="line">uv init  </span><br><span class="line">uv init --python 3.13</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create venv other than a project </p>
+<ul>
+<li>(this is not needed when create a project with uv init), only for creating a venv to run some scripts</li>
+<li>no pyproject.toml file will be created</li>
+</ul>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uv venv</span><br><span class="line">uv venv --python 3.13</span><br><span class="line">uv venv --python /path/to/other/python/bin/python3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Python version</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">uv run python --version</span><br><span class="line"></span><br><span class="line"><span class="comment"># change the python version used in venv</span></span><br><span class="line">uv python pin 3.13 <span class="comment"># this create a .python-version file</span></span><br><span class="line">uv <span class="built_in">sync</span> <span class="comment"># update venv dependencies</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-Setup-cloned-project"><a href="#2-Setup-cloned-project" class="headerlink" title="2. Setup cloned project:"></a>2. Setup cloned project:</h3><ul>
+<li><p>like the pip install, should be executed after git clone a new project.</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># for a project already has pyproject.toml</span></span><br><span class="line">uv <span class="built_in">sync</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for a project without a pyproject.toml</span></span><br><span class="line">uv venv                       <span class="comment"># Create the environment</span></span><br><span class="line"><span class="built_in">source</span> .venv/bin/activate      <span class="comment"># Activate it</span></span><br><span class="line">uv pip install -r requirements.txt  <span class="comment"># Install packages</span></span><br></pre></td></tr></table></figure></li>
+<li><p>steps:</p>
+<ol>
+<li>looks at pyproject.toml to get all requested dependencies</li>
+<li>checks if uv.lock matches those requests</li>
+<li>if match: uses uv.lock as the source of truth to install the exact dependencies.</li>
+<li>if not match (like pyproject.toml was edited manually): re-resolve dependencies based on pyproject.toml, update the uv.lock, then install</li>
+</ol>
+</li>
+<li><p>options</p>
+<ul>
+<li>–frozen: use uv.lock without checking pyproject.toml, if uv.lock is missing, the command fails.</li>
+<li>–locked: use uv.lock with double-check if it’s still in sync with pyproject.toml, if out of sync, an wrror will be trhow instead of updating the lockfile</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Denpendencies-management"><a href="#3-Denpendencies-management" class="headerlink" title="3. Denpendencies management:"></a>3. Denpendencies management:</h3><ul>
+<li><p>uv add</p>
+<ul>
+<li>whenever working on a prject has a pyproject.toml, this command should be used to add dependencies</li>
+<li>pyproject.toml, uv.lock, .venv all will be took care.</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># for runtime dependencies:</span></span><br><span class="line">uv add fastapi uvicorn pydantic-settings</span><br><span class="line"></span><br><span class="line"><span class="comment"># for dev dependencies:</span></span><br><span class="line">uv add pytest black --dev</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>uv pip install </p>
+<ul>
+<li>use this in a no pyproject.toml environment (only uses requirements.txt), </li>
+<li>or installing global tool</li>
+<li>or a temporary dependency, it doesn’t write the pyproject.toml and uv.lock</li>
+<li>replacing the pip install.</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv pip install dependency_name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Remove:</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv remove fastapi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>list</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uv tree</span><br><span class="line"></span><br><span class="line">uv pip list</span><br><span class="line">uv pip freeze</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>upgrade:</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uv update <span class="comment"># Upgrades all dependencies to their latest compatiable versions and updates uv.lock</span></span><br><span class="line">uv update fastapi <span class="comment"># Upgrade a specific package</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>generate requirements.txt (optionally needed for compatibility):</p>
+<ul>
+<li>while <strong>uv.lock</strong> is preferred, if a <strong>requirements.txt</strong> is needed for deployment systems that expect it:</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uv <span class="built_in">export</span> --format requirements-txt &gt; requirements.txt </span><br><span class="line">uv pip freeze &gt; requirements.txt <span class="comment">#not recommended</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-Run-Scripts-x2F-Commands"><a href="#4-Run-Scripts-x2F-Commands" class="headerlink" title="4. Run Scripts&#x2F;Commands"></a>4. Run Scripts&#x2F;Commands</h3><pre><code>- in a project (uv sync is already integrated in this commmand if within a project)
+    
+    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uv run uvicorn app.main:app --reload</span><br><span class="line">uv run pytest</span><br></pre></td></tr></table></figure>
+
+- not in a prject (standalone scripts, uv is powerful to take care the environment stuff)
+
+    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv run --with pandas my_script.py</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="2-Python-package"><a href="#2-Python-package" class="headerlink" title="2. Python package"></a>2. Python package</h2><h3 id="Module"><a href="#Module" class="headerlink" title="Module:"></a><strong>Module</strong>:</h3><ul>
+<li>A single python file (.py) containing code (functions, classes, variables)</li>
+</ul>
+<h3 id="Package"><a href="#Package" class="headerlink" title="Package:"></a><strong>Package</strong>:</h3><ul>
+<li>A collection of modules(.py files) organized in directories, </li>
+<li>Recognized by the presence of an <strong><strong>init</strong>.py</strong> file (usally it is empty) within each directory. </li>
+<li>Packages can contain sub-packages.</li>
+</ul>
+<h3 id="Dependency"><a href="#Dependency" class="headerlink" title="Dependency:"></a><strong>Dependency</strong>:</h3><ul>
+<li><p>An extenal python package (or a specific version of it).</p>
+</li>
+<li><p>Dependency Specification:</p>
+<ul>
+<li><p><strong>requirements.txt</strong>: </p>
+<ul>
+<li>A plain text file listing direct dependencies, </li>
+<li>Typically generated using <strong>pip freeze</strong>. </li>
+<li>It often lists all transitive dependencies, making it hard to manage top-level requirements.</li>
+</ul>
+</li>
+<li><p><strong>pyproject.toml</strong>: </p>
+<ul>
+<li>Modern, standardized way to declare project metadata and dependencies. </li>
+<li>A TOML(Tom’s Obvious, Minimal Language) file that serves as a central configuration. </li>
+<li>Usually only direct dependencies.</li>
+</ul>
+</li>
+<li><p>Lock file(<strong>uv.lock</strong>,<strong>poetry.lock</strong>, etc.):     </p>
+<ul>
+<li>A file generated by a package manager (like <strong>uv</strong> or <strong>poetry</strong>) that lists all direct and transitive dependencies with their exact, pinned versions and hashes. </li>
+<li>Ensures absolute reproducibility of the environment.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Virtual-Environment"><a href="#Virtual-Environment" class="headerlink" title="Virtual Environment:"></a><strong>Virtual Environment</strong>:</h3><ul>
+<li>An isolated python environment that allows to install packages for a specific project without interfering with other projects or the global pthon installation. </li>
+<li>Most crucial concept for robust python development.</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-uv"><span class="toc-number">1.</span> <span class="toc-text">1. uv</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-install-and-initialize-a-new-project"><span class="toc-number">1.1.</span> <span class="toc-text">1. install and initialize a new project</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Setup-cloned-project"><span class="toc-number">1.2.</span> <span class="toc-text">2. Setup cloned project:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Denpendencies-management"><span class="toc-number">1.3.</span> <span class="toc-text">3. Denpendencies management:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Run-Scripts-x2F-Commands"><span class="toc-number">1.4.</span> <span class="toc-text">4. Run Scripts&#x2F;Commands</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Python-package"><span class="toc-number">2.</span> <span class="toc-text">2. Python package</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Module"><span class="toc-number">2.1.</span> <span class="toc-text">Module:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Package"><span class="toc-number">2.2.</span> <span class="toc-text">Package:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dependency"><span class="toc-number">2.3.</span> <span class="toc-text">Dependency:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Virtual-Environment"><span class="toc-number">2.4.</span> <span class="toc-text">Virtual Environment:</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/19/uv/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/19/uv/&text=uv"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/19/uv/&title=uv"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/19/uv/&is_video=false&description=uv"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=uv&body=Check out this article: http://example.com/2025/05/19/uv/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/19/uv/&title=uv"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/19/uv/&title=uv"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/19/uv/&title=uv"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/19/uv/&title=uv"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/19/uv/&name=uv&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/19/uv/&t=uv"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>
