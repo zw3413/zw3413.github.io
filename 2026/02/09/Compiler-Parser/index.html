@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Syntax Analysis (Parsing) Token stream –&gt; parse tree&#x2F;syntax tree Converts a strem of tokens into syntactic structure  (id)(&#x3D;)(id)(+)(id)(*)(num)  Parser builds a tree structure that repre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compiler-Parser">
+<meta property="og:url" content="http://example.com/2026/02/09/Compiler-Parser/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="Syntax Analysis (Parsing) Token stream –&gt; parse tree&#x2F;syntax tree Converts a strem of tokens into syntactic structure  (id)(&#x3D;)(id)(+)(id)(*)(num)  Parser builds a tree structure that repre">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-10T02:58:16.000Z">
+<meta property="article:modified_time" content="2026-02-10T02:59:04.361Z">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="Compiler">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Compiler-Parser</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2026/02/01/Compiler-Lexer/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/02/09/Compiler-Parser/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/02/09/Compiler-Parser/&text=Compiler-Parser"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/02/09/Compiler-Parser/&title=Compiler-Parser"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/02/09/Compiler-Parser/&is_video=false&description=Compiler-Parser"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Compiler-Parser&body=Check out this article: http://example.com/2026/02/09/Compiler-Parser/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/02/09/Compiler-Parser/&title=Compiler-Parser"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/02/09/Compiler-Parser/&title=Compiler-Parser"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/02/09/Compiler-Parser/&title=Compiler-Parser"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/02/09/Compiler-Parser/&title=Compiler-Parser"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/02/09/Compiler-Parser/&name=Compiler-Parser&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/02/09/Compiler-Parser/&t=Compiler-Parser"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Syntax-Analysis-Parsing-Token-stream-%E2%80%93-gt-parse-tree-x2F-syntax-tree"><span class="toc-number">1.</span> <span class="toc-text">Syntax Analysis (Parsing) Token stream –&gt; parse tree&#x2F;syntax tree</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text"></span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Compiler-Parser
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-02-10T02:58:16.000Z" class="dt-published" itemprop="datePublished">2026-02-09</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Compiler/" rel="tag">Compiler</a>, <a class="p-category" href="/tags/Programming/" rel="tag">Programming</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Syntax-Analysis-Parsing-Token-stream-–-gt-parse-tree-x2F-syntax-tree"><a href="#Syntax-Analysis-Parsing-Token-stream-–-gt-parse-tree-x2F-syntax-tree" class="headerlink" title="Syntax Analysis (Parsing) Token stream –&gt; parse tree&#x2F;syntax tree"></a>Syntax Analysis (Parsing) Token stream –&gt; parse tree&#x2F;syntax tree</h1><ul>
+<li><p>Converts a strem of tokens into syntactic structure</p>
+<ul>
+<li><p>(id)(&#x3D;)(id)(+)(id)(*)(num)</p>
+</li>
+<li><p>Parser builds a tree structure that represents:</p>
+<ul>
+<li>operator precedence</li>
+<li>associativity</li>
+<li>nested constructs</li>
+</ul>
+</li>
+<li><p>Grammar(CFG: Context-Free Grammar)</p>
+<ul>
+<li><p>Grammars describe how abstract categories expand into sequences.</p>
+</li>
+<li><p>Grammar is </p>
+<ul>
+<li>a set of rules that describe what sequences of tokens are valid in the language.</li>
+<li>a start symbol that a nonterminal that represents a complete valid program (or complete construct)</li>
+</ul>
+</li>
+<li><p>CFG(context-free grammer) defines what token sequences are legal</p>
+<ul>
+<li>A context-free grammar is a tuple:<ul>
+<li>G &#x3D; (V, \EPSILON, P, S)<ul>
+<li>V: Set of nonterminals</li>
+<li>\EPSILON: Set of terminals</li>
+<li>P: Set of productions</li>
+<li>S: Start symbol</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Naming convention<ul>
+<li>Uppercase letters (E, T, A, B) : Nonterminals</li>
+<li>Lowercase letters (a, b, +): Terminals</li>
+<li>id, num: Terminals (tokens)</li>
+<li>Greek letters (\alpha, \beta): Strings of grammar symbols</li>
+<li>\epsilon: empty string</li>
+<li>$: End-of-input marker</li>
+</ul>
+</li>
+<li>Consistes of<ul>
+<li>Terminals(tokens)<ul>
+<li>terminals are tokens returned by the lexer, Parser cannot break them further<ul>
+<li>id, num, +, *, (, ), if, …</li>
+</ul>
+</li>
+<li>terminals appear in the input stream</li>
+</ul>
+</li>
+<li>Nonterminals<ul>
+<li>nonterminals are names for syntactic categories<ul>
+<li>Expr(E): represents a full expression</li>
+<li>Term(T): represents multiplication-level expressions</li>
+<li>Factor(F): represents atomic things like identifiers or parentheses, <ul>
+<li>smallest expression unit</li>
+</ul>
+</li>
+<li>Statement(S): a higher-level syntactic unit, like<ul>
+<li>assignment</li>
+<li>if statement</li>
+<li>while statement</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>nonterminals do not appear in input, they appear in the grammer rules</li>
+<li>typical grammar:  <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E <span class="operator">-&gt;</span> E <span class="operator">+</span> <span class="built_in">T</span> <span class="operator">|</span> <span class="built_in">T</span></span><br><span class="line"><span class="built_in">T</span> <span class="operator">-&gt;</span> <span class="built_in">T</span> <span class="operator">*</span> <span class="built_in">F</span> <span class="operator">|</span> <span class="built_in">F</span></span><br><span class="line"><span class="built_in">F</span> <span class="operator">-&gt;</span> <span class="punctuation">(</span>E<span class="punctuation">)</span> <span class="operator">|</span> id</span><br></pre></td></tr></table></figure>
+<ul>
+<li>E is “addition-level” expression</li>
+<li>T is “multipication-level” expression</li>
+<li>F is “atomic unit”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Example<ul>
+<li>Grammar for addition:          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E -&gt; E + id | id</span><br></pre></td></tr></table></figure>
+<ul>
+<li>an expression E is either E + id or just id</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>grammar representation</p>
+<ul>
+<li>production rule: <ul>
+<li>LHS -&gt; RHS<ul>
+<li>LHS nonterminals</li>
+<li>RHS symbols, which could be tokens(terminals) or categories(nonterminals)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>example<ul>
+<li>F -&gt; (E)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Porduction</p>
+<ul>
+<li>A production is a rewriting rule<ul>
+<li>A -&gt; \alpha<ul>
+<li>menas: the nonterminal A can be replaced by the string \alpha</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>example<ul>
+<li>E -&gt; T E’</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Derivation</p>
+<ul>
+<li>A derivation is a sequence of rewrite steps:<ul>
+<li>Starts with start symbol (like E)</li>
+<li>Repeatedly replace a nonterminal using a rule</li>
+<li>End with only terminals(tokens)</li>
+</ul>
+</li>
+<li>example <ul>
+<li>rule: E -&gt; E + id | id</li>
+<li>steps of a derivation<ul>
+<li>start E</li>
+<li>use rule E -&gt; E + id: </li>
+<li>become: E + id, </li>
+<li>the left E is still a nonterminal</li>
+<li>Replace left E with rule E -&gt; id</li>
+<li>become: id + id</li>
+<li>now everything is terminals</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Parsing pipeline (parsing is table-driven decision making)</p>
+<ul>
+<li>pipeline<ul>
+<li><p>grammer</p>
+<ul>
+<li>the grammar alone is not executable</li>
+</ul>
+</li>
+<li><p>FIRST &#x2F; FOLLOW sets : extract “lookahead knowledge”</p>
+<ul>
+<li>FIRST&#x2F;FOLLOW extract “lookahead knowledge”</li>
+<li>FIRST&#x2F;FOLLOW are not arbitrary categories <ul>
+<li>they correspond to two concrete parser actions</li>
+</ul>
+</li>
+<li>FIRST sets<ul>
+<li>FIRST(X) is the set of terminals that can appear first in any string derived from X</li>
+<li>FIRST help on choosing which rule to expand when expanding a nonterminal <ul>
+<li>Parser sees:<ul>
+<li>Stack top: A</li>
+<li>Lookahead: a</li>
+</ul>
+</li>
+<li>Question: which production A-&gt;\alpha should I use?</li>
+<li>Use FIRST(\alpha)</li>
+</ul>
+</li>
+<li>This applies to<ul>
+<li>a single symbol (terminal or nonterminal)</li>
+<li>a sequence of grammar symbols</li>
+</ul>
+</li>
+<li>FIRST computation<ul>
+<li>Rule 1 - terminal<ul>
+<li>if a is a terminal</li>
+<li>FIRST(a) &#x3D; { a }</li>
+</ul>
+</li>
+<li>Rule 2 - nonterminal<ul>
+<li>If A is a nonterminal</li>
+<li>FIRST(A) &#x3D; union of FIRST(a) for all productions A-&gt;a</li>
+</ul>
+</li>
+<li>Rule 3 - string of symbols<ul>
+<li>Let a &#x3D; X_1 X_2 … X_n<ul>
+<li>Then<ul>
+<li><ol>
+<li>Add FIRST(X_1) - {\epsilon}</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>If \epsilon \belongto FIRST(X_1), add FIRST(X_2)-{\epsilon}</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>Continue</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>If all X_i can derive \epsilon, add \epsilon</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>example<ul>
+<li>grammar<ul>
+<li>E -&gt; T E’</li>
+<li>E’ -&gt; + T E’ | \epsilon</li>
+<li>T -&gt; id</li>
+</ul>
+</li>
+<li>compute FIRST:<ul>
+<li>FIRST(id ) &#x3D; { id }</li>
+<li>FIRST( T ) &#x3D; { id }</li>
+<li>FIRST( E ) &#x3D; { id }</li>
+<li>FIRST( E’) &#x3D; { + , \epsilon }</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>FOLLOW sets <ul>
+<li>FOLLOW(A) is the set of terminals that can appear immediately to the right of A<ul>
+<li>FOLLOW is only defined for nonterminals</li>
+<li>FOOLOW never contains \epsilon</li>
+<li>FOLLOW help on deciding whether \epsilon is allowed - \epsilon-production<ul>
+<li>“\epsilon-production”<ul>
+<li>A production like E’ -&gt; \epsilon</li>
+<li>Meaning this nonterminal produces nothing</li>
+</ul>
+</li>
+<li>“choosing \epsilon-production”<ul>
+<li>parser decides not to expand the nonterminal further</li>
+</ul>
+</li>
+<li>“Safe to disappear”<ul>
+<li>The next input symbol is allowed to follow this nonterminal</li>
+<li>that condition is checked using FOLLOW</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>FOLLOW computation<ul>
+<li>Rule 1 - start symbol<ul>
+<li>$ \belongto FOLLOW(S) <ul>
+<li>because input must end</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Rule 2 - internal position<ul>
+<li>For every production A -&gt; \alpha B \beta</li>
+<li>Add FIRST(\beta) - {\epsilon} \in FOLLOW(B)</li>
+<li>Meaning: whatever can start \beta can appear after B</li>
+</ul>
+</li>
+<li>Rule 3 - end or nullable tail<ul>
+<li>if: A -&gt; \alpha B</li>
+<li>or: A -&gt; \alpha B \beta and \epsilon \belongto FIRST(\beta)</li>
+<li>then: FOLLOW(A) \in FOLLOW(B)</li>
+<li>Meaning: if \beta can disappear, B may be followed by whatever follows A</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>example<ul>
+<li>grammar<ul>
+<li>E -&gt; T E’</li>
+<li>E’ -&gt; + T E’ | \epsilon</li>
+<li>T -&gt; id</li>
+</ul>
+</li>
+<li>step 1 - start symbol E<ul>
+<li>FOLLOW(E) &#x3D;{\epsilon}</li>
+</ul>
+</li>
+<li>step 2 - from E -&gt; T E’<ul>
+<li>E’ is at end -&gt; add FOLLOW(E) to FOLLOW(E’)<ul>
+<li>FOLLOW(E’) &#x3D; {$}</li>
+</ul>
+</li>
+<li>T is followed by E’<ul>
+<li>FIRST(E’) - {\epsilon} &#x3D; {+}</li>
+<li>So FOLLOW(T) &#x3D; {+}</li>
+</ul>
+</li>
+<li>Since \epsilon \belongto FIRST(E’), also add FOLLOW(E)<ul>
+<li>FOLLOW(T) &#x3D; { + , $}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>FIRST and FOLLOW help on two distinct parser decisions:</li>
+</ul>
+</li>
+<li><p>parsing table : encode that knowledge in a mechanical form</p>
+</li>
+<li><p>parser control decisions</p>
+<ul>
+<li>Parsing is table-driven decision making</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Example</p>
+<ul>
+<li>rate * 60 + initial</li>
+<li>Lexer gives flat tokens<ul>
+<li>&lt;id, rate&gt; &lt;*&gt; &lt;num,60&gt; &lt;+&gt; &lt;id,initial&gt;</li>
+</ul>
+</li>
+<li>Parser builds structure  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">            +</span><br><span class="line">           / \</span><br><span class="line">          *   &lt;<span class="built_in">id</span>,initial&gt;</span><br><span class="line">         / \</span><br><span class="line">&lt;<span class="built_in">id</span>,rate&gt;  &lt;num,60&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>parser enforces precedence:<ul>
+<li>* binds tigher than +</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Data Structure</p>
+<ul>
+<li>Parse Tree<ul>
+<li>shows how the grammar generated from the input</li>
+</ul>
+</li>
+<li>Syntax Tree (AST)<ul>
+<li>AST is a simplified parse tree<ul>
+<li>removes unnecessary grammar nodes</li>
+<li>keeps essential structure</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Parse stack<ul>
+<li>stack used by the parser to track partially recognized syntax</li>
+<li>stores<ul>
+<li>LL: stack stores expected grammar symbols (terminals&#x2F;nonterminals)</li>
+<li>LR: stack stores states and&#x2F;or grammar symbols</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Parsing Table (LL or LR)</li>
+</ul>
+</li>
+<li><p>Two Main Parsing Strategies</p>
+<ul>
+<li><p>Top-Down Parsing(LL) into Predictive Table</p>
+<ul>
+<li>LL means<ul>
+<li>Left-to-right scan</li>
+<li>leftmost derivation<ul>
+<li>always expand leftmost nontermial first</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Top-down parsing<ul>
+<li>start from the start symbol and expand downward</li>
+</ul>
+</li>
+<li>Predictive parsing <ul>
+<li>Parser looks at<ul>
+<li>top of stack(nonterminal)</li>
+<li>next input token</li>
+</ul>
+</li>
+<li>then decides which tule to apply</li>
+<li>Predictive table<ul>
+<li><p>a table to save rules of grammar</p>
+<ul>
+<li>rows &#x3D; nonterminals (E, E’)</li>
+<li>columns &#x3D; lookahead tokens (id, +, $)</li>
+<li>cell &#x3D; which production to use</li>
+</ul>
+</li>
+<li><p>example table entry</p>
+<ul>
+<li>M[E, id] &#x3D; E -&gt; idE’</li>
+<li>M[E’, +]&#x3D; E’ -&gt; + id E’</li>
+<li>M[E’, $]&#x3D; E’ -&gt; \epsilon</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>nonterminals</th>
+<th>id</th>
+<th>+</th>
+<th>$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>E</td>
+<td>E -&gt; id E’</td>
+<td>&#x2F;</td>
+<td>&#x2F;</td>
+</tr>
+<tr>
+<td>E’</td>
+<td>&#x2F;</td>
+<td>E’-&gt; + id E’</td>
+<td>E’ -&gt; \epsilon</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>so if current nonterminal is E and next token is id:</p>
+<ul>
+<li>use this production rule</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>example <ul>
+<li>grammer<ul>
+<li>rule: E  -&gt; id E’</li>
+<li>rule: E’ -&gt; + id E’ | \epsilon<ul>
+<li>E is expression</li>
+<li>E’ is the rest of an expression (a helper nonterminal)</li>
+<li>this is a standard transformation for LL parsing</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>input id + id $</li>
+<li>LL parsing rule<ul>
+<li>LL parsing expand rules by looking ahead one token.</li>
+<li>At each step:<ul>
+<li>look at stack top (what we expect)</li>
+<li>look at next input token (lookahead)</li>
+<li>if top is nonterminal: expand using a rule</li>
+<li>if top is terminal: it must match input token</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Step-by-step<ul>
+<li>step1<ul>
+<li>initial stack [E, $]</li>
+<li>input id + id $</li>
+<li>top is nonterminal E, lookahead is id</li>
+<li>use rule E -&gt; id E’                </li>
+<li>stack [id E’ $]</li>
+<li>top is terminal id, lookahead is id, match, consume</li>
+</ul>
+</li>
+<li>step2<ul>
+<li>stack [E’ $]</li>
+<li>input + id $</li>
+<li>top is nonterminal E’, lookahead is +</li>
+<li>use rule E’ -&gt; + id E’</li>
+<li>stack [+ id E’ $]</li>
+<li>top is terminal id, lookahead is +, match, consume</li>
+</ul>
+</li>
+<li>step3<ul>
+<li>stack [id E’ $]</li>
+<li>input id $</li>
+<li>top is terminal id, lookahead is id, matches, consume</li>
+</ul>
+</li>
+<li>step4<ul>
+<li>stack [E’ $]</li>
+<li>input $</li>
+<li>top is nonterminal E’, lookahead is $</li>
+<li>use rule E’ -&gt; \epsilon</li>
+<li>stack [$]</li>
+<li>top is $, lookahead $, match, accept</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Bottom-Up Parsing(LR) into Action&#x2F;GOTO Table</p>
+<ul>
+<li><p>LR means</p>
+<ul>
+<li>Left-to-right scan</li>
+<li>Rightmost derivation in reverse<ul>
+<li>LR parsing constructs a rightmost derivation backwards by reducing<ul>
+<li>derivation expands nonterminals -&gt; terminals</li>
+<li>LR parsing reduces terminals -&gt; nonterminals(reverse direction)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Bottom-up parsing:</p>
+<ul>
+<li>start from tokens and reduce upward</li>
+</ul>
+</li>
+<li><p>ACTION&#x2F;GOTO table</p>
+<ul>
+<li>In real LR parsing, we can’t just guess when to reduce</li>
+<li>the parser uses a state machine:<ul>
+<li>ACTION[state, terminal], decides what to do on terminals, SHIFT&#x2F;REDUCE&#x2F;ACCEPT</li>
+<li>GOTO[state, nonterminal], decides where to go after reduce to a nonterminal</li>
+</ul>
+</li>
+<li>LR parsing stack usually stores:<ul>
+<li>states (integers)</li>
+<li>sometimes symbols interleaved</li>
+</ul>
+</li>
+<li>example shape: [state0, E, state3, +, state7, id, state9]</li>
+</ul>
+</li>
+<li><p>example</p>
+<ul>
+<li>grammar<ul>
+<li>rule: E -&gt; E + id | id (left recursion is not LL-friendly rule)</li>
+</ul>
+</li>
+<li>input: id + id $</li>
+<li>LR parsing rule<ul>
+<li>SHIFT: push input token onto stack</li>
+<li>REDUCE: replace RHS symbols on stack with LHS nonterminal</li>
+</ul>
+</li>
+<li>step by step<ul>
+<li>step1<ul>
+<li>stack []</li>
+<li>SHIFT id</li>
+<li>stack [id]</li>
+<li>REDUCE id -&gt; E</li>
+</ul>
+</li>
+<li>step2<ul>
+<li>stack [E]</li>
+<li>input + id $</li>
+<li>SHIFT +</li>
+</ul>
+</li>
+<li>step3<ul>
+<li>stack [E +]</li>
+<li>input id $</li>
+<li>SHIFT id</li>
+<li>stack [E + id]</li>
+<li>REDUCE E + id -&gt; E</li>
+</ul>
+</li>
+<li>step4<ul>
+<li>stack [E]</li>
+<li>input $</li>
+<li>accept</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>reverse derivation<ul>
+<li>instead of expanding E into E + id, we reduce E + id back into E</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Parser Generators</p>
+<ul>
+<li><p>Most compilers do not hand-write LR tables, LR table construction by hand is painful and error-prone</p>
+</li>
+<li><p>Parser generators automate parsing table construction.</p>
+</li>
+<li><p>parser generators solve two hard problems automatically:</p>
+<ul>
+<li>they compute parsing tables<ul>
+<li>LL: compute FIRST&#x2F;FOLLOW -&gt; predictive table M</li>
+<li>LR: build LR automation -&gt; ACTION&#x2F;GOTO</li>
+</ul>
+</li>
+<li>they generate a working parser<ul>
+<li>user provide<ul>
+<li>grammar rules</li>
+<li>semantic actions (code to run on reduce&#x2F;expand)</li>
+</ul>
+</li>
+<li>output<ul>
+<li>parser code (C&#x2F;C++&#x2F;Java&#x2F;etc.)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>example: Yacc&#x2F;Bison workflow</p>
+<ol>
+<li>write a .y file<ul>
+<li>tokens</li>
+<li>grammar rules</li>
+<li>action code like “build AST node”</li>
+</ul>
+</li>
+<li>generator produces:<ul>
+<li>a parser engine</li>
+<li>parsing tables embedded in code</li>
+<li>calls action code at reductions</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>write grammar file (ACTION&#x2F;GOT table)  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Expr : Expr &#x27;+&#x27; Term</span><br><span class="line">     | Term</span><br><span class="line">     ;</span><br><span class="line">Term : id ;</span><br></pre></td></tr></table></figure></li>
+<li>Tool generates <ul>
+<li>parsing tables</li>
+<li>parsing engine code</li>
+</ul>
+</li>
+<li>Parser builds AST and calls semantic actions</li>
+</ul>
+</li>
+<li><p>Parser generators</p>
+<ul>
+<li>Yacc&#x2F;Bison: LR parsers</li>
+<li>ANTLR: LL-stype parsers</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">### 1.1 Lexical Structure (scanning)</span></span><br><span class="line">Convert character stream to tokens by</span><br><span class="line"><span class="bullet">-</span> Regular expressions</span><br><span class="line"><span class="bullet">-</span> Finite automate (NFA --&gt; DFA)</span><br><span class="line"><span class="bullet">-</span> Lexical analyzers (Lex/Flex)</span><br><span class="line"></span><br><span class="line">Key algorithms:</span><br><span class="line"><span class="bullet">-</span> Thompson construction</span><br><span class="line"><span class="bullet">-</span> Subset construction</span><br><span class="line"><span class="bullet">-</span> DFA minimization</span><br><span class="line"></span><br><span class="line"><span class="section">### 1.2 Syntactic Structure (Parsing)</span></span><br><span class="line">Convert tokens to Parse Tree/AST</span><br><span class="line"><span class="bullet">-</span> Context-free grammars (CFG)</span><br><span class="line"><span class="bullet">-</span> LL Parsing(top-down)</span><br><span class="line"><span class="bullet">-</span> LR parsing(bottom-up)</span><br><span class="line"><span class="bullet">-</span> Parser generators(Yacc/Bison)</span><br><span class="line"></span><br><span class="line">Key algorithms:</span><br><span class="line"><span class="bullet">-</span> FIST/FOLLOW computation</span><br><span class="line"><span class="bullet">-</span> Predictive parsing tables</span><br><span class="line"><span class="bullet">-</span> LR(0), SLR, LALR, Canonical LR</span><br><span class="line"></span><br><span class="line"><span class="section">### 1.3 Semantic Structure (Meaning &amp; Types)</span></span><br><span class="line">Convert AST to Typed, well-formed program</span><br><span class="line"><span class="bullet">-</span> Symbol tables</span><br><span class="line"><span class="bullet">-</span> Scope rules</span><br><span class="line"><span class="bullet">-</span> Type checking</span><br><span class="line"><span class="bullet">-</span> Type inference(unification)</span><br><span class="line"></span><br><span class="line">Key Topics:</span><br><span class="line"><span class="bullet">-</span> Static vs dynamic typing</span><br><span class="line"><span class="bullet">-</span> Type equivalence</span><br><span class="line"><span class="bullet">-</span> Polymorphism basic</span><br><span class="line"></span><br><span class="line"><span class="section">### 1.4 syntax-Directed Translation</span></span><br><span class="line">Attach computation to syntax</span><br><span class="line"><span class="bullet">-</span> Attribute grammers</span><br><span class="line"><span class="bullet">-</span> Syntax-directed definitions(SDD)</span><br><span class="line"><span class="bullet">-</span> Syntax-directed translation(SDT)</span><br><span class="line"></span><br><span class="line">Implementation:</span><br><span class="line"><span class="bullet">-</span> Annotated parse trees</span><br><span class="line"><span class="bullet">-</span> Translation schemes</span><br><span class="line"><span class="bullet">-</span> Dependency graphs</span><br><span class="line"></span><br><span class="line"><span class="section">## Layer 2 -- Intermediate Representation (IR Core)</span></span><br><span class="line"></span><br><span class="line">TAC --&gt; CFG --&gt; SSA</span><br><span class="line"></span><br><span class="line"><span class="section">### 2.1 IR Forms</span></span><br><span class="line"><span class="bullet">-</span> AST</span><br><span class="line"><span class="bullet">-</span> DAGs</span><br><span class="line"><span class="bullet">-</span> Three-address code (TAC)</span><br><span class="line"><span class="bullet">-</span> Control-flow graph (CFG)</span><br><span class="line"><span class="bullet">-</span> Static single assignment (SSA)</span><br><span class="line"></span><br><span class="line"><span class="section">### 2.2 Control-Flow Translation</span></span><br><span class="line"><span class="bullet">-</span> Boolean expressions</span><br><span class="line"><span class="bullet">-</span> Short-circuit evaluation</span><br><span class="line"><span class="bullet">-</span> Backpatching</span><br><span class="line"><span class="bullet">-</span> Basic blocks</span><br><span class="line"></span><br><span class="line"><span class="section">### 2.3 Data Structures of IR</span></span><br><span class="line">Key implementation artifacts:</span><br><span class="line"><span class="bullet">-</span> IR instruction objects</span><br><span class="line"><span class="bullet">-</span> Def-use chains</span><br><span class="line"><span class="bullet">-</span> Dominator trees</span><br><span class="line"><span class="bullet">-</span> Phi functions (SSA)</span><br><span class="line"></span><br><span class="line"><span class="section">## Layer 3 -- Optimization (Program Improvement)</span></span><br><span class="line"></span><br><span class="line">Data-flow --&gt; Global opts --&gt; Loop opts</span><br><span class="line"></span><br><span class="line"><span class="section">### 3.1 Local Optimization</span></span><br><span class="line"><span class="bullet">-</span> Peephole optimization</span><br><span class="line"><span class="bullet">-</span> Algebraic simplification</span><br><span class="line"><span class="bullet">-</span> Constant folding</span><br><span class="line"></span><br><span class="line"><span class="section">### 3.2 Data-Flow Analysis Framework</span></span><br><span class="line"></span><br><span class="line">Program Analysis = CFG + Equations on Sets</span><br><span class="line"></span><br><span class="line">Core analyses:</span><br><span class="line"><span class="bullet">-</span> Reaching definitions</span><br><span class="line"><span class="bullet">-</span> Live variables</span><br><span class="line"><span class="bullet">-</span> Available expression</span><br><span class="line"><span class="bullet">-</span> Constant propagation</span><br><span class="line"></span><br><span class="line">Concepts:</span><br><span class="line"><span class="bullet">-</span> Forward vs backward analysis</span><br><span class="line"><span class="bullet">-</span> Meet-over-paths solution</span><br><span class="line"><span class="bullet">-</span> Iterative fixpoint computation</span><br><span class="line"></span><br><span class="line"><span class="section">### 3.3 Global Optimizations</span></span><br><span class="line"><span class="bullet">-</span> Common subexpression elimination</span><br><span class="line"><span class="bullet">-</span> Partial redundancy elimination (PRE)</span><br><span class="line"><span class="bullet">-</span> Loop invariant code motion</span><br><span class="line"><span class="bullet">-</span> Strength reduction</span><br><span class="line"><span class="bullet">-</span> Induction variable elimination</span><br><span class="line"></span><br><span class="line"><span class="section">### 3.4 Loop Optimizations + Locality</span></span><br><span class="line"><span class="bullet">-</span> Denpendence analysis</span><br><span class="line"><span class="bullet">-</span> Loop transformations</span><br><span class="line"><span class="bullet">-</span> Tiling, interchange, fusion</span><br><span class="line"></span><br><span class="line"><span class="section">### 3.5 Interprocedural Optimization</span></span><br><span class="line"><span class="bullet">-</span> Call graph construction</span><br><span class="line"><span class="bullet">-</span> Context sensitivity</span><br><span class="line"><span class="bullet">-</span> Pointer analysis foundations</span><br><span class="line"></span><br><span class="line"><span class="section">## Layer 4 -- Back-End (Machine Realization)</span></span><br><span class="line"></span><br><span class="line">Instruction selection --&gt; Reg alloc --&gt; scheduling --&gt; Runtime</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">### 4.1 Instruction Selection</span></span><br><span class="line"><span class="bullet">-</span> Tree covering /tiling</span><br><span class="line"><span class="bullet">-</span> Pattern matching</span><br><span class="line"><span class="bullet">-</span> DAG-based code generation</span><br><span class="line"></span><br><span class="line"><span class="section">### 4.2 Register Allocation</span></span><br><span class="line">Algorithm:</span><br><span class="line"><span class="bullet">-</span> Graph coloring allocation</span><br><span class="line"><span class="bullet">-</span> Spill handing</span><br><span class="line"><span class="bullet">-</span> Live range splitting</span><br><span class="line"></span><br><span class="line"><span class="section">### 4.3 Instruction Scheduling</span></span><br><span class="line"><span class="bullet">-</span> Dependence graphs</span><br><span class="line"><span class="bullet">-</span> List scheduling</span><br><span class="line"><span class="bullet">-</span> Pipeline hazards</span><br><span class="line"></span><br><span class="line"><span class="section">### 4.4 Runtime Organization</span></span><br><span class="line"><span class="bullet">-</span> Activation records</span><br><span class="line"><span class="bullet">-</span> Stack layout</span><br><span class="line"><span class="bullet">-</span> Heap allocation</span><br><span class="line"><span class="bullet">-</span> Garbage collection</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section"># 5. Modern Compiler Architecture</span></span><br><span class="line"></span><br><span class="line">LLVM + MLIR + JIT + GPU</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> LLVM/MLIR multi-level IR</span><br><span class="line"><span class="bullet">-</span> SSA as default IR</span><br><span class="line"><span class="bullet">-</span> Profile-guided optimization (PGO)</span><br><span class="line"><span class="bullet">-</span> JIT + tiered compilation</span><br><span class="line"><span class="bullet">-</span> Auto-vectorization for SIMD/GPU</span><br><span class="line"><span class="bullet">-</span> Verified compilation (CompCert)</span><br><span class="line"><span class="bullet">-</span> Security hardening passes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section"># Comcepts that support the compiler system</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 1. Formal Language Theory</span></span><br><span class="line"><span class="bullet">-</span> Regex, CFG, PDA</span><br><span class="line"><span class="bullet">-</span> Automate models</span><br><span class="line"></span><br><span class="line"><span class="section">## 2. Graph Theory Everywhere</span></span><br><span class="line"><span class="bullet">-</span> CFGs</span><br><span class="line"><span class="bullet">-</span> Dominators</span><br><span class="line"><span class="bullet">-</span> Interference graphs</span><br><span class="line"><span class="bullet">-</span> Dependence graphs</span><br><span class="line"></span><br><span class="line"><span class="section">## 3. Algorithmic Frameworks</span></span><br><span class="line"><span class="bullet">-</span> Fixpoint iteration</span><br><span class="line"><span class="bullet">-</span> Lattice theory</span><br><span class="line"><span class="bullet">-</span> Union-find</span><br><span class="line"><span class="bullet">-</span> Worklist algorithms</span><br><span class="line"></span><br><span class="line"><span class="section">## 4. Engineering Practice</span></span><br><span class="line"><span class="bullet">-</span> Pass pipelines</span><br><span class="line"><span class="bullet">-</span> IR design tradeoffs</span><br><span class="line"><span class="bullet">-</span> Debuggable compilation</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Syntax-Analysis-Parsing-Token-stream-%E2%80%93-gt-parse-tree-x2F-syntax-tree"><span class="toc-number">1.</span> <span class="toc-text">Syntax Analysis (Parsing) Token stream –&gt; parse tree&#x2F;syntax tree</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text"></span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/02/09/Compiler-Parser/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/02/09/Compiler-Parser/&text=Compiler-Parser"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/02/09/Compiler-Parser/&title=Compiler-Parser"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/02/09/Compiler-Parser/&is_video=false&description=Compiler-Parser"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Compiler-Parser&body=Check out this article: http://example.com/2026/02/09/Compiler-Parser/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/02/09/Compiler-Parser/&title=Compiler-Parser"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/02/09/Compiler-Parser/&title=Compiler-Parser"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/02/09/Compiler-Parser/&title=Compiler-Parser"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/02/09/Compiler-Parser/&title=Compiler-Parser"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/02/09/Compiler-Parser/&name=Compiler-Parser&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/02/09/Compiler-Parser/&t=Compiler-Parser"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>

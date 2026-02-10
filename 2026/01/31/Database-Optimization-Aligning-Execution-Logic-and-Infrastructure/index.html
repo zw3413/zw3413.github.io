@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="The “soul” of database optimization lies in three direct dependencies. If any link in this chain is broken, the system fails to perform.  Query design –&gt; Must match schema structureA query is an in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Database Optimization: Aligning Execution, Logic, and Infrastructure">
+<meta property="og:url" content="http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="The “soul” of database optimization lies in three direct dependencies. If any link in this chain is broken, the system fails to perform.  Query design –&gt; Must match schema structureA query is an in">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-01T00:24:03.000Z">
+<meta property="article:modified_time" content="2026-02-01T00:48:12.281Z">
+<meta property="article:tag" content="database">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Database Optimization: Aligning Execution, Logic, and Infrastructure</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2026/01/31/Database-Optimization-Sharding/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/12/26/AI-infrastructure/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&text=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&title=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&is_video=false&description=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Database Optimization: Aligning Execution, Logic, and Infrastructure&body=Check out this article: http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&title=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&title=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&title=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&title=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&name=Database Optimization: Aligning Execution, Logic, and Infrastructure&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&t=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Database Optimization: Aligning Execution, Logic, and Infrastructure
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-02-01T00:24:03.000Z" class="dt-published" itemprop="datePublished">2026-01-31</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/database/">database</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/database/" rel="tag">database</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>The “soul” of database optimization lies in three direct dependencies. If any link in this chain is broken, the system fails to perform.</p>
+<ol>
+<li>Query design –&gt; Must match schema structure<br>A query is an instruction ot navigate a specific physical map.</li>
+</ol>
+<ul>
+<li>If a schema uses a B-Tree index, the query must provide the leading columns of that index.</li>
+<li>If the schema uses partitioning, the query mush include the partition key to avoid scanning the entire dataset.<br>Aligning query to schema, ensures the database engine uses the most direct path to the data, minimizing I&#x2F;O and CPU cycles.</li>
+</ul>
+<ol start="2">
+<li>Schema Design –&gt; Must match workload patterns<br>A database structure is a tool designed for a specific job. You do not build a racing car to haul gravel.</li>
+</ol>
+<ul>
+<li>Read-heavy workloads: demand a schema with strategic redundancy (denormalization) to avoid the computational tax of joining tables at runtime.</li>
+<li>Write-heavy workloads: demand a lean, normalized schema to ensure that every “write” touches the fewest number of blocks and indexes possible.<br>The schema becomes a physical manifestation of the application’s behavior.</li>
+</ul>
+<ol start="3">
+<li>Server Config –&gt; Must support Both<br>Hardware and configuration are the foundation. They do not create performance, but they must provide the headroom for the query and schema to function.</li>
+</ol>
+<ul>
+<li>If the schema is large, the server config must allocation enough RAM (buffer pool) to keep the hot data off the slow disks.</li>
+<li>If the query design involves heavy sorting or complex joins, the server config must provide sufficient temporary workspace and CPU thread.<br>The infrastructure acts as a reliable floor, ensuring that well-designed logic is never throttled by physical resource exhaustion.</li>
+</ul>
+<p>These are simplified essence of the “Performance Tuning Pyramid”, which is a framework popularized by vendors like Oracle etc. and expaned upon in O’Reilly’s “Hight Performance MySQL”, it asserts that performance is a top-down requirement: Workload defines the Schema, which dictates the Query, while the Server facilitates the entire stack.</p>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&text=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&title=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&is_video=false&description=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Database Optimization: Aligning Execution, Logic, and Infrastructure&body=Check out this article: http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&title=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&title=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&title=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&title=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&name=Database Optimization: Aligning Execution, Logic, and Infrastructure&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/&t=Database Optimization: Aligning Execution, Logic, and Infrastructure"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>

@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Lexical Analysis (Scanning) Character stream –&gt; token stream Converts a stream of characters into a stream of tokens for the parser  Lexime is the actual character sequence matched. example source:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compiler - Lexer">
+<meta property="og:url" content="http://example.com/2026/02/01/Compiler-Lexer/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="Lexical Analysis (Scanning) Character stream –&gt; token stream Converts a stream of characters into a stream of tokens for the parser  Lexime is the actual character sequence matched. example source:">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-01T20:12:54.000Z">
+<meta property="article:modified_time" content="2026-02-10T02:58:53.071Z">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="Compiler">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Compiler - Lexer</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2026/02/09/Compiler-Parser/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2026/01/31/Database-Optimization-Sharding/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/02/01/Compiler-Lexer/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/02/01/Compiler-Lexer/&text=Compiler - Lexer"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/02/01/Compiler-Lexer/&is_video=false&description=Compiler - Lexer"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Compiler - Lexer&body=Check out this article: http://example.com/2026/02/01/Compiler-Lexer/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/02/01/Compiler-Lexer/&name=Compiler - Lexer&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/02/01/Compiler-Lexer/&t=Compiler - Lexer"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lexical-Analysis-Scanning-Character-stream-%E2%80%93-gt-token-stream"><span class="toc-number">1.</span> <span class="toc-text">Lexical Analysis (Scanning) Character stream –&gt; token stream</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Compiler - Lexer
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-02-01T20:12:54.000Z" class="dt-published" itemprop="datePublished">2026-02-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Compiler/" rel="tag">Compiler</a>, <a class="p-category" href="/tags/Programming/" rel="tag">Programming</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Lexical-Analysis-Scanning-Character-stream-–-gt-token-stream"><a href="#Lexical-Analysis-Scanning-Character-stream-–-gt-token-stream" class="headerlink" title="Lexical Analysis (Scanning) Character stream –&gt; token stream"></a>Lexical Analysis (Scanning) Character stream –&gt; token stream</h1><ul>
+<li><p>Converts a stream of characters into a stream of tokens for the parser</p>
+<ul>
+<li>Lexime is the actual character sequence matched.<ul>
+<li>example source: position &#x3D; initial + rate * 60</li>
+<li>lexemes include:<ul>
+<li>“postion”</li>
+<li>“&#x3D;”</li>
+<li>“initial”</li>
+<li>“+”</li>
+<li>“rate”</li>
+<li>“*”</li>
+<li>“60”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Token Stream<ul>
+<li>example output: (id, 1) (&#x3D;) (id, 2) (+) (id, 3) (*) (60)</li>
+<li>tokens include:<ul>
+<li>(id, 1)</li>
+<li>(&#x3D;)</li>
+<li>(id, 2)</li>
+<li>(+)</li>
+<li>(id, 3)</li>
+<li>(*)</li>
+<li>(60)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Pattern is the rule describing valid lexemes<ul>
+<li>example:<ul>
+<li>identifier: [A-Za-z][A-Za-z0-9]*</li>
+<li>number: [0-9]+</li>
+</ul>
+</li>
+<li>patterns are described using regular expressions</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Data structures</p>
+<ul>
+<li><p>Token </p>
+<ul>
+<li>&lt;token_name, attribute_value&gt;<ul>
+<li>token-name is category used by parsing (e.g., id, num, + , &#x3D;)</li>
+<li>attribute-value: tokens may carry extra information,typically points into the symbol table (or anoter table) holding details needed later (e.g., identifier name&#x2F; type)</li>
+</ul>
+</li>
+<li>example:<ul>
+<li>{id, 1} means identifier token with pointer into symbol table entry #1 </li>
+<li>{+} no attribute  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Token</span>&#123;</span><br><span class="line">    TokenType type; <span class="comment">// type =&gt; &#123;ID, NUM, IF, PLUS, ...&#125;</span></span><br><span class="line">    Attribute attr; <span class="comment">// holds pointer/index, points into the symbol table or anoter table</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Symbol Table (scoped, hash-based)</p>
+<ul>
+<li>Token’s attribute_value points into symbol table<ul>
+<li>&lt;token_name:ID, attribute_value:pointer_to_symbol_entry&gt;</li>
+</ul>
+</li>
+<li>Actions exposured<ul>
+<li>look up type</li>
+<li>look up scope</li>
+<li>look up storage location</li>
+</ul>
+</li>
+<li>typical fileds<ul>
+<li>name</li>
+<li>kind (variable&#x2F;function&#x2F;type)</li>
+<li>type (int&#x2F;float&#x2F;…)</li>
+<li>scope level (global&#x2F;local)</li>
+<li>memory offset (stack location)  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">SymbolEntry</span>&#123;</span><br><span class="line">    string name;</span><br><span class="line">    Kind kind;</span><br><span class="line">    Type type;</span><br><span class="line">    <span class="type">int</span> scopeLevel;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>Hash-based <ul>
+<li>Every identifier token triggers lookup</li>
+<li>Semantic analysis does even more lookups</li>
+<li>average O(1) lookup time  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unordered_map&lt;string, SymbolEntry&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>Scoped<ul>
+<li>make SymbolTable a stack of hashmaps<ul>
+<li>global scope map</li>
+<li>function scope map</li>
+<li>block scope map</li>
+</ul>
+</li>
+<li>One hashmap per scope</li>
+<li>Same name allowed in different scopes</li>
+<li>stack<ul>
+<li>when enter a new scope –&gt; push</li>
+<li>when exit –&gt; pop  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stack <span class="attribute">top</span> --&gt; Innermost scope (current)</span><br><span class="line">Stack <span class="attribute">bottom</span> --&gt; Outermost scope (global)</span><br></pre></td></tr></table></figure></li>
+<li>example  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x;     <span class="comment">//global scope</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;  <span class="comment">//function scope begins</span></span><br><span class="line">    <span class="type">int</span> x; <span class="comment">//local scope shadows global x</span></span><br><span class="line">    &#123;      <span class="comment">// inner block scope begins</span></span><br><span class="line">        <span class="type">int</span> y;  </span><br><span class="line">    &#125;      <span class="comment">// block scope ends</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Global Scope</span><br><span class="line">└── Function Scope (f)</span><br><span class="line">    └── Block Scope &#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stack <span class="attribute">top</span> : &#123;x -&gt; local x entry&#125;</span><br><span class="line">Stack <span class="attribute">bottom</span> : &#123;x -&gt; global x entry&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>How lookup works<ul>
+<li>lookup always searches from top to bottom:  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lookup(&quot;x&quot;):</span><br><span class="line">    for scope from top to bottom:</span><br><span class="line">        if scope contains &quot;x&quot;:</span><br><span class="line">            return that entry</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;optional&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SymbolEntry</span> &#123;</span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="keyword">enum class</span> <span class="title class_">Kind</span> &#123; Var, Func, Type, Keyword &#125; kind;</span><br><span class="line">    <span class="comment">// For Step 1, name+kind is enough; later we add type, scope info, offsets, etc.</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SymbolTable</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">SymbolTable</span>() &#123; <span class="built_in">enterScope</span>(); &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">enterScope</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            scopes_.<span class="built_in">emplace_back</span>(); <span class="comment">// push a new empty scope</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">exitScope</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!scopes_.<span class="built_in">empty</span>()) scopes_.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Lookup searches from innermost scope outward.</span></span><br><span class="line">        <span class="function">std::optional&lt;SymbolEntry&gt; <span class="title">lookup</span><span class="params">(<span class="type">const</span> std::string&amp; name)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(scopes_.<span class="built_in">size</span>()) - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">                <span class="keyword">auto</span> it = scopes_[i].<span class="built_in">find</span>(name);</span><br><span class="line">                <span class="keyword">if</span> (it != scopes_[i].<span class="built_in">end</span>()) <span class="keyword">return</span> it-&gt;second;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> std::<span class="literal">nullopt</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Insert into current scope only. Returns reference to inserted entry.</span></span><br><span class="line">        <span class="function">SymbolEntry&amp; <span class="title">insert</span><span class="params">(<span class="type">const</span> std::string&amp; name, SymbolEntry::Kind kind)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">auto</span>&amp; cur = scopes_.<span class="built_in">back</span>();</span><br><span class="line">            <span class="keyword">auto</span> [it, inserted] = cur.<span class="built_in">emplace</span>(name, SymbolEntry&#123;name, kind&#125;);</span><br><span class="line">            <span class="keyword">return</span> it-&gt;second;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        std::vector&lt;std::unordered_map&lt;std::string, SymbolEntry&gt;&gt; scopes_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Input Buffer</p>
+<ul>
+<li><p>lexers read file in chunks</p>
+<ul>
+<li>4KB</li>
+<li>8KB</li>
+<li>etc., this chunk is the input buffer</li>
+</ul>
+</li>
+<li><p>stores just characters</p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> buffer[<span class="number">4096</span>]</span><br></pre></td></tr></table></figure></li>
+<li><p>Pointers</p>
+<ul>
+<li>lexemeBegin pointer: where the current token started</li>
+<li>forward: current scanning position  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buffer[lexemeBegin ... forward]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>Retract()</p>
+<ul>
+<li>sometimes the lexer reads one character too far, to push back characters.</li>
+</ul>
+</li>
+<li><p>two-buffer sentinel version (TBD)</p>
+</li>
+</ul>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class InputBuffer:</span><br><span class="line">    buffer: array&lt;char&gt;(N)</span><br><span class="line">    pos: int</span><br><span class="line">    length: int</span><br><span class="line">    stream: file</span><br><span class="line"></span><br><span class="line">    init(file):</span><br><span class="line">        stream = file</span><br><span class="line">        refill()</span><br><span class="line"></span><br><span class="line">    refill():</span><br><span class="line">        buffer = read_next_chunk(stream, N)</span><br><span class="line">        length = number_of_chars_read</span><br><span class="line">        pos = 0</span><br><span class="line"></span><br><span class="line">    nextChar() -&gt; char:</span><br><span class="line">        if pos &gt;= length:</span><br><span class="line">            refill()</span><br><span class="line">            if length == 0:</span><br><span class="line">                return EOF</span><br><span class="line"></span><br><span class="line">        c = buffer[pos]</span><br><span class="line">        pos = pos + 1</span><br><span class="line">        return c</span><br><span class="line"></span><br><span class="line">    retract():</span><br><span class="line">        pos = pos - 1</span><br><span class="line"></span><br><span class="line">    peekChar() -&gt; char:</span><br><span class="line">        c = nextChar()</span><br><span class="line">        retract()</span><br><span class="line">        return c</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">c = nextChar()</span><br><span class="line"></span><br><span class="line">if isLetter(c):</span><br><span class="line">    lexeme = readIdentifier()</span><br><span class="line">elif isDigit(c):</span><br><span class="line">    lexeme = readNumber()</span><br><span class="line">else:</span><br><span class="line">    return operatorToken(c)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>Algorithms of Lexical Analysis</p>
+<ul>
+<li><p>Terminologies</p>
+<ul>
+<li><p>NFA(Nondeterministic Finite Automation)</p>
+<ul>
+<li>From one state, may have multiple possible next states</li>
+<li>may have \epsilon-transitions (move without consuming input)(\epsilon mean empty string)<ul>
+<li>\epsilon: transition that consumes NO input character</li>
+</ul>
+</li>
+<li>example: NFA for a|b<ul>
+<li>NFA has branching  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">        <span class="attr">--a--</span>&gt; (accept)</span><br><span class="line">(start)</span><br><span class="line">        <span class="attr">--b--</span>&gt; (accept)</span><br></pre></td></tr></table></figure></li>
+<li>NFA is nondeterminism, multiple possible transitions</li>
+<li>from start, if input is ‘a’, take top arrow, if input is ‘b’, take bottom arrow</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>DFA(Deterministic Finite Automation, Table-driven state machine)</p>
+<ul>
+<li>For every(state, input char), there is exactly one next state</li>
+<li>A DFA state represents a set of NFA states</li>
+<li>simulate “all possible NFA paths” by tracking them as a set</li>
+<li>example: DFS for a|b<ul>
+<li>DFA must have exactly one transition per character  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(state0) <span class="attr">--a--</span>&gt; (accept)</span><br><span class="line">(state0) <span class="attr">--b--</span>&gt; (accept)</span><br></pre></td></tr></table></figure></li>
+<li>Table form:<table>
+<thead>
+<tr>
+<th>State</th>
+<th>‘a’</th>
+<th>‘b’</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>dead</td>
+<td>dead</td>
+</tr>
+</tbody></table>
+</li>
+<li>DFA is deterministic, </li>
+<li>from state0, input decides uniquely</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Pipeline: Regex –&gt; NFA –&gt; DFA</p>
+<ul>
+<li><p>step1: Regex –&gt; NFA (Thompson Construction)</p>
+<ul>
+<li>Turn a regex into a machine that recognizes the same language.</li>
+<li>Key property:<ul>
+<li>\epsilon-transitions (moves that consume no character)</li>
+<li>branching (multiple possible next states)</li>
+</ul>
+</li>
+<li>Thompson’s construction builds an NFA by composiing small building blocks:<ol>
+<li>For a literal a:</li>
+<li>For concatenation RS:</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>step2: NFA –&gt; DFA (Subset Construction)</p>
+<ul>
+<li>Remove nondeterminism so the scanner can run with a single current state.</li>
+<li>Example<ul>
+<li>ab|a</li>
+<li>matches ‘ab’ and ‘a’</li>
+<li>build the NFA<ul>
+<li>a nondeterministic finite state machine that accepts either:<ul>
+<li>a</li>
+<li>ab</li>
+</ul>
+</li>
+<li>it looks like   <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">        <span class="attr">--a--</span>&gt; (accept1)</span><br><span class="line">(start)</span><br><span class="line">        <span class="attr">--a--</span>&gt; (s1) <span class="attr">--b--</span>&gt; (accept2)</span><br></pre></td></tr></table></figure></li>
+<li>possible transitions:<ul>
+<li>start–a–&gt;accept1</li>
+<li>start–a–&gt;state1</li>
+<li>state1–b–&gt;accept2</li>
+</ul>
+</li>
+<li>this is nondeterministic because from start on input ‘a’, there 2 possiblities</li>
+</ul>
+</li>
+<li>build DFA<ul>
+<li>a DFA is a set of NFA states</li>
+<li>NFA start state &#x3D; {start}</li>
+<li>D0 &#x3D; {start}</li>
+<li>DFA start state A&#x3D;{start}</li>
+<li>determine move({start}, ‘a’), according to NFA</li>
+<li>From NFA, from state0<ul>
+<li>start–a–&gt;accept1</li>
+<li>start–a–&gt;state1</li>
+</ul>
+</li>
+<li>so: move({start},a) &#x3D;{accept1,state1}</li>
+<li>get the DFA transition: {start}–a–&gt;{accept1,state1}</li>
+<li>similarly, <ul>
+<li>move({start},’a’) &#x3D; {accept1, state1}</li>
+<li>move({start},’b’) &#x3D; dead</li>
+<li>move({accept1,state1},’a’)&#x3D;dead</li>
+<li>move({accept1,state1},’b’)&#x3D;accept2</li>
+</ul>
+</li>
+<li>when accept2 is accepted, no outgoing transitions any more, dead for all input.</li>
+<li>final DFA build from NFA<table>
+<thead>
+<tr>
+<th>DFA State</th>
+<th>on ‘a’ –&gt;</th>
+<th>on ‘b’ –&gt;</th>
+<th>Accepting?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>{start}</td>
+<td>{accept1, state1}</td>
+<td>dead</td>
+<td>No</td>
+</tr>
+<tr>
+<td>{accept1, state1}</td>
+<td>dead</td>
+<td>{accept2}</td>
+<td>Yes(accept1)</td>
+</tr>
+<tr>
+<td>{accept2}</td>
+<td>dead</td>
+<td>dead</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>step3: DFA Mninimization (Hopcroft)</p>
+<ul>
+<li>merge redundant state transitions</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Rules</p>
+<ul>
+<li>Longest Match, first apply longest match</li>
+<li>Priority Rule, if there’s still a tie (same longest length), choose the rule that appears earlier in the Lex program</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Practical Scanner Implementation</p>
+<ul>
+<li><p>Strategy A - Hand-written Lexer</p>
+<ul>
+<li>Typical loop:  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">skip_whitespace</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">is_letter</span>(c)) <span class="built_in">read_identifier</span>();</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">is_digit</span>(c)) <span class="built_in">read_number</span>();</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">operator_token</span>();</span><br></pre></td></tr></table></figure></li>
+<li>Pros &amp; Cons<ul>
+<li>Pros:<ul>
+<li>fast</li>
+<li>customizable</li>
+</ul>
+</li>
+<li>Cons:<ul>
+<li>harder to maintain</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Strategy B - Generated Lexer (Lex&#x2F;Flex)</p>
+<ul>
+<li>Input: <ul>
+<li>Lexer spec file (Lex&#x2F;Flex)<ul>
+<li>commonly named<ul>
+<li>lexer.l</li>
+<li>scanner.l</li>
+</ul>
+</li>
+<li>Contains<ul>
+<li>Regex patterns (rules)</li>
+<li>actions (code to run when a pattern matches)</li>
+</ul>
+</li>
+<li>example  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%</span><br><span class="line">&quot;if&quot;      &#123; return IF; &#125;</span><br><span class="line">[a-zA-Z][a-zA-Z0-9]*  &#123; return ID; &#125;</span><br><span class="line">[0-9]+    &#123; return NUMBER; &#125;</span><br><span class="line">[ \t\n]+  ;   /* skip whitespace */</span><br><span class="line">%%</span><br></pre></td></tr></table></figure></li>
+<li>Run flex   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex scanner.l</span><br></pre></td></tr></table></figure></li>
+<li>Produces C code: lex.yy.c</li>
+<li>Compile it   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc lex.yy.c -o lexer -lfl</span><br></pre></td></tr></table></figure></li>
+<li>run it on an input file, it emits tokens</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Tool produces:<ul>
+<li>DFA tansition table</li>
+<li>efficient scanner code</li>
+</ul>
+</li>
+<li>Pros &amp; Cons<ul>
+<li>Pros:<ul>
+<li>Very fast in practice (table-driven DFA)</li>
+<li>Easy to modify token rules (edit regex rules, regenerate)</li>
+<li>Handles lots of tricky cases (lookahead, longest-match, priority rules) systematically</li>
+</ul>
+</li>
+<li>Cons<ul>
+<li>Debugging can be less direct (we debug rules, not the generated control flow)</li>
+<li>Can produce large transition tables (usually fine; occasionally memory-sensitive)</li>
+<li>Rule interactions can surprise, have to understand “longest match + rule priority”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Errors Handled at Lexical Phase<br>(Lexer detects and reports below errors early before parsing:)</p>
+<ul>
+<li>illegal characters</li>
+<li>malformed literals</li>
+<li>unterminated strings&#x2F;comments</li>
+</ul>
+</li>
+<li><p>more:</p>
+<ul>
+<li>Unicode-aware tokenization</li>
+<li>incremental lexing (IDEs)</li>
+<li>Scannerless parsing (rare)</li>
+<li>Lexer modes (context-sensitive lexing)</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lexical-Analysis-Scanning-Character-stream-%E2%80%93-gt-token-stream"><span class="toc-number">1.</span> <span class="toc-text">Lexical Analysis (Scanning) Character stream –&gt; token stream</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/02/01/Compiler-Lexer/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/02/01/Compiler-Lexer/&text=Compiler - Lexer"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/02/01/Compiler-Lexer/&is_video=false&description=Compiler - Lexer"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Compiler - Lexer&body=Check out this article: http://example.com/2026/02/01/Compiler-Lexer/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/02/01/Compiler-Lexer/&name=Compiler - Lexer&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/02/01/Compiler-Lexer/&t=Compiler - Lexer"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>

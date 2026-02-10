@@ -14,7 +14,7 @@
 <meta property="og:description" content="CUDA (Compute Unified Device Architecture)In the area of AI infrastructure, Nvdia was the dominator with its CUDA ecosystem, which has been the world’s most dominant AI-Computing Moat. NVDIA Driver &amp;a">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-12-26T19:00:34.000Z">
-<meta property="article:modified_time" content="2026-01-01T16:00:43.652Z">
+<meta property="article:modified_time" content="2026-01-03T22:27:13.920Z">
 <meta name="twitter:card" content="summary">
     
     
@@ -84,6 +84,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" aria-label="Previous post" href="/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" aria-label="Next post" href="/2025/12/16/Fine-Tuning-a-customized-LLM/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -115,7 +117,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CUDA-Compute-Unified-Device-Architecture"><span class="toc-number">1.</span> <span class="toc-text">CUDA (Compute Unified Device Architecture)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NVDIA-Driver-amp-GPU"><span class="toc-number">1.1.</span> <span class="toc-text">NVDIA Driver &amp; GPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CUDA-Toolkit-and-CUDA-X"><span class="toc-number">1.2.</span> <span class="toc-text">CUDA Toolkit and CUDA-X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#High-level-Programming"><span class="toc-number">1.3.</span> <span class="toc-text">High-level Programming</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NV-LINK"><span class="toc-number">1.4.</span> <span class="toc-text">NV-LINK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyTorch"><span class="toc-number">2.</span> <span class="toc-text">PyTorch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eager-Mode-Dynamic-Computation-Graph"><span class="toc-number">2.1.</span> <span class="toc-text">Eager Mode (Dynamic Computation Graph):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Three-Pillars"><span class="toc-number">2.2.</span> <span class="toc-text">Three Pillars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PyTorch-Standard-Workflow-Core-libraries"><span class="toc-number">2.3.</span> <span class="toc-text">PyTorch Standard Workflow (Core libraries)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Domain-Libraries"><span class="toc-number">2.4.</span> <span class="toc-text">Domain Libraries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Extensions"><span class="toc-number">2.5.</span> <span class="toc-text">Extensions,</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROCm-Radeon-Open-Compute"><span class="toc-number">3.</span> <span class="toc-text">ROCm (Radeon Open Compute)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TPU"><span class="toc-number">4.</span> <span class="toc-text">TPU</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CUDA-Compute-Unified-Device-Architecture"><span class="toc-number">1.</span> <span class="toc-text">CUDA (Compute Unified Device Architecture)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NVDIA-Driver-amp-GPU"><span class="toc-number">1.1.</span> <span class="toc-text">NVDIA Driver &amp; GPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CUDA-Toolkit-and-CUDA-X"><span class="toc-number">1.2.</span> <span class="toc-text">CUDA Toolkit and CUDA-X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#High-level-Programming"><span class="toc-number">1.3.</span> <span class="toc-text">High-level Programming</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NV-LINK"><span class="toc-number">1.4.</span> <span class="toc-text">NV-LINK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyTorch"><span class="toc-number">2.</span> <span class="toc-text">PyTorch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eager-Mode-Dynamic-Computation-Graph"><span class="toc-number">2.1.</span> <span class="toc-text">Eager Mode (Dynamic Computation Graph):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Three-Pillars"><span class="toc-number">2.2.</span> <span class="toc-text">Three Pillars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stack-Layer"><span class="toc-number">2.3.</span> <span class="toc-text">Stack Layer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Domain-Libraries"><span class="toc-number">2.4.</span> <span class="toc-text">Domain Libraries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Extensions"><span class="toc-number">2.5.</span> <span class="toc-text">Extensions,</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROCm-Radeon-Open-Compute"><span class="toc-number">3.</span> <span class="toc-text">ROCm (Radeon Open Compute)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TPU"><span class="toc-number">4.</span> <span class="toc-text">TPU</span></a></li></ol>
       </div>
     
   </span>
@@ -351,17 +353,21 @@
 </ul>
 </li>
 </ul>
-<h3 id="PyTorch-Standard-Workflow-Core-libraries"><a href="#PyTorch-Standard-Workflow-Core-libraries" class="headerlink" title="PyTorch Standard Workflow (Core libraries)"></a>PyTorch Standard Workflow (Core libraries)</h3><ol>
-<li>Data Ingestion &amp; Pipeline Orchestration, abstracting raw data into structured tensors; managing btaching, shuffling, and multi-process memory pinning for GPU transfer.<ul>
+<h3 id="Stack-Layer"><a href="#Stack-Layer" class="headerlink" title="Stack Layer"></a>Stack Layer</h3><ul>
+<li><p>User Code</p>
+</li>
+<li><p>Core Libraries</p>
+<ol>
+<li>Data preprocessing, abstracting raw data into structured tensors; btaching, shuffling, and multi-process memory pinning for GPU transfer.<ul>
 <li>torch.utils.data.Dataset, DataLoader</li>
 </ul>
 </li>
-<li>Model Architecture Definition, constructing the computational graph by subclassing nn.Module and initializing the linear or non-linear layers and stateful parameters<ul>
+<li>Model architecture definition, constructing the computational graph by subclassing nn.Module and initializing the linear or non-linear layers and stateful parameters<ul>
 <li>torch.nn.Module, nn.Paramter</li>
 </ul>
 </li>
-<li>Forward Propagation, Executing the sequence of mathematical transformations on input tensors to produce model outputs or latent representations.<ul>
-<li>model.forward(), Tensor Operations</li>
+<li>Forward propagation, executing the sequence of mathematical transformations on input tensors to produce model outputs or latent representations.<ul>
+<li>model.forward(), tensor Operations</li>
 </ul>
 </li>
 <li>Loss Computation &amp; Gradient Atrribution, quantifying error via an objective function and utilizing the Autograd engine to compute the partial deriatives of the loss with respect to all trainable parameters.<ul>
@@ -374,6 +380,12 @@
 </ul>
 </li>
 </ol>
+</li>
+<li><p>Dispatcher</p>
+</li>
+<li><p>Kernel</p>
+</li>
+</ul>
 <h3 id="Domain-Libraries"><a href="#Domain-Libraries" class="headerlink" title="Domain Libraries"></a>Domain Libraries</h3><ul>
 <li>TorchVision (Computer Vision): models like ResNet, YOLO</li>
 <li>Hugging Face Transformers (Natural Language): standard for LLMs</li>
@@ -415,7 +427,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CUDA-Compute-Unified-Device-Architecture"><span class="toc-number">1.</span> <span class="toc-text">CUDA (Compute Unified Device Architecture)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NVDIA-Driver-amp-GPU"><span class="toc-number">1.1.</span> <span class="toc-text">NVDIA Driver &amp; GPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CUDA-Toolkit-and-CUDA-X"><span class="toc-number">1.2.</span> <span class="toc-text">CUDA Toolkit and CUDA-X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#High-level-Programming"><span class="toc-number">1.3.</span> <span class="toc-text">High-level Programming</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NV-LINK"><span class="toc-number">1.4.</span> <span class="toc-text">NV-LINK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyTorch"><span class="toc-number">2.</span> <span class="toc-text">PyTorch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eager-Mode-Dynamic-Computation-Graph"><span class="toc-number">2.1.</span> <span class="toc-text">Eager Mode (Dynamic Computation Graph):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Three-Pillars"><span class="toc-number">2.2.</span> <span class="toc-text">Three Pillars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PyTorch-Standard-Workflow-Core-libraries"><span class="toc-number">2.3.</span> <span class="toc-text">PyTorch Standard Workflow (Core libraries)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Domain-Libraries"><span class="toc-number">2.4.</span> <span class="toc-text">Domain Libraries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Extensions"><span class="toc-number">2.5.</span> <span class="toc-text">Extensions,</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROCm-Radeon-Open-Compute"><span class="toc-number">3.</span> <span class="toc-text">ROCm (Radeon Open Compute)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TPU"><span class="toc-number">4.</span> <span class="toc-text">TPU</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CUDA-Compute-Unified-Device-Architecture"><span class="toc-number">1.</span> <span class="toc-text">CUDA (Compute Unified Device Architecture)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NVDIA-Driver-amp-GPU"><span class="toc-number">1.1.</span> <span class="toc-text">NVDIA Driver &amp; GPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CUDA-Toolkit-and-CUDA-X"><span class="toc-number">1.2.</span> <span class="toc-text">CUDA Toolkit and CUDA-X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#High-level-Programming"><span class="toc-number">1.3.</span> <span class="toc-text">High-level Programming</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NV-LINK"><span class="toc-number">1.4.</span> <span class="toc-text">NV-LINK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyTorch"><span class="toc-number">2.</span> <span class="toc-text">PyTorch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eager-Mode-Dynamic-Computation-Graph"><span class="toc-number">2.1.</span> <span class="toc-text">Eager Mode (Dynamic Computation Graph):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Three-Pillars"><span class="toc-number">2.2.</span> <span class="toc-text">Three Pillars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stack-Layer"><span class="toc-number">2.3.</span> <span class="toc-text">Stack Layer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Domain-Libraries"><span class="toc-number">2.4.</span> <span class="toc-text">Domain Libraries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Extensions"><span class="toc-number">2.5.</span> <span class="toc-text">Extensions,</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROCm-Radeon-Open-Compute"><span class="toc-number">3.</span> <span class="toc-text">ROCm (Radeon Open Compute)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TPU"><span class="toc-number">4.</span> <span class="toc-text">TPU</span></a></li></ol>
       </div>
     
 

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Database sharding is the process of horizontally partitioning a dataset across multiple independent database instances. The fundamental objective is to eliminate hardware utilization caps on a single">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Database Optimization: Sharding">
+<meta property="og:url" content="http://example.com/2026/01/31/Database-Optimization-Sharding/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="Database sharding is the process of horizontally partitioning a dataset across multiple independent database instances. The fundamental objective is to eliminate hardware utilization caps on a single">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-01T01:03:31.000Z">
+<meta property="article:modified_time" content="2026-02-10T02:58:22.636Z">
+<meta property="article:tag" content="database">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Database Optimization: Sharding</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2026/02/01/Compiler-Lexer/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2026/01/31/Database-Optimization-Aligning-Execution-Logic-and-Infrastructure/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/01/31/Database-Optimization-Sharding/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&text=Database Optimization: Sharding"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&title=Database Optimization: Sharding"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&is_video=false&description=Database Optimization: Sharding"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Database Optimization: Sharding&body=Check out this article: http://example.com/2026/01/31/Database-Optimization-Sharding/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&title=Database Optimization: Sharding"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&title=Database Optimization: Sharding"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&title=Database Optimization: Sharding"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&title=Database Optimization: Sharding"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&name=Database Optimization: Sharding&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/01/31/Database-Optimization-Sharding/&t=Database Optimization: Sharding"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Database Optimization: Sharding
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-02-01T01:03:31.000Z" class="dt-published" itemprop="datePublished">2026-01-31</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/database/">database</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/database/" rel="tag">database</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>Database sharding is the process of horizontally partitioning a dataset across multiple independent database instances. The fundamental objective is to eliminate hardware utilization caps on a single node.</p>
+<ol>
+<li>Pain Point: Contention and Resource Exhaustion<br>The essence of why sharding is required lies in resource saturation:</li>
+</ol>
+<ul>
+<li>B-Tree Depth: As row counts increase, the index depth increases, leading to logarithmic growth in I&#x2F;O operations per query.</li>
+<li>Lock Contention: Concurrent transactions competing for the same page-level or table-level locks create serialization bottlenecks, reducing throughput.</li>
+<li>Monolithic I&#x2F;O: All write operations must eventually pass through a single log sequence (WAL), create a physical I&#x2F;O limit.</li>
+</ul>
+<ol start="2">
+<li>Sharding</li>
+</ol>
+<p>a. Sharding key<br>The sharding key is the partitioning descriptor that determines the physical location of a data row.</p>
+<ul>
+<li>it is an mapping function where a high-entropy attribute is used to distribute load. If the key is not chosen based on access patterns, hotspots are created.</li>
+<li>the Sharding key transforms a global search problem O(N) into a localized O(1) routing problem. Without a sharding key in the predicate (the WHERE clause), the system loses its distributed advantage and reverts to a broadcast model.</li>
+</ul>
+<p>b.  Shared-Nothing Architecture: The Resource Logic<br>“Shared-nothing” means each node is the cluster is self-sufficient and independent.</p>
+<ul>
+<li>No two nodes share the same RAM or DISK. There is no central “master” disk that all nodes access.</li>
+<li>This eliminates “Single points of contention”, if a new node is added, its 100% capacity of system’s CPU, RAM and disk I&#x2F;O were linearly scaled.</li>
+</ul>
+<p>c. Two-Phase Commit(2PC): the Atomic Logic<br>2PC is essential when a transaction needs to update data on multiple shards simultaneously.</p>
+<ul>
+<li>Why: if node A succeeds in updaing a balance but Node B fails, the database is corrupted.</li>
+<li>How:  <ul>
+<li>Prepare Phase: the coordinator asks all shards, “Can you commit?” shards lock the resoures and say “Yes”</li>
+<li>Commit Phase: only if everyone said yes, the coordinator sends the “Commit” command.</li>
+</ul>
+</li>
+<li>The Catch: undlink the sharding key, 2PC is a performance killer. It requires multiple network round-trips and holds locks on all involved shards until the very end.</li>
+</ul>
+<ol start="3">
+<li>Mechanics of Distributed Query Execution(on a sharded db system)<br>When a query is issued, the execution engine performs Query Decomposition:</li>
+</ol>
+<ul>
+<li>Plan fragmentation: the engine breaks the SQL into “fragments<br> that can be executed independently by shards.</li>
+<li>Predicate Pushdown: the engine pushes filters and aggregations down to the shard level to minimize network data transfer.</li>
+<li>Result Set Merging: The coordinator node performs final operations (like SUM or SORT) on the partial results returned by shards.</li>
+</ul>
+<ol start="4">
+<li>Distinction between Sharding and Partitioning</li>
+</ol>
+<ul>
+<li>Partitioniiing(Logical): THE DIVISION OF A DATASET WITHIN A SINGLE DATABASE INSTANCE. It improves manageability(e.g., dropping and old month’s data) but does not solve hardware resource exhaustion(CPU&#x2F;RAM)</li>
+<li>Sharding(Physical): The division of a dataset across multiple independent nodes. It is a shared-nothing architecture designed to scale hardware resources linearly.</li>
+</ul>
+<ol start="4">
+<li>PostgreSQL implementation: Citus and FDW<br>PG approaches sharding through extensibility.</li>
+</ol>
+<ul>
+<li>Postgres_FDW(Foreign Data Wrapper): Provides the interface for cross-node commnunication. It maps local tables to remote instances using the SQL&#x2F;MED standard.</li>
+<li>Citus: Another extension implements a distributed query planner. It intercepts SQL commands, decomposes them into fragments, and distributes them to worker nodes. Its essence is Metadata Mnagement- keeping a synchronized map of where every shard reside.</li>
+</ul>
+<ol start="5">
+<li>Industry-Leading implementatiosn:</li>
+</ol>
+<ul>
+<li>TiDB: its essence is the Abstraction Layer. It separated computing(TiDB) from storage (TiKV). It uses the Raft consensus algorithm to manage data “Regions”, providing automatic re-sharding and high availablity without manual intervention.</li>
+<li>CockroachDB: Its core is Strict Serializability. It uses a monolithic sorted key-value map a s the underlying storage, partitioned into 64MB”ranges”.</li>
+<li>Azure Cosmos DB: The global Distribution Model<br>Cosmos DB utilizes a specific implementation of sharding called Physical Partitions.<ul>
+<li>It decouples logical partitions (defined by partition key) from physical partitions (the underlying compute&#x2F;storage buckets)</li>
+<li>Request Units(RU): Cosmos DB is the abstraction of hardware into throughput units. The sharding logic is entirely managed by the fabric, which dynamically splits physical partitions as data  grows or throughput demand increases.</li>
+</ul>
+</li>
+</ul>
+<ol start="6">
+<li>Constraint Inherent to Sharding:</li>
+</ol>
+<ul>
+<li><p>The join problem: it’s impossible to perform a hash-join between two tables if they are stored on different physical shards without pulling all data to a single coordinator (which crashes the coordinator).</p>
+<ul>
+<li>Best practice: table co-location, ensure that related tables use the exact same sharding key and sharding algorithm so that related rows always land on the same physical node.</li>
+</ul>
+</li>
+<li><p>Global Consistency vs Latency.<br>This is the most difficult technical constraint in distributed systems.</p>
+<ul>
+<li><p>The Problem: the “Snapshot” challenge<br>  Imagine a bak with 100 shards, we want a snapshot of the total balance of all accounts at exactly 12:00:00 PM.</p>
+<ul>
+<li>The technical conflict: because of network jitter, “12:00:00” might arrive at Shard 1 a few milliseconds earlier that Shard 100. If a transfer is happening between them during those milliseconds, the snapshot will be wrong(money will either be doubled or missing)</li>
+<li>The global Timestamp: To fix this, a distributed system needs a Global Transaction Mnager or a Global CLock(like Google Spanner’s TrueTime) to give every transaction a strictly ordered timestamp.</li>
+<li>The Latency Cost: every shard must “check-in” with the global clock or coordinator before it can finish a write. This “checking-in” adds network delay(latency) to every single transaction.</li>
+</ul>
+</li>
+<li><p>Best practice: Use Eventual Consistency for non-critical data. If the business logic allows, use asynchronous replication for secondary indexes to keep the write path fast. Which will trade “perfect accuracy at any given millisecond” for “high-speed writes”. This removes the need for the Global Timestamp bottleneck, thereby reducing latency.</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="7">
+<li>Read Replicas</li>
+</ol>
+<p>Sharding is a “last resort” due to its operational complexity.</p>
+<p>If the bottleneck is purely read-heavy, <strong>Asynchronous Replication(Read Replicas)</strong> is the superior alternative. It avoid the complexity of data partitioning and distributed transactions while scaling read throughput linearly.</p>
+<p>Read Replicas provides an exact copy of the data. Since reads do not change state, they can be distributed across N nodes without the need for complex sharding keys or distributed transaction coordination. This scales linearly until the Write Volume exceeds the capacity of the primary node.</p>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/01/31/Database-Optimization-Sharding/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&text=Database Optimization: Sharding"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&title=Database Optimization: Sharding"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&is_video=false&description=Database Optimization: Sharding"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Database Optimization: Sharding&body=Check out this article: http://example.com/2026/01/31/Database-Optimization-Sharding/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&title=Database Optimization: Sharding"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&title=Database Optimization: Sharding"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&title=Database Optimization: Sharding"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&title=Database Optimization: Sharding"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/01/31/Database-Optimization-Sharding/&name=Database Optimization: Sharding&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/01/31/Database-Optimization-Sharding/&t=Database Optimization: Sharding"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>
