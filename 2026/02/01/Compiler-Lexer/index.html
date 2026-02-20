@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Lexical Analysis (Scanning) Character stream –&gt; token stream Converts a stream of characters into a stream of tokens for the parser  Lexime is the actual character sequence matched. example source:">
+    <meta name="description" content="Lexical Analysis (Scanning) Convert Character stream to Token stream  simple example:   input character stream: “position &#x3D; initial + rate * 60”.  lexemes include: “postion”, “&#x3D;”, “initial”,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Compiler - Lexer">
 <meta property="og:url" content="http://example.com/2026/02/01/Compiler-Lexer/index.html">
 <meta property="og:site_name" content="Elvin&#39;s Blog">
-<meta property="og:description" content="Lexical Analysis (Scanning) Character stream –&gt; token stream Converts a stream of characters into a stream of tokens for the parser  Lexime is the actual character sequence matched. example source:">
+<meta property="og:description" content="Lexical Analysis (Scanning) Convert Character stream to Token stream  simple example:   input character stream: “position &#x3D; initial + rate * 60”.  lexemes include: “postion”, “&#x3D;”, “initial”,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-01T20:12:54.000Z">
-<meta property="article:modified_time" content="2026-02-10T02:58:53.071Z">
+<meta property="article:modified_time" content="2026-02-16T17:34:19.062Z">
 <meta property="article:tag" content="Programming">
 <meta property="article:tag" content="Compiler">
 <meta name="twitter:card" content="summary">
@@ -119,7 +119,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lexical-Analysis-Scanning-Character-stream-%E2%80%93-gt-token-stream"><span class="toc-number">1.</span> <span class="toc-text">Lexical Analysis (Scanning) Character stream –&gt; token stream</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lexical-Analysis-Scanning"><span class="toc-number">1.</span> <span class="toc-text">Lexical Analysis (Scanning)</span></a></li></ol>
       </div>
     
   </span>
@@ -170,146 +170,81 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h1 id="Lexical-Analysis-Scanning-Character-stream-–-gt-token-stream"><a href="#Lexical-Analysis-Scanning-Character-stream-–-gt-token-stream" class="headerlink" title="Lexical Analysis (Scanning) Character stream –&gt; token stream"></a>Lexical Analysis (Scanning) Character stream –&gt; token stream</h1><ul>
-<li><p>Converts a stream of characters into a stream of tokens for the parser</p>
+    <h1 id="Lexical-Analysis-Scanning"><a href="#Lexical-Analysis-Scanning" class="headerlink" title="Lexical Analysis (Scanning)"></a>Lexical Analysis (Scanning)</h1><ul>
+<li><p>Convert Character stream to Token stream</p>
 <ul>
-<li>Lexime is the actual character sequence matched.<ul>
-<li>example source: position &#x3D; initial + rate * 60</li>
-<li>lexemes include:<ul>
-<li>“postion”</li>
-<li>“&#x3D;”</li>
-<li>“initial”</li>
-<li>“+”</li>
-<li>“rate”</li>
-<li>“*”</li>
-<li>“60”</li>
+<li><p>simple example: </p>
+<ul>
+<li>input character stream: “position &#x3D; initial + rate * 60”. <ul>
+<li>lexemes include: “postion”, “&#x3D;”, “initial”, “+”, “rate”, “*”, “60”</li>
+</ul>
+</li>
+<li>output Token Stream<ul>
+<li>output tokens: (id, 1), (&#x3D;), (id, 2), (+), (id, 3), (*), (60)</li>
+<li>And the corresponding table</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Token Stream<ul>
-<li>example output: (id, 1) (&#x3D;) (id, 2) (+) (id, 3) (*) (60)</li>
-<li>tokens include:<ul>
-<li>(id, 1)</li>
-<li>(&#x3D;)</li>
-<li>(id, 2)</li>
-<li>(+)</li>
-<li>(id, 3)</li>
-<li>(*)</li>
-<li>(60)</li>
-</ul>
+<li><p>Lexime is the actual character sequence matched.</p>
 </li>
-</ul>
-</li>
-<li>Pattern is the rule describing valid lexemes<ul>
+<li><p>Pattern is the rule describing valid lexemes (usually described using regular expressions)</p>
+<ul>
 <li>example:<ul>
 <li>identifier: [A-Za-z][A-Za-z0-9]*</li>
 <li>number: [0-9]+</li>
 </ul>
 </li>
-<li>patterns are described using regular expressions</li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p>Data structures</p>
+<li><p>Token &lt;token_name, attribute_value&gt;</p>
 <ul>
-<li><p>Token </p>
-<ul>
-<li>&lt;token_name, attribute_value&gt;<ul>
-<li>token-name is category used by parsing (e.g., id, num, + , &#x3D;)</li>
-<li>attribute-value: tokens may carry extra information,typically points into the symbol table (or anoter table) holding details needed later (e.g., identifier name&#x2F; type)</li>
+<li>Token-name is category used by parsing (identifier, number, symbol names like of ‘+’ and ‘&#x3D;’)</li>
+<li>Attribute-value: tokens may carry extra information<ul>
+<li>typically points into the symbol table which holding details  </li>
+<li>e.g., identifier name &#x2F; type</li>
 </ul>
 </li>
 <li>example:<ul>
 <li>{id, 1} means identifier token with pointer into symbol table entry #1 </li>
-<li>{+} no attribute  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Token</span>&#123;</span><br><span class="line">    TokenType type; <span class="comment">// type =&gt; &#123;ID, NUM, IF, PLUS, ...&#125;</span></span><br><span class="line">    Attribute attr; <span class="comment">// holds pointer/index, points into the symbol table or anoter table</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>{+} no attribute  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Token</span>&#123;</span><br><span class="line">    TokenType type; <span class="comment">// type =&gt; &#123;ID, NUM, IF, PLUS, ...&#125;</span></span><br><span class="line">    Attribute attr; <span class="comment">// holds pointer/index, points into the symbol table</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>Symbol Table (scoped, hash-based)</p>
-<ul>
-<li>Token’s attribute_value points into symbol table<ul>
-<li>&lt;token_name:ID, attribute_value:pointer_to_symbol_entry&gt;</li>
-</ul>
-</li>
-<li>Actions exposured<ul>
-<li>look up type</li>
-<li>look up scope</li>
-<li>look up storage location</li>
-</ul>
-</li>
-<li>typical fileds<ul>
-<li>name</li>
-<li>kind (variable&#x2F;function&#x2F;type)</li>
-<li>type (int&#x2F;float&#x2F;…)</li>
-<li>scope level (global&#x2F;local)</li>
-<li>memory offset (stack location)  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">SymbolEntry</span>&#123;</span><br><span class="line">    string name;</span><br><span class="line">    Kind kind;</span><br><span class="line">    Type type;</span><br><span class="line">    <span class="type">int</span> scopeLevel;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>Hash-based <ul>
-<li>Every identifier token triggers lookup</li>
-<li>Semantic analysis does even more lookups</li>
-<li>average O(1) lookup time  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unordered_map&lt;string, SymbolEntry&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>Scoped<ul>
-<li>make SymbolTable a stack of hashmaps<ul>
-<li>global scope map</li>
-<li>function scope map</li>
-<li>block scope map</li>
-</ul>
-</li>
-<li>One hashmap per scope</li>
-<li>Same name allowed in different scopes</li>
-<li>stack<ul>
-<li>when enter a new scope –&gt; push</li>
-<li>when exit –&gt; pop  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stack <span class="attribute">top</span> --&gt; Innermost scope (current)</span><br><span class="line">Stack <span class="attribute">bottom</span> --&gt; Outermost scope (global)</span><br></pre></td></tr></table></figure></li>
-<li>example  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x;     <span class="comment">//global scope</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;  <span class="comment">//function scope begins</span></span><br><span class="line">    <span class="type">int</span> x; <span class="comment">//local scope shadows global x</span></span><br><span class="line">    &#123;      <span class="comment">// inner block scope begins</span></span><br><span class="line">        <span class="type">int</span> y;  </span><br><span class="line">    &#125;      <span class="comment">// block scope ends</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Global Scope</span><br><span class="line">└── Function Scope (f)</span><br><span class="line">    └── Block Scope &#123;...&#125;</span><br></pre></td></tr></table></figure>
-
-  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stack <span class="attribute">top</span> : &#123;x -&gt; local x entry&#125;</span><br><span class="line">Stack <span class="attribute">bottom</span> : &#123;x -&gt; global x entry&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>How lookup works<ul>
-<li>lookup always searches from top to bottom:  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lookup(&quot;x&quot;):</span><br><span class="line">    for scope from top to bottom:</span><br><span class="line">        if scope contains &quot;x&quot;:</span><br><span class="line">            return that entry</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;optional&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SymbolEntry</span> &#123;</span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="keyword">enum class</span> <span class="title class_">Kind</span> &#123; Var, Func, Type, Keyword &#125; kind;</span><br><span class="line">    <span class="comment">// For Step 1, name+kind is enough; later we add type, scope info, offsets, etc.</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SymbolTable</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">SymbolTable</span>() &#123; <span class="built_in">enterScope</span>(); &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">enterScope</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            scopes_.<span class="built_in">emplace_back</span>(); <span class="comment">// push a new empty scope</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">exitScope</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!scopes_.<span class="built_in">empty</span>()) scopes_.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Lookup searches from innermost scope outward.</span></span><br><span class="line">        <span class="function">std::optional&lt;SymbolEntry&gt; <span class="title">lookup</span><span class="params">(<span class="type">const</span> std::string&amp; name)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(scopes_.<span class="built_in">size</span>()) - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">                <span class="keyword">auto</span> it = scopes_[i].<span class="built_in">find</span>(name);</span><br><span class="line">                <span class="keyword">if</span> (it != scopes_[i].<span class="built_in">end</span>()) <span class="keyword">return</span> it-&gt;second;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> std::<span class="literal">nullopt</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Insert into current scope only. Returns reference to inserted entry.</span></span><br><span class="line">        <span class="function">SymbolEntry&amp; <span class="title">insert</span><span class="params">(<span class="type">const</span> std::string&amp; name, SymbolEntry::Kind kind)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">auto</span>&amp; cur = scopes_.<span class="built_in">back</span>();</span><br><span class="line">            <span class="keyword">auto</span> [it, inserted] = cur.<span class="built_in">emplace</span>(name, SymbolEntry&#123;name, kind&#125;);</span><br><span class="line">            <span class="keyword">return</span> it-&gt;second;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        std::vector&lt;std::unordered_map&lt;std::string, SymbolEntry&gt;&gt; scopes_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Input Buffer</p>
 <ul>
-<li><p>lexers read file in chunks</p>
-<ul>
-<li>4KB</li>
-<li>8KB</li>
-<li>etc., this chunk is the input buffer</li>
+<li>lexers read file in chunks, 4KB, 8KB, etc., this chunk is the input buffer<ul>
+<li>stores characters  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::array&lt;<span class="type">char</span>, 4096&gt; buffer;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li><p>stores just characters</p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> buffer[<span class="number">4096</span>]</span><br></pre></td></tr></table></figure></li>
-<li><p>Pointers</p>
-<ul>
-<li>lexemeBegin pointer: where the current token started</li>
-<li>forward: current scanning position  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buffer[lexemeBegin ... forward]</span><br></pre></td></tr></table></figure></li>
+<li>Pointers<ul>
+<li>LexemeBegin pointer: where the current token started</li>
+<li>Forward: current scanning position  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buffer[lexemeBegin ... forward]</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li><p>Retract()</p>
-<ul>
-<li>sometimes the lexer reads one character too far, to push back characters.</li>
+<li>Retract()<ul>
+<li>move the buffer Forward pointer back by one</li>
+<li>Lookahead problem<ul>
+<li>lexer cannot know if a token has ended until see the character after it.</li>
+<li>lexer reads too far to examine the next character to determine if the current token is complete</li>
+<li>need to</li>
 </ul>
 </li>
-<li><p>two-buffer sentinel version (TBD)</p>
+<li>example: lexer scan characters “123+45”<ul>
+<li>reads 1</li>
+<li>reads 2</li>
+<li>reads 3</li>
+<li>reads +</li>
+<li>lexer sees +, it knows “123” is finished, however the + is not part of the number</li>
+<li>Retract: lexer has read one character too far, it must Retract so that the next time the lexer is called, it starts exactly at the ‘+’</li>
+</ul>
 </li>
 </ul>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class InputBuffer:</span><br><span class="line">    buffer: array&lt;char&gt;(N)</span><br><span class="line">    pos: int</span><br><span class="line">    length: int</span><br><span class="line">    stream: file</span><br><span class="line"></span><br><span class="line">    init(file):</span><br><span class="line">        stream = file</span><br><span class="line">        refill()</span><br><span class="line"></span><br><span class="line">    refill():</span><br><span class="line">        buffer = read_next_chunk(stream, N)</span><br><span class="line">        length = number_of_chars_read</span><br><span class="line">        pos = 0</span><br><span class="line"></span><br><span class="line">    nextChar() -&gt; char:</span><br><span class="line">        if pos &gt;= length:</span><br><span class="line">            refill()</span><br><span class="line">            if length == 0:</span><br><span class="line">                return EOF</span><br><span class="line"></span><br><span class="line">        c = buffer[pos]</span><br><span class="line">        pos = pos + 1</span><br><span class="line">        return c</span><br><span class="line"></span><br><span class="line">    retract():</span><br><span class="line">        pos = pos - 1</span><br><span class="line"></span><br><span class="line">    peekChar() -&gt; char:</span><br><span class="line">        c = nextChar()</span><br><span class="line">        retract()</span><br><span class="line">        return c</span><br></pre></td></tr></table></figure>
+</li>
+<li>two-buffer sentinel version (TBD)</li>
+</ul>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">InputBuffer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="type">static</span> <span class="keyword">constexpr</span> std::<span class="type">size_t</span> N = <span class="number">4096</span>;</span><br><span class="line">        <span class="function"><span class="keyword">explicit</span> <span class="title">InputBuffer</span><span class="params">(<span class="type">const</span> std::string&amp; filename)</span> : stream_(filename, std::ios::binary) &#123;</span></span><br><span class="line">            <span class="built_in">refill</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">std::optional&lt;<span class="type">char</span>&gt; <span class="title">nextChar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (pos_ &gt;= length_) &#123;</span><br><span class="line">                <span class="built_in">refill</span>();</span><br><span class="line">                <span class="keyword">if</span> (length_ == <span class="number">0</span>) <span class="keyword">return</span> std::<span class="literal">nullopt</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> buffer_[pos_++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">retract</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (pos_ &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                --pos_;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">std::optional&lt;<span class="type">char</span>&gt; <span class="title">peekChar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">auto</span> c = <span class="built_in">nextChar</span>();</span><br><span class="line">            <span class="keyword">if</span> (c) <span class="built_in">retract</span>();</span><br><span class="line">            <span class="keyword">return</span> c;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">refill</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!stream_) &#123;</span><br><span class="line">                length_ = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            stream_.<span class="built_in">read</span>(buffer_.<span class="built_in">data</span>(), N);</span><br><span class="line">            length_ = <span class="built_in">static_cast</span>&lt;std::<span class="type">size_t</span>&gt;(stream_.<span class="built_in">gcount</span>());</span><br><span class="line">            pos_ = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    std::ifstream stream_;</span><br><span class="line">    std::array&lt;<span class="type">char</span>, N&gt; buffer_&#123;&#125;;</span><br><span class="line">    std::<span class="type">size_t</span> pos_ = <span class="number">0</span>;</span><br><span class="line">    std::<span class="type">size_t</span> length_ = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">Token <span class="title">nextToken</span><span class="params">(InputBuffer&amp; input)</span></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> optC = input.<span class="built_in">nextChar</span>();</span><br><span class="line">    <span class="keyword">if</span>(!optC)&#123;</span><br><span class="line">        <span class="keyword">return</span> Token&#123;TokenType::EndOfFile, <span class="string">&quot;&quot;</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">char</span> c = *optC;</span><br><span class="line">    <span class="keyword">if</span>(std::<span class="built_in">isalpha</span>(<span class="built_in">static_cast</span>&lt;<span class="type">unsigned</span> <span class="type">char</span>&gt;(c)))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">readIdentifier</span>(input, c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(std::<span class="built_in">isdigit</span>(<span class="built_in">static_cast</span>&lt;<span class="type">unsigned</span> <span class="type">char</span>&gt;(c)))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">readNumber</span>(input,c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">operatorToken</span>(c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Token <span class="title">readIdentifier</span><span class="params">(InputBuffer&amp; input, <span class="type">char</span> firstChar)</span></span>&#123;</span><br><span class="line">    std::string lexeme;</span><br><span class="line">    lexeme += firstChar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">c = nextChar()</span><br><span class="line"></span><br><span class="line">if isLetter(c):</span><br><span class="line">    lexeme = readIdentifier()</span><br><span class="line">elif isDigit(c):</span><br><span class="line">    lexeme = readNumber()</span><br><span class="line">else:</span><br><span class="line">    return operatorToken(c)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
@@ -552,10 +487,73 @@
 </li>
 <li><p>more:</p>
 <ul>
-<li>Unicode-aware tokenization</li>
-<li>incremental lexing (IDEs)</li>
-<li>Scannerless parsing (rare)</li>
-<li>Lexer modes (context-sensitive lexing)</li>
+<li><p>Unicode-aware tokenization</p>
+</li>
+<li><p>incremental lexing (IDEs)</p>
+</li>
+<li><p>Scannerless parsing (rare)</p>
+</li>
+<li><p>Lexer modes (context-sensitive lexing)</p>
+</li>
+<li><p>Symbol Table</p>
+<ul>
+<li><p>SymbolEntry is struct to store each symbol record</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>kind(variable&#x2F;function&#x2F;type)</th>
+<th>type(int&#x2F;float&#x2F;…)</th>
+<th>scope level(global&#x2F;local)</th>
+<th>memory offset</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>token string name</td>
+<td>variable&#x2F;function&#x2F;type</td>
+<td>int&#x2F;float</td>
+<td>global&#x2F;local</td>
+<td>stack location</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>SymbolTable wrapps SymbolEntry into hashmap and exposure actions, </p>
+<ul>
+<li>maintain a scoped hashmap of SymbolEntry list</li>
+<li>lookup type, scope or storage location of a symbol</li>
+<li>Hash-based, average O(1) lookup time by symbol name<br>  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unordered_map&lt;string, SymbolEntry&gt; </span><br></pre></td></tr></table></figure></li>
+<li>Scoped<ul>
+<li>using a stack to track each symbol’s scope dynamically in parsing, and save to the symbol table</li>
+<li>make SymbolTable a stack of hashmaps<ul>
+<li>global scope map</li>
+<li>function scope map</li>
+<li>block scope map</li>
+</ul>
+</li>
+<li>One hashmap per scope</li>
+<li>Same name allowed in different scopes</li>
+<li>stack<ul>
+<li>when enter a new scope –&gt; push</li>
+<li>when exit –&gt; pop  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stack <span class="attribute">top</span> --&gt; Innermost scope (current)</span><br><span class="line">Stack <span class="attribute">bottom</span> --&gt; Outermost scope (global)</span><br></pre></td></tr></table></figure></li>
+<li>example  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x;     <span class="comment">//global scope</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;  <span class="comment">//function scope begins</span></span><br><span class="line">    <span class="type">int</span> x; <span class="comment">//local scope shadows global x</span></span><br><span class="line">    &#123;      <span class="comment">// inner block scope begins</span></span><br><span class="line">        <span class="type">int</span> y;  </span><br><span class="line">    &#125;      <span class="comment">// block scope ends</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Global Scope</span><br><span class="line">└── Function Scope (f)</span><br><span class="line">    └── Block Scope &#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stack <span class="attribute">top</span> : &#123;x -&gt; local x entry&#125;</span><br><span class="line">Stack <span class="attribute">bottom</span> : &#123;x -&gt; global x entry&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>How lookup works<ul>
+<li>lookup always searches from top to bottom:  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lookup(&quot;x&quot;):</span><br><span class="line">    for scope from top to bottom:</span><br><span class="line">        if scope contains &quot;x&quot;:</span><br><span class="line">            return that entry</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">SymbolEntry</span> &#123;</span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="keyword">enum class</span> <span class="title class_">Kind</span> &#123; Var, Func, Type, Keyword &#125; kind;</span><br><span class="line">    <span class="comment">// other properties</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SymbolTable</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">SymbolTable</span>() &#123; </span><br><span class="line">            <span class="built_in">enterScope</span>(); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">enterScope</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            scopes_.<span class="built_in">emplace_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">exitScope</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!scopes_.<span class="built_in">empty</span>()) scopes_.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">std::optional&lt;SymbolEntry&gt; <span class="title">lookup</span><span class="params">(<span class="type">const</span> std::string&amp; name)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(scopes_.<span class="built_in">size</span>()) - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">                <span class="keyword">auto</span> it = scopes_[i].<span class="built_in">find</span>(name);</span><br><span class="line">                <span class="keyword">if</span> (it != scopes_[i].<span class="built_in">end</span>()) <span class="keyword">return</span> it-&gt;second;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> std::<span class="literal">nullopt</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">SymbolEntry&amp; <span class="title">insert</span><span class="params">(<span class="type">const</span> std::string&amp; name, SymbolEntry::Kind kind)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">auto</span>&amp; cur = scopes_.<span class="built_in">back</span>();</span><br><span class="line">            <span class="keyword">auto</span> [it, inserted] = cur.<span class="built_in">emplace</span>(name, SymbolEntry&#123;name, kind&#125;);</span><br><span class="line">            <span class="keyword">return</span> it-&gt;second;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        std::vector&lt;std::unordered_map&lt;std::string, SymbolEntry&gt;&gt; scopes_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
@@ -585,7 +583,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lexical-Analysis-Scanning-Character-stream-%E2%80%93-gt-token-stream"><span class="toc-number">1.</span> <span class="toc-text">Lexical Analysis (Scanning) Character stream –&gt; token stream</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lexical-Analysis-Scanning"><span class="toc-number">1.</span> <span class="toc-text">Lexical Analysis (Scanning)</span></a></li></ol>
       </div>
     
 
