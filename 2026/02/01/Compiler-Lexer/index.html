@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Lexical Analysis (Scanning) Convert Character stream to Token stream  simple example:  input character stream: “position &#x3D; initial + rate * 60”.  lexemes include: “postion”, “&#x3D;”, “initial”,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compiler - Lexer">
+<meta property="og:url" content="http://example.com/2026/02/01/Compiler-Lexer/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="Lexical Analysis (Scanning) Convert Character stream to Token stream  simple example:  input character stream: “position &#x3D; initial + rate * 60”.  lexemes include: “postion”, “&#x3D;”, “initial”,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-01T20:12:54.000Z">
+<meta property="article:modified_time" content="2026-07-08T02:08:40.135Z">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="Compiler">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Compiler - Lexer</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2026/02/09/Compiler-Parser/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2026/01/31/Database-Optimization-Sharding/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/02/01/Compiler-Lexer/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/02/01/Compiler-Lexer/&text=Compiler - Lexer"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/02/01/Compiler-Lexer/&is_video=false&description=Compiler - Lexer"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Compiler - Lexer&body=Check out this article: http://example.com/2026/02/01/Compiler-Lexer/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/02/01/Compiler-Lexer/&name=Compiler - Lexer&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/02/01/Compiler-Lexer/&t=Compiler - Lexer"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lexical-Analysis-Scanning"><span class="toc-number">1.</span> <span class="toc-text">Lexical Analysis (Scanning)</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Compiler - Lexer
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-02-01T20:12:54.000Z" class="dt-published" itemprop="datePublished">2026-02-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Compiler/" rel="tag">Compiler</a>, <a class="p-category" href="/tags/Programming/" rel="tag">Programming</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Lexical-Analysis-Scanning"><a href="#Lexical-Analysis-Scanning" class="headerlink" title="Lexical Analysis (Scanning)"></a>Lexical Analysis (Scanning)</h1><ul>
+<li><p>Convert Character stream to Token stream</p>
+<ul>
+<li>simple example: <ul>
+<li>input character stream: “position &#x3D; initial + rate * 60”. <ul>
+<li>lexemes include: “postion”, “&#x3D;”, “initial”, “+”, “rate”, “*”, “60”</li>
+</ul>
+</li>
+<li>output Token Stream<ul>
+<li>output tokens: (id, 1), (&#x3D;), (id, 2), (+), (id, 3), (*), (60)</li>
+<li>And the corresponding table</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Lexime is the actual character sequence matched.</li>
+<li>Pattern is the rule describing valid lexemes (usually described using regular expressions)<ul>
+<li>example:<ul>
+<li>identifier: [A-Za-z][A-Za-z0-9]*</li>
+<li>number: [0-9]+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Token &lt;token_name, attribute_value&gt;<ul>
+<li>Token-name is category used by parsing (identifier, number, symbol names like of ‘+’ and ‘&#x3D;’)</li>
+<li>Attribute-value: tokens may carry extra information<ul>
+<li>typically points into the symbol table which holding details  </li>
+<li>e.g., identifier name &#x2F; type</li>
+</ul>
+</li>
+<li>example:<ul>
+<li>{id, 1} means identifier token with pointer into symbol table entry #1 </li>
+<li>{+} no attribute</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Input Buffer<ul>
+<li>lexers read file in chunks, 4KB, 8KB, etc., this chunk is the input buffer which stores characters</li>
+<li>Pointers<ul>
+<li>LexemeBegin: where the current token started</li>
+<li>Forward: current scanning position</li>
+</ul>
+</li>
+<li>Retract()<ul>
+<li>move the Forward pointer back by one</li>
+</ul>
+</li>
+<li>two-buffer sentinel version <ul>
+<li>TBD</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Process of Lexical Analysis</p>
+<ul>
+<li><p>Pipeline: Regex –&gt; NFA –&gt; DFA –&gt; Minimized DFA –&gt; Transition Table (flex)</p>
+<ul>
+<li><p>NFA(Nondeterministic Finite Automation)</p>
+<ul>
+<li>From one state, may have multiple possible next states</li>
+<li>may have \epsilon-transitions (move without consuming input)(\epsilon mean empty string)<ul>
+<li>\epsilon: transition that consumes NO input character</li>
+</ul>
+</li>
+<li>example: NFA for a|b<ul>
+<li>NFA has branching  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">        <span class="attr">--a--</span>&gt; (accept)</span><br><span class="line">(start)</span><br><span class="line">        <span class="attr">--b--</span>&gt; (accept)</span><br></pre></td></tr></table></figure></li>
+<li>NFA is nondeterminism, multiple possible transitions</li>
+<li>from start, if input is ‘a’, take top arrow, if input is ‘b’, take bottom arrow</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>DFA(Deterministic Finite Automation, Table-driven state machine)</p>
+<ul>
+<li>For every(state, input char), there is exactly one next state</li>
+<li>A DFA state represents a set of NFA states, </li>
+<li>DFA compresses all NFA possibilities into one state, simulate “all possible NFA paths” by tracking them as a set</li>
+<li>example: DFA for a|b<ul>
+<li>DFA must have exactly one transition per character  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(state0) <span class="attr">--a--</span>&gt; (accept)</span><br><span class="line">(state0) <span class="attr">--b--</span>&gt; (accept)</span><br></pre></td></tr></table></figure></li>
+<li>Table form:<table>
+<thead>
+<tr>
+<th>State</th>
+<th>‘a’</th>
+<th>‘b’</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>dead</td>
+<td>dead</td>
+</tr>
+</tbody></table>
+</li>
+<li>DFA is deterministic, </li>
+<li>from state0, input decides uniquely</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Process</p>
+<ul>
+<li><p>step1 : define grammar as regex</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[a-zA-Z][a-zA-Z0-9_]* &#123;return IDENTIFIER;&#125;</span><br><span class="line">[0-9]+ &#123;return NUMBER;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>step2: Regex –&gt; NFA (Thompson Construction)</p>
+<ul>
+<li>Turn a regex into a machine that recognizes the same language, Each regex gets converted to a Non-deterministic Finite Automation</li>
+<li>Key property:<ul>
+<li>\epsilon-transitions (moves that consume no character)</li>
+<li>branching (multiple possible next states)</li>
+</ul>
+</li>
+<li>Thompson’s construction builds an NFA by composing small building blocks:<ol>
+<li>For a literal a:</li>
+<li>For concatenation RS:</li>
+<li>TBD</li>
+</ol>
+</li>
+<li>Easy to build, hard to execute</li>
+</ul>
+</li>
+<li><p>step3: NFA –&gt; DFA (Subset Construction)</p>
+<ul>
+<li>Remove nondeterminism so the scanner can run with a single current state.</li>
+<li>Example<ul>
+<li>ab|a</li>
+<li>matches ‘ab’ and ‘a’</li>
+<li>build the NFA<ul>
+<li>a nondeterministic finite state machine that accepts either:<ul>
+<li>a</li>
+<li>ab</li>
+</ul>
+</li>
+<li>it looks like   <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">        <span class="attr">--a--</span>&gt; (accept1)</span><br><span class="line">(start)</span><br><span class="line">        <span class="attr">--a--</span>&gt; (s1) <span class="attr">--b--</span>&gt; (accept2)</span><br></pre></td></tr></table></figure></li>
+<li>possible transitions:<ul>
+<li>start–a–&gt;accept1</li>
+<li>start–a–&gt;state1</li>
+<li>state1–b–&gt;accept2</li>
+</ul>
+</li>
+<li>this is nondeterministic because from start on input ‘a’, there 2 possiblities</li>
+</ul>
+</li>
+<li>build DFA<ul>
+<li>a DFA is a set of NFA states</li>
+<li>NFA start state &#x3D; {start}</li>
+<li>D0 &#x3D; {start}</li>
+<li>DFA start state A&#x3D;{start}</li>
+<li>determine move({start}, ‘a’), according to NFA</li>
+<li>From NFA, from state0<ul>
+<li>start–a–&gt;accept1</li>
+<li>start–a–&gt;state1</li>
+</ul>
+</li>
+<li>so: move({start},a) &#x3D;{accept1,state1}</li>
+<li>get the DFA transition: {start}–a–&gt;{accept1,state1}</li>
+<li>similarly, <ul>
+<li>move({start},’a’) &#x3D; {accept1, state1}</li>
+<li>move({start},’b’) &#x3D; dead</li>
+<li>move({accept1,state1},’a’)&#x3D;dead</li>
+<li>move({accept1,state1},’b’)&#x3D;accept2</li>
+</ul>
+</li>
+<li>when accept2 is accepted, no outgoing transitions any more, dead for all input.</li>
+<li>final DFA build from NFA<table>
+<thead>
+<tr>
+<th>DFA State</th>
+<th>on ‘a’ –&gt;</th>
+<th>on ‘b’ –&gt;</th>
+<th>Accepting?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>{start}</td>
+<td>{accept1, state1}</td>
+<td>dead</td>
+<td>No</td>
+</tr>
+<tr>
+<td>{accept1, state1}</td>
+<td>dead</td>
+<td>{accept2}</td>
+<td>Yes(accept1)</td>
+</tr>
+<tr>
+<td>{accept2}</td>
+<td>dead</td>
+<td>dead</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>step4 : DFA –&gt; Minimized DFA (Hopcroft) –&gt; Transition Table</p>
+<ul>
+<li>merge redundant state transitions</li>
+<li>Flatten the DFA into a 2D lookup table</li>
+</ul>
+</li>
+<li><p>Above pipeline is exactly a real lexer generators like the flex do. Input regex, output the lookup table.</p>
+</li>
+</ul>
+</li>
+<li><p>Rules</p>
+<ul>
+<li>Longest Match, first apply longest match</li>
+<li>Priority Rule, if there’s still a tie (same longest length), choose the rule that appears earlier in the Lex program</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Practical Scanner Implementation</p>
+<ul>
+<li><p>Strategy A - Hand-written Lexer</p>
+<ul>
+<li>Typical loop:  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">skip_whitespace</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">is_letter</span>(c)) </span><br><span class="line">    <span class="built_in">read_identifier</span>();</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">is_digit</span>(c)) </span><br><span class="line">    <span class="built_in">read_number</span>();</span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">operator_token</span>();</span><br></pre></td></tr></table></figure></li>
+<li>Pros &amp; Cons<ul>
+<li>Pros:<ul>
+<li>fast</li>
+<li>customizable</li>
+</ul>
+</li>
+<li>Cons:<ul>
+<li>harder to maintain</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Strategy B - Generated Lexer (Lex&#x2F;Flex)</p>
+<ul>
+<li>Input: <ul>
+<li>Lexer spec file (Lex&#x2F;Flex)<ul>
+<li>commonly named<ul>
+<li>lexer.l</li>
+<li>scanner.l</li>
+</ul>
+</li>
+<li>Contains<ul>
+<li>Regex patterns (rules)</li>
+<li>actions (code to run when a pattern matches)</li>
+</ul>
+</li>
+<li>example  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%</span><br><span class="line">&quot;if&quot;      &#123; return IF; &#125;</span><br><span class="line">[a-zA-Z][a-zA-Z0-9]*  &#123; return ID; &#125;</span><br><span class="line">[0-9]+    &#123; return NUMBER; &#125;</span><br><span class="line">[ \t\n]+  ;   /* skip whitespace */</span><br><span class="line">%%</span><br></pre></td></tr></table></figure></li>
+<li>Run flex   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex scanner.l</span><br></pre></td></tr></table></figure></li>
+<li>Produces C code: lex.yy.c</li>
+<li>Compile it   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc lex.yy.c -o lexer -lfl</span><br></pre></td></tr></table></figure></li>
+<li>run it on an input file, it emits tokens</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Tool produces:<ul>
+<li>DFA tansition table</li>
+<li>efficient scanner code</li>
+</ul>
+</li>
+<li>Pros &amp; Cons<ul>
+<li>Pros:<ul>
+<li>Very fast in practice (table-driven DFA)</li>
+<li>Easy to modify token rules (edit regex rules, regenerate)</li>
+<li>Handles lots of tricky cases (lookahead, longest-match, priority rules) systematically</li>
+</ul>
+</li>
+<li>Cons<ul>
+<li>Debugging can be less direct (we debug rules, not the generated control flow)</li>
+<li>Can produce large transition tables (usually fine; occasionally memory-sensitive)</li>
+<li>Rule interactions can surprise, have to understand “longest match + rule priority”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Errors Handled at Lexical Phase<br>(Lexer detects and reports below errors early before parsing:)</p>
+<ul>
+<li>illegal characters</li>
+<li>malformed literals</li>
+<li>unterminated strings&#x2F;comments</li>
+</ul>
+</li>
+<li><p>more:</p>
+<ul>
+<li>Unicode-aware tokenization</li>
+<li>incremental lexing (IDEs)</li>
+<li>Scannerless parsing (rare)</li>
+<li>Lexer modes (context-sensitive lexing)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//enum -- token type</span></span><br><span class="line"><span class="keyword">enum class</span> <span class="title class_">TokenType</span> &#123;</span><br><span class="line">    Identifier, Number, Operator,</span><br><span class="line">    If, Else, While, Return,</span><br><span class="line">    EndOfFile</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//struct - token</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Token</span> &#123;</span><br><span class="line">    TokenType type;</span><br><span class="line">    std::string lexeme;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//interface - IInputSource</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IInputSource</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> std::optional&lt;<span class="type">char</span>&gt; <span class="title">nextChar</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">retract</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> std::optional&lt;<span class="type">char</span>&gt; <span class="title">peekChar</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">virtual</span> ~<span class="built_in">IInputSource</span>() = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//interface - ILexer</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ILexer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> Token <span class="title">nextToken</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> Token <span class="title">peek</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">virtual</span> ~<span class="built_in">ILexer</span>() = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FileInputSource</span> : <span class="keyword">public</span> IInputSource &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">explicit</span> <span class="title">FileInputSource</span><span class="params">(<span class="type">const</span> std::string&amp; filename)</span></span>;</span><br><span class="line">        <span class="function">std::optional&lt;<span class="type">char</span>&gt; <span class="title">nextChar</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">retract</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line">        <span class="function">std::optional&lt;<span class="type">char</span>&gt; <span class="title">peekChar</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="type">static</span> <span class="keyword">constexpr</span> std::<span class="type">size_t</span> N = <span class="number">4096</span>;</span><br><span class="line">        std::ifstream stream_;</span><br><span class="line">        std::array&lt;<span class="type">char</span>, N&gt; buffer_&#123;&#125;;</span><br><span class="line">        std::<span class="type">size_t</span> pos_ = <span class="number">0</span>;</span><br><span class="line">        std::<span class="type">size_t</span> length_ = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">refill</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Lexer</span> : <span class="keyword">public</span> ILexer &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">explicit</span> <span class="title">Lexer</span><span class="params">(std::unique_ptr&lt;IInputSource&gt; source)</span></span>;</span><br><span class="line">        <span class="function">Token <span class="title">nextToken</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line">        <span class="function">Token <span class="title">peek</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        std::unique_ptr&lt;IInputSource&gt; source_;</span><br><span class="line">        std::optional&lt;Token&gt; lookahead_;</span><br><span class="line"></span><br><span class="line">        <span class="function">Token <span class="title">readIdentifier</span><span class="params">(<span class="type">char</span> first)</span></span>;</span><br><span class="line">        <span class="function">Token <span class="title">readNumber</span><span class="params">(<span class="type">char</span> first)</span></span>;</span><br><span class="line">        <span class="function">Token <span class="title">operatorToken</span><span class="params">(<span class="type">char</span> c)</span></span>;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">skipWhitespace</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// swap FileInputSource for StringInputSource anytime</span></span><br><span class="line">    <span class="keyword">auto</span> input = std::<span class="built_in">make_unique</span>&lt;FileInputSource&gt;(<span class="string">&quot;test.txt&quot;</span>);</span><br><span class="line">    <span class="function">Lexer <span class="title">lexer</span><span class="params">(std::move(input))</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        Token tok = lexer.<span class="built_in">nextToken</span>();</span><br><span class="line">        <span class="keyword">if</span> (tok.type == TokenType::EndOfFile) <span class="keyword">break</span>;</span><br><span class="line">        <span class="comment">// process token...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lexical-Analysis-Scanning"><span class="toc-number">1.</span> <span class="toc-text">Lexical Analysis (Scanning)</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/02/01/Compiler-Lexer/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/02/01/Compiler-Lexer/&text=Compiler - Lexer"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/02/01/Compiler-Lexer/&is_video=false&description=Compiler - Lexer"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Compiler - Lexer&body=Check out this article: http://example.com/2026/02/01/Compiler-Lexer/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/02/01/Compiler-Lexer/&title=Compiler - Lexer"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/02/01/Compiler-Lexer/&name=Compiler - Lexer&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/02/01/Compiler-Lexer/&t=Compiler - Lexer"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>

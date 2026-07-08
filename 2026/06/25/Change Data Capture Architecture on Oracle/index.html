@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1. Oracle Architecture1. Cluster &amp; Oracle Grid Infrastructure(GI)Cluster is a collection of interconnected physical servers or virtual mathines(nodes) operating as a single system. A single-node e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Change Data Capture Architecture on Oracle">
+<meta property="og:url" content="http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/index.html">
+<meta property="og:site_name" content="Elvin&#39;s Blog">
+<meta property="og:description" content="1. Oracle Architecture1. Cluster &amp; Oracle Grid Infrastructure(GI)Cluster is a collection of interconnected physical servers or virtual mathines(nodes) operating as a single system. A single-node e">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-06-25T14:37:43.000Z">
+<meta property="article:modified_time" content="2026-07-08T02:00:02.752Z">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Change Data Capture Architecture on Oracle</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="ltr">
+    <div class="page-container">
+  
+            
+                <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/#side-projects">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2026/02/09/Compiler-Parser/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&text=Change Data Capture Architecture on Oracle"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&title=Change Data Capture Architecture on Oracle"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&is_video=false&description=Change Data Capture Architecture on Oracle"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Change Data Capture Architecture on Oracle&body=Check out this article: http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&title=Change Data Capture Architecture on Oracle"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&title=Change Data Capture Architecture on Oracle"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&title=Change Data Capture Architecture on Oracle"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&title=Change Data Capture Architecture on Oracle"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&name=Change Data Capture Architecture on Oracle&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&t=Change Data Capture Architecture on Oracle"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Oracle-Architecture"><span class="toc-number">1.</span> <span class="toc-text">1. Oracle Architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Cluster-amp-Oracle-Grid-Infrastructure-GI"><span class="toc-number">1.1.</span> <span class="toc-text">1. Cluster &amp; Oracle Grid Infrastructure(GI)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Oracle-Instance-amp-memory-structures"><span class="toc-number">1.2.</span> <span class="toc-text">2. Oracle Instance &amp; memory structures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Database-physical-files-on-shared-storage"><span class="toc-number">1.3.</span> <span class="toc-text">3. Database (physical files on shared storage)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Logical-Abstraction-Multitenant-Architecture"><span class="toc-number">1.4.</span> <span class="toc-text">4. Logical Abstraction(Multitenant Architecture)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CDB-Container-database"><span class="toc-number">1.4.1.</span> <span class="toc-text">CDB(Container database)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PDBs-pluggable-databases"><span class="toc-number">1.4.2.</span> <span class="toc-text">PDBs(pluggable databases)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Oracle-Redo-Log-Mechanics"><span class="toc-number">2.</span> <span class="toc-text">2. Oracle Redo Log Mechanics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Cache-amp-Log-Buffer"><span class="toc-number">2.1.</span> <span class="toc-text">Buffer Cache &amp; Log Buffer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redo-Record"><span class="toc-number">2.2.</span> <span class="toc-text">Redo Record</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Supplemental-Logging"><span class="toc-number">2.2.1.</span> <span class="toc-text">Supplemental Logging</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiplexing-Log-Groups-amp-Members"><span class="toc-number">2.3.</span> <span class="toc-text">Multiplexing: Log Groups &amp; Members</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Checkpoint-and-Log-Lifecycle"><span class="toc-number">2.4.</span> <span class="toc-text">Checkpoint and Log Lifecycle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LogMiner-DBMS-LOGMNR"><span class="toc-number">2.5.</span> <span class="toc-text">LogMiner(DBMS_LOGMNR)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Oracle-CDC-Reader-GoldenGate-Debezium"><span class="toc-number">3.</span> <span class="toc-text">3. Oracle CDC Reader (GoldenGate, Debezium)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-LogMiner-server-MSnn-processes"><span class="toc-number">3.1.</span> <span class="toc-text">1. LogMiner server(MSnn processes)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Integrated-Capture-amp-XStream-Out"><span class="toc-number">3.2.</span> <span class="toc-text">2. Integrated Capture &amp; XStream Out</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Integrated-Capture-amp-XStream-Out"><span class="toc-number">3.2.1.</span> <span class="toc-text">Integrated Capture &amp; XStream Out</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Third-Party-CDC-Debezium"><span class="toc-number">3.3.</span> <span class="toc-text">3. Third-Party CDC (Debezium)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-RAC-orchestration-and-SCN-Synchronization"><span class="toc-number">3.4.</span> <span class="toc-text">4. RAC orchestration and SCN Synchronization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Abbreviation"><span class="toc-number">4.</span> <span class="toc-text">Abbreviation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DBMS-LOGMNR"><span class="toc-number">5.</span> <span class="toc-text">DBMS_LOGMNR:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CDC-Terminology"><span class="toc-number">6.</span> <span class="toc-text">CDC Terminology</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+            
+            <div class="content index py4 ">
+                
+                <div class="main-container">
+                    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Change Data Capture Architecture on Oracle
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-06-25T14:37:43.000Z" class="dt-published" itemprop="datePublished">2026-06-25</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="1-Oracle-Architecture"><a href="#1-Oracle-Architecture" class="headerlink" title="1. Oracle Architecture"></a>1. Oracle Architecture</h2><h3 id="1-Cluster-amp-Oracle-Grid-Infrastructure-GI"><a href="#1-Cluster-amp-Oracle-Grid-Infrastructure-GI" class="headerlink" title="1. Cluster &amp; Oracle Grid Infrastructure(GI)"></a>1. Cluster &amp; Oracle Grid Infrastructure(GI)</h3><p>Cluster is a collection of interconnected physical servers or virtual mathines(nodes) operating as a single system. A single-node environment is a single instance system.<br>Grid Infrastructure (GI): software framework running on the nodes that provides:</p>
+<ul>
+<li>Oracle Clusterware: manages cluster node membership, monitors server health and provides high availablitity</li>
+<li>Oracle ASM(automatic storage management): a specialized volume manager and file system optimized specifically for oracle database files, striping and mirroring data across shared storage disks.</li>
+<li>SCAN Listerner(Single Client access name): a cluster-level virtual network entity taht acts as the single entry point for all incoming remote client connections, routing traffic across the nodes.</li>
+</ul>
+<h3 id="2-Oracle-Instance-amp-memory-structures"><a href="#2-Oracle-Instance-amp-memory-structures" class="headerlink" title="2. Oracle Instance &amp; memory structures"></a>2. Oracle Instance &amp; memory structures</h3><p>System Global Area(SGA) is a massive, shared memory allocated during the instance bootstrap phase. It is universally addressable by all background and forground processes running onthe node OS. including SHared pool, buffer cache, redo log buffer, large pool.</p>
+<p>Program Global Area(PGA): private memory for a query session, total memory used by the PGA grows and shrinks dynamically as users log in and log out.</p>
+<ul>
+<li>allocates isolated runtime memory to process CPU-heavy execution operators like hash joins, index builds, and data sorting algorithms.</li>
+<li>LogMiner Session Registry Memory: A dedicated sub-allocation track within the session’s PGA context . it records runtime configurations for log parsing operations, active SCN limits, registered file handles, and dictionary parsing structures. Beacuse it is bound to the connection’s PGA, a LogMiner session is intrinscically linked to the lifetime of the client connection thread.</li>
+</ul>
+<p>Dynamic Performance Views (V$) are real-time instrumentation interfaces that read directly from volatile database kernel memory maps inside the SGA and PGA. These views are virtual structures that do not read traditional disk block tablespaces and clear out entirely when the database instance shuts down.</p>
+<ul>
+<li><p>V$LOG: Queries the log group tracking control structures in the SGA. It exposes the current log sequence number, group identifiers, block allocation metrics, and state conditions (<code>CURRENT</code>, <code>ACTIVE</code>, <code>INACTIVE</code>, <code>UNUSED</code>).</p>
+</li>
+<li><p>V$LOGFILE: Evaluates the multiplexing configurations of the transaction log architecture, mapping each database logical log group number to its literal operating system file system string path.</p>
+</li>
+<li><p>V$LOGMNR_SESSION: Exposes global metadata properties for all active mining sessions initialized across the instance, detailing memory overhead metrics inside individual client PGAs.</p>
+</li>
+<li><p>V$LOGMNR_CONTENTS: The primary relational view used to extract processed transaction entries. Querying this view forces LogMiner to parse registered binary logs on the fly, transforming raw hexadecimal change vectors into human-readable text strings within the output rows (<code>SQL_REDO</code> and <code>SQL_UNDO</code>).</p>
+</li>
+<li><p>V$LOGMNR_LOGS: Enumerates every physical log or archive file registered for processing in the active session context, showing their individual SCN boundary limits.</p>
+</li>
+<li><p>V$LOGMNR_PARAMETERS: Tracks active operation parameters, transformation options, and output filter flags passed to the session during engine initialization.</p>
+</li>
+<li><p>workload processing: provide CPU cycles and memory to handle sql parsing, analysis, optimization&#x2F;planning, query execution, and the execution of stored procedures&#x2F;functions</p>
+</li>
+<li><p>One node is a physical or logical server harware and OS (linux or windows), one or more instances run on a node</p>
+</li>
+<li><p>Connection paradigms:</p>
+<ul>
+<li>Local administration: SQL*Plus on server via IPC or Bequeath protocol, allowing authentication via host OS privileges (SYSDBA&#x2F;SYSOPER) without requiring a network listener </li>
+<li>Remote Clients: External applications (dbeaver or applications) connect over TCP&#x2F;IP via the Oracle Net Listener(or SCAN listener in RAC environments)</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Database-physical-files-on-shared-storage"><a href="#3-Database-physical-files-on-shared-storage" class="headerlink" title="3. Database (physical files on shared storage)"></a>3. Database (physical files on shared storage)</h3><p>Oralce’s database strictly refers to the physical files sitting on the disk storage (Datafiles, Control Files, Redo Logs and Tempfiles)</p>
+<ul>
+<li>Single instance setup: a single instance mounts and opens a single databse.</li>
+<li>Oracle RAC setup: multiple independent instances running on distinct cluster nodes simultaneously mount and open the exact same set of physical database files on shared storage, using Cache Fusion to coordinate memory and locking across the cluster interconnect.</li>
+</ul>
+<h3 id="4-Logical-Abstraction-Multitenant-Architecture"><a href="#4-Logical-Abstraction-Multitenant-Architecture" class="headerlink" title="4. Logical Abstraction(Multitenant Architecture)"></a>4. Logical Abstraction(Multitenant Architecture)</h3><h4 id="CDB-Container-database"><a href="#CDB-Container-database" class="headerlink" title="CDB(Container database)"></a>CDB(Container database)</h4><p>CDB is the overarching root container(CDB$ROOT) that houses the master data dictionary, background metadata and common users(system accounts or users prefixed with C##).<br>Core administrative dictionary tables<br>    - <code>OBJ$</code>: Automatically assigns a unique binary internal object identifier number to every schema entity (table, view, sequence, trigger) instantiated inside the database.<br>    - <code>USER$</code>: Manages base user profiles, authentication parameters, cryptographic password hashes, and security clearance roles.<br>    - <code>TAB$</code>: Dictates table layout configurations, mapping specific table identifiers directly to physical storage block groupings, clustering definitions, and column metadata.</p>
+<h4 id="PDBs-pluggable-databases"><a href="#PDBs-pluggable-databases" class="headerlink" title="PDBs(pluggable databases)"></a>PDBs(pluggable databases)</h4><p>PDBs are fully isolated user-facing logical databases nested in CDB, contain application schemas, local tables, and Local users whose credentials exist exclusively inside that specific PDB dictionary.</p>
+<h2 id="2-Oracle-Redo-Log-Mechanics"><a href="#2-Oracle-Redo-Log-Mechanics" class="headerlink" title="2. Oracle Redo Log Mechanics"></a>2. Oracle Redo Log Mechanics</h2><h3 id="Buffer-Cache-amp-Log-Buffer"><a href="#Buffer-Cache-amp-Log-Buffer" class="headerlink" title="Buffer Cache &amp; Log Buffer"></a>Buffer Cache &amp; Log Buffer</h3><p>when a DML was rquested from client, the database executes two parallel, independent operations in memory:</p>
+<ul>
+<li><p>Buffer Cache &#x2F; DBWn (Data Path):<br>The database modifies the data block directly within the SGA buffer cache, transitioning it to a “dirty buffer”. The DBWn lazily batches and flushes these dirty buffers to the physical datafiles.</p>
+</li>
+<li><p>Log Buffer &#x2F; LGWR (Redo Path):<br>Concurrently, a redo record is constructed within the log buffer.<br>Redo records are complex logical structures, generally capped at an upper size limit of 65,536 bytes.<br>Each redo record is prepended with a header containing a VLD field that dictates the record type.</p>
+</li>
+</ul>
+<p>Only after the LGWR has flused the corresponding redo record to disk (Current Online Redo Log), DBWn can writie a dirty data block to a datafile.</p>
+<p>Once a COMMIT statement comes, the session enter a synchronous wait state, waiting for the LOG_FILE_SYNC event.<br>Before this event trigger, LGWR will aggressively flushes the log buffer to the CURRENT online redo log files.<br>The COMMIT is acknowledged to the application only once LGWR confirms the redo record is durably written, entirely ignoring DBWn’s lazy datafile flush.</p>
+<h3 id="Redo-Record"><a href="#Redo-Record" class="headerlink" title="Redo Record"></a>Redo Record</h3><p>By default, Oracle redo logs are designed exclusively for instance recovery (roll-forward operations). They record physical changes at the block and byte-offset level. </p>
+<blockquote>
+<p>Redo Block &amp; Redo Record<br>Redo Block is the minimum fundamental unit of physical input&#x2F;output (I&#x2F;O) for the redo log files.<br>Standard Oracle architecture typically defines a redo block size of 512 bytes (though 4KB is utilized on specific modern storage hardware).<br>Redo Record is a logical data structure comprising one or more change vectors that precisely document the physical modifications applied to database data blocks.<br>The relationship between blocks and records is entirely dynamic: a single physical redo block may encapsulate multiple small redo records, or a single large redo record may sequentially span multiple physical redo blocks.</p>
+</blockquote>
+<blockquote>
+<p>SCN Assignment<br>The primary granularity of SCN assignment is the transaction commit.</p>
+</blockquote>
+<p>When an UPDATE executes, the default redo record contains only</p>
+<ul>
+<li>the physical ROWID</li>
+<li>the specific column values that were modified<br>Without supplemental logging, LogMiner will extract the chagne, but the resulting SQL WHERE clause will reply entirely on the physical ROWID.<br>It will not contain the logical identifier(the primary key) unless the primary key itself was the column being updated.<br>Because ROWIDs are physical pointers that can change across database instances or during maintenance operations(like table moves), ROWID-based SQL is useless for logical replication to another database(such as PostgreSQL) or for precise row-level auditing.</li>
+</ul>
+<h4 id="Supplemental-Logging"><a href="#Supplemental-Logging" class="headerlink" title="Supplemental Logging"></a>Supplemental Logging</h4><p>To facilitate logical CDC, Supplemental Logging must be explicitly enabled.<br>For UPDATE and DELETE operations, the database logs the pre-image of the row’s primary key or unique index to allow the replication engine to formulate a deterministic WHERE clause.<br>If a table lacks a primary key, Identification Key Logging must be configured to log ALL COLUMNS, which massively inflates the redo generation volume.</p>
+<p>Supplemental logging instructs the database to write additional data columns into the redo stream to fully qualify a row logically. Beyond the primary key and unique index pre-images, it can include several other components depending on the configuration level (Ddatabase-level or Table level);</p>
+<ol>
+<li><p>Minimum Supplemental Logging<br>This is the baseline requirement for LogMiner. It adds minimal information necessary to identify row structures, specifically handling:</p>
+<ul>
+<li>Chained Rows: information to correctly reconstruct rows that span multiple data blocks</li>
+<li>Storage Arrangements?: Metadata to interpret cluster tables or indexed-organized tables (IOTs)</li>
+</ul>
+</li>
+<li><p>Identification Key Logging<br>When enabled at the database or table level, this adds specific constraints to the redo stream for every UPDATE operation:</p>
+<ul>
+<li>Primary Key Logging: The pre-image of all columns comprising the primary key.</li>
+<li>Unique Index Logging: The pre-image of unique index columns(typically leveraged when a table lacks a defined primary key).</li>
+<li>Foreign Key Logging: The pre-image of foreign key columns. This is critical for replication environments to maintain referential integrity and ensure parent-child constraints are evaluated correctly in the target database.</li>
+<li>All Column Logging: The pre-image of all fixed-lenght columns in the row, regardless of whether they were modified. This is generally reserved for tables without any primary or unique keys, though it generates significant redo volume.</li>
+</ul>
+</li>
+<li><p>User-Defined Column Groups(Table-Level)<br>Administrators can configure supplemental logging to record specific, user-defined groups of columns.</p>
+<ul>
+<li>Unconditional Supplemental Logging: The database logs the pre-images of specified column group whenever the row is updated, even if none of the columns in the group were changed.</li>
+<li>Conditional Supplemental Logging: The database logs the pre-images of all columns in the specified group only if at least one column within that specific group is modified.</li>
+</ul>
+</li>
+</ol>
+<h3 id="Multiplexing-Log-Groups-amp-Members"><a href="#Multiplexing-Log-Groups-amp-Members" class="headerlink" title="Multiplexing: Log Groups &amp; Members"></a>Multiplexing: Log Groups &amp; Members</h3><p>Oracle utilizes a specific hierarchical structure for redo logs:</p>
+<ul>
+<li>Log Group: A logical slot in the circular round-robin buffer, identified by GROUP# and SEQUENCE#.</li>
+<li>Member: A physical file path. A group comprises one or more identical physical members<ul>
+<li>&#x2F;u01&#x2F;redo01a.log</li>
+<li>&#x2F;u02&#x2F;redo01b.log</li>
+</ul>
+</li>
+</ul>
+<p>During a flush, LGWR issues parallel write operations to all available members of the current group simultaneously to guarantee redundancy.<br>A CDC reader safely ignores multiplexing complexities, requiring only one valid, uncorrupted member file to extract the required SCN sequence.</p>
+<h3 id="Checkpoint-and-Log-Lifecycle"><a href="#Checkpoint-and-Log-Lifecycle" class="headerlink" title="Checkpoint and Log Lifecycle"></a>Checkpoint and Log Lifecycle</h3><ul>
+<li><p>CDC Reader Checkpoint(Watermark)<br>A stateful marker persisted entirely by the external CDC application (or internal capture metadata).<br>(It represents the lowest SCN of an unacknowledged transaction that the CDC reader guarantees it can resume from without data loss.)</p>
+</li>
+<li><p>Instance Checkpoint(CKPT)<br>Managed by the Oracle instance. It tracks how far DBWn has progressed in flushing dirty buffers to datafiles.<br>This SCN is recorded in the controlfile and governs when a redo log is no longer needed for instance crash recovery.<br>(the SCN after this CKPT in Archived Log is safe to delete by RMAN.)</p>
+</li>
+</ul>
+<p>The instance checkpoint governs the operational statuses of redo log groups, defining the boundary conditions for external CDC readers:</p>
+<table>
+<thead>
+<tr>
+<th>Log Status</th>
+<th>Architectural Meaning</th>
+<th>CDC Reader Implication</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CURRENT</td>
+<td>LGWR is actively appending redo records to the members of this group</td>
+<td>Provides the lowest-latency read path, but is highly volatile and subject to overwriting if the status change</td>
+</tr>
+<tr>
+<td>ACTIVE</td>
+<td>The group has undergone a log switch, closing it to new writes, but the CKPT SCN has not yet advanced past all changes it protects.</td>
+<td>Physically immutable to LGWR in this state, but remains at risk of transitioning to INACTIVE</td>
+</tr>
+<tr>
+<td>INACTIVE</td>
+<td>The CKPT process confirms all dirty buffers protected by this group are safely written to datafiles</td>
+<td>Extremely volatile; eligible for immediate resue by LGWR’s round-robin cycle if archiving is complete.</td>
+</tr>
+<tr>
+<td>UNUSED</td>
+<td>The group has never been written to since creation</td>
+<td>Ignored by CDC readers</td>
+</tr>
+</tbody></table>
+<p>This status progression underscores a critical engineering vulnerability for external CDC implementations: attempting to read from a CURRENT or ACTIVE online redo log is inherently racy.<br>If a reader is parsing an online log and the database instance subsequently marks the group as INACTIVE, the round-robin cycle may allow LGWR to overwrite the physical file with a new sequence number mid-read, resulting in torn blocks.<br>Robust readers detect this race condition via coarse-grained block-header and file-header validations, instantly aborting the torn read and falling back to the immutable archived copy.</p>
+<h3 id="LogMiner-DBMS-LOGMNR"><a href="#LogMiner-DBMS-LOGMNR" class="headerlink" title="LogMiner(DBMS_LOGMNR)"></a>LogMiner(DBMS_LOGMNR)</h3><p>Oracle LogMiner serves as the foundational decoding engine capable of parsing the raw binary redo byte streams into structured LCRs and exposing them via the V$LOGMNR_CONTENTS view.</p>
+<blockquote>
+<p>The deprecation of CONTINUOUS_MINE. In legacy Oracle versions, a CDC application could invoke the DBMS_LOGMNR.START_LOGMNR procedure utilizing the CONTINUOUS_MINE constant, which instructed LogMiner to automatically discover log sequences and seamlessly cross file boundaries in real-time. Oracle officially deprecated CONTINUOUS_MINE in 12c Release2(12.2) and completely desupported it in 19c and subsequent releases. While Oracle’s official documentation explicitly states there is no relacement functionality and does not publicly publish internal failure mechanisms in the desupport notice, architectural consensus attributes its removal to the inherent fragility and overwrite-race conditions of attempting to perform continuous validation against actively written online redo logs without internal lock coordination.</p>
+</blockquote>
+<h2 id="3-Oracle-CDC-Reader-GoldenGate-Debezium"><a href="#3-Oracle-CDC-Reader-GoldenGate-Debezium" class="headerlink" title="3. Oracle CDC Reader (GoldenGate, Debezium)"></a>3. Oracle CDC Reader (GoldenGate, Debezium)</h2><h3 id="1-LogMiner-server-MSnn-processes"><a href="#1-LogMiner-server-MSnn-processes" class="headerlink" title="1. LogMiner server(MSnn processes)"></a>1. LogMiner server(MSnn processes)</h3><p>Oracle embed the LogMining server directly into the Oracle database engine as a suite of background processes.<br>The collective assembly of the Reader, Preparers, and Builder is officially designated by Oracle as the LogMiner server.</p>
+<ul>
+<li><p>Reader Process: Interfaces with the log buffer or files to intercept and split redo vectors. Initial physical I&#x2F;O and splitting the redo vectors into smaller, manageable chunks.</p>
+<blockquote>
+<p>LogMiner server utilizes a tiered ingestion hierarchy to bypass the torn-read race conditions of online files entirely:<br>  1. SGA Memory(Primary): the engine reads redo directly from the log buffer in the SGA in real-time, operating in lockstemp with LGWR before data hits the disk.<br>  2. Online Redo(Fallback): If the capture process lags slightly behind memory retention, it reads from the intact online redo logs.<br>  3. Archived Redo(Deep Fallback): If the process falls significantly behind, it falls back to the immutable archived logs.</p>
+</blockquote>
+</li>
+<li><p>Preparer Process(es): Scans the memory regions, pre-filters the data against capture rules, and evaluate the vectors against the configured capture rules, filter out irrelevant data, and decode the binary redo stream into logical tuples (representing the actual DML or DDL operations)</p>
+</li>
+<li><p>Builder Process: Ingests the disjointed records from the Preparers and rigorously merges them into strict SCN chronological order</p>
+</li>
+<li><p>Capture Process: Finalizes the standard LCRs and routes them to the outbound queue.</p>
+</li>
+</ul>
+<p>LogMiner server is the built-in Oracle proecesses to extract the Redo logs, which be utilized by LogMiner package, Integrated Capture of GoldenGate, and the XStream Out.<br>LogMiner server is responsible for reading the physical redo vectors fromt he log buffer or files, filtering them against capture rules, and reconstructing the physical changes into chronological Logical Change Records (LCRs).</p>
+<h3 id="2-Integrated-Capture-amp-XStream-Out"><a href="#2-Integrated-Capture-amp-XStream-Out" class="headerlink" title="2. Integrated Capture &amp; XStream Out"></a>2. Integrated Capture &amp; XStream Out</h3><p>Integrated Capture is the CDC reader of GoldenGate.<br>XStream Out is a Native OCI Application Programming Interface API built-in oracle to expose the power of Integrated Capture to enterprise C&#x2F;C++ applications.<br>Both need need Oracle GoldenGate license.</p>
+<h4 id="Integrated-Capture-amp-XStream-Out"><a href="#Integrated-Capture-amp-XStream-Out" class="headerlink" title="Integrated Capture &amp; XStream Out"></a>Integrated Capture &amp; XStream Out</h4><ul>
+<li>Base Layer: LogMiner Server</li>
+<li>Middle Layer: Outbound Server<br>This is a memory-based queue structure localted within the database SGA. It receives the rigorously ordered LCR stream from the LogMiner server’s builder process and manages the state and transmission queuing for external consumers.</li>
+<li>Top Layer: Parallel CLient Interfaces<br>This layer represents the external consumption of the LCR stream. This is where the architecture strictly diverges into two independent, parallel pathways. They sit side-by-side atop the Outbound Server:<ul>
+<li>Endpoint A: Integrated Capture. The Oracle GoldenGate Extract process connects directly to the Outbound Server to receive the LCRs for propagation through the proprietary GoldenGate replication topology.</li>
+<li>Endpoint B: XStream OUT. This expose a native C-level Oralce Calll Interface (OCI) or Java API. It connects directly to the Outbound Server, entirely bypassing Integrated Capture, to push LCRs over a network socket to custom compiled client binaries.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Streams Pool Sizing and MAX_SGA-SIZE Optimization<br>Integrated Capture dynamically allocates memory exclusively from the Streams Pool portion of the SGA.<br>The MAX_SGA_SIZE parameter caps the volume of shared memory the server can request.<br>If MAX_SGA_SIZE is undersized, the engine exhausts its allocation and violently abotrts, or aggressively spills to disk-backed temporary segments, spiking latency. </p>
+</blockquote>
+<blockquote>
+<p>Low-Water Mark (LWM)<br>A resilient CDC system must periodically notify the outbound server of its durably processed position via OCIXStreamOutProcessedLWMSet.<br>The database utilizes the OCI_ATTR_XSTREAM_ACK_INTERVAL attribute (default 30s) to forcefully preempt OCIXStreamOutLCRReceive loops, allowing the application thread to transmit the acknowledgment packet safely.<br>This purges synchronized transactions from the SGA and releases the underlying dependency on associated archive logs.</p>
+</blockquote>
+<h3 id="3-Third-Party-CDC-Debezium"><a href="#3-Third-Party-CDC-Debezium" class="headerlink" title="3. Third-Party CDC (Debezium)"></a>3. Third-Party CDC (Debezium)</h3><p>For massive, distributed streaming architectures standardizing on Apache Kafka, the open-source Debezium Oracle Connnector is the primary conduit.<br>LogMiner Package is an PLSQL interface of the LogMiner server.<br>The absence of COTINUOUS_MINE mandates that modern external CDC readers implement a deterministic, stateful driver loop - a “safe subset” of continuous mining - to manage log file resolution and mining boundaries:</p>
+<ol>
+<li>Resolution via Range Scanning: The application queries the V$ARCHIVED_LOG and V$LOG views to resolve the physical file paths encompassing the target SCN range. The logic executes a range scan against the FIST_CHANGE# and NEXT_CHANGE# columns.</li>
+<li>Explicit File Registration: The resolved files are registered with the mining session using DBMS_LOGMNR.ADD_LOGFILE with the DBMS_LOGMNR.NEW or DBMS_LOGMNR.ADDFILE options.</li>
+<li>Execution Bounding: The mining window is activated via DBMS_LOGMNR.START_LOGMNR, passing explicit STARTSCN and ENDSCN parameters, combined with DBMS_LOGMNR.DICT_FROM_ONLINE_CATALOG and COMMITTED_DATA_ONLY flags.</li>
+<li>Data Consumption: The client streams decoded records by polling V$LOGMNR_CONTENTS. For CDB architectures, queries filter the CON_ID column to isolate changes for sepcific PDBs.</li>
+<li>Session Termination: The session must be cleanly terminated via DBMS_LOGMNR.END_LOGMNR to release PGA memory. The internal checkpoint advances, and the application orchestrates the jump to the next sequence.</li>
+</ol>
+<blockquote>
+<p>Advanced Transaction Buffering<br>To guarantee atomic, COMMITTED_DATA_ONLY delivery, Debezium must intercept every event for an active Transaction ID(XID), buffer the payload indefinitely, and suspend transmission until an explicit COMMIT or ROLLBACK is observed.<br>Pathological batch transactions cause the default JVM memory buffer (log.mining.buffer.type &#x3D; memory) to trigger severe garbage collection thrashing and OutOfMemoryError failures.<br>Modern deployments transition to off-heap memory buffering (infinispan_embedded).<br>This hybrid architecture seamlessly spills data from physical memory to persistent disk storage (persistence) when the memory capacity threshold (max-count) is breached.<br>This ensures sub-millisecond memory latencies for OLTP traffic while providing unbounded disk durability for massive batch updates without crashing the Kafka Connect worker.</p>
+</blockquote>
+<blockquote>
+<p>Retention Coordination and RMAN Policy Failures<br>The ultimate reliability of any redo-based CDC pipeline is constrained by the physical lifecycle of the archived redo logs on disk.<br>If the consumer pipeline stalls, the CDC reader’s required checkpoint SCN freezes, but the Oracle database mercilessly continues to generate and archive new logs.</p>
+</blockquote>
+<blockquote>
+<p>The Missing Log Incident (ORA-01291) and Re-instantiation<br>Oracle Recovery Manager (RMAN) manages archive deletion independent of external CDC readers.<br>Standard maintenance procedures execute aggressive cleanups (e.g., DELETE ALL INPUT, which purges from all archive destinations, versus DELETE INPUT, which purges only from the backed-up destination).<br>If RMAN deletes a log containing the CDC reader’s required checkpoint SCN, the pipeline is irreparably severed, resulting in an ORA-01291: missing log file error.<br>Recovery requires a disruptive full re-instantiation: administrators must select a consistent SCN in the present, execute a bulk table unload using Oracle Flashback query syntax (SELECT * FROM table AS OF SCN :s), load the data into the target, and reset the CDC reader’s checkpoint to begin streaming strictly after the snapshot SCN.</p>
+</blockquote>
+<blockquote>
+<p>Enforcing Strict Retention with Dual-Guard Deletion Policies<br>To eradicate ORA-01291 incidents, administrators must bind the RMAN deletion policy to the replication pipeline’s progress.<br>For Integrated Capture (GoldenGate), the extract process registers directly with the database, and RMAN natively honors the REQUIRED_CHECKPOINT_SCN, autonomously refusing to purge needed logs.<br>For external readers like Debezium, administrators forge a protective RMAN policy utilizing dual-guard directives :</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Establish a dual-guard deletion policy to protect CDC logs</span></span><br><span class="line">CONFIGURE ARCHIVELOG DELETION POLICY <span class="keyword">TO</span> </span><br><span class="line">  APPLIED <span class="keyword">ON</span> <span class="keyword">ALL</span> STANDBY </span><br><span class="line">  BACKED UP <span class="number">1</span> TIMES <span class="keyword">TO</span> DISK;</span><br></pre></td></tr></table></figure>
+<p>By enforcing APPLIED ON ALL STANDBY alongside a BACKED UP directive, the policy guarantees that no archived redo log is subjected to deletion until the file has been both safely backed up to tertiary storage and explicitly consumed by the configured CDC endpoints, mathematically prioritizing the chronological consistency of the replication stream over raw storage utilization.</p>
+<h3 id="4-RAC-orchestration-and-SCN-Synchronization"><a href="#4-RAC-orchestration-and-SCN-Synchronization" class="headerlink" title="4. RAC orchestration and SCN Synchronization"></a>4. RAC orchestration and SCN Synchronization</h3><p>In a RAC rchitecture, multiple instances(nodes) share the same datafiles, but each instance maintains its own private thread of redo logs and distinct sequence numbers.<br>A global application transaction modifies data across multiple nodes, scattering its composite redo fragments across physically disjointed threads.<br>A CDC reader must perform a rigorous k-way multi-thread heap merge, interleaving records from all threads simultaneously to reconstruct a globally consistent stream.</p>
+<blockquote>
+<p>SCN&#x2F;Sequence Number<br>In an Oracle database, there is strictly one global Sytem Change Number(SCN) namespace that totally orders all changes across the entire cluster.<br>Sequence numbers are per-thread(e.g., Thread 1 Sequence 615 and Thread 2 Sequence 615 are completely different physical files), but the SCN is universal.</p>
+</blockquote>
+<blockquote>
+<p>Broadcast-on-Commit(BOC)<br>To execute an accurate multi-thread merge, the SCN must function as a perfectly synchronized global logical clock.<br>Modern architectures utilize the Broadcast-on-Commit (BOC) protocol (MAX_COMMIT_PROPAGATION_DELAY &#x3D; 0).<br>Under BOC, when an instance commits, LGWR synchronously broadcasts the updated SCN to the Lock Management Server (LMS) processes on all peer nodes.<br>On modern Exadata infrastructure (21c+), this is optimized via BOC over RDMA, bypassing LMS processes and utilizing atomic RDMA hardware operations to directly overwrite SCN memory registers in remote SGAs, eliminating log write broadcast wait network overhead.</p>
+</blockquote>
+<blockquote>
+<p>Resolving the Idle Thread Low-Watermark Stall<br>The multi-thread merge algorithm contains a critical logical flaw: the global low-watermark SCN cannot advance past the lowest confirmed position across all active RAC threads.<br>If Thread 3 is idle while Threads 1 and 2 advance rapidly, the reader cannot safely emit records from Threads 1 and 2, as it cannot mathematically guarantee Thread 3 will not suddenly emit a delayed record at an older SCN.<br>Mature CDC architectures eradicate this stall condition by injecting synthetic heartbeats.<br>A scheduler executes a superficial UPDATE on a dummy table across every RAC instance at a rigorous interval, forcing a continuous trickle of redo generation across all physical threads.<br>This proves to the CDC reader that the idle node’s SCN is advancing, unlocking the k-way merge low-watermark.</p>
+</blockquote>
+<h2 id="Abbreviation"><a href="#Abbreviation" class="headerlink" title="Abbreviation"></a>Abbreviation</h2><ul>
+<li>DML: Data Manipulation Language</li>
+<li>SGA: System Global Area</li>
+<li>DBWn: Database Writer process</li>
+<li>LGWR: Log Writer process</li>
+<li>SCN: System Change Number</li>
+<li>LCRs: Logical Change Records</li>
+<li>LWM: Low-Water Mark</li>
+</ul>
+<h2 id="DBMS-LOGMNR"><a href="#DBMS-LOGMNR" class="headerlink" title="DBMS_LOGMNR:"></a>DBMS_LOGMNR:</h2><p>active ARCHIVELOG on the server:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqlplus <span class="operator">/</span> <span class="keyword">as</span> sysdba <span class="operator">&lt;&lt;</span>EOF</span><br><span class="line">SHUTDOWN IMMEDIATE;</span><br><span class="line">STARTUP MOUNT;</span><br><span class="line"><span class="keyword">ALTER</span> DATABASE ARCHIVELOG;</span><br><span class="line"><span class="keyword">ALTER</span> DATABASE <span class="keyword">OPEN</span>;</span><br><span class="line">EXIT;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>execute in client:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- check current .log files</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">group</span>#, <span class="keyword">member</span>, status <span class="keyword">FROM</span> v$logfile;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">GROUP</span>#, SEQUENCE#, status, archived, bytes<span class="operator">/</span><span class="number">1024</span><span class="operator">/</span><span class="number">1024</span> mb <span class="keyword">FROM</span> v$log;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">GROUP</span>#, SEQUENCE#, first_change# <span class="keyword">AS</span> low_scn, next_change# <span class="keyword">AS</span> hight_scn, status</span><br><span class="line"><span class="keyword">FROM</span> v$log;</span><br><span class="line"><span class="keyword">SELECT</span> SEQUENCE#, first_change# <span class="keyword">AS</span> low_scn, next_change# <span class="keyword">AS</span> high_scn, name</span><br><span class="line"><span class="keyword">FROM</span> v$archived_log</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> SEQUENCE#;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- check status of ARCHIVEDLOG</span></span><br><span class="line"><span class="keyword">SELECT</span> status <span class="keyword">FROM</span> v$archived_log;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- check status of supplemental log data</span></span><br><span class="line"><span class="keyword">SELECT</span> supplemental_log_data_min <span class="keyword">FROM</span> v$database;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- active supplemental log data</span></span><br><span class="line"><span class="keyword">ALTER</span> DATABASE <span class="keyword">ADD</span> SUPPLEMENTAL LOG DATA;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 1. Add the target file to the LogMiner session registry</span></span><br><span class="line"><span class="comment">-- this can only be executed within an CDB context</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">	DBMS_LOGMNR.ADD_LOGFILE(</span><br><span class="line">		logfilename <span class="operator">=</span><span class="operator">&gt;</span> <span class="string">&#x27;/opt/oracle/oradata/FREE/redo02.log&#x27;</span>,</span><br><span class="line">		OPTIONS <span class="operator">=</span><span class="operator">&gt;</span> DBMS_LOGMNR.NEW</span><br><span class="line">	);</span><br><span class="line"><span class="keyword">END</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 2. Start mining using the database&#x27;s online dictionary catalog</span></span><br><span class="line"><span class="comment">-- it could also be DBMS_LOGNBR.DICT_FROM_REDO_LOGS</span></span><br><span class="line"><span class="comment">-- if none logfile was added with above command, there will be nothing be output from following select statement</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">	DBMS_LOGMNR.START_LOGMNR(</span><br><span class="line">		OPTIONS <span class="operator">=</span><span class="operator">&gt;</span> DBMS_LOGMNR.DICT_FROM_ONLINE_CATALOG</span><br><span class="line">	);</span><br><span class="line"><span class="keyword">END</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 3. Query the change data log decoded by Log Miner</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> (</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    SCN, COMMIT_SCN, <span class="type">TIMESTAMP</span>, COMMIT_TIMESTAMP,</span><br><span class="line">    OPERATION_CODE, SEG_OWNER, TABLE_NAME,</span><br><span class="line">    SQL_REDO, SQL_UNDO, CSF,</span><br><span class="line">    ROW_ID, XIDUSN, XIDSLT, XIDSQN,</span><br><span class="line">    DATA_OBJ#, DATA_OBJV#</span><br><span class="line"><span class="keyword">FROM</span> V$LOGMNR_CONTENTS</span><br><span class="line"><span class="keyword">WHERE</span> OPERATION_CODE <span class="keyword">IN</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">  <span class="keyword">AND</span> SEG_OWNER <span class="keyword">IN</span> (<span class="string">&#x27;SYSTEM&#x27;</span>)</span><br><span class="line">  <span class="keyword">AND</span> TABLE_NAME <span class="keyword">IN</span> (<span class="string">&#x27;ORDERS&#x27;</span>)</span><br><span class="line">  <span class="keyword">ORDER</span> <span class="keyword">BY</span> SCN</span><br><span class="line">)</span><br><span class="line"><span class="keyword">WHERE</span> ROWNUM <span class="operator">&lt;=</span> <span class="number">5000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> scn, operation, seg_owner, table_name, sql_redo, sql_undo</span><br><span class="line"><span class="keyword">FROM</span> v$logmnr_contents</span><br><span class="line"><span class="keyword">WHERE</span> seg_owner <span class="operator">=</span> <span class="string">&#x27;SYSTEM&#x27;</span></span><br><span class="line"><span class="keyword">AND</span> operation <span class="keyword">IN</span> (<span class="string">&#x27;INSERT&#x27;</span>, <span class="string">&#x27;UPDATE&#x27;</span>, <span class="string">&#x27;DELETE&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- operations to generate some change data.</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SYSTEM.ORDERS </span><br><span class="line">(ORDER_ID, CUSTOMER_NAME, AMOUNT, STATUS) </span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">53</span>, <span class="string">&#x27;Test_2&#x27;</span>, <span class="number">22.1</span>,<span class="string">&#x27;Pending&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> system.orders</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="CDC-Terminology"><a href="#CDC-Terminology" class="headerlink" title="CDC Terminology"></a>CDC Terminology</h2><ul>
+<li><p>CDC&#x2F;DML&#x2F;DDL</p>
+</li>
+<li><p>LSN&#x2F;SCN&#x2F;GTID</p>
+<ul>
+<li>Log Sequence Number</li>
+<li>System Change Number</li>
+<li>Global Transaction ID</li>
+</ul>
+</li>
+<li><p>Snapshot (Initial load&#x2F; bootstrap)<br>A full consistent copy of existing table data taken before streaming incremental changes, so the target starts from a complete baseline.</p>
+</li>
+<li><p>Watermark<br>The recorded position(LSN&#x2F;SCN&#x2F;offset) up to which changes have been successfully captured&#x2F;committed. Enables resume after restart.</p>
+</li>
+<li><p>Tombstone<br>A marker representing a delete - a record whose presence signals “this key no longer exists,” important for downstream compaction.</p>
+</li>
+<li><p>Purpost and mechanism</p>
+<ol>
+<li>Signaling deletion in append-only logs<br> Many CDC systems and message brokers (e.g., debezium, Apache Kafka) utilize append-only commit logs to stream events. Because you cannot modify or delete past messages in an append-only log, a deletion cannot be represented by simply removing a message. Instead, the CDC engine appends a new record-the tombstone-to the log.</li>
+<li>Structure of a Tombstone Record<br> a. The primay key of the deteted row (to identify which record to remove)<br> b. A apyload&#x2F;value set to null (or a specific delete operation flag, such as “op”:”d”)<br> c. Log compaction enablement, In distributed streaming platforms like Kafka, topic partitions undergo log compaction to conserve storage. Compaction retains only the latest message for each primary key.<br>Tombsone is critical in Database Migration<br>During a zero-downtime database migration, the migration pipleline must maintain exact parity between the source and target systems.<br>Without tombstone records, a CDC-driven migration cannot safely handle hard deletes, rendering true transactional synchronization impossible.</li>
+</ol>
+</li>
+<li><p>High-water mark (HWM)<br>The boundry between the snapshot phase and the streaming phase; changes after it are read from the log, before it from the snapshot.</p>
+</li>
+<li><p>Change Records </p>
+<ul>
+<li><p>Before&#x2F;after Image (Pre&#x2F;post image)<br>  The row’s column values before and after a change. Updates need both; the before-image is essential for deletes and for matching keys.</p>
+</li>
+<li><p>Op type or Operation type<br>  Flag on each change event: c&#x2F;I(craete&#x2F;insert), u&#x2F;U(update), d&#x2F;D(delete), r(read&#x2F;snapshot)</p>
+</li>
+<li><p>Idempotency (Delivery guarantees)<br>  Property that re-applying the same change event yields the same result - critical because CDC delivery is usually at-least-once</p>
+<ul>
+<li>At-least-once: may duplicate events on retry (needs idempotent apply)</li>
+<li>Exactly-once: is stronger but harder&#x2F;costlier.</li>
+</ul>
+</li>
+<li><p>Commit order<br>  Events must be applied in source transaction-commit order to preserve consistency, especially across related rows.</p>
+</li>
+<li><p>Transaction boundaries (BEGIN&#x2F;COMMIT framing)<br>  Grouping change events by the transaction they belonged to, so consumers can apply atomically.</p>
+</li>
+</ul>
+</li>
+<li><p>Postgres</p>
+<ul>
+<li>WAL (Write-ahead log)</li>
+<li>Logical replication &#x2F; logical decoding</li>
+<li>Replication slot</li>
+</ul>
+</li>
+<li><p>Oracle</p>
+<ul>
+<li>Redo log&#x2F; archived log</li>
+<li>LogMiner</li>
+</ul>
+</li>
+<li><p>MySQL&#x2F;MariaDB</p>
+<ul>
+<li>binlog</li>
+</ul>
+</li>
+<li><p>SQL Server</p>
+<ul>
+<li>Transaction log (CDC tables)</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+                </div>
+                
+                    <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Oracle-Architecture"><span class="toc-number">1.</span> <span class="toc-text">1. Oracle Architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Cluster-amp-Oracle-Grid-Infrastructure-GI"><span class="toc-number">1.1.</span> <span class="toc-text">1. Cluster &amp; Oracle Grid Infrastructure(GI)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Oracle-Instance-amp-memory-structures"><span class="toc-number">1.2.</span> <span class="toc-text">2. Oracle Instance &amp; memory structures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Database-physical-files-on-shared-storage"><span class="toc-number">1.3.</span> <span class="toc-text">3. Database (physical files on shared storage)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Logical-Abstraction-Multitenant-Architecture"><span class="toc-number">1.4.</span> <span class="toc-text">4. Logical Abstraction(Multitenant Architecture)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CDB-Container-database"><span class="toc-number">1.4.1.</span> <span class="toc-text">CDB(Container database)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PDBs-pluggable-databases"><span class="toc-number">1.4.2.</span> <span class="toc-text">PDBs(pluggable databases)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Oracle-Redo-Log-Mechanics"><span class="toc-number">2.</span> <span class="toc-text">2. Oracle Redo Log Mechanics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Cache-amp-Log-Buffer"><span class="toc-number">2.1.</span> <span class="toc-text">Buffer Cache &amp; Log Buffer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redo-Record"><span class="toc-number">2.2.</span> <span class="toc-text">Redo Record</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Supplemental-Logging"><span class="toc-number">2.2.1.</span> <span class="toc-text">Supplemental Logging</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiplexing-Log-Groups-amp-Members"><span class="toc-number">2.3.</span> <span class="toc-text">Multiplexing: Log Groups &amp; Members</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Checkpoint-and-Log-Lifecycle"><span class="toc-number">2.4.</span> <span class="toc-text">Checkpoint and Log Lifecycle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LogMiner-DBMS-LOGMNR"><span class="toc-number">2.5.</span> <span class="toc-text">LogMiner(DBMS_LOGMNR)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Oracle-CDC-Reader-GoldenGate-Debezium"><span class="toc-number">3.</span> <span class="toc-text">3. Oracle CDC Reader (GoldenGate, Debezium)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-LogMiner-server-MSnn-processes"><span class="toc-number">3.1.</span> <span class="toc-text">1. LogMiner server(MSnn processes)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Integrated-Capture-amp-XStream-Out"><span class="toc-number">3.2.</span> <span class="toc-text">2. Integrated Capture &amp; XStream Out</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Integrated-Capture-amp-XStream-Out"><span class="toc-number">3.2.1.</span> <span class="toc-text">Integrated Capture &amp; XStream Out</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Third-Party-CDC-Debezium"><span class="toc-number">3.3.</span> <span class="toc-text">3. Third-Party CDC (Debezium)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-RAC-orchestration-and-SCN-Synchronization"><span class="toc-number">3.4.</span> <span class="toc-text">4. RAC orchestration and SCN Synchronization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Abbreviation"><span class="toc-number">4.</span> <span class="toc-text">Abbreviation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DBMS-LOGMNR"><span class="toc-number">5.</span> <span class="toc-text">DBMS_LOGMNR:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CDC-Terminology"><span class="toc-number">6.</span> <span class="toc-text">CDC Terminology</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&text=Change Data Capture Architecture on Oracle"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&title=Change Data Capture Architecture on Oracle"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&is_video=false&description=Change Data Capture Architecture on Oracle"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Change Data Capture Architecture on Oracle&body=Check out this article: http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&title=Change Data Capture Architecture on Oracle"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&title=Change Data Capture Architecture on Oracle"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&title=Change Data Capture Architecture on Oracle"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&title=Change Data Capture Architecture on Oracle"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&name=Change Data Capture Architecture on Oracle&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2026/06/25/Change%20Data%20Capture%20Architecture%20on%20Oracle/&t=Change Data Capture Architecture on Oracle"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+                 
+                   
+                        
+                    
+                 <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    Elvin&#39;s Blog
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/#side-projects">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+            </div>
+
+                 
+
+
+        </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
+
+<style>
+      .side-iframe{
+                            height: 100vh;
+                            width: 100vw;
+                            overflow: visible !important;
+                          }
+    html{
+        scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+    }
+body{
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+.page-container {
+    display: grid;
+    width: 100%;
+    min-height: fit-content;
+    transition: grid-template-columns 0.3s ease;
+
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    scrollbar-width: none; /* 'auto' | 'thin' | 'none' */
+
+}
+
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-bottom: 5rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    padding: 1rem;
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .page-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .page-container {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .content-side,
+    .resume-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .resume-side {
+        position: relative;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .content-side {
+        padding: 0.5rem;
+    }
+}
+</style>
